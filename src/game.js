@@ -1,9 +1,11 @@
+import {inject} from 'aurelia-framework';
 import {DrugList} from './drugList';
 
+@inject(DrugList)
 export class GameEngine {
 
-  constructor(){
-    this.DrugList = new DrugList();
+  constructor(drugList){
+    this.DrugList = drugList;
     this.DrugList.UpdatePrices();
   }
 }
