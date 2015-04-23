@@ -17,6 +17,7 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@3.3.4",
     "css": "github:systemjs/plugin-css@0.1.9",
     "font-awesome": "npm:font-awesome@4.3.0",
+    "numeral": "npm:numeral@1.5.3",
     "traceur": "github:jmcriffey/bower-traceur@0.0.87",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87",
     "github:aurelia/binding@0.5.0": {
@@ -210,6 +211,9 @@ System.config({
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:numeral@1.5.3": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"

@@ -1,5 +1,5 @@
 {
-  "jshintConfig":{
+  "jshintConfig": {
     "esnext": true
   },
   "devDependencies": {
@@ -38,7 +38,8 @@
       "aurelia-router": "github:aurelia/router@^0.7.0",
       "bootstrap": "github:twbs/bootstrap@^3.3.4",
       "css": "github:systemjs/plugin-css@^0.1.9",
-      "font-awesome": "npm:font-awesome@^4.3.0"
+      "font-awesome": "npm:font-awesome@^4.3.0",
+      "numeral": "npm:numeral@^1.5.3"
     },
     "devDependencies": {
       "traceur": "github:jmcriffey/bower-traceur@0.0.87",

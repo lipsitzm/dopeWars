@@ -12,7 +12,8 @@
       <div class="col-xs-6">
         <div class="row" repeat.for="drug of currentCity.DrugList.Drugs" show.bind="drug.Available">
           <h3 class="col-xs-6">${drug.Name}</h3>
-          <h4 class="col-xs-6">${drug.Price}</h4>
+          <require from="./converters/currency-format"></require>
+          <h4 class="col-xs-6">${drug.Price | currencyFormat}</h4>
         </div>
       </div>
     </div>
