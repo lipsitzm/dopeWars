@@ -2,16 +2,19 @@
   <section>
     <div class="row">
       <div class="col-xs-6">
-        <div class="row" repeat.for="drug of DrugList.Drugs" show.bind="drug.Available">
-          <h2 class="col-xs-6">${drug.Name}</h2>
-          <h4 class="col-xs-6">${drug.Price}</h4>
-        </div>
+        <h1>${currentCity.Name}</h1>
       </div>
       <div class="col-xs-6">
         <button click.delegate="move()">Move</button>
       </div>
     </div>
     <div class="row">
+      <div class="col-xs-6">
+        <div class="row" repeat.for="drug of currentCity.DrugList.Drugs" show.bind="drug.Available">
+          <h3 class="col-xs-6">${drug.Name}</h3>
+          <h4 class="col-xs-6">${drug.Price}</h4>
+        </div>
+      </div>
     </div>
   </section>
 </template>

@@ -1,15 +1,18 @@
 import {inject} from 'aurelia-framework';
-import {DrugList} from './drugList';
+import {CityList} from './cityList';
 
-@inject(DrugList)
+@inject(CityList)
 export class GameEngine {
 
-  constructor(drugList){
-    this.DrugList = drugList;
-    this.DrugList.Update();
+  constructor(cityList){
+    this.CityList = cityList;
+    this.currentCity = this.CityList.Cities[0];
+    this.currentCity.Update();
   }
 
   move() {
-    this.DrugList.Update();
+    let newCityIdx = Math.floor(Math.random() * this.CityList.Cities.length);
+    this.currentCity = this.CityList.Cities[newCityIdx];
+    this.currentCity.Update();
   }
 }

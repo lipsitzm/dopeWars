@@ -1,14 +1,20 @@
 import {computedFrom} from 'aurelia-framework';
 
 export class Drug{
-  // TODO: Make these privates but not statics / in a closure outside of the class...
+  // TODO: Make these privates but not statics / in a closure outside of the class... http://stackoverflow.com/questions/22156326/private-properties-in-javascript-es6-classes
   maxPrice = 1;
   price = 1;
   available = true;
+  name = '';
 
-  constructor(name, maxPriceIn){
-    this.Name = name;
+  constructor(nameIn, maxPriceIn){
+    this.name = nameIn;
     this.maxPrice = maxPriceIn;
+  }
+
+  @computedFrom('name')
+  get Name() {
+    return this.name;
   }
 
   @computedFrom('maxPrice', 'price') // TODO: How to tell if the binding is being refreshed using this?

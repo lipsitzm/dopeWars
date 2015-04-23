@@ -1,13 +1,16 @@
+//import {transient} from 'aurelia-framework';
 import {Drug} from './drug';
 
+//@transient()
 export class DrugList{
 
   constructor(){
-    this.test = new Drug("Hi",10);
     this.Drugs = [
       new Drug("Cocaine", 30000),
       new Drug("MDMA", 1000),
-      new Drug("Weed", 100)
+      new Drug("Weed", 200),
+      new Drug("Speed", 50),
+      new Drug("Meth", 100)
     ];
   }
 
