@@ -1,6 +1,7 @@
 import {computedFrom} from 'aurelia-framework';
 
 export class Drug{
+  // TODO: Make these privates but not statics / in a closure outside of the class...
   maxPrice = 1;
   price = 1;
   available = true;
@@ -10,7 +11,7 @@ export class Drug{
     this.maxPrice = maxPriceIn;
   }
 
-  @computedFrom('maxPrice', 'price')
+  @computedFrom('maxPrice', 'price') // TODO: How to tell if the binding is being refreshed using this?
   get Price() {
     return this.price;
   }
