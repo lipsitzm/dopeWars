@@ -6,6 +6,10 @@ export class GameEngine {
 
   constructor(drugList){
     this.DrugList = drugList;
-    this.DrugList.UpdatePrices();
+    this.DrugList.Update();
+  }
+
+  move() {
+    this.DrugList.Update();
   }
 }

@@ -11,9 +11,10 @@ export class DrugList{
     ];
   }
 
-  UpdatePrices() {
+  Update() {
     for(let drug of this.Drugs) {
       drug.UpdatePrice();
+      drug.UpdateAvailability(.1);
     }
   }
 }
