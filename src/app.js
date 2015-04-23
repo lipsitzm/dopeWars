@@ -10,7 +10,8 @@ export class App {
     this.router.configure(config => {
       config.title = 'Dope Wars';
       config.map([
-        { route: 'newGame',       moduleId: './game',         nav: true, title:'New Game' },
+        // there's an error if you don't have a default route so new game gets an array with '' in it to get it to start there
+        { route: ['', 'newGame'],       moduleId: './game',         nav: true, title:'New Game' },
         { route: 'drugList',      moduleId: './drugList',     nav: true }
       ]);
     });
