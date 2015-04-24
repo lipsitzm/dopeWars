@@ -46,11 +46,6 @@ export class CityList{
     });
   }
 
-  move(){
-    alert('lame');
-  }
-
-
   Update() {
     for(let city of this.Cities) {
       city.Update();
