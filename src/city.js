@@ -19,7 +19,15 @@ export class City {
     this.name = n;
   }
 
+  get AvailableThreshold() {
+    return this.availableThreshold;
+  }
+
+  set AvailableThreshold(a) {
+    this.availableThreshold = a;
+  }
+
   Update() {
-    this.DrugList.Update();
+    this.DrugList.Update(this.AvailableThreshold);
   }
 }

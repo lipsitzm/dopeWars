@@ -14,10 +14,10 @@ export class DrugList{
     ];
   }
 
-  Update() {
+  Update(availabilityThreshold) {
     for(let drug of this.Drugs) {
       drug.UpdatePrice();
-      drug.UpdateAvailability(.1);
+      drug.UpdateAvailability(availabilityThreshold);
     }
   }
 }
