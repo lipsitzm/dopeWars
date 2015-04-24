@@ -3,17 +3,16 @@
     <div class="row">
       <div class="col-xs-6">
         <h1>${currentCity.Name}</h1>
-      </div>
-      <div class="col-xs-6">
-        <button click.delegate="move()">Move</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6">
         <div class="row" repeat.for="drug of currentCity.DrugList.Drugs" show.bind="drug.Available">
           <h3 class="col-xs-6">${drug.Name}</h3>
           <require from="./converters/currency-format"></require>
           <h4 class="col-xs-6">${drug.Price | currencyFormat}</h4>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <h2>Travel to</h2>
+        <div class="row" repeat.for="city of Cities">
+          <button class="btn btn-default" click.delegate="$parent.move($index)">${city.Name}</button>
         </div>
       </div>
     </div>

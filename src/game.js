@@ -5,14 +5,13 @@ import {CityList} from './cityList';
 export class GameEngine {
 
   constructor(cityList){
-    this.CityList = cityList;
-    this.currentCity = this.CityList.Cities[0];
+    this.Cities = cityList.Cities;
+    this.currentCity = this.Cities[0];
     this.currentCity.Update();
   }
 
-  move() {
-    let newCityIdx = Math.floor(Math.random() * this.CityList.Cities.length);
-    this.currentCity = this.CityList.Cities[newCityIdx];
+  move(idx) {
+    this.currentCity = this.Cities[idx];
     this.currentCity.Update();
   }
 }
