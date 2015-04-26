@@ -1,7 +1,7 @@
 <template>
   <require from="./city"></require>
   <div class="row" repeat.for="city of Cities">
-    <city show.bind="$index == $parent.idx" city_name="${city.Name}" available_threshold="${city.AvailableThreshold}"></city>
+    <city show.bind="$index == $parent.idx" city.bind="city" ></city>
   </div>
   <div class="col-xs-6">
     <h2>Travel to</h2>

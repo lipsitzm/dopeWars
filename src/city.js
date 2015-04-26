@@ -3,8 +3,7 @@ import {DrugList} from './drug-list';
 
 @inject(DrugList)
 export class City {
-  @bindable city_name = null;
-  @bindable available_threshold = null;
+  @bindable city = null;
 
   // TODO: Make these privates but not statics / in a closure outside of the class... http://stackoverflow.com/questions/22156326/private-properties-in-javascript-es6-classes
 
