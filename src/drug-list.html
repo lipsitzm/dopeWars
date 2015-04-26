@@ -1,0 +1,9 @@
+<template>
+  <section>
+    <div class="row" repeat.for="drug of Drugs" show.bind="drug.Available">
+      <h3 class="col-xs-6">${drug.Name}</h3>
+      <require from="./converters/currency-format"></require>
+      <h4 class="col-xs-6">${drug.Price | currencyFormat}</h4>
+    </div>
+  </section>
+</template>

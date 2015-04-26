@@ -1,20 +1,8 @@
 <template>
   <section>
     <div class="row">
-      <div class="col-xs-6">
-        <h1>${currentCity.Name}</h1>
-        <div class="row" repeat.for="drug of currentCity.DrugList.Drugs" show.bind="drug.Available">
-          <h3 class="col-xs-6">${drug.Name}</h3>
-          <require from="./converters/currency-format"></require>
-          <h4 class="col-xs-6">${drug.Price | currencyFormat}</h4>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <h2>Travel to</h2>
-        <div class="row" repeat.for="city of Cities">
-          <button class="btn btn-default" click.delegate="$parent.move($index)">${city.Name}</button>
-        </div>
-      </div>
+      <require from="./city-list"></require>
+      <city-list></city-list>
     </div>
   </section>
 </template>
