@@ -15,10 +15,6 @@ export class CityList{
     });
   }
 
-  move(idx) {
-    this.UpdateCurrentCity(idx);
-  }
-
   Update() {
     for(let city of this.Cities) {
       city.Update();
