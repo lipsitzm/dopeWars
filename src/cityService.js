@@ -1,4 +1,20 @@
-import {City} from './city';
+export class CityInfo {
+  name;
+  availabilityThreshold;
+
+  constructor(nameIn, avThresh) {
+    this.name = nameIn;
+    this.availabilityThreshold = avThresh;
+  }
+
+  get Name() {
+    return this.name;
+  }
+
+  get AvailabilityThreshold() {
+    return this.availabilityThreshold;
+  }
+}
 
 let cityInfos = [
   {
@@ -36,9 +52,7 @@ let cityInfos = [
 ];
 
 let cities = cityInfos.map(cityInfo => {
-  let city = {};
-  city.Name = cityInfo.Name;
-  city.AvailableThreshold = cityInfo.AvailableThreshold;
+  let city = new CityInfo(cityInfo.Name, cityInfo.AvailableThreshold);
   return city;
 });
 
