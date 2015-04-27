@@ -30,7 +30,7 @@ export class CityList{
         // This feels like a code smell?
       });
 
-      this.DrugService.GetNewPrice(this.Cities[this.idx], drug).then(function () {
+      this.DrugService.GetNewAvailability(this.Cities[this.idx], drug).then(function () {
         // Nothing to do here as the DrugService sets the value on the drug itself
         // This feels like a code smell?
       });

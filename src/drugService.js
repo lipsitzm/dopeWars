@@ -28,7 +28,7 @@ export class DrugService {
   GetNewAvailability(city, drug) {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
-        drug.Available = Math.random() >= city.AvailableThreshold;
+        drug.Available = Math.random() >= city.AvailabilityThreshold;
         resolve(true);
       });
   }
