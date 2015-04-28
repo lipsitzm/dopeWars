@@ -1,4 +1,4 @@
-import {Drug} from './drug';
+import {Drug} from 'models/drug';
 
 let drugs = [
   new Drug("Cocaine", 10000, 30000),

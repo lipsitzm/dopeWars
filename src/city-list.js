@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
-import {CityService} from './cityService';
-import {DrugService} from './drugService';
+import {CityService} from './services/cityService';
+import {DrugService} from './services/drugService';
 
 @inject(CityService, DrugService)
 export class CityList{
