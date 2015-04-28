@@ -1,12 +1,6 @@
 <template>
   <require from="./city"></require>
-  <div class="col-xs-6" repeat.for="cityInfo of Cities" show.bind="$index == $parent.idx">
-    <city class="row" city_info.bind="cityInfo" drug_list.bind="$parent.Drugs"></city>
-  </div>
-  <div class="col-xs-6">
-    <h2>Travel to</h2>
-    <div class="row" repeat.for="city of Cities">
-      <button class="btn btn-default" click.delegate="$parent.UpdateCurrentCity($index)">${city.Name}</button>
-    </div>
+  <div class="col-xs-6" repeat.for="cityInfo of cities" show.bind="$index == $parent.current_city_index">
+    <city class="row" city_info.bind="cityInfo" drug_list.bind="$parent.drugs"></city>
   </div>
 </template>

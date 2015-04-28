@@ -4,6 +4,8 @@
   <nav-bar router.bind="router"></nav-bar>
 
   <div class="page-host">
-    <router-view></router-view>
+    <!--<router-view></router-view> Can't use this right now because it doesn't cause game's created to be called... -->
+    <require from='./game'></require>
+    <game></game>
   </div>
 </template>

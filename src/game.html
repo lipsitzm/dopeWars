@@ -2,7 +2,13 @@
   <section>
     <div class="row">
       <require from="./city-list"></require>
-      <city-list></city-list>
+      <city-list cities.bind="Cities" drugs.bind="Drugs" current_city_index.bind="CurrentCityIndex"></city-list>
+      <div class="col-xs-6">
+        <h2>Travel to</h2>
+        <div class="row" repeat.for="city of Cities">
+          <button class="btn btn-default" click.delegate="$parent.UpdateCurrentCity($index)">${city.Name}</button>
+        </div>
+      </div>
     </div>
   </section>
 </template>

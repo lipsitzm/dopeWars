@@ -1,44 +1,14 @@
-import {inject} from 'aurelia-framework';
-import {CityService} from './services/cityService';
-import {DrugService} from './services/drugService';
+import {bindable} from 'aurelia-framework';
 
-@inject(CityService, DrugService)
 export class CityList{
-  constructor(cityService, drugService){
-    this.CityService = cityService;
-    this.idx = 0;
-    this.Cities = [];
-    this.DrugService = drugService;
-    this.Drugs = [];
-  }
+  @bindable cities = null;
+  @bindable drugs = null;
+  @bindable current_city_index = null;
 
-  created() {
-    this.CityService.GetCityList().then(cities => {
-      this.Cities = cities;
-    });
-
-    this.DrugService.GetDrugList().then(drugList => {
-      this.Drugs = drugList;
-      this.UpdateDrugs();
-    });
-  }
-
-  UpdateDrugs() {
-    for (let drug of this.Drugs) {
-      this.DrugService.GetNewPrice(drug).then(function () {
-        // Nothing to do here as the DrugService sets the value on the drug itself
-        // This feels like a code smell?
-      });
-
-      this.DrugService.GetNewAvailability(this.Cities[this.idx], drug).then(function () {
-        // Nothing to do here as the DrugService sets the value on the drug itself
-        // This feels like a code smell?
-      });
-    }
+  constructor(){
   }
 
   UpdateCurrentCity(idx) {
-    this.idx = idx;
-    this.UpdateDrugs();
+    this.current_city_index = idx;
   }
 }
