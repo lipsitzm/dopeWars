@@ -1,6 +1,10 @@
 <template>
   <section>
     <div class="row">
+      <require from="./player"></require>
+      <player player_info.bind="Player"></player>
+    </div>
+    <div class="row">
       <require from="./city-list"></require>
       <city-list cities.bind="Cities" drugs.bind="Drugs" current_city_index.bind="CurrentCityIndex"></city-list>
       <div class="col-xs-6">

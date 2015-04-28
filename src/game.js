@@ -1,16 +1,19 @@
 import {inject} from 'aurelia-framework';
 import {CityService} from './services/cityService';
 import {DrugService} from './services/drugService';
+import {PlayerService} from './services/playerService';
 
-@inject(CityService, DrugService)
+@inject(CityService, DrugService, PlayerService)
 export class Game {
 
-  constructor(cityService, drugService){
+  constructor(cityService, drugService, playerService){
     this.CityService = cityService;
     this.CurrentCityIndex = 0;
     this.Cities = [];
     this.DrugService = drugService;
     this.Drugs = [];
+    this.PlayerService = playerService;
+    this.Player = null;
   }
 
   created() {
@@ -21,6 +24,10 @@ export class Game {
     this.DrugService.GetDrugList().then(drugList => {
       this.Drugs = drugList;
       this.UpdateDrugs();
+    });
+
+    this.PlayerService.GetPlayer().then(player => {
+      this.Player = player;
     });
   }
 
