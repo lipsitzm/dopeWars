@@ -17,7 +17,9 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@3.3.4",
     "css": "github:systemjs/plugin-css@0.1.9",
     "font-awesome": "npm:font-awesome@4.3.0",
+    "jquery": "github:components/jquery@2.1.3",
     "numeral": "npm:numeral@1.5.3",
+    "pwkad/aurelia-bs-modal": "github:pwkad/aurelia-bs-modal@master",
     "traceur": "github:jmcriffey/bower-traceur@0.0.87",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87",
     "github:aurelia/binding@0.5.0": {

@@ -5,4 +5,8 @@ export class DrugList{
 
   constructor(){
   }
+
+  buyDrug(drugName) {
+    console.log('buying', drugName);
+  }
 }
