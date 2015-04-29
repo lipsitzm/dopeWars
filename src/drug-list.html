@@ -2,14 +2,16 @@
   <section>
     <div class="row" repeat.for="drug of drugs" show.bind="drug.Available">
       <require from="./converters/currency-format"></require>
-      <button class="col-xs-12 btn btn-default" click.delegate="$parent.buyDrug(drug.Name)">${drug.Name} - ${drug.Price | currencyFormat}</button>
+      <button class="col-xs-12 btn btn-default" click.delegate="$parent.buySellDrug(drug)">${drug.Name} - ${drug.Price | currencyFormat}</button>
     </div>
-    <modal showing.bind="showing">
-      <modal-header title.bind="modal_title" close.call="closeModal()"></modal-header>
-      <modal-body content.bind="modal_body"></modal-body>
+    <require from='./modalBodies/buyDrug'></require>
+    <require from='./modalBodies/sellDrug'></require>
+    <modal showing.bind="showBSModal">
+      <modal-header title.bind="modal_title" close.call="closeBSModal()"></modal-header>
+      <modal-body content_view.bind="modal_body" content_model.bind="modalModel"></modal-body>
       <modal-footer>
         <button class="btn" click.trigger="modalSuccess()">${modal_success_label}</button>
-        <au-button text="Cancel" click.call="modalCancel()"></au-button>
+        <au-button text="Cancel" click.call="closeBSModal()"></au-button>
       </modal-footer>
     </modal>
   </section>

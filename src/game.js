@@ -14,9 +14,7 @@ export class Game {
     this.Drugs = [];
     this.PlayerService = playerService;
     this.Player = null;
-  }
 
-  created() {
     this.CityService.GetCityList().then(cities => {
       this.Cities = cities;
     });

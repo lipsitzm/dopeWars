@@ -9,6 +9,10 @@ export class PlayerInfo {
   constructor(){
   }
 
+  HasDrug(drugName) {
+    return this.Drugs.has(drugName);
+  }
+
   BuyDrug(drugName, count, pricePerDrug) {
     if (this.BackpackSpace + count > this.BackpackSize) {
       throw 'Attempted to buy more ' + drugName + ' than the backpack could hold';
