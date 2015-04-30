@@ -9,12 +9,12 @@ export class PlayerInfo {
   constructor(){
   }
 
-  HasDrug(drugName) {
-    return this.Drugs.has(drugName);
+  GetDrugCount(drugName) {
+    return this.Drugs.get(drugName);
   }
 
   BuyDrug(drugName, count, pricePerDrug) {
-    count = parseInt(count); // this doesn't belong here... Figure out how to fix the modal's pass through
+    count = parseInt(count); // this doesn't belong here... Figure out how to fix the modal's pass through / input box
 
     if (this.BackpackSpace - count <= 0) {
       return 'You can\'t fit that much ' + drugName + ' in your backpack! The cops would see it if it\'s hanging out like that.';
@@ -37,17 +37,21 @@ export class PlayerInfo {
   }
 
   SellDrug(drugName, count, pricePerDrug) {
+    count = parseInt(count); // this doesn't belong here... Figure out how to fix the modal's pass through / input box
+
     if(!this.Drugs.has(drugName)) {
-      throw drugName + ' was attempted to be sold but wasn\'t present in the backpack';
+      return 'You don\'t have any ' + drugName + ' to sell... Try finding a college kid to mug first.';
     }
 
     let newDrugCount = this.Drugs.get(drugName) - count;
     if(newDrugCount < 0) {
-      throw 'Attempted to sell more ' + drugName + ' than the player had in the backpack';
+      return 'You don\'t have that much ' + drugName + ' to sell. You tryin\' to your supplier off?';
+      // Idea: Allow people to rip off their supplier... Or maybe cut the drug down? Get 2/3's the price? Something like that?
     }
 
     this.Drugs.set(drugName, newDrugCount);
     this.BackpackSpace += count;
     this.Money += (count * pricePerDrug);
+    return null; // Don't like this for the same reason as above, but again, it works for now.
   }
 }

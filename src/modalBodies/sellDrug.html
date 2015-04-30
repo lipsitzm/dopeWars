@@ -1,6 +1,14 @@
 <template>
+  <require from="converters/currency-format"></require>
   <div class="row">
-    <div>${drug_name} costs ${drug_cost}. How many would you like to sell?</div>
-    <input class="form-control" value.bind="buy_amount" />
+    <div class="col-xs-12">You've got ${model.TotalAmount} ${model.Name}. You can sell each one for ${model.Price | currencyFormat}. How many do you want to sell?</div>
+  </div>
+  <div class="row">
+    <input class="form-control col-xs-8" value.bind="model.SellAmount" />
+    <!-- Can't do the below in the JS because I don't know how to bind to a inner property change event... How's that done? -->
+    <div class="col-xs-4">${(model.Price * model.SellAmount) | currencyFormat}</div>
+  </div>
+  <div class="row" show.bind="model.ErrorMessage">
+    <div class="col-xs-12 error">${model.ErrorMessage}</div>
   </div>
 </template>

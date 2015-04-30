@@ -22,11 +22,19 @@ export class DrugList{
 
   buySellDrug(drug) {
     this.showBSModal = true;
-    if(!this.Player.HasDrug(drug.Name)) {
+    let drugCount = this.Player.GetDrugCount(drug.Name);
+    if(!drugCount) {
       this.modal_title = "Buy " + drug.Name;
       this.modal_body = 'modalBodies/buyDrug';
       this.modal_success_label = "Buy";
-      drug.BuyAmount = 0;
+      drug.BuyAmount = null;
+      this.modalModel = drug;
+    } else {
+      this.modal_title = "Sell " + drug.Name;
+      this.modal_body = 'modalBodies/sellDrug';
+      this.modal_success_label = "Sell";
+      drug.TotalAmount = drugCount;
+      drug.SellAmount = null;
       this.modalModel = drug;
     }
   }
@@ -36,11 +44,29 @@ export class DrugList{
   }
 
   bsModalSuccess() {
-    let errorMessage = this.Player.BuyDrug(this.modalModel.Name, this.modalModel.BuyAmount, this.modalModel.Price);
-    if(errorMessage == null) {
-      this.showBSModal = false;
+    if(this.modalModel.TotalAmount == undefined) { // This can be done in a way cleaner way...
+      let errorMessage = this.Player.BuyDrug(this.modalModel.Name, this.modalModel.BuyAmount, this.modalModel.Price);
+      if(errorMessage == null) {
+        this.showBSModal = false;
+      } else {
+        this.modalModel.ErrorMessage = errorMessage;
+      }
     } else {
-      this.modalModel.ErrorMessage = errorMessage;
+      let errorMessage = this.Player.SellDrug(this.modalModel.Name, this.modalModel.SellAmount, this.modalModel.Price);
+      if(errorMessage == null) {
+        this.showBSModal = false;
+      } else {
+        this.modalModel.ErrorMessage = errorMessage;
+      }
+    }
+
+    if(!this.modalModel.ErrorMessage) {
+      // Need to clean up the Drug object now that we're done with it
+      // Is there a better way to do this? Probably should create a new model class with the properties that is created in buySellDrug and thrown away here...
+      this.modalModel.ErrorMessage = undefined;
+      this.modalModel.BuyAmount = undefined;
+      this.modalModel.TotalAmount = undefined;
+      this.modalModel.SellAmount = undefined;
     }
   }
 }
