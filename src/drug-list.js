@@ -26,11 +26,21 @@ export class DrugList{
       this.modal_title = "Buy " + drug.Name;
       this.modal_body = 'modalBodies/buyDrug';
       this.modal_success_label = "Buy";
+      drug.BuyAmount = 0;
       this.modalModel = drug;
     }
   }
 
   closeBSModal() {
     this.showBSModal = false;
+  }
+
+  bsModalSuccess() {
+    let errorMessage = this.Player.BuyDrug(this.modalModel.Name, this.modalModel.BuyAmount, this.modalModel.Price);
+    if(errorMessage == null) {
+      this.showBSModal = false;
+    } else {
+      this.modalModel.ErrorMessage = errorMessage;
+    }
   }
 }

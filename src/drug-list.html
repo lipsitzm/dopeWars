@@ -10,7 +10,7 @@
       <modal-header title.bind="modal_title" close.call="closeBSModal()"></modal-header>
       <modal-body content_view.bind="modal_body" content_model.bind="modalModel"></modal-body>
       <modal-footer>
-        <button class="btn" click.trigger="modalSuccess()">${modal_success_label}</button>
+        <button class="btn" click.trigger="bsModalSuccess()">${modal_success_label}</button>
         <au-button text="Cancel" click.call="closeBSModal()"></au-button>
       </modal-footer>
     </modal>
