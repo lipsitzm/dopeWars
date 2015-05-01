@@ -20,6 +20,7 @@ export class Game {
     this.CurrentDayOption = null;
     this.CurrentDay = 1;
     this.IsLastDay = false;
+    this.GameOver = false;
 
     this.CityService.GetCityList().then(cities => {
       this.Cities = cities;
@@ -64,6 +65,7 @@ export class Game {
 
   MoveCity(idx) {
     if(this.IsLastDay) { // If we were already on the last day, that means that the player is triggering the end game
+      this.GameOver = true;
       return;
     }
 

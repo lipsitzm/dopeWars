@@ -1,11 +1,11 @@
 <template>
-  <section>
+  <require from="./player"></require>
+  <section show.bind="GameOver === false">
     <div class="row">
       <require from="./day"></require>
       <day max_days.bind="CurrentDayOption.TotalDays" current_day.bind="CurrentDay" is_last_day.bind="IsLastDay"></day>
     </div>
     <div class="row">
-      <require from="./player"></require>
       <player player_info.bind="Player"></player>
     </div>
     <div class="row">
@@ -17,6 +17,13 @@
           <button class="btn btn-default" click.delegate="$parent.MoveCity($index)">${city.Name}</button>
         </div>
       </div>
+    </div>
+  </section>
+  <section show.bind="GameOver">
+    <div class="splash">
+      <div class="message">Game Over</div>
+      <require from="./converters/currency-format"></require>
+      <div class="message">You made ${Player.Money | currencyFormat}</div>
     </div>
   </section>
 </template>
