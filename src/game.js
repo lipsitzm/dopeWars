@@ -60,5 +60,6 @@ export class Game {
   MoveCity(idx) {
     this.CurrentCityIndex = idx;
     this.UpdateDrugs();
+    this.UpdateDay();
   }
 }
