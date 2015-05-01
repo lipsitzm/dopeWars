@@ -1,5 +1,3 @@
-import {inject} from 'aurelia-framework';
-
 export class PlayerInfo {
   BackpackSize = 50; // Is this really needed? Basically just used to make the displaying of the size easier...
   Money = 5000;
