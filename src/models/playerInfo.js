@@ -14,7 +14,7 @@ export class PlayerInfo {
   BuyDrug(drugName, count, pricePerDrug) {
     count = parseInt(count); // this doesn't belong here... Figure out how to fix the modal's pass through / input box
 
-    if (this.BackpackSpace - count <= 0) {
+    if (this.BackpackSpace - count < 0) {
       return 'You can\'t fit that much ' + drugName + ' in your backpack! The cops would see it if it\'s hanging out like that.';
     }
 
