@@ -19,6 +19,7 @@ export class Game {
     this.DayOptions = null;
     this.CurrentDayOption = null;
     this.CurrentDay = 1;
+    this.IsLastDay = false;
 
     this.CityService.GetCityList().then(cities => {
       this.Cities = cities;
@@ -57,9 +58,19 @@ export class Game {
     this.CurrentDay++;
   }
 
+  CheckIfReachedMaxDay() {
+    return this.CurrentDay >= this.CurrentDayOption.TotalDays;
+  }
+
   MoveCity(idx) {
+    if(this.IsLastDay) { // If we were already on the last day, that means that the player is triggering the end game
+      return;
+    }
+
+    this.UpdateDay();
+    this.IsLastDay = this.CheckIfReachedMaxDay();
+
     this.CurrentCityIndex = idx;
     this.UpdateDrugs();
-    this.UpdateDay();
   }
 }
