@@ -1,6 +1,10 @@
 <template>
   <section>
     <div class="row">
+      <require from="./day"></require>
+      <day max_days.bind="CurrentDayOption.TotalDays" current_day.bind="CurrentDay"></day>
+    </div>
+    <div class="row">
       <require from="./player"></require>
       <player player_info.bind="Player"></player>
     </div>
@@ -10,7 +14,7 @@
       <div class="col-xs-6">
         <h2>Travel to</h2>
         <div class="row" repeat.for="city of Cities">
-          <button class="btn btn-default" click.delegate="$parent.UpdateCurrentCity($index)">${city.Name}</button>
+          <button class="btn btn-default" click.delegate="$parent.MoveCity($index)">${city.Name}</button>
         </div>
       </div>
     </div>

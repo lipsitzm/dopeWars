@@ -2,11 +2,12 @@ import {inject} from 'aurelia-framework';
 import {CityService} from './services/cityService';
 import {DrugService} from './services/drugService';
 import {PlayerService} from './services/playerService';
+import {DayService} from './services/dayService';
 
-@inject(CityService, DrugService, PlayerService)
+@inject(CityService, DrugService, PlayerService, DayService)
 export class Game {
 
-  constructor(cityService, drugService, playerService){
+  constructor(cityService, drugService, playerService, dayService){
     this.CityService = cityService;
     this.CurrentCityIndex = 0;
     this.Cities = [];
@@ -14,6 +15,10 @@ export class Game {
     this.Drugs = [];
     this.PlayerService = playerService;
     this.Player = null;
+    this.DayService = dayService;
+    this.DayOptions = null;
+    this.CurrentDayOption = null;
+    this.CurrentDay = 1;
 
     this.CityService.GetCityList().then(cities => {
       this.Cities = cities;
@@ -26,6 +31,11 @@ export class Game {
 
     this.PlayerService.GetPlayer().then(player => {
       this.Player = player;
+    });
+
+    this.DayService.GetDayOptions().then(dayOptions => {
+      this.DayOptions = dayOptions;
+      this.CurrentDayOption = dayOptions[0];
     });
   }
 
@@ -43,7 +53,11 @@ export class Game {
     }
   }
 
-  UpdateCurrentCity(idx) {
+  UpdateDay() {
+    this.CurrentDay++;
+  }
+
+  MoveCity(idx) {
     this.CurrentCityIndex = idx;
     this.UpdateDrugs();
   }
