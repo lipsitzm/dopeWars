@@ -15,8 +15,8 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-          <a href.bind="row.href">${row.title}</a>
+        <li repeat.for="dayOption of DayOptions">
+          <a route-href="route: newGame; params.bind: {totalDays:dayOption.TotalDays}">${dayOption.Name}</a>
         </li>
       </ul>
 

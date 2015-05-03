@@ -37,8 +37,24 @@ export class Game {
 
     this.DayService.GetDayOptions().then(dayOptions => {
       this.DayOptions = dayOptions;
-      this.CurrentDayOption = dayOptions[0];
     });
+  }
+
+  activate(params) {
+    if(params.hasOwnProperty('totalDays')) {
+      let totalDays = parseInt(params.totalDays);
+      let matchingDayOpts = this.DayOptions.filter(dOpt => {
+        return dOpt.TotalDays === totalDays;
+      });
+
+      if(matchingDayOpts.length === 1) {
+        this.CurrentDayOption = matchingDayOpts[0];
+      } else {
+        throw 'Found multiple matching Day Options for the given Total Days.';
+      }
+    } else {
+      this.CurrentDayOption = this.DayOptions[0]; // Default the game to the first day options setting
+    }
   }
 
   UpdateDrugs() {
