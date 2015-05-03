@@ -19,8 +19,6 @@ export class Game {
     this.DayOptions = null;
     this.CurrentDayOption = null;
     this.CurrentDay = 1;
-    this.IsLastDay = false;
-    this.GameOver = false;
 
     this.CityService.GetCityList().then(cities => {
       this.Cities = cities;
@@ -40,6 +38,13 @@ export class Game {
     });
   }
 
+  ResetGame() {
+    this.CurrentDay = 1;
+    this.Player.ResetPlayer();
+    this.IsLastDay = false;
+    this.GameOver = false;
+  }
+
   activate(params) {
     if(params.hasOwnProperty('totalDays')) {
       let totalDays = parseInt(params.totalDays);
@@ -55,6 +60,8 @@ export class Game {
     } else {
       this.CurrentDayOption = this.DayOptions[0]; // Default the game to the first day options setting
     }
+
+    this.ResetGame();
   }
 
   UpdateDrugs() {
