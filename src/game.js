@@ -105,6 +105,11 @@ export class Game {
       return;
     }
 
+    // Force the player to move cities every day
+    if(this.CurrentCityIndex === idx) {
+      return;
+    }
+
     this.UpdateDay();
     this.IsLastDay = this.CheckIfReachedMaxDay();
 
