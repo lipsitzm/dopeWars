@@ -16,7 +16,7 @@
     </div>
     <div class="row">
       <require from="./city-list"></require>
-      <city-list cities.bind="Cities" drugs.bind="Drugs" current_city_index.bind="CurrentCityIndex"></city-list>
+      <city-list current_city.bind="Cities[CurrentCityIndex]" drugs.bind="Drugs"></city-list>
       <div class="col-xs-6">
         <!-- Can this get moved into it's own view / model? I can't get the change binding to work right now -->
         <h2>Travel to</h2>
