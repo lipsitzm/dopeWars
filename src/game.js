@@ -43,7 +43,7 @@ export class Game {
   }
 
   ResetGame() {
-    this.CurrentCityIndex = Math.floor(Math.random() * this.Cities.length) + 1; // Start at a random city
+    this.CurrentCityIndex = Math.floor(Math.random() * this.Cities.length); // Start at a random city (0 indexed)
     this.CurrentDay = 1;
     this.Player.ResetPlayer(this.CurrentDifficultyLevel);
     this.IsLastDay = false;
