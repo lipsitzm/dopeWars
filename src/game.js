@@ -3,46 +3,52 @@ import {CityService} from './services/cityService';
 import {DrugService} from './services/drugService';
 import {PlayerService} from './services/playerService';
 import {DayService} from './services/dayService';
+import {DifficultyLevelsService} from './services/difficultyService';
 
-@inject(CityService, DrugService, PlayerService, DayService)
+@inject(CityService, DrugService, PlayerService, DayService, DifficultyLevelsService)
 export class Game {
 
-  constructor(cityService, drugService, playerService, dayService){
-    this.CityService = cityService;
-    this.CurrentCityIndex = 0;
-    this.Cities = [];
-    this.DrugService = drugService;
-    this.Drugs = [];
-    this.PlayerService = playerService;
-    this.Player = null;
+  constructor(cityService, drugService, playerService, dayService, difficultyLevelsService){
     this.DayService = dayService;
     this.DayOptions = null;
     this.CurrentDayOption = null;
-    this.CurrentDay = 1;
+    this.DayService.GetDayOptions().then(dayOptions => {
+      this.DayOptions = dayOptions;
+    });
 
+    this.DifficultyLevelsService = difficultyLevelsService;
+    this.DifficultyLevels = null;
+    this.CurrentDifficultyLevel = null;
+    this.DifficultyLevelsService.GetDifficultyLevels().then(diffLevels => {
+      this.DifficultyLevels = diffLevels;
+    });
+
+    this.CityService = cityService;
+    this.Cities = [];
     this.CityService.GetCityList().then(cities => {
       this.Cities = cities;
     });
 
+    this.DrugService = drugService;
+    this.Drugs = [];
     this.DrugService.GetDrugList().then(drugList => {
       this.Drugs = drugList;
-      this.UpdateDrugs();
     });
 
+    this.PlayerService = playerService;
+    this.Player = null;
     this.PlayerService.GetPlayer().then(player => {
       this.Player = player;
-    });
-
-    this.DayService.GetDayOptions().then(dayOptions => {
-      this.DayOptions = dayOptions;
     });
   }
 
   ResetGame() {
+    this.CurrentCityIndex = Math.floor(Math.random() * this.Cities.length) + 1; // Start at a random city
     this.CurrentDay = 1;
-    this.Player.ResetPlayer();
+    this.Player.ResetPlayer(this.CurrentDifficultyLevel);
     this.IsLastDay = false;
     this.GameOver = false;
+    this.UpdateDrugs();
   }
 
   activate(params) {
@@ -58,9 +64,16 @@ export class Game {
         throw 'Found multiple matching Day Options for the given Total Days.';
       }
     } else {
-      this.CurrentDayOption = this.DayOptions[0]; // Default the game to the first day options setting
+      // This is a nav to just the url so we need to init some base options
+      this.CurrentDayOption = this.DayOptions[0];
+      this.CurrentDifficultyLevel = this.DifficultyLevels[0];
     }
 
+    this.ResetGame();
+  }
+
+  ChangeDifficultyLevel(chosenDifficultyLevel) {
+    this.CurrentDifficultyLevel = chosenDifficultyLevel;
     this.ResetGame();
   }
 

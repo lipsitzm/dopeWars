@@ -1,14 +1,17 @@
+import {DifficultyLevel} from 'models/difficultyLevel';
+
 export class PlayerInfo {
+  startingBackpackSize;
+  startingMoney;
 
   constructor(){
-    this.ResetPlayer(); // TODO: Leave this call in here? The game.js ResetGame calls it and that's called on the game startup so it's being called twice...
   }
 
-  ResetPlayer() {
-    this.BackpackSize = 50; // Is this really needed? Basically just used to make the displaying of the size easier...
-    this.Money = 5000;
+  ResetPlayer(DifficultyLevel) {
+    this.BackpackSpace = DifficultyLevel.StartingBackpackSize;
+    this.BackpackSize = DifficultyLevel.StartingBackpackSize; // Is this really needed? Basically just used to make the displaying of the size easier...
+    this.Money = DifficultyLevel.StartingMoney;
     this.Drugs = new Map();
-    this.BackpackSpace = 50;
   }
 
   GetDrugCount(drugName) {

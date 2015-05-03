@@ -3,7 +3,7 @@ import {PlayerService} from './services/playerService';
 
 @inject(PlayerService)
 export class DrugList{
-  @bindable drugs = null;
+  @bindable drugs = null; // TODO: I think that this can actually be injected in as the DrugService...
   showBSModal = false;
   modal_title = "";
   modal_body = "";
