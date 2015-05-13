@@ -1,12 +1,11 @@
 <template>
+  <require from='./nav-bar'></require>
+  <nav-bar day_options.bind="DayOptions"
+           current_day_option.bind="CurrentDayOption"
+           difficulty_levels.bind="DifficultyLevels"
+           current_difficulty_level.bind="CurrentDifficultyLevel"></nav-bar>
   <require from="./player"></require>
   <section show.bind="GameOver === false">
-    <div class="row ">
-      <!-- Can this get moved into it's own view / model? I can't get the change binding to work right now -->
-      <button repeat.for="difficultyLevel of DifficultyLevels"
-              class="col-xs-4 btn btn-default"
-              click.delegate="$parent.ChangeDifficultyLevel(difficultyLevel)">${difficultyLevel.Name}</button>
-      </div>
     <div class="row">
       <require from="./day"></require>
       <day max_days.bind="CurrentDayOption.TotalDays" current_day.bind="CurrentDay" is_last_day.bind="IsLastDay"></day>

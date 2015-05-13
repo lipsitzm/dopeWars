@@ -51,9 +51,9 @@ export class Game {
     this.UpdateDrugs();
   }
 
-  activate(params) {
-    if(params.hasOwnProperty('totalDays')) {
-      let totalDays = parseInt(params.totalDays);
+  activate(params, config, instruction) {
+    if(instruction.params.hasOwnProperty('totalDays')) {
+      let totalDays = parseInt(instruction.params.totalDays);
       let matchingDayOpts = this.DayOptions.filter(dOpt => {
         return dOpt.TotalDays === totalDays;
       });
@@ -64,11 +64,23 @@ export class Game {
         throw 'Found multiple matching Day Options for the given Total Days.';
       }
     } else {
-      // This is a nav to just the url so we need to init some base options
-      this.CurrentDayOption = this.DayOptions[0];
-      this.CurrentDifficultyLevel = this.DifficultyLevels[0];
+      throw 'There should have been a totalDays param';
     }
 
+    if(instruction.params.hasOwnProperty('difficultyLevel')) {
+      let diffLevelName = instruction.params.difficultyLevel;
+      let matchingDiffLevels = this.DifficultyLevels.filter(dLevel => {
+        return dLevel.Name === diffLevelName;
+      });
+
+      if(matchingDiffLevels.length === 1) {
+        this.CurrentDifficultyLevel = matchingDiffLevels[0];
+      } else {
+        throw 'Found multiple matching Difficulty Levels for the given Name.';
+      }
+    } else {
+      throw 'There should have been a difficultyLevel param';
+    }
     this.ResetGame();
   }
 

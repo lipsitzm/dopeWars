@@ -1,30 +1,40 @@
 <template>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">
-        <i class="fa fa-home"></i>
-        <span>${router.title}</span>
-      </a>
-    </div>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <i class="fa fa-home"></i>
+          <span>${router.title}</span>
+        </a>
+      </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li repeat.for="dayOption of DayOptions">
-          <a route-href="route: newGame; params.bind: {totalDays:dayOption.TotalDays}">${dayOption.Name}</a>
-        </li>
-      </ul>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li repeat.for="dayOption of day_options">
+            <a href="#" click.delegate="$parent.dayOptionChange(dayOption)">${dayOption.Name}</a>
+          </li>
+        </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="loader" if.bind="router.isNavigating">
-          <i class="fa fa-spinner fa-spin fa-2x"></i>
-        </li>
-      </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Difficulty Level <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li repeat.for="diffLevel of difficulty_levels">
+                <a href="#" click.delegate="$parent.difficultyLevelChange(diffLevel)">${diffLevel.Name}</a>
+              </li>
+            </ul>
+          </li>
+          <li class="loader" if.bind="router.isNavigating">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>
