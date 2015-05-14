@@ -1,7 +1,5 @@
 <template>
-  <div class="col-xs-6">
-    <h1>${city_info.Name} ${city_info.AvailableThreshold}</h1>
-    <require from="./drug-list"></require>
-    <drug-list drugs.bind="drug_list"></drug-list>
-  </div>
+  <h1>${city_info.Name} ${city_info.AvailableThreshold}</h1>
+  <require from="./drug-list"></require>
+  <drug-list drugs.bind="drug_list"></drug-list>
 </template>
