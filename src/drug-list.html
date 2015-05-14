@@ -1,21 +1,19 @@
 <template>
-  <section>
-    <require from="./converters/currency-format"></require>
-    <button repeat.for="drug of drugs" show.bind="drug.Available"
-            class="btn btn-default btn-block"
-            data-toggle="modal"
-            data-target="#au-modal"
-            click.delegate="$parent.buySellDrug(drug)">${drug.Name} - ${drug.Price | currencyFormat}</button>
-    <require from='./modalBodies/buyDrug'></require>
-    <require from='./modalBodies/sellDrug'></require>
-    <div>${modal_id}</div>
-    <modal showing.bind="showBSModal">
-      <modal-header title.bind="modal_title" close.call="closeBSModal()"></modal-header>
-      <modal-body content_view.bind="modal_body" content_model.bind="modalModel"></modal-body>
-      <modal-footer>
-        <button class="btn" click.trigger="bsModalSuccess()">${modal_success_label}</button>
-        <au-button text="Cancel" click.call="closeBSModal()"></au-button>
-      </modal-footer>
-    </modal>
-  </section>
+  <require from="./converters/currency-format"></require>
+  <button repeat.for="drug of drugs" show.bind="drug.Available"
+          class="btn btn-default btn-block"
+          data-toggle="modal"
+          data-target="#au-modal"
+          click.delegate="$parent.buySellDrug(drug)">${drug.Name} - ${drug.Price | currencyFormat}</button>
+  <require from='./modalBodies/buyDrug'></require>
+  <require from='./modalBodies/sellDrug'></require>
+  <div>${modal_id}</div>
+  <modal showing.bind="showBSModal">
+    <modal-header title.bind="modal_title" close.call="closeBSModal()"></modal-header>
+    <modal-body content_view.bind="modal_body" content_model.bind="modalModel"></modal-body>
+    <modal-footer>
+      <button class="btn" click.trigger="bsModalSuccess()">${modal_success_label}</button>
+      <au-button text="Cancel" click.call="closeBSModal()"></au-button>
+    </modal-footer>
+  </modal>
 </template>

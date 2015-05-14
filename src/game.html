@@ -16,17 +16,12 @@
     </div>
     <div class="row">
       <require from="./city-list"></require>
-      <city-list class="col-xs-6"
+      <city-list class="col-xs-12"
+                 cities.bind="Cities"
                  current_city.bind="Cities[CurrentCityIndex]"
                  drugs.bind="Drugs"
-                 drugs_available.bind="DrugsAvailable"></city-list>
-      <div class="col-xs-6">
-        <!-- Can this get moved into it's own view / model? I can't get the change binding to work right now -->
-        <h1>Travel to</h1>
-        <button repeat.for="city of Cities"
-                class="btn btn-default btn-block ${$index == $parent.CurrentCityIndex ? 'active' : ''}"
-                click.delegate="$parent.MoveCity($index)">${city.Name}</button>
-      </div>
+                 drugs_available.bind="DrugsAvailable"
+                 game_engine.bind="Engine"></city-list>
     </div>
   </section>
   <section show.bind="GameOver">
