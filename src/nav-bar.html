@@ -2,7 +2,7 @@
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dw-navbar-collapse">
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -13,19 +13,17 @@
           <span>${router.title}</span>
         </a>
       </div>
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="dw-navbar-collapse">
         <ul class="nav navbar-nav">
-          <li repeat.for="dayOption of day_options">
+          <li repeat.for="dayOption of day_options" class="${$parent.current_day_option.TotalDays === dayOption.TotalDays ? 'active' : ''}">
             <a href="#" click.delegate="$parent.dayOptionChange(dayOption)">${dayOption.Name}</a>
           </li>
         </ul>
-
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Difficulty Level <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li repeat.for="diffLevel of difficulty_levels">
+              <li repeat.for="diffLevel of difficulty_levels" class="${$parent.current_difficulty_level.Name === diffLevel.Name ? 'active' : ''}">
                 <a href="#" click.delegate="$parent.difficultyLevelChange(diffLevel)">${diffLevel.Name}</a>
               </li>
             </ul>
