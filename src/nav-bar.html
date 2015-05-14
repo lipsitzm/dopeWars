@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dw-navbar-collapse">
@@ -18,9 +18,7 @@
           <li repeat.for="dayOption of day_options" class="${$parent.current_day_option.TotalDays === dayOption.TotalDays ? 'active' : ''}">
             <a href="#" click.delegate="$parent.dayOptionChange(dayOption)">${dayOption.Name}</a>
           </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
+          <li class="dropdown active">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Difficulty Level <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li repeat.for="diffLevel of difficulty_levels" class="${$parent.current_difficulty_level.Name === diffLevel.Name ? 'active' : ''}">
@@ -28,6 +26,8 @@
               </li>
             </ul>
           </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li class="loader" if.bind="router.isNavigating">
             <i class="fa fa-spinner fa-spin fa-2x"></i>
           </li>
