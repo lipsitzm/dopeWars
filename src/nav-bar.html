@@ -15,16 +15,24 @@
       </div>
       <div class="collapse navbar-collapse" id="dw-navbar-collapse">
         <ul class="nav navbar-nav">
-          <li repeat.for="dayOption of day_options" class="${$parent.current_day_option.TotalDays === dayOption.TotalDays ? 'active' : ''}">
-            <a href="#" click.delegate="$parent.dayOptionChange(dayOption)">${dayOption.Name}</a>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Game Length <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li repeat.for="dayOption of day_options" class="${$parent.current_day_option.TotalDays === dayOption.TotalDays ? 'active' : ''}">
+                <a href="#" click.delegate="$parent.dayOptionChange(dayOption)">${dayOption.Name}</a>
+              </li>
+            </ul>
           </li>
-          <li class="dropdown active">
+          <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Difficulty Level <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li repeat.for="diffLevel of difficulty_levels" class="${$parent.current_difficulty_level.Name === diffLevel.Name ? 'active' : ''}">
                 <a href="#" click.delegate="$parent.difficultyLevelChange(diffLevel)">${diffLevel.Name}</a>
               </li>
             </ul>
+          </li>
+          <li>
+            <a href="#" click.delegate="restartGame()">Restart Game</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

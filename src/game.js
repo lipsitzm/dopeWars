@@ -9,6 +9,9 @@ import {DifficultyLevelsService} from './services/difficultyService';
 export class Game {
 
   constructor(cityService, drugService, playerService, dayService, difficultyLevelsService){
+    // This feels like a huge anti-pattern, esp given that I'm passing it into the nav-bar to be able to trigger a GameReset
+    this.Engine = this;
+
     this.DayService = dayService;
     this.DayOptions = null;
     this.CurrentDayOption = null;
@@ -50,6 +53,7 @@ export class Game {
     this.IsLastDay = false;
     this.GameOver = false;
     this.UpdateDrugs();
+    this.TriggerRestart = false;
   }
 
   activate(params, config, instruction) {

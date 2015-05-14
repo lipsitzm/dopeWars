@@ -4,7 +4,7 @@ export class DayOption {
 
   constructor(totalDaysIn) {
     this.totalDays = totalDaysIn;
-    this.name = totalDaysIn + " Day Game";
+    this.name = totalDaysIn + " Days";
   }
 
   get TotalDays() {
