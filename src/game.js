@@ -95,14 +95,6 @@ export class Game {
     for (let drug of this.Drugs) {
       promisesAry.push(this.DrugService.GetNewPrice(drug));
       promisesAry.push(this.DrugService.GetNewAvailability(this.Cities[this.CurrentCityIndex], drug));
-
-      //this.DrugService.GetNewPrice(drug).then(function () {
-      //  // Nothing to do here as the DrugService sets the value on the drug itself
-      //  // This feels like a code smell?
-      //});
-      //
-      //this.DrugService.GetNewAvailability(this.Cities[this.CurrentCityIndex], drug).then(function () {
-      //});
     }
 
     return Promise.all(promisesAry).then(resultsAry => {
