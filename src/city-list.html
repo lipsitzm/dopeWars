@@ -9,7 +9,7 @@
       <!-- Can this get moved into it's own view / model? I can't get the change binding to work right now -->
       <h1>Travel to</h1>
       <button repeat.for="city of cities"
-              class="btn btn-default btn-block ${city.Name == current_city.Name ? 'active' : ''}"
+              class="btn btn-default btn-block ${city.Name == $parent.current_city.Name ? 'active' : ''}"
               click.delegate="$parent.MoveCity($index)">${city.Name}</button>
     </div>
   </div>
