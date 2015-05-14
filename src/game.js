@@ -31,6 +31,7 @@ export class Game {
 
     this.DrugService = drugService;
     this.Drugs = [];
+    this.DrugsAvailable = false;
     this.DrugService.GetDrugList().then(drugList => {
       this.Drugs = drugList;
     });
@@ -90,17 +91,33 @@ export class Game {
   }
 
   UpdateDrugs() {
+    let promisesAry = [];
     for (let drug of this.Drugs) {
-      this.DrugService.GetNewPrice(drug).then(function () {
-        // Nothing to do here as the DrugService sets the value on the drug itself
-        // This feels like a code smell?
-      });
+      promisesAry.push(this.DrugService.GetNewPrice(drug));
+      promisesAry.push(this.DrugService.GetNewAvailability(this.Cities[this.CurrentCityIndex], drug));
 
-      this.DrugService.GetNewAvailability(this.Cities[this.CurrentCityIndex], drug).then(function () {
-        // Nothing to do here as the DrugService sets the value on the drug itself
-        // This feels like a code smell?
-      });
+      //this.DrugService.GetNewPrice(drug).then(function () {
+      //  // Nothing to do here as the DrugService sets the value on the drug itself
+      //  // This feels like a code smell?
+      //});
+      //
+      //this.DrugService.GetNewAvailability(this.Cities[this.CurrentCityIndex], drug).then(function () {
+      //});
     }
+
+    return Promise.all(promisesAry).then(resultsAry => {
+      // Nothing to do here on the actual Drug objects as the DrugService sets the value on the drug itself
+      // This feels like a code smell?
+
+      // I feel like this logic could / should get pushed further down the stack...
+      this.DrugsAvailable = false;
+      for(let drug of this.Drugs) {
+        if(drug.Available) {
+          this.DrugsAvailable = true;
+          break;
+        }
+      }
+    });
   }
 
   UpdateDay() {
