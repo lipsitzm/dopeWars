@@ -1,13 +1,13 @@
 import {CityInfo} from 'models/cityInfo';
 
 let cityInfos = [
-  new CityInfo("Dublin", .6),
-  new CityInfo("London", .8),
-  new CityInfo("Paris", .9),
-  new CityInfo("Amsterdam", .1),
-  new CityInfo("Munich", .6),
-  new CityInfo("Prague", .4),
-  new CityInfo("Rome", .5),
+  new CityInfo("Dublin", .3),
+  new CityInfo("London", .4),
+  new CityInfo("Paris", .4),
+  new CityInfo("Amsterdam",.05),
+  new CityInfo("Munich", .3),
+  new CityInfo("Prague", .2),
+  new CityInfo("Rome", .25),
   new CityInfo("Ibiza", 0)
 ];
 
