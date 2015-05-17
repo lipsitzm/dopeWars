@@ -15,7 +15,12 @@ export class PlayerInfo {
   }
 
   GetDrugCount(drugName) {
-    return this.Drugs.get(drugName);
+    return this.Drugs.get(drugName) || 0;
+  }
+
+  GetMaxPossibleToBuy(pricePerDrug) {
+    let max = Math.floor(this.Money / pricePerDrug);
+    return max > this.BackpackSpace ? this.BackpackSpace : max;
   }
 
   BuyDrug(drugName, count, pricePerDrug) {

@@ -10,7 +10,7 @@ export class NavBar {
   @bindable game_engine;
 
   constructor(router) {
-    this.router = router;
+   this.router = router;
   }
 
   dayOptionChange(newDayOption) {

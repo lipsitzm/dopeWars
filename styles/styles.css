@@ -41,6 +41,21 @@ section {
     margin: 12px 24px 0 6px;
 }
 
-.pictureDetail {
-    max-width: 425px;
+.panel-heading {
+  cursor: pointer;
+}
+
+.panel-default > .panel-heading:hover {
+  background-color: #e6e6e6;
+}
+
+.aurelia-validation-message{
+  display:  inline;
+  margin-left : 5px;
+}
+.has-success label {
+  color: #3c763d;
+}
+.has-warning .help-block, .has-warning label {
+  color: red;
 }
