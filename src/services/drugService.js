@@ -20,7 +20,7 @@ export class DrugService {
   GetNewPrice(drug) {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
-        drug.Price = Math.floor(Math.random() * drug.MaxPrice) + drug.MinPrice;
+        drug.Price = Math.floor(Math.random() * (drug.MaxPrice - drug.MinPrice)) + drug.MinPrice;
         resolve(true);
       });
   }

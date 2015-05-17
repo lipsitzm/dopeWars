@@ -59,3 +59,19 @@ section {
 .has-warning .help-block, .has-warning label {
   color: red;
 }
+
+.most-expensive-drug-cost {
+  color: #CC0000;
+}
+.middle-expensive-drug-cost {
+  color: #FF6666;
+}
+.middle-drug-cost {
+  color: #000;
+}
+.middle-cheapest-drug-cost {
+  color: #00FF00;
+}
+.cheapest-drug-cost {
+  color: #336600;
+}

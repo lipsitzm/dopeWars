@@ -14,7 +14,9 @@
            data-target="#${drug.Name}"
            aria-expanded="false"
            aria-controls="${drug.Name}">
-        <h4 class="panel-title">${drug.Name} - ${drug.Price | currencyFormat}</h4>
+        <h4 class="panel-title ${drug.ThresholdColorClass}">
+          <strong>${drug.Name} - <span class="${drug-price-color}">${drug.Price | currencyFormat}</span></strong>
+        </h4>
       </div>
       <div id="${drug.Name}"
            class="panel-collapse collapse"
