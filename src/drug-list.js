@@ -19,7 +19,7 @@ export class DrugList{
   }
 
   showSellDialog(drug) {
-    this.currentAmount = this.maxAmount = this.Player.GetDrugCount(drug.Name);
+    this.currentAmount = this.maxAmount = drug.BackpackCount;
     this.panelBodyToShow = -1;
   }
 
@@ -34,7 +34,7 @@ export class DrugList{
   }
 
   buyDrugs(drug) {
-    let errorMessage = this.Player.BuyDrug(drug.Name, this.currentAmount, drug.Price);
+    let errorMessage = this.Player.BuyDrug(drug, this.currentAmount);
     if(errorMessage == null) {
       this.loadDrugPanelInfo(drug);
     } else {
@@ -44,7 +44,7 @@ export class DrugList{
   }
 
   sellDrugs(drug) {
-    let errorMessage = this.Player.SellDrug(drug.Name, this.currentAmount, drug.Price);
+    let errorMessage = this.Player.SellDrug(drug, this.currentAmount);
     if(errorMessage == null) {
       this.loadDrugPanelInfo(drug);
     } else {
@@ -55,7 +55,7 @@ export class DrugList{
   }
 
   loadDrugPanelInfo(drug) {
-    let curDrugCount = this.Player.GetDrugCount(drug.Name);
+    let curDrugCount = drug.BackpackCount;
     let maxToBuy = this.Player.GetMaxPossibleToBuy(drug.Price);
     if(curDrugCount > 0) {
       if(maxToBuy > 0)
