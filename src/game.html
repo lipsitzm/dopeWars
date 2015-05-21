@@ -2,35 +2,26 @@
   <!--Including this here so that it gets pulled in after bootstrap-->
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
   <require from='./nav-bar'></require>
-  <nav-bar day_options.bind="DayOptions"
-           current_day_option.bind="CurrentDayOption"
-           difficulty_levels.bind="DifficultyLevels"
-           current_difficulty_level.bind="CurrentDifficultyLevel"
-           game_engine.bind="Engine"></nav-bar>
+  <nav-bar></nav-bar>
   <require from="./player"></require>
-  <section show.bind="GameOver === false">
+  <section show.bind="GameEngine.GameOver === false">
     <div class="row">
       <require from="./day"></require>
-      <day max_days.bind="CurrentDayOption.TotalDays" current_day.bind="CurrentDay" is_last_day.bind="IsLastDay"></day>
+      <day max_days.bind="GameEngine.CurrentDayOption.TotalDays" current_day.bind="GameEngine.CurrentDay" is_last_day.bind="GameEngine.IsLastDay"></day>
     </div>
     <div class="row">
-      <player player_info.bind="Player"></player>
+      <player player_info.bind="GameEngine.Player"></player>
     </div>
     <div class="row">
       <require from="./city-list"></require>
-      <city-list class="col-xs-12"
-                 cities.bind="Cities"
-                 current_city.bind="Cities[CurrentCityIndex]"
-                 drugs.bind="Drugs"
-                 drugs_available.bind="DrugsAvailable"
-                 game_engine.bind="Engine"></city-list>
+      <city-list class="col-xs-12"></city-list>
     </div>
   </section>
-  <section show.bind="GameOver">
+  <section show.bind="GameEngine.GameOver">
     <div class="splash">
       <div class="message">Game Over</div>
       <require from="./converters/currency-format"></require>
-      <div class="message">You made ${Player.Money - Player.LoanOutstanding | currencyFormat}</div>
+      <div class="message">You made ${GameEngine.Player.Money - GameEngine.Player.LoanOutstanding | currencyFormat}</div>
     </div>
   </section>
 </template>

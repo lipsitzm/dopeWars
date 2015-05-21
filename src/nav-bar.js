@@ -1,35 +1,46 @@
 import {bindable, inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+import {GameEngineService} from './services/gameEngineService';
+import {GameEngine} from './engines/gameEngine';
+import {DayOption} from './models/dayOption'
+import {DifficultyLevel} from './models/difficultyLevel'
 
-@inject(Router)
+@inject(Router, GameEngineService)
 export class NavBar {
-  @bindable day_options;
-  @bindable current_day_option;
-  @bindable difficulty_levels;
-  @bindable current_difficulty_level;
-  @bindable game_engine;
+  GameEngine;
+  DayOptions;
+  CurrentDayOption;
+  DifficultyLevels;
+  CurrentDifficultyLevel;
 
-  constructor(router) {
-   this.router = router;
+  constructor(router, gameEngineService) {
+    this.router = router;
+
+    this.GameEngineService = gameEngineService;
+    this.GameEngineService.GetGameEngine().then(
+        gameEngine => {
+          this.GameEngine = gameEngine;
+        }
+    );
   }
 
   dayOptionChange(newDayOption) {
     // Is there a way to get this into the HTML? Can't do it right now due to it's dependency on a bound param that isn't value immediately
     location.href = this.router.generate("Dope Wars", {
       totalDays: newDayOption.TotalDays,
-      difficultyLevel: this.current_difficulty_level.Name
+      difficultyLevel: this.GameEngine.CurrentDifficultyLevel.Name
     });
   }
 
   difficultyLevelChange(newDiffLevel) {
     // Is there a way to get this into the HTML? Can't do it right now due to it's dependency on a bound param that isn't value immediately
     location.href = this.router.generate("Dope Wars", {
-      totalDays: this.current_day_option.TotalDays,
+      totalDays: this.GameEngine.CurrentDayOption.TotalDays,
       difficultyLevel: newDiffLevel.Name
     });
   }
 
   restartGame() {
-    this.game_engine.ResetGame();
+    this.GameEngine.ResetGame();
   }
 }

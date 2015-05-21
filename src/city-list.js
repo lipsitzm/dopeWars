@@ -1,13 +1,23 @@
-import {bindable} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
+import {GameEngineService} from './services/gameEngineService';
+import {GameEngine} from './engines/gameEngine';
 
+@inject(GameEngineService)
 export class CityList{
-  @bindable game_engine = null;
-  @bindable cities = null;
-  @bindable current_city = null;
-  @bindable drugs = null;
-  @bindable drugs_available = false;
+  GameEngine;
+  CurrentCity;
+
+  constructor(gameEngineService) {
+    this.GameEngineService = gameEngineService;
+    this.GameEngineService.GetGameEngine().then(
+        gameEngine => {
+          this.GameEngine = gameEngine;
+          this.CurrentCity = this.GameEngine.Cities[this.GameEngine.CurrentCityIndex];
+        }
+    );
+  }
 
   MoveCity(index) {
-    this.game_engine.MoveCity(index);
+    this.GameEngine.MoveCity(index);
   }
 }
