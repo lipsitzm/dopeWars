@@ -1,9 +1,9 @@
 import {DifficultyLevel} from 'models/difficultyLevel';
 
 let difficultyLevels = [
-  new DifficultyLevel('Easy', 50000, 100),
-  new DifficultyLevel('Medium', 25000, 75),
-  new DifficultyLevel('Hard', 5000, 50)
+  new DifficultyLevel('Easy', 25000, 100, .1, 10000),
+  new DifficultyLevel('Medium', 10000, 75, .3, 7500),
+  new DifficultyLevel('Hard', 5000, 50, .5, 5000)
 ];
 
 export class DifficultyLevelsService {

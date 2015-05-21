@@ -12,6 +12,8 @@ export class PlayerInfo {
     this.BackpackSize = DifficultyLevel.StartingBackpackSize; // Is this really needed? Basically just used to make the displaying of the size easier...
     this.Money = DifficultyLevel.StartingMoney;
     this.Drugs = new Map();
+    this.LoanOutstanding = DifficultyLevel.LoanOutstanding;
+    this.InterestRate = DifficultyLevel.InterestRate;
   }
 
   GetMaxPossibleToBuy(pricePerDrug) {
@@ -38,6 +40,19 @@ export class PlayerInfo {
     this.BackpackSpace -= count;
     this.Money -= drugCost;
     return null; // Don't like that null is the success retVal, but it's an error msg being return otherwise so it does work... Go back to throwing?
+  }
+
+  IncreaseLoanAmount() {
+    this.LoanOutstanding = this.LoanOutstanding * (1 + this.InterestRate);
+  }
+
+  PayOffLoan(payDownAmount) {
+    if(this.Money < payDownAmount) {
+      return 'You don\'t have that much money, watch out for your knees if you\'re trying to rip off your bookie!';
+    }
+
+    this.Money -= payDownAmount;
+    this.LoanOutstanding -= payDownAmount;
   }
 
   SellDrug(drug, count) {

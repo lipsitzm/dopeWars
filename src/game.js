@@ -4,6 +4,7 @@ import {DrugService} from './services/drugService';
 import {PlayerService} from './services/playerService';
 import {DayService} from './services/dayService';
 import {DifficultyLevelsService} from './services/difficultyService';
+import {DifficultyLevel} from './models/difficultyLevel';
 
 @inject(CityService, DrugService, PlayerService, DayService, DifficultyLevelsService)
 export class Game {
@@ -140,5 +141,6 @@ export class Game {
 
     this.CurrentCityIndex = idx;
     this.UpdateDrugs();
+    this.Player.IncreaseLoanAmount();
   }
 }
