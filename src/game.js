@@ -35,9 +35,10 @@ export class Game {
 
     this.DrugService = drugService;
     this.Drugs = [];
+    this.OriginalDrugs = [];
     this.DrugsAvailable = false;
     this.DrugService.GetDrugList().then(drugList => {
-      this.Drugs = drugList;
+      this.Drugs = this.OriginalDrugs = drugList;
     });
 
     this.PlayerService = playerService;
@@ -53,6 +54,7 @@ export class Game {
     this.Player.ResetPlayer(this.CurrentDifficultyLevel);
     this.IsLastDay = false;
     this.GameOver = false;
+    this.Drugs = this.OriginalDrugs; // Reset the drugs back to their initial states
     this.UpdateDrugs();
     this.TriggerRestart = false;
   }

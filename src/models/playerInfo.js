@@ -43,7 +43,7 @@ export class PlayerInfo {
   }
 
   IncreaseLoanAmount() {
-    this.LoanOutstanding = this.LoanOutstanding * (1 + this.InterestRate);
+    this.LoanOutstanding = Math.floor(this.LoanOutstanding * (1 + this.InterestRate));
   }
 
   PayOffLoan(payDownAmount) {

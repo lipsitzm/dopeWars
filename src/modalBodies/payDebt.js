@@ -4,7 +4,8 @@ import {PlayerService} from 'services/playerService';
 
 @inject(Validation, PlayerService)
 export class BuyDrug {
-  paymentAmount = 0;
+  paymentAmount = 0; // TODO: Make this equal the amount of cash the player has or the debt amount left, whichever is smaller
+  // Don't know how to make it happen on the 2nd opening of the modal which is why I'm not doing it now...
 
   constructor(validation, playerService) {
     this.validation = validation.on(this)
