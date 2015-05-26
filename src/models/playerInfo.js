@@ -1,7 +1,6 @@
 import {DifficultyLevel} from 'models/difficultyLevel';
 
 export class PlayerInfo {
-  startingBackpackSize;
   startingMoney;
 
   constructor(){
@@ -10,7 +9,7 @@ export class PlayerInfo {
   ResetPlayer(DifficultyLevel) {
     this.BackpackSpace = DifficultyLevel.StartingBackpackSize;
     this.BackpackSize = DifficultyLevel.StartingBackpackSize; // Is this really needed? Basically just used to make the displaying of the size easier...
-    this.Money = DifficultyLevel.StartingMoney;
+    this.Money = this.startingMoney = DifficultyLevel.StartingMoney;
     this.Drugs = new Map();
     this.LoanOutstanding = DifficultyLevel.LoanOutstanding;
     this.InterestRate = DifficultyLevel.InterestRate;
@@ -19,6 +18,11 @@ export class PlayerInfo {
   GetMaxPossibleToBuy(pricePerDrug) {
     let max = Math.floor(this.Money / pricePerDrug);
     return max > this.BackpackSpace ? this.BackpackSpace : max;
+  }
+
+  get Profit() {
+    return this.Money - this.LoanOutstanding;
+    // Still on the fence of whether or not I should subtract the starting money from this or not...
   }
 
   BuyDrug(drug, count) {
