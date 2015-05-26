@@ -43,6 +43,10 @@ export class GameEngine {
     });
   }
 
+  get CurrentCity() {
+    return this.Cities[this.CurrentCityIndex];
+  }
+
   ResetGame() {
     this.CurrentCityIndex = Math.floor(Math.random() * this.Cities.length); // Start at a random city (0 indexed)
     this.CurrentDay = 1;
@@ -63,7 +67,7 @@ export class GameEngine {
     let promisesAry = [];
     for (let drug of this.Drugs) {
       promisesAry.push(this.DrugService.GetNewPrice(drug));
-      promisesAry.push(this.DrugService.GetNewAvailability(this.Cities[this.CurrentCityIndex], drug));
+      promisesAry.push(this.DrugService.GetNewAvailability(this.CurrentCity, drug));
     }
 
     return Promise.all(promisesAry).then(resultsAry => {
@@ -106,7 +110,5 @@ export class GameEngine {
     this.CurrentCityIndex = idx;
     this.UpdateDrugs();
     this.Player.IncreaseLoanAmount();
-
-    return this.Cities[this.CurrentCityIndex];
   }
 }
