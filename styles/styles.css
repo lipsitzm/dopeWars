@@ -75,3 +75,10 @@ section {
 .cheapest-drug-cost {
   color: #336600;
 }
+
+.footer-holder {
+  font-style: italic;
+  background-color: darkgray;
+  margin-top:50px;
+  padding: 50px 0;
+}
