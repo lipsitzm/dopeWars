@@ -5,19 +5,17 @@ import {GameEngine} from './engines/gameEngine';
 @inject(GameEngineService)
 export class CityList{
   GameEngine;
-  CurrentCity;
 
   constructor(gameEngineService) {
     this.GameEngineService = gameEngineService;
     this.GameEngineService.GetGameEngine().then(
         gameEngine => {
           this.GameEngine = gameEngine;
-          this.CurrentCity = this.GameEngine.Cities[this.GameEngine.CurrentCityIndex];
         }
     );
   }
 
   MoveCity(index) {
-    this.CurrentCity = this.GameEngine.MoveCity(index);
+    this.GameEngine.MoveCity(index);
   }
 }
