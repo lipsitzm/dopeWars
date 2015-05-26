@@ -1,0 +1,29 @@
+<template>
+  <!--Including this here so that it gets pulled in after bootstrap-->
+  <link rel="stylesheet" type="text/css" href="styles/styles.css">
+  <require from='./nav-bar'></require>
+  <nav-bar></nav-bar>
+  <require from="./player"></require>
+  <section show.bind="GameEngine.GameOver === false">
+    <div class="row">
+      <require from="./day"></require>
+      <day max_days.bind="GameEngine.CurrentDayOption.TotalDays" current_day.bind="GameEngine.CurrentDay" is_last_day.bind="GameEngine.IsLastDay"></day>
+    </div>
+    <div class="row">
+      <player player_info.bind="GameEngine.Player"></player>
+    </div>
+    <div class="row">
+      <require from="./city-list"></require>
+      <city-list class="col-xs-12"></city-list>
+    </div>
+  </section>
+  <section show.bind="GameEngine.GameOver">
+    <div class="splash mrg-btm-10-pct">
+      <div class="message">Game Over</div>
+      <require from="./converters/currency-format"></require>
+      <div class="message">You made ${GameEngine.Player.Profit | currencyFormat}</div>
+    </div>
+  </section>
+  <require from="./footer-bar"></require>
+  <footer-bar></footer-bar>
+</template>

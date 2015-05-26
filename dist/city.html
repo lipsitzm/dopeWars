@@ -1,0 +1,10 @@
+<template>
+  <h1>${city_info.Name}</h1>
+  <require from="./drug-list"></require>
+  <div show.bind="drugs_available === true">
+    <drug-list drugs.bind="drug_list"></drug-list>
+  </div>
+  <div show.bind="drugs_available === false">
+    <h3>Those damn hippies bought all the drugs today.</h3>
+  </div>
+</template>
