@@ -18,6 +18,6 @@ export class CityList{
   }
 
   MoveCity(index) {
-    this.GameEngine.MoveCity(index);
+    this.CurrentCity = this.GameEngine.MoveCity(index);
   }
 }

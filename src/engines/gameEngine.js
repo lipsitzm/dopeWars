@@ -106,5 +106,7 @@ export class GameEngine {
     this.CurrentCityIndex = idx;
     this.UpdateDrugs();
     this.Player.IncreaseLoanAmount();
+
+    return this.Cities[this.CurrentCityIndex];
   }
 }
