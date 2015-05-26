@@ -1,7 +1,7 @@
 <template>
   <require from="./converters/currency-format"></require>
-  <h3 class="col-xs-3">Money: ${player_info.Money | currencyFormat}</h3>
-  <div class="col-xs-3">
+  <h3 class="col-xs-6 col-sm-3">Money: ${player_info.Money | currencyFormat}</h3>
+  <div class="col-xs-6 col-sm-3">
     <h3>Debt: ${player_info.LoanOutstanding | currencyFormat}
     <small class="btn btn-default col-xs-offset-1"
            data-toggle="modal"
@@ -13,6 +13,6 @@
       <modal-body content_view.bind="modalView"></modal-body>
     </modal>
   </div>
-  <h3 class="col-xs-3">Backpack Space: ${player_info.BackpackSpace}</h3>
-  <h3 class="col-xs-3">Backpack Size: ${player_info.BackpackSize}</h3>
+  <h3 class="col-xs-6 col-sm-3">Backpack Space: ${player_info.BackpackSpace}</h3>
+  <h3 class="col-xs-6 col-sm-3">Backpack Size: ${player_info.BackpackSize}</h3>
 </template>

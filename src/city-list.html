@@ -1,11 +1,11 @@
 <template>
   <div class="row">
     <require from="./city"></require>
-    <city class="col-xs-6"
+    <city class="col-xs-12 col-sm-6"
           city_info.bind="CurrentCity"
           drug_list.bind="GameEngine.Drugs"
           drugs_available.bind="GameEngine.DrugsAvailable"></city>
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-sm-6">
       <!-- Can this get moved into it's own view / model? I can't get the change binding to work right now -->
       <h1>Travel to</h1>
       <button repeat.for="city of GameEngine.Cities"
