@@ -8,6 +8,10 @@ let drugs = [
   new Drug("Meth", 25, 100)
 ];
 
+let doPriceMath = (minPrice, maxPrice) => {
+  return Math.floor(Math.random() * (maxPrice - minPrice)) + minPrice;
+};
+
 export class DrugService {
 
   GetDrugList() {
@@ -20,7 +24,7 @@ export class DrugService {
   GetNewPrice(drug) {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
-        drug.Price = Math.floor(Math.random() * (drug.MaxPrice - drug.MinPrice)) + drug.MinPrice;
+        drug.Price = doPriceMath(drug.MinPrice, drug.MaxPrice);
         resolve(true);
       });
   }
@@ -30,6 +34,44 @@ export class DrugService {
       function (resolve, reject) {
         drug.Available = Math.random() >= city.AvailabilityThreshold;
         resolve(true);
+      });
+  }
+
+  // There should be a way to refactor these to make them workable... Issue is that the prices passed to doPriceMath are dependent on the
+  //  drug that's been randomly chosen which is the part that is repetitive...
+  SurpriseMakeRandomAvailableDrugMoreExpensive() {
+    return new Promise( // Faking out a promise in case down the road this becomes an actual server call
+      function (resolve, reject) {
+        // Going through the drugs randomly but need the loop to make sure I'm working on one that's available
+        let drugToCheck;
+        for (let i = drugs.length - 1; i > 0; i--) {
+          let idx = Math.floor(Math.random() * (i + 1));
+          drugToCheck = drugs[idx];
+
+          if(drugToCheck.Available) {
+            drugToCheck.Price = doPriceMath(drugToCheck.MaxPrice, drugToCheck.MaxPrice * 2);
+            break;
+          }
+        }
+        resolve(drugToCheck);
+      });
+  }
+
+  SurpriseMakeRandomAvailableDrugCheaper() {
+    return new Promise( // Faking out a promise in case down the road this becomes an actual server call
+      function (resolve, reject) {
+        // Going through the drugs randomly but need the loop to make sure I'm working on one that's available
+        let drugToCheck;
+        for (let i = drugs.length - 1; i > 0; i--) {
+          let idx = Math.floor(Math.random() * (i + 1));
+          drugToCheck = drugs[idx];
+
+          if(drugToCheck.Available) {
+            drugToCheck.Price = doPriceMath(drugToCheck.MinPrice / 2, drugToCheck.MinPrice);
+            break;
+          }
+        }
+        resolve(drugToCheck);
       });
   }
 }

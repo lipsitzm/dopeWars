@@ -4,10 +4,11 @@ import {PlayerService} from 'services/playerService';
 import {DayService} from 'services/dayService';
 import {DifficultyLevelsService} from 'services/difficultyService';
 import {DifficultyLevel} from 'models/difficultyLevel';
+import {SurpriseService} from 'services/surpriseService';
+import {Surprise} from 'models/Surprise';
 
 export class GameEngine {
-
-  constructor(cityService, drugService, playerService, dayService, difficultyLevelsService){
+  constructor(cityService, drugService, playerService, dayService, difficultyLevelsService, surpriseService){
     this.DayService = dayService;
     this.DayOptions = null;
     this.CurrentDayOption = null;
@@ -41,6 +42,12 @@ export class GameEngine {
     this.PlayerService.GetPlayer().then(player => {
       this.Player = player;
     });
+
+    this.SurpriseService = surpriseService;
+    this.Surprises = null;
+    this.SurpriseService.GetSurprises().then(surprises => {
+      this.Surprises = surprises;
+    });
   }
 
   get CurrentCity() {
@@ -55,6 +62,7 @@ export class GameEngine {
     this.GameOver = false;
     this.Drugs = this.OriginalDrugs; // Reset the drugs back to their initial states
     this.UpdateDrugs();
+    this.TriggerSurprises();
     this.TriggerRestart = false;
   }
 
@@ -93,6 +101,25 @@ export class GameEngine {
     return this.CurrentDay >= this.CurrentDayOption.TotalDays;
   }
 
+  TriggerSurprises() {
+    // Going through the surprises randomly to make sure that all have an equal chance of being triggered
+    for (let i = this.Surprises.length - 1; i > 0; i--) {
+      let idx = Math.floor(Math.random() * (i + 1));
+      let surpriseToCheck = this.Surprises[idx];
+      if(Math.random() <= surpriseToCheck.Threshold) {
+
+        console.log('triggering surprise', surpriseToCheck);
+        // Add checks here to ensure that these things are all in existence
+
+        this[surpriseToCheck.ServiceName][surpriseToCheck.FunctionName](surpriseToCheck.FunctionArguments).then(result => {
+          console.log('result', result);
+          // How do I display what happened? Return a view to display and a view model to bind to it rather than just the object like I'm doing now?
+        });
+        break;
+      }
+    }
+  }
+
   MoveCity(idx) {
     if(this.IsLastDay) { // If we were already on the last day, that means that the player is triggering the end game
       this.GameOver = true;
@@ -108,7 +135,11 @@ export class GameEngine {
     this.IsLastDay = this.CheckIfReachedMaxDay();
 
     this.CurrentCityIndex = idx;
+
     this.UpdateDrugs();
+
     this.Player.IncreaseLoanAmount();
+
+    this.TriggerSurprises();
   }
 }
