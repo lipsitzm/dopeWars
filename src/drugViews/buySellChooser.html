@@ -1,7 +1,12 @@
 <template>
-  <div class="form-group">
-    <label>You've got ${drug_count} ${drug.Name} in your backpack. Do you want to buy more or sell that?</label>
-    <button class="col-xs-6 btn btn-primary btn-block" click.delegate="goToBuy()">Buy</button>
-    <button class="col-xs-6 btn btn-success btn-block" click.delegate="goToSell()">Sell</button>
+  <div>
+    <div class="form-group">
+      <label>You've got ${drugCount} ${drug.Name} in your backpack. Do you want to buy more or sell that?</label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block" click.delegate="goToBuy()">Buy</button>
+      <button class="btn btn-success btn-block" click.delegate="goToSell()">Sell</button>
+      <button class="btn btn-default btn-block" click.delegate="cancel()">Cancel</button>
+    </div>
   </div>
 </template>

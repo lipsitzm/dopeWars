@@ -4,13 +4,12 @@
   <div class="col-xs-6 col-sm-3">
     <h3>Debt: ${player_info.LoanOutstanding | currencyFormat}
     <small class="btn btn-default col-xs-offset-1"
-           data-toggle="modal"
-           data-target="#au-modal">Pay Debt</small>
+           click.delegate="showDebtDialog()"
+           show.bind="player_info.LoanOutstanding > 0">Pay Debt</small>
     </h3>
-    <require from='./modalBodies/payDebt'></require>
-    <modal>
+    <modal showing.bind="showing">
       <modal-header title.bind="modalTitle" close.call="cancel()"></modal-header>
-      <modal-body content_view.bind="modalView"></modal-body>
+      <modal-body content_model.bind="that" content_view.bind="modalView"></modal-body>
     </modal>
   </div>
   <h3 class="col-xs-6 col-sm-3">Backpack Space: ${player_info.BackpackSpace}</h3>

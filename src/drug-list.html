@@ -1,49 +1,17 @@
 <template>
   <require from="./converters/currency-format"></require>
-  <require from="./drugViews/buyDrug"></require>
-  <require from="./drugViews/sellDrug"></require>
-  <require from="./drugViews/buySellChooser"></require>
-  <div class="panel-group" id="drugList" role="tablist" aria-multiselectable="false">
-    <div class="panel panel-default" repeat.for="drug of drugs" show.bind="drug.Available">
-      <div class="panel-heading"
-           role="tab"
-           id="${drug.Name}heading"
-           click.delegate="$parent.loadDrugPanelInfo(drug)"
-           data-toggle="collapse"
-           data-parent="#drugList"
-           data-target="#${drug.Name}"
-           aria-expanded="false"
-           aria-controls="${drug.Name}">
-        <h4 class="panel-title">
-          <strong class="${drug.ThresholdColorClass}">${drug.Name} - <span class="${drug-price-color}">${drug.Price | currencyFormat}</span></strong>
-          <div class="pull-right" show.bind="drug.BackpackCount > 0">${drug.BackpackCount} (${drug.HighestBuyPrice | currencyFormat})</div>
-        </h4>
-      </div>
-      <div id="${drug.Name}"
-           class="panel-collapse collapse"
-           role="tabpanel"
-           aria-labelledby="${drug.Name}">
-        <div class="panel-body">
-          <buy-drug if.bind="$parent.panelBodyToShow === 1"
-                    drug.bind="drug"
-                    buy_amount.two-way="$parent.currentAmount"
-                    max_can_buy_amount.bind="$parent.maxAmount"
-                    drug_list_engine.bind="$parent.Engine"></buy-drug>
-          <buy-sell-chooser if.bind="$parent.panelBodyToShow === 0"
-                            drug.bind="drug"
-                            drug_count.bind="$parent.drugCount"
-                            drug_list_engine.bind="$parent.Engine">
-          </buy-sell-chooser>
-          <sell-drug if.bind="$parent.panelBodyToShow === -1"
-                     drug.bind="drug"
-                     sell_amount.two-way="$parent.currentAmount"
-                     max_can_sell_amount.bind="$parent.maxAmount"
-                     drug_list_engine.bind="$parent.Engine"></sell-drug>
-          <div if.bind="$parent.panelBodyToShow === null" >
-            <h2>Can't afford to buy more ${drug.Name} or fit more in your backpack, and no ${drug.Name} to sell.</h2>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div repeat.for="drug of drugs"
+          show.bind="drug.Available"
+          class="btn btn-default btn-block"
+          click.delegate="$parent.ShowDrugDialog(drug)">
+    <strong class="${drug.ThresholdColorClass}">${drug.Name} - <span class="${drug-price-color}">${drug.Price | currencyFormat}</span></strong>
+    <div class="pull-right" show.bind="drug.BackpackCount > 0">${drug.BackpackCount} (${drug.HighestBuyPrice | currencyFormat})</div>
   </div>
+  <modal showing.bind="showing">
+    <modal-header title.bind="modalTitle" close.call="cancel()"></modal-header>
+    <modal-body content_view.bind="modalView" content_model.bind="modalModel"></modal-body>
+  </modal>
+  <!--<div if.bind="$parent.panelBodyToShow === null" >-->
+    <!--<h2>Can't afford to buy more ${drug.Name} or fit more in your backpack, and no ${drug.Name} to sell.</h2>-->
+  <!--</div>-->
 </template>

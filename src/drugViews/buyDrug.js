@@ -1,31 +1,45 @@
 import {inject, bindable} from 'aurelia-framework';
 import {Validation} from 'aurelia-validation';
+import {PlayerService} from 'services/playerService';
 
-@inject(Validation)
+@inject(Validation, PlayerService)
 export class BuyDrug {
-  @bindable drug = null;
-  @bindable buy_amount = null;
-  @bindable max_can_buy_amount = null;
-  @bindable drug_list_engine = null;
+  drug = null;
+  buyAmount = null;
+  maxBuyAmount = null;
+  drugList = null; // Can't get the showing bool val to be passed by reference so I need to pass the whole drugList object :-(
 
-  constructor(validation) {
+  constructor(validation, playerService) {
     this.validation = validation.on(this)
-      .ensure('buy_amount')
+      .ensure('buyAmount')
       .containsOnlyDigits()
       .isNotEmpty()
-      .isBetween(1, () => { return this.max_can_buy_amount});
+      .isBetween(1, () => { return this.maxBuyAmount});
+
+    this.PlayerService = playerService;
+    this.Player = null;
+    this.PlayerService.GetPlayer().then(player => {
+      this.Player = player;
+    });
+  }
+
+  activate(model) {
+    this.drug = model.Drug;
+    this.buyAmount = this.maxBuyAmount = model.MaxBuyAmount;
+    this.drugList = model.DrugList;
   }
 
   buyDrugs() {
     this.validation.validate().then(
       () => {
-        this.drug_list_engine.buyDrugs(this.drug);
+        this.Player.BuyDrug(this.drug, this.buyAmount);
+        this.drugList.showing = false;
       }
     );
   }
 
   cancel() {
-    this.drug_list_engine.loadDrugPanelInfo(this.drug);
+    this.drugList.showing = false;
   }
 
   /* Figure out why this doesn't work... Can't trigger the Changed call on an inner property. How do you do that?

@@ -4,19 +4,18 @@
     <require from="converters/percent-format"></require>
     <div class="form">
       <div class="form-group">
-        <p class="lead">Your bookie loaned you ${ Player.LoanOutstanding | currencyFormat } with an interest rate of ${ Player.InterestRate | percentFormat }. You have ${ Player.Money | currencyFormat } in cash.</p>
+        <p class="lead">The loan shark gave you ${ Player.LoanOutstanding | currencyFormat } with a vig of ${ Player.InterestRate | percentFormat }. You have ${ Player.Money | currencyFormat } in cash.</p>
         <label>Amount to Pay Back</label>
             <input class="form-control"
                    value.bind="paymentAmount"
                    type="number"/>
       </div>
-      <!--Adding disabled.bind="validation.isValidating" to the button below causes the dismiss to not work... Why? -->
       <div class="form-group">
         <button click.delegate="payDebt()"
-                class="btn btn-primary"
-                data-dismiss="modal">Pay ${ paymentAmount | currencyFormat } Back</button>
+                disabled.bind="validation.isValidating"
+                class="btn btn-primary">Pay ${ paymentAmount | currencyFormat } Back</button>
         <button class="btn btn-default"
-                data-dismiss="modal">Cancel</button>
+                click.delegate="cancel()">Cancel</button>
       </div>
     </div>
   </div>

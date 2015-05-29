@@ -6,16 +6,18 @@
       <div class="row">
         <div class="col-xs-8">
           <input class="form-control"
-                 value.bind="sell_amount"
+                 value.bind="sellAmount"
                  type="number"/>
         </div>
         <!-- Can't do the below in the JS because I don't know how to bind to a inner property change event... How's that done? -->
         <div class="col-xs-4">
-          <p>${(drug.Price * sell_amount) | currencyFormat}</p>
+          <p>${(drug.Price * sellAmount) | currencyFormat}</p>
         </div>
       </div>
     </div>
-    <button click.delegate="sellDrugs()" class="btn btn-success" disabled.bind="validation.isValidating"  >Sell ${sell_amount} ${drug.Name}</button>
+    <button click.delegate="sellDrugs()"
+            class="btn btn-success"
+            disabled.bind="validation.isValidating"  >Sell ${sellAmount} ${drug.Name}</button>
     <button click.delegate="cancel()" class="btn btn-default">Cancel</button>
   </div>
 </template>
