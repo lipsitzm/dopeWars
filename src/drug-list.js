@@ -89,6 +89,22 @@ export class DrugList {
     this.showing = true;
   }
 
+  ShowBuySellIssueDialog(drug) {
+    this.modalModel = {
+      Drug: drug,
+      DrugList: this
+    };
+    if(this.Player.BackpackSpace === 0) {
+      this.modalTitle = 'No More Space';
+      this.modalModel.Reason = 1;
+    } else {
+      this.modalTitle = 'Not Enough Money and Nothing To Sell';
+      this.modalModel.Reason = 2;
+    }
+    this.modalView = 'drugViews/buySellIssue';
+    this.showing = true;
+  }
+
   ShowDrugDialog(drug) {
     let curDrugCount = this.Player.GetBackpackDrugCount(drug);
     let maxToBuy = this.Player.GetMaxPossibleToBuy(drug.Price);
@@ -100,7 +116,11 @@ export class DrugList {
         this.ShowSellDrugDialog(drug, curDrugCount);
       }
     } else if(curDrugCount === 0) {
-      this.ShowBuyDrugDialog(drug, maxToBuy);
+      if(maxToBuy > 0) {
+        this.ShowBuyDrugDialog(drug, maxToBuy);
+      } else {
+        this.ShowBuySellIssueDialog(drug);
+      }
     }
   }
 

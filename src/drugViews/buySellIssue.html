@@ -1,0 +1,11 @@
+<template>
+  <div>
+    <div class="form-group">
+      <label show.bind="reason == 1">You can't fit more ${drug.Name} in your backpack. Or it'll be hanging out and the 5-0 will see it.</label>
+      <label show.bind="reason == 2">You don't have the loot to buy more ${drug.Name} and no ${drug.Name} to sell.</label>
+    </div>
+    <div class="form-group">
+      <button click.delegate="cancel()" class="btn btn-default">Cancel</button>
+    </div>
+  </div>
+</template>
