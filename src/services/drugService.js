@@ -12,6 +12,21 @@ let doPriceMath = (minPrice, maxPrice) => {
   return Math.floor(Math.random() * (maxPrice - minPrice)) + minPrice;
 };
 
+let surpriseUpdateDrugPrice = (minFunc, maxFunc) => {
+  // Going through the drugs randomly but need the loop to make sure I'm working on one that's available
+  let drugToCheck;
+  for (let i = drugs.length - 1; i > 0; i--) {
+    let idx = Math.floor(Math.random() * (i + 1));
+    drugToCheck = drugs[idx];
+
+    if(drugToCheck.Available) {
+      drugToCheck.Price = doPriceMath(minFunc(drugToCheck), maxFunc(drugToCheck));
+      break;
+    }
+  }
+  return drugToCheck
+};
+
 export class DrugService {
 
   GetDrugList() {
@@ -37,22 +52,10 @@ export class DrugService {
       });
   }
 
-  // There should be a way to refactor these to make them workable... Issue is that the prices passed to doPriceMath are dependent on the
-  //  drug that's been randomly chosen which is the part that is repetitive...
   SurpriseMakeRandomAvailableDrugMoreExpensive() {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
-        // Going through the drugs randomly but need the loop to make sure I'm working on one that's available
-        let drugToCheck;
-        for (let i = drugs.length - 1; i > 0; i--) {
-          let idx = Math.floor(Math.random() * (i + 1));
-          drugToCheck = drugs[idx];
-
-          if(drugToCheck.Available) {
-            drugToCheck.Price = doPriceMath(drugToCheck.MaxPrice, drugToCheck.MaxPrice * 2);
-            break;
-          }
-        }
+        let drugToCheck = surpriseUpdateDrugPrice((drug) => { return drug.MaxPrice }, (drug) => { return drug.MaxPrice * 2 });
         resolve(drugToCheck);
       });
   }
@@ -60,17 +63,7 @@ export class DrugService {
   SurpriseMakeRandomAvailableDrugCheaper() {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
-        // Going through the drugs randomly but need the loop to make sure I'm working on one that's available
-        let drugToCheck;
-        for (let i = drugs.length - 1; i > 0; i--) {
-          let idx = Math.floor(Math.random() * (i + 1));
-          drugToCheck = drugs[idx];
-
-          if(drugToCheck.Available) {
-            drugToCheck.Price = doPriceMath(drugToCheck.MinPrice / 2, drugToCheck.MinPrice);
-            break;
-          }
-        }
+        let drugToCheck = surpriseUpdateDrugPrice((drug) => { return drug.MinPrice / 2 }, (drug) => { return drug.MinPrice });
         resolve(drugToCheck);
       });
   }
