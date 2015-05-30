@@ -1,11 +1,11 @@
 <template>
   <require from="./converters/currency-format"></require>
-  <div repeat.for="drug of drugs"
-          show.bind="drug.Available"
-          class="btn btn-default btn-block"
-          click.delegate="$parent.ShowDrugDialog(drug)">
-    <strong class="${drug.ThresholdColorClass}">${drug.Name} - <span class="${drug-price-color}">${drug.Price | currencyFormat}</span></strong>
-    <div class="pull-right" show.bind="drug.BackpackCount > 0">${drug.BackpackCount} (${drug.HighestBuyPrice | currencyFormat})</div>
+  <div repeat.for="drugVM of drugViewModels"
+       show.bind="drugVM.Drug.Available"
+       class="btn btn-default btn-block"
+       click.delegate="$parent.ShowDrugDialog(drugVM.Drug)">
+    <strong class="${drugVM.Drug.ThresholdColorClass}">${drugVM.Drug.Name} - <span class="${drug-price-color}">${drugVM.Drug.Price | currencyFormat}</span></strong>
+    <div class="pull-right" show.bind="drugVM.BackpackCount > 0">${drugVM.BackpackCount} (${drugVM.HighestBuyPrice | currencyFormat})</div>
   </div>
   <modal showing.bind="showing">
     <modal-header title.bind="modalTitle" close.call="cancel()"></modal-header>

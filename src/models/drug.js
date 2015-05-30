@@ -13,8 +13,6 @@ export class Drug{
   Available = true;
   Name = '';
   ThresholdLevel = 2;
-  BackpackCount = 0;
-  HighestBuyPrice = 0;
 
   constructor(nameIn, minPriceIn, maxPriceIn){
     this.Name = nameIn;

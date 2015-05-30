@@ -1,22 +1,57 @@
 import {inject, bindable} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {PlayerService} from './services/playerService';
+import {DrugService} from './services/drugService';
 
-@inject(PlayerService)
-export class DrugList{
-  @bindable drugs = null; // TODO: I think that this can actually be injected in as the DrugService...
+@inject(EventAggregator, PlayerService, DrugService)
+export class DrugList {
   modalTitle = "";
   modalView = "";
   @bindable modalModel = null;
   showing = false;
+  DrugsAvailable = false;
 
-  constructor(playerService){
+  constructor(eventAggregator, playerService, drugService){
+    this.eventAggregator = eventAggregator;
+
     this.PlayerService = playerService;
     this.Player = null;
     this.PlayerService.GetPlayer().then(player => {
       this.Player = player;
     });
 
-    this.Engine = this;
+    this.DrugService = drugService;
+    this.DrugService.GetDrugList().then(drugList => {
+      this.ResetDrugViewModels(drugList);
+    });
+
+    this.eventAggregator.subscribe('drugInBackpackChanged', drug => {
+      for(let drugVM of this.drugViewModels.values()) {
+        if(drugVM.Drug.Name === drug.Name) {
+          let purchasedDrug = this.Player.GetPurchasedDrug(drug);
+          drugVM.BackpackCount = purchasedDrug.BackpackCount;
+          drugVM.HighestBuyPrice = purchasedDrug.HighestBuyPrice;
+          break;
+        }
+      }
+    });
+
+    this.eventAggregator.subscribe('resetDrugsInBackpack', drugList => {
+      this.ResetDrugViewModels(drugList);
+    });
+
+  }
+
+  ResetDrugViewModels(drugList) {
+    this.drugViewModels = new Array();
+    for(let drug of drugList.values()) {
+      this.drugViewModels.push({
+        Drug: drug,
+        BackpackCount: 0,
+        HighestBuyPrice: 0
+      });
+    }
+
   }
 
   // TODO: Refactor buy and sell into one because they are ridic similar
@@ -55,7 +90,7 @@ export class DrugList{
   }
 
   ShowDrugDialog(drug) {
-    let curDrugCount = drug.BackpackCount;
+    let curDrugCount = this.Player.GetBackpackDrugCount(drug);
     let maxToBuy = this.Player.GetMaxPossibleToBuy(drug.Price);
     if(curDrugCount > 0) {
       if(maxToBuy > 0)

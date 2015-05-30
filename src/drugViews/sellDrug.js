@@ -1,20 +1,23 @@
 import {inject, bindable} from 'aurelia-framework';
 import {Validation} from 'aurelia-validation';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {PlayerService} from 'services/playerService';
 
-@inject(Validation, PlayerService)
+@inject(Validation, EventAggregator, PlayerService)
 export class SellDrug {
   drug = null;
   sellAmount = null;
   maxSellAmount = null;
   drugList = null; // Can't get the showing bool val to be passed by reference so I need to pass the whole drugList object :-(
 
-  constructor(validation, playerService) {
+  constructor(validation, eventAggregator, playerService) {
     this.validation = validation.on(this)
       .ensure('sellAmount')
       .containsOnlyDigits()
       .isNotEmpty()
       .isBetween(1, () => { return this.maxSellAmount});
+
+    this.eventAggregator = eventAggregator;
 
     this.PlayerService = playerService;
     this.Player = null;
@@ -33,6 +36,7 @@ export class SellDrug {
     this.validation.validate().then(
       () => {
         this.Player.SellDrug(this.drug, this.sellAmount);
+        this.eventAggregator.publish('drugInBackpackChanged', this.drug);
         this.drugList.showing = false;
       }
     );

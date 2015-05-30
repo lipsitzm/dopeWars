@@ -1,11 +1,10 @@
 import {bindable, inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import {GameEngineService} from './services/gameEngineService';
 import {GameEngine} from './engines/gameEngine';
 import {DayOption} from './models/dayOption'
 import {DifficultyLevel} from './models/difficultyLevel'
 
-@inject(Router, GameEngineService)
+@inject(Router, GameEngine)
 export class NavBar {
   GameEngine;
   DayOptions;
@@ -13,15 +12,9 @@ export class NavBar {
   DifficultyLevels;
   CurrentDifficultyLevel;
 
-  constructor(router, gameEngineService) {
+  constructor(router, gameEngine) {
     this.router = router;
-
-    this.GameEngineService = gameEngineService;
-    this.GameEngineService.GetGameEngine().then(
-        gameEngine => {
-          this.GameEngine = gameEngine;
-        }
-    );
+    this.GameEngine = gameEngine;
   }
 
   dayOptionChange(newDayOption) {

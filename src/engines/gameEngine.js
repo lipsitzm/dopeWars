@@ -1,3 +1,5 @@
+import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {CityService} from 'services/cityService';
 import {DrugService} from 'services/drugService';
 import {PlayerService} from 'services/playerService';
@@ -7,8 +9,11 @@ import {DifficultyLevel} from 'models/difficultyLevel';
 import {SurpriseService} from 'services/surpriseService';
 import {Surprise} from 'models/Surprise';
 
+@inject(EventAggregator, CityService, DrugService, PlayerService, DayService, DifficultyLevelsService, SurpriseService)
 export class GameEngine {
-  constructor(cityService, drugService, playerService, dayService, difficultyLevelsService, surpriseService){
+  constructor(eventAggregator, cityService, drugService, playerService, dayService, difficultyLevelsService, surpriseService){
+    this.eventAggregator = eventAggregator;
+
     this.DayService = dayService;
     this.DayOptions = null;
     this.CurrentDayOption = null;
@@ -31,10 +36,9 @@ export class GameEngine {
 
     this.DrugService = drugService;
     this.Drugs = [];
-    this.OriginalDrugs = [];
     this.DrugsAvailable = false;
     this.DrugService.GetDrugList().then(drugList => {
-      this.Drugs = this.OriginalDrugs = drugList;
+      this.Drugs = drugList;
     });
 
     this.PlayerService = playerService;
@@ -58,9 +62,9 @@ export class GameEngine {
     this.CurrentCityIndex = Math.floor(Math.random() * this.Cities.length); // Start at a random city (0 indexed)
     this.CurrentDay = 1;
     this.Player.ResetPlayer(this.CurrentDifficultyLevel);
+    this.eventAggregator.publish('resetDrugsInBackpack', this.Drugs);
     this.IsLastDay = false;
     this.GameOver = false;
-    this.Drugs = this.OriginalDrugs; // Reset the drugs back to their initial states
     this.UpdateDrugs();
     this.TriggerSurprises();
     this.TriggerRestart = false;

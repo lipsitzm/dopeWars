@@ -6,17 +6,13 @@ import {DayService} from './services/dayService';
 import {DifficultyLevelsService} from './services/difficultyService';
 import {DifficultyLevel} from './models/difficultyLevel';
 import {SurpriseService} from './services/surpriseService';
-import {GameEngineService} from './services/gameEngineService';
 import {GameEngine} from './engines/gameEngine';
 
-@inject(GameEngineService, CityService, DrugService, PlayerService, DayService, DifficultyLevelsService, SurpriseService)
+@inject(GameEngine)
 export class Game {
 
-  constructor(gameEngineService, cityService, drugService, playerService, dayService, difficultyLevelsService, surpriseService) {
-    this.GameEngineService = gameEngineService;
-    this.GameEngineService.Initialize(cityService, drugService, playerService, dayService, difficultyLevelsService, surpriseService).then(
-        gameEngine => { this.GameEngine = gameEngine; }
-    );
+  constructor(gameEngine) {
+    this.GameEngine = gameEngine;
   }
 
   ResetGame() {
