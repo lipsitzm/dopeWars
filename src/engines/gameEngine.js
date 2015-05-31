@@ -66,7 +66,7 @@ export class GameEngine {
     this.IsLastDay = false;
     this.GameOver = false;
     this.UpdateDrugs();
-    this.TriggerSurprises();
+    //this.TriggerSurprises(); Can't trigger these on the opening day because the modal tries to open too early... How to get around that?
     this.TriggerRestart = false;
   }
 
@@ -107,21 +107,26 @@ export class GameEngine {
 
   TriggerSurprises() {
     // Going through the surprises randomly to make sure that all have an equal chance of being triggered
+    let surprisePromises = [];
     for (let i = this.Surprises.length - 1; i > 0; i--) {
       let idx = Math.floor(Math.random() * (i + 1));
       let surpriseToCheck = this.Surprises[idx];
       if(Math.random() <= surpriseToCheck.Threshold) {
 
-        console.log('triggering surprise', surpriseToCheck);
         // Add checks here to ensure that these things are all in existence
 
-        this[surpriseToCheck.ServiceName][surpriseToCheck.FunctionName](surpriseToCheck.FunctionArguments).then(result => {
-          console.log('result', result);
-          // How do I display what happened? Return a view to display and a view model to bind to it rather than just the object like I'm doing now?
-        });
+        surprisePromises.push(this[surpriseToCheck.ServiceName][surpriseToCheck.FunctionName](surpriseToCheck.FunctionArguments));
         break;
       }
     }
+
+    Promise.all(surprisePromises).then(
+      resultsAry => {
+        if(resultsAry.length > 0) {
+          this.eventAggregator.publish('surprisesTriggered', resultsAry);
+        }
+      }
+    );
   }
 
   MoveCity(idx) {

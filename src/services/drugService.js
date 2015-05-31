@@ -56,7 +56,7 @@ export class DrugService {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
         let drugToCheck = surpriseUpdateDrugPrice((drug) => { return drug.MaxPrice }, (drug) => { return drug.MaxPrice * 2 });
-        resolve(drugToCheck);
+        resolve('The cops seized tons of ' + drugToCheck.Name + ' making it unreal expensive!');
       });
   }
 
@@ -64,7 +64,7 @@ export class DrugService {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
         let drugToCheck = surpriseUpdateDrugPrice((drug) => { return drug.MinPrice / 2 }, (drug) => { return drug.MinPrice });
-        resolve(drugToCheck);
+        resolve('Someone broke into the evidence locker at the police station and stole a ton of ' + drugToCheck.Name + ' making it beyond cheap!');
       });
   }
 }
