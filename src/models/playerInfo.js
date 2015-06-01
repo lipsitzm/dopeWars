@@ -70,6 +70,7 @@ export class PlayerInfo {
   }
 
   SellDrug(drug, count, price) {
+    count = parseInt(count); // TODO: Why does buy's count come in correctly but sell's doesn't?
     let purchasedDrug;
     if(!this.Drugs.has(drug.Name)) {
       return 'You don\'t have any ' + drug.Name + ' to sell... Try finding a college kid to mug first.';

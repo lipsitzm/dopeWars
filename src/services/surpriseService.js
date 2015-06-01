@@ -1,10 +1,11 @@
 import {Surprise} from 'models/surprise';
 
 let surprises = [
-  new Surprise(.25, 'DrugService', 'SurpriseMakeRandomAvailableDrugCheaper'),
-  new Surprise(.25, 'DrugService', 'SurpriseMakeRandomAvailableDrugMoreExpensive'),
+  // TODO: Make these adjustable with the difficulty level...
+  new Surprise(.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugCheaper'),
+  new Surprise(.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugMoreExpensive'),
   new Surprise(.25, 'PlayerService', 'SurpriseFindDrugsOnSubway'),
-  new Surprise(.25, 'PlayerService', 'SurpriseGetMugged')
+  new Surprise(.05, 'PlayerService', 'SurpriseGetMugged')
 ];
 
 export class SurpriseService {
