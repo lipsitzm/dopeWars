@@ -1,4 +1,4 @@
-System.register(['aurelia-framework', 'aurelia-event-aggregator', 'services/cityService', 'services/drugService', 'services/playerService', 'services/dayService', 'services/difficultyService', 'models/difficultyLevel', 'services/surpriseService', 'models/Surprise'], function (_export) {
+System.register(['aurelia-framework', 'aurelia-event-aggregator', 'services/cityService', 'services/drugService', 'services/playerService', 'services/dayService', 'services/difficultyService', 'models/difficultyLevel', 'services/surpriseService', 'models/surprise'], function (_export) {
   'use strict';
 
   var inject, EventAggregator, CityService, DrugService, PlayerService, DayService, DifficultyLevelsService, DifficultyLevel, SurpriseService, Surprise, GameEngine;
