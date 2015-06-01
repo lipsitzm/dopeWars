@@ -1,66 +1,50 @@
-System.register(['aurelia-framework'], function (_export) {
-  var bindable, _classCallCheck, _createDecoratedClass, BuySellChooser;
+System.register([], function (_export) {
+  "use strict";
+
+  var BuySellChooser;
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   return {
-    setters: [function (_aureliaFramework) {
-      bindable = _aureliaFramework.bindable;
-    }],
+    setters: [],
     execute: function () {
-      'use strict';
-
-      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
-      _createDecoratedClass = (function () { function defineProperties(target, descriptors, initializers) { for (var i = 0; i < descriptors.length; i++) { var descriptor = descriptors[i]; var decorators = descriptor.decorators; var key = descriptor.key; delete descriptor.key; delete descriptor.decorators; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor || descriptor.initializer) descriptor.writable = true; if (decorators) { for (var f = 0; f < decorators.length; f++) { var decorator = decorators[f]; if (typeof decorator === 'function') { descriptor = decorator(target, key, descriptor) || descriptor; } else { throw new TypeError('The decorator for method ' + descriptor.key + ' is of the invalid type ' + typeof decorator); } } if (initializers) initializers[key] = descriptor.initializer; } Object.defineProperty(target, key, descriptor); } } return function (Constructor, protoProps, staticProps, protoInitializers, staticInitializers) { if (protoProps) defineProperties(Constructor.prototype, protoProps, protoInitializers); if (staticProps) defineProperties(Constructor, staticProps, staticInitializers); return Constructor; }; })();
-
       BuySellChooser = (function () {
-        var _instanceInitializers = {};
-
         function BuySellChooser() {
           _classCallCheck(this, BuySellChooser);
-
-          this.drug = _instanceInitializers.drug.call(this);
-          this.drug_count = _instanceInitializers.drug_count.call(this);
-          this.drug_list_engine = _instanceInitializers.drug_list_engine.call(this);
         }
 
-        _createDecoratedClass(BuySellChooser, [{
-          key: 'drug',
-          decorators: [bindable],
-          initializer: function () {
-            return null;
-          },
-          enumerable: true
+        _createClass(BuySellChooser, [{
+          key: "activate",
+          value: function activate(model) {
+            this.drug = model.Drug;
+            this.drugCount = model.DrugCount;
+            this.maxToBuy = model.MaxBuyAmount;
+            this.drugList = model.DrugList;
+          }
         }, {
-          key: 'drug_count',
-          decorators: [bindable],
-          initializer: function () {
-            return 0;
-          },
-          enumerable: true
-        }, {
-          key: 'drug_list_engine',
-          decorators: [bindable],
-          initializer: function () {
-            return null;
-          },
-          enumerable: true
-        }, {
-          key: 'goToSell',
+          key: "goToSell",
           value: function goToSell() {
-            this.drug_list_engine.showSellDialog(this.drug);
+            this.drugList.ShowSellDrugDialog(this.drug, this.drugCount);
           }
         }, {
-          key: 'goToBuy',
+          key: "goToBuy",
           value: function goToBuy() {
-            this.drug_list_engine.showBuyDialog(this.drug);
+            this.drugList.ShowBuyDrugDialog(this.drug, this.maxToBuy);
           }
-        }], null, _instanceInitializers);
+        }, {
+          key: "cancel",
+          value: function cancel() {
+            this.drugList.showing = false;
+          }
+        }]);
 
         return BuySellChooser;
       })();
 
-      _export('BuySellChooser', BuySellChooser);
+      _export("BuySellChooser", BuySellChooser);
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRydWdWaWV3cy9idXlTZWxsQ2hvb3Nlci5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO3dEQUVhLGNBQWM7Ozs7bUNBRm5CLFFBQVE7Ozs7Ozs7OztBQUVILG9CQUFjOzs7aUJBQWQsY0FBYztnQ0FBZCxjQUFjOztlQUNmLElBQUkseUJBQUosSUFBSTtlQUNKLFVBQVUseUJBQVYsVUFBVTtlQUNWLGdCQUFnQix5QkFBaEIsZ0JBQWdCOzs7OEJBSGYsY0FBYzs7dUJBQ3hCLFFBQVE7O21CQUFRLElBQUk7Ozs7O3VCQUNwQixRQUFROzttQkFBYyxDQUFDOzs7Ozt1QkFDdkIsUUFBUTs7bUJBQW9CLElBQUk7Ozs7O2lCQUV6QixvQkFBRztBQUNULGdCQUFJLENBQUMsZ0JBQWdCLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztXQUNqRDs7O2lCQUVNLG1CQUFHO0FBQ1IsZ0JBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1dBQ2hEOzs7ZUFYVSxjQUFjOzs7Z0NBQWQsY0FBYyIsImZpbGUiOiJkcnVnVmlld3MvYnV5U2VsbENob29zZXIuanMiLCJzb3VyY2VSb290IjoiL3NyYy8ifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRydWdWaWV3cy9idXlTZWxsQ2hvb3Nlci5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7TUFBYSxjQUFjOzs7Ozs7Ozs7QUFBZCxvQkFBYztpQkFBZCxjQUFjO2dDQUFkLGNBQWM7OztxQkFBZCxjQUFjOztpQkFDakIsa0JBQUMsS0FBSyxFQUFFO0FBQ2QsZ0JBQUksQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDLElBQUksQ0FBQztBQUN2QixnQkFBSSxDQUFDLFNBQVMsR0FBRyxLQUFLLENBQUMsU0FBUyxDQUFDO0FBQ2pDLGdCQUFJLENBQUMsUUFBUSxHQUFHLEtBQUssQ0FBQyxZQUFZLENBQUM7QUFDbkMsZ0JBQUksQ0FBQyxRQUFRLEdBQUcsS0FBSyxDQUFDLFFBQVEsQ0FBQztXQUNoQzs7O2lCQUVPLG9CQUFHO0FBQ1QsZ0JBQUksQ0FBQyxRQUFRLENBQUMsa0JBQWtCLENBQUMsSUFBSSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7V0FDN0Q7OztpQkFFTSxtQkFBRztBQUNSLGdCQUFJLENBQUMsUUFBUSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1dBQzNEOzs7aUJBRUssa0JBQUc7QUFDUCxnQkFBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO1dBQy9COzs7ZUFsQlUsY0FBYzs7O2dDQUFkLGNBQWMiLCJmaWxlIjoiZHJ1Z1ZpZXdzL2J1eVNlbGxDaG9vc2VyLmpzIiwic291cmNlUm9vdCI6Ii9zcmMvIn0=

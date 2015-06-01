@@ -1,18 +1,18 @@
 System.register(['models/dayOption'], function (_export) {
-  var DayOption, _classCallCheck, _createClass, dayOptions, DayService;
+  'use strict';
+
+  var DayOption, dayOptions, DayService;
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   return {
     setters: [function (_modelsDayOption) {
       DayOption = _modelsDayOption.DayOption;
     }],
     execute: function () {
-      'use strict';
-
-      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
-      _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-      dayOptions = [new DayOption(4), new DayOption(30), new DayOption(60), new DayOption(90), new DayOption(120)];
+      dayOptions = [new DayOption(30), new DayOption(60), new DayOption(90), new DayOption(120)];
 
       DayService = (function () {
         function DayService() {
@@ -35,4 +35,4 @@ System.register(['models/dayOption'], function (_export) {
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlcnZpY2VzL2RheVNlcnZpY2UuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtnREFFSSxVQUFVLEVBUUQsVUFBVTs7OzttQ0FWZixTQUFTOzs7Ozs7Ozs7QUFFYixnQkFBVSxHQUFHLENBQ2YsSUFBSSxTQUFTLENBQUMsQ0FBQyxDQUFDLEVBQ2hCLElBQUksU0FBUyxDQUFDLEVBQUUsQ0FBQyxFQUNqQixJQUFJLFNBQVMsQ0FBQyxFQUFFLENBQUMsRUFDakIsSUFBSSxTQUFTLENBQUMsRUFBRSxDQUFDLEVBQ2pCLElBQUksU0FBUyxDQUFDLEdBQUcsQ0FBQyxDQUNuQjs7QUFFWSxnQkFBVTtpQkFBVixVQUFVO2dDQUFWLFVBQVU7OztxQkFBVixVQUFVOztpQkFDUix5QkFBRztBQUNkLG1CQUFPLElBQUksT0FBTyxDQUNoQixVQUFVLE9BQU8sRUFBRSxNQUFNLEVBQUU7QUFDekIscUJBQU8sQ0FBQyxVQUFVLENBQUMsQ0FBQzthQUNyQixDQUFDLENBQUM7V0FDTjs7O2VBTlUsVUFBVTs7OzRCQUFWLFVBQVUiLCJmaWxlIjoic2VydmljZXMvZGF5U2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiIvc3JjLyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlcnZpY2VzL2RheVNlcnZpY2UuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O2lCQUVJLFVBQVUsRUFRRCxVQUFVOzs7Ozs7OzttQ0FWZixTQUFTOzs7QUFFYixnQkFBVSxHQUFHLENBRWYsSUFBSSxTQUFTLENBQUMsRUFBRSxDQUFDLEVBQ2pCLElBQUksU0FBUyxDQUFDLEVBQUUsQ0FBQyxFQUNqQixJQUFJLFNBQVMsQ0FBQyxFQUFFLENBQUMsRUFDakIsSUFBSSxTQUFTLENBQUMsR0FBRyxDQUFDLENBQ25COztBQUVZLGdCQUFVO2lCQUFWLFVBQVU7Z0NBQVYsVUFBVTs7O3FCQUFWLFVBQVU7O2lCQUNSLHlCQUFHO0FBQ2QsbUJBQU8sSUFBSSxPQUFPLENBQ2hCLFVBQVUsT0FBTyxFQUFFLE1BQU0sRUFBRTtBQUN6QixxQkFBTyxDQUFDLFVBQVUsQ0FBQyxDQUFDO2FBQ3JCLENBQUMsQ0FBQztXQUNOOzs7ZUFOVSxVQUFVOzs7NEJBQVYsVUFBVSIsImZpbGUiOiJzZXJ2aWNlcy9kYXlTZXJ2aWNlLmpzIiwic291cmNlUm9vdCI6Ii9zcmMvIn0=

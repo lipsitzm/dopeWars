@@ -1,5 +1,11 @@
-System.register(['aurelia-framework', 'aurelia-router', './services/gameEngineService', './engines/gameEngine', './models/dayOption', './models/difficultyLevel'], function (_export) {
-  var bindable, inject, Router, GameEngineService, GameEngine, DayOption, DifficultyLevel, _classCallCheck, _createClass, NavBar;
+System.register(['aurelia-framework', 'aurelia-router', './engines/gameEngine', './models/dayOption', './models/difficultyLevel'], function (_export) {
+  'use strict';
+
+  var bindable, inject, Router, GameEngine, DayOption, DifficultyLevel, NavBar;
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   return {
     setters: [function (_aureliaFramework) {
@@ -7,8 +13,6 @@ System.register(['aurelia-framework', 'aurelia-router', './services/gameEngineSe
       inject = _aureliaFramework.inject;
     }, function (_aureliaRouter) {
       Router = _aureliaRouter.Router;
-    }, function (_servicesGameEngineService) {
-      GameEngineService = _servicesGameEngineService.GameEngineService;
     }, function (_enginesGameEngine) {
       GameEngine = _enginesGameEngine.GameEngine;
     }, function (_modelsDayOption) {
@@ -17,49 +21,17 @@ System.register(['aurelia-framework', 'aurelia-router', './services/gameEngineSe
       DifficultyLevel = _modelsDifficultyLevel.DifficultyLevel;
     }],
     execute: function () {
-      'use strict';
-
-      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
-      _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
       NavBar = (function () {
-        function NavBar(router, gameEngineService) {
-          var _this = this;
-
+        function NavBar(router, gameEngine) {
           _classCallCheck(this, _NavBar);
 
           this.router = router;
-
-          this.GameEngineService = gameEngineService;
-          this.GameEngineService.GetGameEngine().then(function (gameEngine) {
-            _this.GameEngine = gameEngine;
-          });
+          this.GameEngine = gameEngine;
         }
 
         var _NavBar = NavBar;
 
         _createClass(_NavBar, [{
-          key: 'GameEngine',
-          value: undefined,
-          enumerable: true
-        }, {
-          key: 'DayOptions',
-          value: undefined,
-          enumerable: true
-        }, {
-          key: 'CurrentDayOption',
-          value: undefined,
-          enumerable: true
-        }, {
-          key: 'DifficultyLevels',
-          value: undefined,
-          enumerable: true
-        }, {
-          key: 'CurrentDifficultyLevel',
-          value: undefined,
-          enumerable: true
-        }, {
           key: 'dayOptionChange',
           value: function dayOptionChange(newDayOption) {
             location.href = this.router.generate('Dope Wars', {
@@ -82,7 +54,7 @@ System.register(['aurelia-framework', 'aurelia-router', './services/gameEngineSe
           }
         }]);
 
-        NavBar = inject(Router, GameEngineService)(NavBar) || NavBar;
+        NavBar = inject(Router, GameEngine)(NavBar) || NavBar;
         return NavBar;
       })();
 
@@ -90,4 +62,4 @@ System.register(['aurelia-framework', 'aurelia-router', './services/gameEngineSe
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5hdi1iYXIuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjswSEFRYSxNQUFNOzs7O21DQVJYLFFBQVE7aUNBQUUsTUFBTTs7OEJBQ2hCLE1BQU07O3FEQUNOLGlCQUFpQjs7c0NBQ2pCLFVBQVU7O21DQUNWLFNBQVM7OytDQUNULGVBQWU7Ozs7Ozs7OztBQUdWLFlBQU07QUFPTixpQkFQQSxNQUFNLENBT0wsTUFBTSxFQUFFLGlCQUFpQixFQUFFOzs7OztBQUNyQyxjQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQzs7QUFFckIsY0FBSSxDQUFDLGlCQUFpQixHQUFHLGlCQUFpQixDQUFDO0FBQzNDLGNBQUksQ0FBQyxpQkFBaUIsQ0FBQyxhQUFhLEVBQUUsQ0FBQyxJQUFJLENBQ3ZDLFVBQUEsVUFBVSxFQUFJO0FBQ1osa0JBQUssVUFBVSxHQUFHLFVBQVUsQ0FBQztXQUM5QixDQUNKLENBQUM7U0FDSDs7c0JBaEJVLE1BQU07Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkFrQkYseUJBQUMsWUFBWSxFQUFFO0FBRTVCLG9CQUFRLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRTtBQUNoRCx1QkFBUyxFQUFFLFlBQVksQ0FBQyxTQUFTO0FBQ2pDLDZCQUFlLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxzQkFBc0IsQ0FBQyxJQUFJO2FBQzdELENBQUMsQ0FBQztXQUNKOzs7aUJBRW9CLCtCQUFDLFlBQVksRUFBRTtBQUVsQyxvQkFBUSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQyxXQUFXLEVBQUU7QUFDaEQsdUJBQVMsRUFBRSxJQUFJLENBQUMsVUFBVSxDQUFDLGdCQUFnQixDQUFDLFNBQVM7QUFDckQsNkJBQWUsRUFBRSxZQUFZLENBQUMsSUFBSTthQUNuQyxDQUFDLENBQUM7V0FDSjs7O2lCQUVVLHVCQUFHO0FBQ1osZ0JBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxFQUFFLENBQUM7V0FDN0I7OztBQXBDVSxjQUFNLEdBRGxCLE1BQU0sQ0FBQyxNQUFNLEVBQUUsaUJBQWlCLENBQUMsQ0FDckIsTUFBTSxLQUFOLE1BQU07ZUFBTixNQUFNOzs7d0JBQU4sTUFBTSIsImZpbGUiOiJuYXYtYmFyLmpzIiwic291cmNlUm9vdCI6Ii9zcmMvIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5hdi1iYXIuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O3dFQU9hLE1BQU07Ozs7Ozs7O21DQVBYLFFBQVE7aUNBQUUsTUFBTTs7OEJBQ2hCLE1BQU07O3NDQUNOLFVBQVU7O21DQUNWLFNBQVM7OytDQUNULGVBQWU7OztBQUdWLFlBQU07QUFPTixpQkFQQSxNQUFNLENBT0wsTUFBTSxFQUFFLFVBQVUsRUFBRTs7O0FBQzlCLGNBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO0FBQ3JCLGNBQUksQ0FBQyxVQUFVLEdBQUcsVUFBVSxDQUFDO1NBQzlCOztzQkFWVSxNQUFNOzs7O2lCQVlGLHlCQUFDLFlBQVksRUFBRTtBQUU1QixvQkFBUSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQyxXQUFXLEVBQUU7QUFDaEQsdUJBQVMsRUFBRSxZQUFZLENBQUMsU0FBUztBQUNqQyw2QkFBZSxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsc0JBQXNCLENBQUMsSUFBSTthQUM3RCxDQUFDLENBQUM7V0FDSjs7O2lCQUVvQiwrQkFBQyxZQUFZLEVBQUU7QUFFbEMsb0JBQVEsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxRQUFRLENBQUMsV0FBVyxFQUFFO0FBQ2hELHVCQUFTLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBQyxTQUFTO0FBQ3JELDZCQUFlLEVBQUUsWUFBWSxDQUFDLElBQUk7YUFDbkMsQ0FBQyxDQUFDO1dBQ0o7OztpQkFFVSx1QkFBRztBQUNaLGdCQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsRUFBRSxDQUFDO1dBQzdCOzs7QUE5QlUsY0FBTSxHQURsQixNQUFNLENBQUMsTUFBTSxFQUFFLFVBQVUsQ0FBQyxDQUNkLE1BQU0sS0FBTixNQUFNO2VBQU4sTUFBTTs7O3dCQUFOLE1BQU0iLCJmaWxlIjoibmF2LWJhci5qcyIsInNvdXJjZVJvb3QiOiIvc3JjLyJ9

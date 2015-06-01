@@ -1,5 +1,11 @@
-System.register(['aurelia-framework', 'aurelia-validation'], function (_export) {
-  var inject, bindable, Validation, _classCallCheck, _createDecoratedClass, SellDrug;
+System.register(['aurelia-framework', 'aurelia-validation', 'aurelia-event-aggregator', 'services/playerService'], function (_export) {
+  'use strict';
+
+  var inject, bindable, Validation, EventAggregator, PlayerService, SellDrug;
+
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   return {
     setters: [function (_aureliaFramework) {
@@ -7,79 +13,64 @@ System.register(['aurelia-framework', 'aurelia-validation'], function (_export) 
       bindable = _aureliaFramework.bindable;
     }, function (_aureliaValidation) {
       Validation = _aureliaValidation.Validation;
+    }, function (_aureliaEventAggregator) {
+      EventAggregator = _aureliaEventAggregator.EventAggregator;
+    }, function (_servicesPlayerService) {
+      PlayerService = _servicesPlayerService.PlayerService;
     }],
     execute: function () {
-      'use strict';
-
-      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
-      _createDecoratedClass = (function () { function defineProperties(target, descriptors, initializers) { for (var i = 0; i < descriptors.length; i++) { var descriptor = descriptors[i]; var decorators = descriptor.decorators; var key = descriptor.key; delete descriptor.key; delete descriptor.decorators; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor || descriptor.initializer) descriptor.writable = true; if (decorators) { for (var f = 0; f < decorators.length; f++) { var decorator = decorators[f]; if (typeof decorator === 'function') { descriptor = decorator(target, key, descriptor) || descriptor; } else { throw new TypeError('The decorator for method ' + descriptor.key + ' is of the invalid type ' + typeof decorator); } } if (initializers) initializers[key] = descriptor.initializer; } Object.defineProperty(target, key, descriptor); } } return function (Constructor, protoProps, staticProps, protoInitializers, staticInitializers) { if (protoProps) defineProperties(Constructor.prototype, protoProps, protoInitializers); if (staticProps) defineProperties(Constructor, staticProps, staticInitializers); return Constructor; }; })();
-
       SellDrug = (function () {
-        var _instanceInitializers = {};
-
-        function SellDrug(validation) {
+        function SellDrug(validation, eventAggregator, playerService) {
           var _this = this;
 
           _classCallCheck(this, _SellDrug);
 
-          this.drug = _instanceInitializers.drug.call(this);
-          this.sell_amount = _instanceInitializers.sell_amount.call(this);
-          this.max_can_sell_amount = _instanceInitializers.max_can_sell_amount.call(this);
-          this.drug_list_engine = _instanceInitializers.drug_list_engine.call(this);
+          this.drug = null;
+          this.sellAmount = null;
+          this.maxSellAmount = null;
+          this.drugList = null;
 
-          this.validation = validation.on(this).ensure('sell_amount').containsOnlyDigits().isNotEmpty().isBetween(1, function () {
-            return _this.max_can_sell_amount;
+          this.validation = validation.on(this).ensure('sellAmount').containsOnlyDigits().isNotEmpty().isBetween(1, function () {
+            return _this.maxSellAmount;
+          });
+
+          this.eventAggregator = eventAggregator;
+
+          this.PlayerService = playerService;
+          this.Player = null;
+          this.PlayerService.GetPlayer().then(function (player) {
+            _this.Player = player;
           });
         }
 
         var _SellDrug = SellDrug;
 
-        _createDecoratedClass(_SellDrug, [{
-          key: 'drug',
-          decorators: [bindable],
-          initializer: function () {
-            return null;
-          },
-          enumerable: true
-        }, {
-          key: 'sell_amount',
-          decorators: [bindable],
-          initializer: function () {
-            return null;
-          },
-          enumerable: true
-        }, {
-          key: 'max_can_sell_amount',
-          decorators: [bindable],
-          initializer: function () {
-            return null;
-          },
-          enumerable: true
-        }, {
-          key: 'drug_list_engine',
-          decorators: [bindable],
-          initializer: function () {
-            return null;
-          },
-          enumerable: true
+        _createClass(_SellDrug, [{
+          key: 'activate',
+          value: function activate(model) {
+            this.drug = model.Drug;
+            this.sellAmount = this.maxSellAmount = model.MaxSellAmount;
+            this.drugList = model.DrugList;
+          }
         }, {
           key: 'sellDrugs',
           value: function sellDrugs() {
             var _this2 = this;
 
             this.validation.validate().then(function () {
-              _this2.drug_list_engine.sellDrugs(_this2.drug);
+              _this2.Player.SellDrug(_this2.drug, _this2.sellAmount);
+              _this2.eventAggregator.publish('drugInBackpackChanged', _this2.drug);
+              _this2.drugList.showing = false;
             });
           }
         }, {
           key: 'cancel',
           value: function cancel() {
-            this.drug_list_engine.loadDrugPanelInfo(this.drug);
+            this.drugList.showing = false;
           }
-        }], null, _instanceInitializers);
+        }]);
 
-        SellDrug = inject(Validation)(SellDrug) || SellDrug;
+        SellDrug = inject(Validation, EventAggregator, PlayerService)(SellDrug) || SellDrug;
         return SellDrug;
       })();
 
@@ -87,4 +78,4 @@ System.register(['aurelia-framework', 'aurelia-validation'], function (_export) 
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRydWdWaWV3cy9zZWxsRHJ1Zy5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzRFQUlhLFFBQVE7Ozs7aUNBSmIsTUFBTTttQ0FBRSxRQUFROztzQ0FDaEIsVUFBVTs7Ozs7Ozs7O0FBR0wsY0FBUTs7O0FBTVIsaUJBTkEsUUFBUSxDQU1QLFVBQVUsRUFBRTs7Ozs7ZUFMZCxJQUFJLHlCQUFKLElBQUk7ZUFDSixXQUFXLHlCQUFYLFdBQVc7ZUFDWCxtQkFBbUIseUJBQW5CLG1CQUFtQjtlQUNuQixnQkFBZ0IseUJBQWhCLGdCQUFnQjs7QUFHeEIsY0FBSSxDQUFDLFVBQVUsR0FBRyxVQUFVLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQyxDQUNsQyxNQUFNLENBQUMsYUFBYSxDQUFDLENBQ3JCLGtCQUFrQixFQUFFLENBQ3BCLFVBQVUsRUFBRSxDQUNaLFNBQVMsQ0FBQyxDQUFDLEVBQUUsWUFBTTtBQUFFLG1CQUFPLE1BQUssbUJBQW1CLENBQUE7V0FBQyxDQUFDLENBQUM7U0FDM0Q7O3dCQVpVLFFBQVE7Ozs7dUJBQ2xCLFFBQVE7O21CQUFRLElBQUk7Ozs7O3VCQUNwQixRQUFROzttQkFBZSxJQUFJOzs7Ozt1QkFDM0IsUUFBUTs7bUJBQXVCLElBQUk7Ozs7O3VCQUNuQyxRQUFROzttQkFBb0IsSUFBSTs7Ozs7aUJBVXhCLHFCQUFHOzs7QUFDVixnQkFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxJQUFJLENBQzdCLFlBQU07QUFDSixxQkFBSyxnQkFBZ0IsQ0FBQyxTQUFTLENBQUMsT0FBSyxJQUFJLENBQUMsQ0FBQzthQUM1QyxDQUNGLENBQUM7V0FDSDs7O2lCQUVLLGtCQUFHO0FBQ1AsZ0JBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7V0FDcEQ7OztBQXhCVSxnQkFBUSxHQURwQixNQUFNLENBQUMsVUFBVSxDQUFDLENBQ04sUUFBUSxLQUFSLFFBQVE7ZUFBUixRQUFROzs7MEJBQVIsUUFBUSIsImZpbGUiOiJkcnVnVmlld3Mvc2VsbERydWcuanMiLCJzb3VyY2VSb290IjoiL3NyYy8ifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRydWdWaWV3cy9zZWxsRHJ1Zy5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7b0VBTWEsUUFBUTs7Ozs7Ozs7aUNBTmIsTUFBTTttQ0FBRSxRQUFROztzQ0FDaEIsVUFBVTs7Z0RBQ1YsZUFBZTs7NkNBQ2YsYUFBYTs7O0FBR1IsY0FBUTtBQU1SLGlCQU5BLFFBQVEsQ0FNUCxVQUFVLEVBQUUsZUFBZSxFQUFFLGFBQWEsRUFBRTs7Ozs7ZUFMeEQsSUFBSSxHQUFHLElBQUk7ZUFDWCxVQUFVLEdBQUcsSUFBSTtlQUNqQixhQUFhLEdBQUcsSUFBSTtlQUNwQixRQUFRLEdBQUcsSUFBSTs7QUFHYixjQUFJLENBQUMsVUFBVSxHQUFHLFVBQVUsQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLENBQ2xDLE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FDcEIsa0JBQWtCLEVBQUUsQ0FDcEIsVUFBVSxFQUFFLENBQ1osU0FBUyxDQUFDLENBQUMsRUFBRSxZQUFNO0FBQUUsbUJBQU8sTUFBSyxhQUFhLENBQUE7V0FBQyxDQUFDLENBQUM7O0FBRXBELGNBQUksQ0FBQyxlQUFlLEdBQUcsZUFBZSxDQUFDOztBQUV2QyxjQUFJLENBQUMsYUFBYSxHQUFHLGFBQWEsQ0FBQztBQUNuQyxjQUFJLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQztBQUNuQixjQUFJLENBQUMsYUFBYSxDQUFDLFNBQVMsRUFBRSxDQUFDLElBQUksQ0FBQyxVQUFBLE1BQU0sRUFBSTtBQUM1QyxrQkFBSyxNQUFNLEdBQUcsTUFBTSxDQUFDO1dBQ3RCLENBQUMsQ0FBQztTQUNKOzt3QkFwQlUsUUFBUTs7OztpQkFzQlgsa0JBQUMsS0FBSyxFQUFFO0FBQ2QsZ0JBQUksQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDLElBQUksQ0FBQztBQUN2QixnQkFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsYUFBYSxHQUFHLEtBQUssQ0FBQyxhQUFhLENBQUM7QUFDM0QsZ0JBQUksQ0FBQyxRQUFRLEdBQUcsS0FBSyxDQUFDLFFBQVEsQ0FBQztXQUNoQzs7O2lCQUVRLHFCQUFHOzs7QUFDVixnQkFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxJQUFJLENBQzdCLFlBQU07QUFDSixxQkFBSyxNQUFNLENBQUMsUUFBUSxDQUFDLE9BQUssSUFBSSxFQUFFLE9BQUssVUFBVSxDQUFDLENBQUM7QUFDakQscUJBQUssZUFBZSxDQUFDLE9BQU8sQ0FBQyx1QkFBdUIsRUFBRSxPQUFLLElBQUksQ0FBQyxDQUFDO0FBQ2pFLHFCQUFLLFFBQVEsQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO2FBQy9CLENBQ0YsQ0FBQztXQUNIOzs7aUJBRUssa0JBQUc7QUFDUCxnQkFBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO1dBQy9COzs7QUF4Q1UsZ0JBQVEsR0FEcEIsTUFBTSxDQUFDLFVBQVUsRUFBRSxlQUFlLEVBQUUsYUFBYSxDQUFDLENBQ3RDLFFBQVEsS0FBUixRQUFRO2VBQVIsUUFBUTs7OzBCQUFSLFFBQVEiLCJmaWxlIjoiZHJ1Z1ZpZXdzL3NlbGxEcnVnLmpzIiwic291cmNlUm9vdCI6Ii9zcmMvIn0=
