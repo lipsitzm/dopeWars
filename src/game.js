@@ -1,27 +1,28 @@
 import {inject} from 'aurelia-framework';
-import {CityService} from './services/cityService';
-import {DrugService} from './services/drugService';
-import {PlayerService} from './services/playerService';
-import {DayService} from './services/dayService';
-import {DifficultyLevelsService} from './services/difficultyService';
-import {DifficultyLevel} from './models/difficultyLevel';
-import {GameEngineService} from './services/gameEngineService';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {GameEngine} from './engines/gameEngine';
 
-@inject(GameEngineService, CityService, DrugService, PlayerService, DayService, DifficultyLevelsService)
+@inject(EventAggregator,  GameEngine)
 export class Game {
+  surpriseTriggered = false;
+  surpriseTitle;
+  surpriseModalView;
+  surpriseModalModel;
 
-  constructor(gameEngineService, cityService, drugService, playerService, dayService, difficultyLevelsService) {
-    this.GameEngineService = gameEngineService;
-    this.GameEngineService.Initialize(cityService, drugService, playerService, dayService, difficultyLevelsService).then(
-        gameEngine => {
-        this.GameEngine = gameEngine;
-      }
-    );
-  }
+  constructor(eventAggregator, gameEngine) {
+    this.GameEngine = gameEngine;
 
-  ResetGame() {
-    this.GameEngine.ResetGame();
+    this.eventAggregator = eventAggregator;
+
+    this.eventAggregator.subscribe('surprisesTriggered', surpriseResults => {
+      this.surpriseTitle = 'Today\'s Events';
+      this.surpriseModalView = 'modalBodies/surpriseEvents';
+      this.surpriseModalModel = {
+        Results: surpriseResults,
+        Game: this
+      };
+      this.surpriseTriggered = true;
+    });
   }
 
   activate(params, config, instruction) {
@@ -58,23 +59,7 @@ export class Game {
     this.GameEngine.ResetGame();
   }
 
-  ChangeDifficultyLevel(chosenDifficultyLevel) {
-    this.GameEngine.ChangeDifficultyLevel(chosenDifficultyLevel);
-  }
-
-  UpdateDrugs() {
-    this.GameEngine.UpdateDrugs();
-  }
-
-  UpdateDay() {
-    this.GameEngine.UpdateDay();
-  }
-
-  CheckIfReachedMaxDay() {
-    this.GameEngine.CheckIfReachedMaxDay();
-  }
-
-  MoveCity(idx) {
-    this.GameEngine.MoveCity(idx);
+  cancel() {
+    this.surpriseTriggered = false;
   }
 }

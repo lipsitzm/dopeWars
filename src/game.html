@@ -16,6 +16,10 @@
       <require from="./city-list"></require>
       <city-list class="col-xs-12"></city-list>
     </div>
+    <modal showing.bind="surpriseTriggered">
+      <modal-header title.bind="surpriseTitle" close.call="cancel()"></modal-header>
+      <modal-body content_view.bind="surpriseModalView" content_model.bind="surpriseModalModel"></modal-body>
+    </modal>
   </section>
   <section show.bind="GameEngine.GameOver">
     <div class="splash mrg-btm-10-pct">

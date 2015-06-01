@@ -1,13 +1,19 @@
+import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {CityService} from 'services/cityService';
 import {DrugService} from 'services/drugService';
 import {PlayerService} from 'services/playerService';
 import {DayService} from 'services/dayService';
 import {DifficultyLevelsService} from 'services/difficultyService';
 import {DifficultyLevel} from 'models/difficultyLevel';
+import {SurpriseService} from 'services/surpriseService';
+import {Surprise} from 'models/Surprise';
 
+@inject(EventAggregator, CityService, DrugService, PlayerService, DayService, DifficultyLevelsService, SurpriseService)
 export class GameEngine {
+  constructor(eventAggregator, cityService, drugService, playerService, dayService, difficultyLevelsService, surpriseService){
+    this.eventAggregator = eventAggregator;
 
-  constructor(cityService, drugService, playerService, dayService, difficultyLevelsService){
     this.DayService = dayService;
     this.DayOptions = null;
     this.CurrentDayOption = null;
@@ -30,16 +36,21 @@ export class GameEngine {
 
     this.DrugService = drugService;
     this.Drugs = [];
-    this.OriginalDrugs = [];
     this.DrugsAvailable = false;
     this.DrugService.GetDrugList().then(drugList => {
-      this.Drugs = this.OriginalDrugs = drugList;
+      this.Drugs = drugList;
     });
 
     this.PlayerService = playerService;
     this.Player = null;
     this.PlayerService.GetPlayer().then(player => {
       this.Player = player;
+    });
+
+    this.SurpriseService = surpriseService;
+    this.Surprises = null;
+    this.SurpriseService.GetSurprises().then(surprises => {
+      this.Surprises = surprises;
     });
   }
 
@@ -51,10 +62,11 @@ export class GameEngine {
     this.CurrentCityIndex = Math.floor(Math.random() * this.Cities.length); // Start at a random city (0 indexed)
     this.CurrentDay = 1;
     this.Player.ResetPlayer(this.CurrentDifficultyLevel);
+    this.eventAggregator.publish('resetDrugsInBackpack', this.Drugs);
     this.IsLastDay = false;
     this.GameOver = false;
-    this.Drugs = this.OriginalDrugs; // Reset the drugs back to their initial states
     this.UpdateDrugs();
+    //this.TriggerSurprises(); Can't trigger these on the opening day because the modal tries to open too early... How to get around that?
     this.TriggerRestart = false;
   }
 
@@ -93,6 +105,30 @@ export class GameEngine {
     return this.CurrentDay >= this.CurrentDayOption.TotalDays;
   }
 
+  TriggerSurprises() {
+    // Going through the surprises randomly to make sure that all have an equal chance of being triggered
+    let surprisePromises = [];
+    for (let i = this.Surprises.length - 1; i >= 0; i--) {
+      let idx = Math.floor(Math.random() * (i + 1));
+      let surpriseToCheck = this.Surprises[idx];
+
+      if(Math.random() <= surpriseToCheck.Threshold) {
+        // Add checks here to ensure that these things are all in existence
+
+        surprisePromises.push(this[surpriseToCheck.ServiceName][surpriseToCheck.FunctionName](surpriseToCheck.FunctionArguments));
+        break;
+      }
+    }
+
+    Promise.all(surprisePromises).then(
+      resultsAry => {
+        if(resultsAry.length > 0) {
+          this.eventAggregator.publish('surprisesTriggered', resultsAry);
+        }
+      }
+    );
+  }
+
   MoveCity(idx) {
     if(this.IsLastDay) { // If we were already on the last day, that means that the player is triggering the end game
       this.GameOver = true;
@@ -108,7 +144,11 @@ export class GameEngine {
     this.IsLastDay = this.CheckIfReachedMaxDay();
 
     this.CurrentCityIndex = idx;
+
     this.UpdateDrugs();
+
     this.Player.IncreaseLoanAmount();
+
+    this.TriggerSurprises();
   }
 }

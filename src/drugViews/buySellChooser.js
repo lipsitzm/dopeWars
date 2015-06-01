@@ -1,15 +1,20 @@
-import {bindable} from 'aurelia-framework';
-
 export class BuySellChooser {
-  @bindable drug = null;
-  @bindable drug_count = 0;
-  @bindable drug_list_engine = null;
+  activate(model) {
+    this.drug = model.Drug;
+    this.drugCount = model.DrugCount;
+    this.maxToBuy = model.MaxBuyAmount;
+    this.drugList = model.DrugList;
+  }
 
   goToSell() {
-    this.drug_list_engine.showSellDialog(this.drug);
+    this.drugList.ShowSellDrugDialog(this.drug, this.drugCount);
   }
 
   goToBuy() {
-    this.drug_list_engine.showBuyDialog(this.drug);
+    this.drugList.ShowBuyDrugDialog(this.drug, this.maxToBuy);
+  }
+
+  cancel() {
+    this.drugList.showing = false;
   }
 }

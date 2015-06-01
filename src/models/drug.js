@@ -13,8 +13,6 @@ export class Drug{
   Available = true;
   Name = '';
   ThresholdLevel = 2;
-  BackpackCount = 0;
-  HighestBuyPrice = 0;
 
   constructor(nameIn, minPriceIn, maxPriceIn){
     this.Name = nameIn;
@@ -23,7 +21,15 @@ export class Drug{
   }
 
   SetThreshold(newPrice) {
-    this.ThresholdLevel = Math.floor((this.Price - this.MinPrice) / (this.MaxPrice - this.MinPrice) * 100 / 20);
+    // With the drugService Surprises allowing outlier prices, we need to colorize those as well
+    if(newPrice >= this.MaxPrice) {
+      this.ThresholdLevel = 4;
+    } else if (newPrice <= this.MinPrice) {
+      this.ThresholdLevel = 0;
+    } else {
+      // Otherwise we can just figure out the band that this price would fall in and color it that way
+      this.ThresholdLevel = Math.floor((this.Price - this.MinPrice) / (this.MaxPrice - this.MinPrice) * 100 / 20);
+    }
   }
 
   get ThresholdColorClass() {
