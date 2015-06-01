@@ -31,9 +31,13 @@ export class PlayerService {
         let idx = Math.floor(Math.random() * (drugList.length + 1));
         let drug = drugList[idx];
         let drugsToFind = Math.floor(player.BackpackSpace / 10 * 1.5);
-        player.BuyDrug(drug, drugsToFind, 0);
-        eventAggregator.publish('drugInBackpackChanged', drug);
-        resolve('You saw a dead guy on the subway so you checked his pockets and found ' + drugsToFind + ' ' + drug.Name + '!');
+        if(drugsToFind > 0) {
+          player.BuyDrug(drug, drugsToFind, 0);
+          eventAggregator.publish('drugInBackpackChanged', drug);
+          resolve('You saw a dead guy on the subway so you checked his pockets and found ' + drugsToFind + ' ' + drug.Name + '!');
+        } else {
+          resolve('You saw a dead guy on the subway with a ton of drugs on him, but your backpack was already full so you had to gave em all to the homeless guy next to you.');
+        }
       }
     );
   }
