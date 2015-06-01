@@ -7,7 +7,7 @@ import {DayService} from 'services/dayService';
 import {DifficultyLevelsService} from 'services/difficultyService';
 import {DifficultyLevel} from 'models/difficultyLevel';
 import {SurpriseService} from 'services/surpriseService';
-import {Surprise} from 'models/Surprise';
+import {Surprise} from 'models/surprise';
 
 @inject(EventAggregator, CityService, DrugService, PlayerService, DayService, DifficultyLevelsService, SurpriseService)
 export class GameEngine {
