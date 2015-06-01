@@ -108,11 +108,11 @@ export class GameEngine {
   TriggerSurprises() {
     // Going through the surprises randomly to make sure that all have an equal chance of being triggered
     let surprisePromises = [];
-    for (let i = this.Surprises.length - 1; i > 0; i--) {
+    for (let i = this.Surprises.length - 1; i >= 0; i--) {
       let idx = Math.floor(Math.random() * (i + 1));
       let surpriseToCheck = this.Surprises[idx];
-      if(Math.random() <= surpriseToCheck.Threshold) {
 
+      if(Math.random() <= surpriseToCheck.Threshold) {
         // Add checks here to ensure that these things are all in existence
 
         surprisePromises.push(this[surpriseToCheck.ServiceName][surpriseToCheck.FunctionName](surpriseToCheck.FunctionArguments));

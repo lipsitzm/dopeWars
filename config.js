@@ -21,7 +21,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.9",
     "font-awesome": "npm:font-awesome@4.3.0",
     "jquery": "github:components/jquery@2.1.4",
-    "lipsitzm/aurelia-bs-modal": "github:lipsitzm/aurelia-bs-modal@0.1.2",
+    "lipsitzm/aurelia-bs-modal": "github:lipsitzm/aurelia-bs-modal@master",
     "numeral": "npm:numeral@1.5.3",
     "pwkad/aurelia-bs-modal": "github:pwkad/aurelia-bs-modal@master",
     "traceur": "github:jmcriffey/bower-traceur@0.0.87",
@@ -168,6 +168,11 @@ System.config({
       "util": "npm:util@0.10.3"
     },
     "github:lipsitzm/aurelia-bs-modal@0.1.2": {
+      "aurelia-bs-modal": "github:pwkad/aurelia-bs-modal@master",
+      "babel": "npm:babel-core@5.4.7",
+      "jquery": "github:components/jquery@2.1.4"
+    },
+    "github:lipsitzm/aurelia-bs-modal@master": {
       "aurelia-bs-modal": "github:pwkad/aurelia-bs-modal@master",
       "babel": "npm:babel-core@5.4.7",
       "jquery": "github:components/jquery@2.1.4"

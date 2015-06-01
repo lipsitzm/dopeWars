@@ -1,8 +1,10 @@
 import {Surprise} from 'models/surprise';
 
 let surprises = [
-  new Surprise(1, 'DrugService', 'SurpriseMakeRandomAvailableDrugCheaper'),
-  new Surprise(1, 'DrugService', 'SurpriseMakeRandomAvailableDrugMoreExpensive')
+  new Surprise(.25, 'DrugService', 'SurpriseMakeRandomAvailableDrugCheaper'),
+  new Surprise(.25, 'DrugService', 'SurpriseMakeRandomAvailableDrugMoreExpensive'),
+  new Surprise(.25, 'PlayerService', 'SurpriseFindDrugsOnSubway'),
+  new Surprise(.25, 'PlayerService', 'SurpriseGetMugged')
 ];
 
 export class SurpriseService {

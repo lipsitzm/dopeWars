@@ -22,9 +22,9 @@ export class Drug{
 
   SetThreshold(newPrice) {
     // With the drugService Surprises allowing outlier prices, we need to colorize those as well
-    if(newPrice > this.MaxPrice) {
+    if(newPrice >= this.MaxPrice) {
       this.ThresholdLevel = 4;
-    } else if (newPrice < this.MinPrice) {
+    } else if (newPrice <= this.MinPrice) {
       this.ThresholdLevel = 0;
     } else {
       // Otherwise we can just figure out the band that this price would fall in and color it that way

@@ -1,14 +1,20 @@
+import numeral from 'numeral';
+
 export class PurchasedDrug {
-  BackpackCount;
-  HighestBuyPrice;
+  backpackCount = 0;
+  HighestBuyPrice = 0;
 
   constructor(count, price) {
-    this.BackpackCount = count;
+    this.backpackCount = numeral(count);
     this.HighestBuyPrice = price;
   }
 
   Update(count, price) {
-    this.BackpackCount = this.BackpackCount + count;
-    this.HighestBuyPrice = price > this.HighestBuyPrice ? price : this.HighestBuyPrice;
+    this.backpackCount = this.backpackCount.add(count);
+    this.HighestBuyPrice = (price > this.HighestBuyPrice ? price : this.HighestBuyPrice);
+  }
+
+  get BackpackCount() {
+    return this.backpackCount.format();
   }
 }

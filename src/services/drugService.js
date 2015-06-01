@@ -9,7 +9,7 @@ let drugs = [
 ];
 
 let doPriceMath = (minPrice, maxPrice) => {
-  return Math.floor(Math.random() * (maxPrice - minPrice)) + minPrice;
+  return Math.floor(Math.random() * (maxPrice - minPrice) + minPrice);
 };
 
 let surpriseUpdateDrugPrice = (minFunc, maxFunc) => {
