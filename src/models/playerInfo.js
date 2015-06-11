@@ -1,5 +1,5 @@
-import {DifficultyLevel} from 'models/difficultyLevel';
-import {PurchasedDrug} from 'models/purchasedDrug'
+import {DifficultyLevel} from '../models/difficultyLevel';
+import {PurchasedDrug} from '../models/purchasedDrug'
 
 export class PlayerInfo {
   startingMoney;

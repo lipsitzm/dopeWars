@@ -1,4 +1,4 @@
-import {Surprise} from 'models/surprise';
+import {Surprise} from '../models/surprise';
 
 let surprises = [
   // TODO: Make these adjustable with the difficulty level...

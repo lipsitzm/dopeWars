@@ -1,4 +1,4 @@
-import {DifficultyLevel} from 'models/difficultyLevel';
+import {DifficultyLevel} from '../models/difficultyLevel';
 
 let difficultyLevels = [
   new DifficultyLevel('Easy', 25000, 100, .1, 10000),

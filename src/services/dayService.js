@@ -1,4 +1,4 @@
-import {DayOption} from 'models/dayOption';
+import {DayOption} from '../models/dayOption';
 
 let dayOptions = [
   //new DayOption(4),
