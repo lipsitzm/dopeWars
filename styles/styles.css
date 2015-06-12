@@ -70,19 +70,19 @@ section {
 }
 
 .most-expensive-drug-cost {
-  color: #CC0000;
+  color: red;
 }
 .middle-expensive-drug-cost {
-  color: #FF6666;
+  color: indianred;
 }
 .middle-drug-cost {
   color: #000;
 }
 .middle-cheapest-drug-cost {
-  color: #00FF00;
+  color: #4CC417;
 }
 .cheapest-drug-cost {
-  color: #336600;
+  color: #347C17;
 }
 
 .footer-holder {
