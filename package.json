@@ -5,7 +5,7 @@
   "main": "dist/commonjs/index.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/aurelia/skeleton-navigation"
+    "url": "http://github.com/lipsitzm/dopeWars"
   },
   "jshintConfig": {
     "esnext": true
