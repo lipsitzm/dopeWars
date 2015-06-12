@@ -1,7 +1,7 @@
 import {inject, bindable} from 'aurelia-framework';
 import {Validation} from 'aurelia-validation';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {PlayerService} from 'services/playerService';
+import {PlayerService} from '../services/playerService';
 
 @inject(Validation, EventAggregator, PlayerService)
 export class BuyDrug {

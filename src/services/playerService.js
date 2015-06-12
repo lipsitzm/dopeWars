@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {PlayerInfo} from 'models/playerInfo';
-import {DrugService} from 'services/drugService';
+import {PlayerInfo} from '../models/playerInfo';
+import {DrugService} from '../services/drugService';
 
 let player = new PlayerInfo();
 let drugList = null;

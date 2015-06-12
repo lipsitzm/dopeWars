@@ -1,6 +1,6 @@
 import {inject,bindable} from 'aurelia-framework';
 import {Validation} from 'aurelia-validation';
-import {PlayerService} from 'services/playerService';
+import {PlayerService} from '../services/playerService';
 
 @inject(Validation, PlayerService)
 export class PayDebt {
