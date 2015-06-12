@@ -1,13 +1,13 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {CityService} from 'services/cityService';
-import {DrugService} from 'services/drugService';
-import {PlayerService} from 'services/playerService';
-import {DayService} from 'services/dayService';
-import {DifficultyLevelsService} from 'services/difficultyService';
-import {DifficultyLevel} from 'models/difficultyLevel';
-import {SurpriseService} from 'services/surpriseService';
-import {Surprise} from 'models/surprise';
+import {CityService} from '../services/cityService';
+import {DrugService} from '../services/drugService';
+import {PlayerService} from '../services/playerService';
+import {DayService} from '../services/dayService';
+import {DifficultyLevelsService} from '../services/difficultyService';
+import {DifficultyLevel} from '../models/difficultyLevel';
+import {SurpriseService} from '../services/surpriseService';
+import {Surprise} from '../models/surprise';
 
 @inject(EventAggregator, CityService, DrugService, PlayerService, DayService, DifficultyLevelsService, SurpriseService)
 export class GameEngine {

@@ -1,4 +1,4 @@
-import {CityInfo} from 'models/cityInfo';
+import {CityInfo} from '../models/cityInfo';
 
 let cityInfos = [
   new CityInfo("Dublin", .3),
