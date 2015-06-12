@@ -1,11 +1,19 @@
 import {Drug} from '../models/drug';
 
 let drugs = [
+  new Drug("Acid", 1000, 3000),
   new Drug("Cocaine", 10000, 30000),
-  new Drug("MDMA", 500, 1000),
-  new Drug("Weed", 50, 200),
-  new Drug("Speed", 10, 50),
-  new Drug("Meth", 25, 100)
+  new Drug("Hashish", 800, 1500),
+  new Drug("Heroin", 6000, 20000),
+  new Drug("Ludes", 25, 100),
+  new Drug("Meth", 25, 100),
+  new Drug("MDMA", 1000, 4000),
+  new Drug("Opium", 500, 1250),
+  new Drug("PCP", 750, 2000),
+  new Drug("Peyote", 100, 750),
+  new Drug("Shrooms", 100, 1250),
+  new Drug("Speed", 50, 200),
+  new Drug("Weed", 50, 200)
 ];
 
 let doPriceMath = (minPrice, maxPrice) => {
