@@ -1,4 +1,4 @@
-System.register(["models/cityInfo"], function (_export) {
+System.register(["../models/cityInfo"], function (_export) {
   "use strict";
 
   var CityInfo, cityInfos, CityService;

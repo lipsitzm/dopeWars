@@ -1,4 +1,4 @@
-System.register(['models/difficultyLevel', 'models/purchasedDrug'], function (_export) {
+System.register(['../models/difficultyLevel', '../models/purchasedDrug'], function (_export) {
   'use strict';
 
   var DifficultyLevel, PurchasedDrug, PlayerInfo;

@@ -1,4 +1,4 @@
-System.register(['models/dayOption'], function (_export) {
+System.register(['../models/dayOption'], function (_export) {
   'use strict';
 
   var DayOption, dayOptions, DayService;

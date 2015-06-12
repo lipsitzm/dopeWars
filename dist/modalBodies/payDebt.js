@@ -1,4 +1,4 @@
-System.register(['aurelia-framework', 'aurelia-validation', 'services/playerService'], function (_export) {
+System.register(['aurelia-framework', 'aurelia-validation', '../services/playerService'], function (_export) {
   'use strict';
 
   var inject, bindable, Validation, PlayerService, PayDebt;

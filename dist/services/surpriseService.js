@@ -1,4 +1,4 @@
-System.register(['models/surprise'], function (_export) {
+System.register(['../models/surprise'], function (_export) {
   'use strict';
 
   var Surprise, surprises, SurpriseService;

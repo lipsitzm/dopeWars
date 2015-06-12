@@ -1,4 +1,4 @@
-System.register(['models/difficultyLevel'], function (_export) {
+System.register(['../models/difficultyLevel'], function (_export) {
   'use strict';
 
   var DifficultyLevel, difficultyLevels, DifficultyLevelsService;

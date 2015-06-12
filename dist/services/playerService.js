@@ -1,4 +1,4 @@
-System.register(['aurelia-framework', 'aurelia-event-aggregator', 'models/playerInfo', 'services/drugService'], function (_export) {
+System.register(['aurelia-framework', 'aurelia-event-aggregator', '../models/playerInfo', '../services/drugService'], function (_export) {
   'use strict';
 
   var inject, EventAggregator, PlayerInfo, DrugService, player, drugList, eventAggregator, PlayerService;
