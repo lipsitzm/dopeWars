@@ -1,11 +1,20 @@
-// Aurelia framework
+// Frameworks
 import 'aurelia-bootstrapper';
 import 'aurelia-dependency-injection';
-//import 'aurelia-templating-binding';
-//import 'aurelia-templating-router';
-//import 'aurelia-templating-resources';
+import 'aurelia-templating-binding';
+import 'aurelia-templating-router';
+import 'aurelia-templating-resources';
 import 'aurelia-event-aggregator';
 import 'aurelia-router';
+import 'aurelia-loader-default'
+import 'aurelia-dependency-injection'
+import 'aurelia-history-browser'
+import 'aurelia-validation'
+import 'jquery'
+import 'bootstrap'
+import 'css'
+import 'numeral'
+import 'lipsitzm/aurelia-bs-modal'
 
 // Behaviours
 import './nav-bar';

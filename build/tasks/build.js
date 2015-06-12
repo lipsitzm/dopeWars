@@ -37,7 +37,7 @@ gulp.task('build', function(callback) {
   return runSequence(
     'clean',
     ['build-system', 'build-html'],
-    ['build-dist-bundles', 'build-bundles'],
+    ['build-dist-bundles', 'build-bundles'], // HACK ALERT: See build-bundles.js for details
     callback
   );
 });
