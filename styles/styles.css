@@ -70,20 +70,36 @@ section {
 }
 
 .most-expensive-drug-cost {
-  color: #CC0000;
+  color: red;
 }
 .middle-expensive-drug-cost {
-  color: #FF6666;
+  color: indianred;
 }
 .middle-drug-cost {
   color: #000;
 }
 .middle-cheapest-drug-cost {
-  color: #00FF00;
+  color: #4CC417;
 }
 .cheapest-drug-cost {
-  color: #336600;
+  color: #347C17;
 }
+.noBands.fa.fa-arrow-up, .noBands.fa.fa-arrow-down {
+  font-size: 0;
+}
+.oneBand.fa.fa-arrow-up, .oneBand.fa.fa-arrow-down {
+  font-size: .7em;
+}
+.twoBands.fa.fa-arrow-up, .twoBands.fa.fa-arrow-down {
+  font-size: .9em;
+}
+.threeBands.fa.fa-arrow-up, .threeBands.fa.fa-arrow-down {
+  font-size: 1.1em;
+}
+.fourBands.fa.fa-arrow-up, .fourBands.fa.fa-arrow-down {
+  font-size: 1.3em;
+}
+
 
 .footer-holder {
   font-style: italic;
