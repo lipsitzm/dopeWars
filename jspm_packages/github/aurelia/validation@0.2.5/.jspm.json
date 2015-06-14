@@ -1,0 +1,82 @@
+{
+  "name": "aurelia-validation",
+  "version": "0.2.5",
+  "description": "A validation plugin for Aurelia.",
+  "keywords": [
+    "aurelia",
+    "validation",
+    "plugin"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/validation/issues"
+  },
+  "license": "MIT",
+  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurelia/validation"
+  },
+  "jspm": {
+    "main": "index",
+    "format": "register",
+    "directories": {
+      "lib": "dist/system"
+    },
+    "dependencies": {
+      "aurelia-binding": "github:aurelia/binding@^0.7.3",
+      "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.8.1",
+      "aurelia-templating": "github:aurelia/templating@^0.12.1"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4",
+      "traceur": "github:jmcriffey/bower-traceur@0.0.88",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
+    }
+  },
+  "devDependencies": {
+    "babel": "npm:babel-core@^5.1.13",
+    "babel-runtime": "npm:babel-runtime@^5.1.13",
+    "core-js": "npm:core-js@^0.9.4",
+    "traceur": "github:jmcriffey/bower-traceur@0.0.88",
+    "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
+  },
+  "aurelia": {
+    "usedBy": [],
+    "documentation": {
+      "links": [
+        {
+          "rel": "license",
+          "mediaType": "text/plain",
+          "title": "The MIT License (MIT)",
+          "href": "LICENSE"
+        },
+        {
+          "rel": "describedby",
+          "mediaType": "application/aurelia-doc+json",
+          "title": "API",
+          "href": "doc/api.json"
+        },
+        {
+          "rel": "version-history",
+          "mediaType": "text/markdown",
+          "title": "Change Log",
+          "href": "doc/CHANGELOG.md"
+        }
+      ]
+    }
+  },
+  "format": "register",
+  "directories": {
+    "lib": "dist/system"
+  },
+  "registry": "github",
+  "dependencies": {
+    "aurelia-binding": "github:aurelia/binding@^0.7.3",
+    "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.8.1",
+    "aurelia-templating": "github:aurelia/templating@^0.12.1"
+  }
+}

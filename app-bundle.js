@@ -1,6 +1,6 @@
 "format register";
 
-System.register("npm:core-js@0.9.13/modules/$.fw", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.fw", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -13,11 +13,11 @@ System.register("npm:core-js@0.9.13/modules/$.fw", [], true, function(require, e
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.dom-create", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.dom-create", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
       document = $.g.document,
       isObject = $.isObject,
       is = isObject(document) && isObject(document.createElement);
@@ -28,11 +28,11 @@ System.register("npm:core-js@0.9.13/modules/$.dom-create", ["npm:core-js@0.9.13/
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.shared", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.shared", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
       SHARED = '__core-js_shared__',
       store = $.g[SHARED] || $.hide($.g, SHARED, {})[SHARED];
   module.exports = function(key) {
@@ -42,7 +42,7 @@ System.register("npm:core-js@0.9.13/modules/$.shared", ["npm:core-js@0.9.13/modu
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.uid", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.uid", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -50,24 +50,26 @@ System.register("npm:core-js@0.9.13/modules/$.uid", ["npm:core-js@0.9.13/modules
   function uid(key) {
     return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++sid + Math.random()).toString(36));
   }
-  uid.safe = require("npm:core-js@0.9.13/modules/$").g.Symbol || uid;
+  uid.safe = require("npm:core-js@0.9.16/modules/$").g.Symbol || uid;
   module.exports = uid;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.redef", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.uid"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.redef", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.uid"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
       tpl = String({}.hasOwnProperty),
-      SRC = require("npm:core-js@0.9.13/modules/$.uid").safe('src'),
+      SRC = require("npm:core-js@0.9.16/modules/$.uid").safe('src'),
       _toString = Function.toString;
   function $redef(O, key, val, safe) {
     if ($.isFunction(val)) {
       var base = O[key];
       $.hide(val, SRC, base ? String(base) : tpl.replace(/hasOwnProperty/, String(key)));
+      if (!('name' in val))
+        val.name = key;
     }
     if (O === $.g) {
       O[key] = val;
@@ -88,7 +90,7 @@ System.register("npm:core-js@0.9.13/modules/$.redef", ["npm:core-js@0.9.13/modul
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.invoke", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.invoke", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -114,11 +116,11 @@ System.register("npm:core-js@0.9.13/modules/$.invoke", [], true, function(requir
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.assert", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.assert", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$");
+  var $ = require("npm:core-js@0.9.16/modules/$");
   function assert(condition, msg1, msg2) {
     if (!condition)
       throw TypeError(msg2 ? msg1 + msg2 : msg1);
@@ -144,11 +146,11 @@ System.register("npm:core-js@0.9.13/modules/$.assert", ["npm:core-js@0.9.13/modu
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.array-includes", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.array-includes", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$");
+  var $ = require("npm:core-js@0.9.16/modules/$");
   module.exports = function(IS_INCLUDES) {
     return function($this, el, fromIndex) {
       var O = $.toObject($this),
@@ -174,7 +176,7 @@ System.register("npm:core-js@0.9.13/modules/$.array-includes", ["npm:core-js@0.9
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.replacer", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.replacer", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -191,7 +193,7 @@ System.register("npm:core-js@0.9.13/modules/$.replacer", [], true, function(requ
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.throws", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.throws", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -207,11 +209,11 @@ System.register("npm:core-js@0.9.13/modules/$.throws", [], true, function(requir
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.keyof", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.keyof", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$");
+  var $ = require("npm:core-js@0.9.16/modules/$");
   module.exports = function(object, el) {
     var O = $.toObject(object),
         keys = $.getKeys(O),
@@ -226,11 +228,11 @@ System.register("npm:core-js@0.9.13/modules/$.keyof", ["npm:core-js@0.9.13/modul
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.enum-keys", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.enum-keys", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$");
+  var $ = require("npm:core-js@0.9.16/modules/$");
   module.exports = function(it) {
     var keys = $.getKeys(it),
         getDesc = $.getDesc,
@@ -246,12 +248,36 @@ System.register("npm:core-js@0.9.13/modules/$.enum-keys", ["npm:core-js@0.9.13/m
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.assign", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.enum-keys"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.get-names", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      enumKeys = require("npm:core-js@0.9.13/modules/$.enum-keys");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      toString = {}.toString,
+      getNames = $.getNames;
+  var windowNames = typeof window == 'object' && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [];
+  function getWindowNames(it) {
+    try {
+      return getNames(it);
+    } catch (e) {
+      return windowNames.slice();
+    }
+  }
+  module.exports.get = function getOwnPropertyNames(it) {
+    if (windowNames && toString.call(it) == '[object Window]')
+      return getWindowNames(it);
+    return getNames($.toObject(it));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.16/modules/$.assign", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.enum-keys"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      enumKeys = require("npm:core-js@0.9.16/modules/$.enum-keys");
   module.exports = Object.assign || function assign(target, source) {
     var T = Object($.assertDefined(target)),
         l = arguments.length,
@@ -271,24 +297,23 @@ System.register("npm:core-js@0.9.13/modules/$.assign", ["npm:core-js@0.9.13/modu
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.object.is", ["npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.same", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def");
-  $def($def.S, 'Object', {is: function is(x, y) {
-      return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
-    }});
+  module.exports = Object.is || function is(x, y) {
+    return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
+  };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.set-proto", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.ctx"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.set-proto", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.ctx"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      assert = require("npm:core-js@0.9.13/modules/$.assert");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      assert = require("npm:core-js@0.9.16/modules/$.assert");
   function check(O, proto) {
     assert.obj(O);
     assert(proto === null || $.isObject(proto), proto, ": can't set as prototype!");
@@ -296,7 +321,7 @@ System.register("npm:core-js@0.9.13/modules/$.set-proto", ["npm:core-js@0.9.13/m
   module.exports = {
     set: Object.setPrototypeOf || ('__proto__' in {} ? function(buggy, set) {
       try {
-        set = require("npm:core-js@0.9.13/modules/$.ctx")(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
+        set = require("npm:core-js@0.9.16/modules/$.ctx")(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
         set({}, []);
       } catch (e) {
         buggy = true;
@@ -316,16 +341,16 @@ System.register("npm:core-js@0.9.13/modules/$.set-proto", ["npm:core-js@0.9.13/m
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.object.to-string", ["npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.wks", "npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.object.to-string", ["npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.wks", "npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var cof = require("npm:core-js@0.9.13/modules/$.cof"),
+  var cof = require("npm:core-js@0.9.16/modules/$.cof"),
       tmp = {};
-  tmp[require("npm:core-js@0.9.13/modules/$.wks")('toStringTag')] = 'z';
-  if (require("npm:core-js@0.9.13/modules/$").FW && cof(tmp) != 'z') {
-    require("npm:core-js@0.9.13/modules/$.redef")(Object.prototype, 'toString', function toString() {
+  tmp[require("npm:core-js@0.9.16/modules/$.wks")('toStringTag')] = 'z';
+  if (require("npm:core-js@0.9.16/modules/$").FW && cof(tmp) != 'z') {
+    require("npm:core-js@0.9.16/modules/$.redef")(Object.prototype, 'toString', function toString() {
       return '[object ' + cof.classof(this) + ']';
     }, true);
   }
@@ -333,12 +358,12 @@ System.register("npm:core-js@0.9.13/modules/es6.object.to-string", ["npm:core-js
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.object.statics-accept-primitives", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.object.statics-accept-primitives", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.get-names"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       isObject = $.isObject,
       toObject = $.toObject;
   $.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' + 'getOwnPropertyDescriptor,getPrototypeOf,keys,getOwnPropertyNames').split(','), function(KEY, ID) {
@@ -363,9 +388,7 @@ System.register("npm:core-js@0.9.13/modules/es6.object.statics-accept-primitives
       return fn(Object($.assertDefined(it)));
     } : ID == 8 ? function keys(it) {
       return fn(toObject(it));
-    } : function getOwnPropertyNames(it) {
-      return fn(toObject(it));
-    };
+    } : require("npm:core-js@0.9.16/modules/$.get-names").get;
     try {
       fn('z');
     } catch (e) {
@@ -377,12 +400,12 @@ System.register("npm:core-js@0.9.13/modules/es6.object.statics-accept-primitives
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.function.name", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.function.name", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
       NAME = 'name',
       setDesc = $.setDesc,
       FunctionProto = Function.prototype;
@@ -402,12 +425,12 @@ System.register("npm:core-js@0.9.13/modules/es6.function.name", ["npm:core-js@0.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.function.has-instance", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.function.has-instance", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      HAS_INSTANCE = require("npm:core-js@0.9.13/modules/$.wks")('hasInstance'),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      HAS_INSTANCE = require("npm:core-js@0.9.16/modules/$.wks")('hasInstance'),
       FunctionProto = Function.prototype;
   if (!(HAS_INSTANCE in FunctionProto))
     $.setDesc(FunctionProto, HAS_INSTANCE, {value: function(O) {
@@ -424,12 +447,12 @@ System.register("npm:core-js@0.9.13/modules/es6.function.has-instance", ["npm:co
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.number.constructor", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.number.constructor", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
       isObject = $.isObject,
       isFunction = $.isFunction,
       NUMBER = 'Number',
@@ -472,18 +495,18 @@ System.register("npm:core-js@0.9.13/modules/es6.number.constructor", ["npm:core-
     });
     $Number.prototype = proto;
     proto.constructor = $Number;
-    require("npm:core-js@0.9.13/modules/$.redef")($.g, NUMBER, $Number);
+    require("npm:core-js@0.9.16/modules/$.redef")($.g, NUMBER, $Number);
   }
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.number.statics", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.number.statics", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       abs = Math.abs,
       floor = Math.floor,
       _isFinite = $.g.isFinite,
@@ -512,12 +535,12 @@ System.register("npm:core-js@0.9.13/modules/es6.number.statics", ["npm:core-js@0
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.math", ["npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.math", ["npm:core-js@0.9.16/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   var Infinity = 1 / 0,
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       E = Math.E,
       pow = Math.pow,
       abs = Math.abs,
@@ -577,20 +600,22 @@ System.register("npm:core-js@0.9.13/modules/es6.math", ["npm:core-js@0.9.13/modu
       var sum = 0,
           i = 0,
           len = arguments.length,
-          args = Array(len),
           larg = 0,
-          arg;
+          arg,
+          div;
       while (i < len) {
-        arg = args[i] = abs(arguments[i++]);
-        if (arg == Infinity)
-          return Infinity;
-        if (arg > larg)
+        arg = abs(arguments[i++]);
+        if (larg < arg) {
+          div = larg / arg;
+          sum = sum * div * div + 1;
           larg = arg;
+        } else if (arg > 0) {
+          div = arg / larg;
+          sum += div * div;
+        } else
+          sum += arg;
       }
-      larg = larg || 1;
-      while (len--)
-        sum += pow(args[len] / larg, 2);
-      return larg * sqrt(sum);
+      return larg === Infinity ? Infinity : larg * sqrt(sum);
     },
     imul: function imul(x, y) {
       var UInt16 = 0xffff,
@@ -626,12 +651,12 @@ System.register("npm:core-js@0.9.13/modules/es6.math", ["npm:core-js@0.9.13/modu
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.from-code-point", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.string.from-code-point", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      toIndex = require("npm:core-js@0.9.13/modules/$").toIndex,
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      toIndex = require("npm:core-js@0.9.16/modules/$").toIndex,
       fromCharCode = String.fromCharCode,
       $fromCodePoint = String.fromCodePoint;
   $def($def.S + $def.F * (!!$fromCodePoint && $fromCodePoint.length != 1), 'String', {fromCodePoint: function fromCodePoint(x) {
@@ -651,12 +676,12 @@ System.register("npm:core-js@0.9.13/modules/es6.string.from-code-point", ["npm:c
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.raw", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.string.raw", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def");
   $def($def.S, 'String', {raw: function raw(callSite) {
       var tpl = $.toObject(callSite.raw),
           len = $.toLength(tpl.length),
@@ -674,11 +699,11 @@ System.register("npm:core-js@0.9.13/modules/es6.string.raw", ["npm:core-js@0.9.1
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.string-at", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.string-at", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$");
+  var $ = require("npm:core-js@0.9.16/modules/$");
   module.exports = function(TO_STRING) {
     return function(that, pos) {
       var s = String($.assertDefined(that)),
@@ -696,17 +721,19 @@ System.register("npm:core-js@0.9.13/modules/$.string-at", ["npm:core-js@0.9.13/m
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.iter", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.wks", "npm:core-js@0.9.13/modules/$.shared"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.iter", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.wks", "npm:core-js@0.9.16/modules/$.shared"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      cof = require("npm:core-js@0.9.13/modules/$.cof"),
-      assertObject = require("npm:core-js@0.9.13/modules/$.assert").obj,
-      SYMBOL_ITERATOR = require("npm:core-js@0.9.13/modules/$.wks")('iterator'),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      cof = require("npm:core-js@0.9.16/modules/$.cof"),
+      classof = cof.classof,
+      assert = require("npm:core-js@0.9.16/modules/$.assert"),
+      assertObject = assert.obj,
+      SYMBOL_ITERATOR = require("npm:core-js@0.9.16/modules/$.wks")('iterator'),
       FF_ITERATOR = '@@iterator',
-      Iterators = require("npm:core-js@0.9.13/modules/$.shared")('iterators'),
+      Iterators = require("npm:core-js@0.9.16/modules/$.shared")('iterators'),
       IteratorPrototype = {};
   setIterator(IteratorPrototype, $.that);
   function setIterator(O, value) {
@@ -725,14 +752,16 @@ System.register("npm:core-js@0.9.13/modules/$.iter", ["npm:core-js@0.9.13/module
     },
     is: function(it) {
       var O = Object(it),
-          Symbol = $.g.Symbol,
-          SYM = Symbol && Symbol.iterator || FF_ITERATOR;
-      return SYM in O || SYMBOL_ITERATOR in O || $.has(Iterators, cof.classof(O));
+          Symbol = $.g.Symbol;
+      return (Symbol && Symbol.iterator || FF_ITERATOR) in O || SYMBOL_ITERATOR in O || $.has(Iterators, classof(O));
     },
     get: function(it) {
       var Symbol = $.g.Symbol,
-          ext = it[Symbol && Symbol.iterator || FF_ITERATOR],
-          getIter = ext || it[SYMBOL_ITERATOR] || Iterators[cof.classof(it)];
+          getIter;
+      if (it != undefined) {
+        getIter = it[Symbol && Symbol.iterator || FF_ITERATOR] || it[SYMBOL_ITERATOR] || Iterators[classof(it)];
+      }
+      assert($.isFunction(getIter), it, ' is not iterable!');
       return assertObject(getIter.call(it));
     },
     set: setIterator,
@@ -745,16 +774,16 @@ System.register("npm:core-js@0.9.13/modules/$.iter", ["npm:core-js@0.9.13/module
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.iter-define", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.redef", "npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.iter-define", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.redef", "npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $redef = require("npm:core-js@0.9.13/modules/$.redef"),
-      $ = require("npm:core-js@0.9.13/modules/$"),
-      cof = require("npm:core-js@0.9.13/modules/$.cof"),
-      $iter = require("npm:core-js@0.9.13/modules/$.iter"),
-      SYMBOL_ITERATOR = require("npm:core-js@0.9.13/modules/$.wks")('iterator'),
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $redef = require("npm:core-js@0.9.16/modules/$.redef"),
+      $ = require("npm:core-js@0.9.16/modules/$"),
+      cof = require("npm:core-js@0.9.16/modules/$.cof"),
+      $iter = require("npm:core-js@0.9.16/modules/$.iter"),
+      SYMBOL_ITERATOR = require("npm:core-js@0.9.16/modules/$.wks")('iterator'),
       FF_ITERATOR = '@@iterator',
       KEYS = 'keys',
       VALUES = 'values',
@@ -791,7 +820,7 @@ System.register("npm:core-js@0.9.13/modules/$.iter-define", ["npm:core-js@0.9.13
       if ($.FW && $.has(proto, FF_ITERATOR))
         $iter.set(IteratorPrototype, $.that);
     }
-    if ($.FW)
+    if ($.FW || FORCE)
       $iter.set(proto, _default);
     Iterators[NAME] = _default;
     Iterators[TAG] = $.that;
@@ -814,13 +843,13 @@ System.register("npm:core-js@0.9.13/modules/$.iter-define", ["npm:core-js@0.9.13
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.code-point-at", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.string-at"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.string.code-point-at", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.string-at"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $at = require("npm:core-js@0.9.13/modules/$.string-at")(false);
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $at = require("npm:core-js@0.9.16/modules/$.string-at")(false);
   $def($def.P, 'String', {codePointAt: function codePointAt(pos) {
       return $at(this, pos);
     }});
@@ -828,16 +857,16 @@ System.register("npm:core-js@0.9.13/modules/es6.string.code-point-at", ["npm:cor
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.ends-with", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.throws"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.string.ends-with", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.throws"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      cof = require("npm:core-js@0.9.13/modules/$.cof"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      cof = require("npm:core-js@0.9.16/modules/$.cof"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       toLength = $.toLength;
-  $def($def.P + $def.F * !require("npm:core-js@0.9.13/modules/$.throws")(function() {
+  $def($def.P + $def.F * !require("npm:core-js@0.9.16/modules/$.throws")(function() {
     'q'.endsWith(/./);
   }), 'String', {endsWith: function endsWith(searchString) {
       if (cof(searchString) == 'RegExp')
@@ -853,14 +882,14 @@ System.register("npm:core-js@0.9.13/modules/es6.string.ends-with", ["npm:core-js
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.includes", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.string.includes", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      cof = require("npm:core-js@0.9.13/modules/$.cof"),
-      $def = require("npm:core-js@0.9.13/modules/$.def");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      cof = require("npm:core-js@0.9.16/modules/$.cof"),
+      $def = require("npm:core-js@0.9.16/modules/$.def");
   $def($def.P, 'String', {includes: function includes(searchString) {
       if (cof(searchString) == 'RegExp')
         throw TypeError();
@@ -870,12 +899,12 @@ System.register("npm:core-js@0.9.13/modules/es6.string.includes", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.string-repeat", ["npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.string-repeat", ["npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$");
+  var $ = require("npm:core-js@0.9.16/modules/$");
   module.exports = function repeat(count) {
     var str = String($.assertDefined(this)),
         res = '',
@@ -891,15 +920,15 @@ System.register("npm:core-js@0.9.13/modules/$.string-repeat", ["npm:core-js@0.9.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.starts-with", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.throws"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.string.starts-with", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.throws"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      cof = require("npm:core-js@0.9.13/modules/$.cof"),
-      $def = require("npm:core-js@0.9.13/modules/$.def");
-  $def($def.P + $def.F * !require("npm:core-js@0.9.13/modules/$.throws")(function() {
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      cof = require("npm:core-js@0.9.16/modules/$.cof"),
+      $def = require("npm:core-js@0.9.16/modules/$.def");
+  $def($def.P + $def.F * !require("npm:core-js@0.9.16/modules/$.throws")(function() {
     'q'.startsWith(/./);
   }), 'String', {startsWith: function startsWith(searchString) {
       if (cof(searchString) == 'RegExp')
@@ -913,11 +942,11 @@ System.register("npm:core-js@0.9.13/modules/es6.string.starts-with", ["npm:core-
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.iter-call", ["npm:core-js@0.9.13/modules/$.assert"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.iter-call", ["npm:core-js@0.9.16/modules/$.assert"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var assertObject = require("npm:core-js@0.9.13/modules/$.assert").obj;
+  var assertObject = require("npm:core-js@0.9.16/modules/$.assert").obj;
   function close(iterator) {
     var ret = iterator['return'];
     if (ret !== undefined)
@@ -937,11 +966,11 @@ System.register("npm:core-js@0.9.13/modules/$.iter-call", ["npm:core-js@0.9.13/m
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.iter-detect", ["npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.iter-detect", ["npm:core-js@0.9.16/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var SYMBOL_ITERATOR = require("npm:core-js@0.9.13/modules/$.wks")('iterator'),
+  var SYMBOL_ITERATOR = require("npm:core-js@0.9.16/modules/$.wks")('iterator'),
       SAFE_CLOSING = false;
   try {
     var riter = [7][SYMBOL_ITERATOR]();
@@ -973,11 +1002,11 @@ System.register("npm:core-js@0.9.13/modules/$.iter-detect", ["npm:core-js@0.9.13
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.of", ["npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.of", ["npm:core-js@0.9.16/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def");
+  var $def = require("npm:core-js@0.9.16/modules/$.def");
   $def($def.S, 'Array', {of: function of() {
       var index = 0,
           length = arguments.length,
@@ -991,28 +1020,26 @@ System.register("npm:core-js@0.9.13/modules/es6.array.of", ["npm:core-js@0.9.13/
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.unscope", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.unscope", ["npm:core-js@0.9.16/modules/$.wks", "npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      UNSCOPABLES = require("npm:core-js@0.9.13/modules/$.wks")('unscopables');
-  if ($.FW && !(UNSCOPABLES in []))
-    $.hide(Array.prototype, UNSCOPABLES, {});
+  var UNSCOPABLES = require("npm:core-js@0.9.16/modules/$.wks")('unscopables');
+  if (!(UNSCOPABLES in []))
+    require("npm:core-js@0.9.16/modules/$").hide(Array.prototype, UNSCOPABLES, {});
   module.exports = function(key) {
-    if ($.FW)
-      [][UNSCOPABLES][key] = true;
+    [][UNSCOPABLES][key] = true;
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.species", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.species", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      SPECIES = require("npm:core-js@0.9.13/modules/$.wks")('species');
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      SPECIES = require("npm:core-js@0.9.16/modules/$.wks")('species');
   module.exports = function(C) {
     if ($.DESC && !(SPECIES in C))
       $.setDesc(C, SPECIES, {
@@ -1024,13 +1051,13 @@ System.register("npm:core-js@0.9.13/modules/$.species", ["npm:core-js@0.9.13/mod
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.copy-within", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.unscope"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.copy-within", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.unscope"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       toIndex = $.toIndex;
   $def($def.P, 'Array', {copyWithin: function copyWithin(target, start) {
       var O = Object($.assertDefined(this)),
@@ -1056,18 +1083,18 @@ System.register("npm:core-js@0.9.13/modules/es6.array.copy-within", ["npm:core-j
       }
       return O;
     }});
-  require("npm:core-js@0.9.13/modules/$.unscope")('copyWithin');
+  require("npm:core-js@0.9.16/modules/$.unscope")('copyWithin');
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.fill", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.unscope"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.fill", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.unscope"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       toIndex = $.toIndex;
   $def($def.P, 'Array', {fill: function fill(value) {
       var O = Object($.assertDefined(this)),
@@ -1079,20 +1106,20 @@ System.register("npm:core-js@0.9.13/modules/es6.array.fill", ["npm:core-js@0.9.1
         O[index++] = value;
       return O;
     }});
-  require("npm:core-js@0.9.13/modules/$.unscope")('fill');
+  require("npm:core-js@0.9.16/modules/$.unscope")('fill');
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.find", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.array-methods", "npm:core-js@0.9.13/modules/$.unscope"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.find", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.array-methods", "npm:core-js@0.9.16/modules/$.unscope"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
   var KEY = 'find',
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       forced = true,
-      $find = require("npm:core-js@0.9.13/modules/$.array-methods")(5);
+      $find = require("npm:core-js@0.9.16/modules/$.array-methods")(5);
   if (KEY in [])
     Array(1)[KEY](function() {
       forced = false;
@@ -1100,20 +1127,20 @@ System.register("npm:core-js@0.9.13/modules/es6.array.find", ["npm:core-js@0.9.1
   $def($def.P + $def.F * forced, 'Array', {find: function find(callbackfn) {
       return $find(this, callbackfn, arguments[1]);
     }});
-  require("npm:core-js@0.9.13/modules/$.unscope")(KEY);
+  require("npm:core-js@0.9.16/modules/$.unscope")(KEY);
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.find-index", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.array-methods", "npm:core-js@0.9.13/modules/$.unscope"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.find-index", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.array-methods", "npm:core-js@0.9.16/modules/$.unscope"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
   var KEY = 'findIndex',
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       forced = true,
-      $find = require("npm:core-js@0.9.13/modules/$.array-methods")(6);
+      $find = require("npm:core-js@0.9.16/modules/$.array-methods")(6);
   if (KEY in [])
     Array(1)[KEY](function() {
       forced = false;
@@ -1121,17 +1148,17 @@ System.register("npm:core-js@0.9.13/modules/es6.array.find-index", ["npm:core-js
   $def($def.P + $def.F * forced, 'Array', {findIndex: function findIndex(callbackfn) {
       return $find(this, callbackfn, arguments[1]);
     }});
-  require("npm:core-js@0.9.13/modules/$.unscope")(KEY);
+  require("npm:core-js@0.9.16/modules/$.unscope")(KEY);
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.regexp", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.redef", "npm:core-js@0.9.13/modules/$.replacer", "npm:core-js@0.9.13/modules/$.species"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.regexp", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.redef", "npm:core-js@0.9.16/modules/$.replacer", "npm:core-js@0.9.16/modules/$.species"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      cof = require("npm:core-js@0.9.13/modules/$.cof"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      cof = require("npm:core-js@0.9.16/modules/$.cof"),
       $RegExp = $.g.RegExp,
       Base = $RegExp,
       proto = $RegExp.prototype,
@@ -1164,26 +1191,26 @@ System.register("npm:core-js@0.9.13/modules/es6.regexp", ["npm:core-js@0.9.13/mo
       });
       proto.constructor = $RegExp;
       $RegExp.prototype = proto;
-      require("npm:core-js@0.9.13/modules/$.redef")($.g, 'RegExp', $RegExp);
+      require("npm:core-js@0.9.16/modules/$.redef")($.g, 'RegExp', $RegExp);
     }
     if (/./g.flags != 'g')
       $.setDesc(proto, 'flags', {
         configurable: true,
-        get: require("npm:core-js@0.9.13/modules/$.replacer")(/^.*\/(\w*)$/, '$1')
+        get: require("npm:core-js@0.9.16/modules/$.replacer")(/^.*\/(\w*)$/, '$1')
       });
   }
-  require("npm:core-js@0.9.13/modules/$.species")($RegExp);
+  require("npm:core-js@0.9.16/modules/$.species")($RegExp);
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.for-of", ["npm:core-js@0.9.13/modules/$.ctx", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.iter-call"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.for-of", ["npm:core-js@0.9.16/modules/$.ctx", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.iter-call"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var ctx = require("npm:core-js@0.9.13/modules/$.ctx"),
-      get = require("npm:core-js@0.9.13/modules/$.iter").get,
-      call = require("npm:core-js@0.9.13/modules/$.iter-call");
+  var ctx = require("npm:core-js@0.9.16/modules/$.ctx"),
+      get = require("npm:core-js@0.9.16/modules/$.iter").get,
+      call = require("npm:core-js@0.9.16/modules/$.iter-call");
   module.exports = function(iterable, entries, fn, that) {
     var iterator = get(iterable),
         f = ctx(fn, that, entries ? 2 : 1),
@@ -1259,11 +1286,11 @@ System.register("npm:process@0.10.1/browser", [], true, function(require, export
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.mix", ["npm:core-js@0.9.13/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.mix", ["npm:core-js@0.9.16/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $redef = require("npm:core-js@0.9.13/modules/$.redef");
+  var $redef = require("npm:core-js@0.9.16/modules/$.redef");
   module.exports = function(target, src) {
     for (var key in src)
       $redef(target, key, src[key]);
@@ -1273,18 +1300,18 @@ System.register("npm:core-js@0.9.13/modules/$.mix", ["npm:core-js@0.9.13/modules
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.collection-strong", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.ctx", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.for-of", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.mix", "npm:core-js@0.9.13/modules/$.iter-define"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.collection-strong", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.ctx", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.for-of", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.mix", "npm:core-js@0.9.16/modules/$.iter-define"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      ctx = require("npm:core-js@0.9.13/modules/$.ctx"),
-      safe = require("npm:core-js@0.9.13/modules/$.uid").safe,
-      assert = require("npm:core-js@0.9.13/modules/$.assert"),
-      forOf = require("npm:core-js@0.9.13/modules/$.for-of"),
-      step = require("npm:core-js@0.9.13/modules/$.iter").step,
-      has = $.has,
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      ctx = require("npm:core-js@0.9.16/modules/$.ctx"),
+      safe = require("npm:core-js@0.9.16/modules/$.uid").safe,
+      assert = require("npm:core-js@0.9.16/modules/$.assert"),
+      forOf = require("npm:core-js@0.9.16/modules/$.for-of"),
+      step = require("npm:core-js@0.9.16/modules/$.iter").step,
+      $has = $.has,
       set = $.set,
       isObject = $.isObject,
       hide = $.hide,
@@ -1299,7 +1326,7 @@ System.register("npm:core-js@0.9.13/modules/$.collection-strong", ["npm:core-js@
   function fastKey(it, create) {
     if (!isObject(it))
       return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-    if (!has(it, ID)) {
+    if (!$has(it, ID)) {
       if (!isExtensible(it))
         return 'F';
       if (!create)
@@ -1319,18 +1346,17 @@ System.register("npm:core-js@0.9.13/modules/$.collection-strong", ["npm:core-js@
     }
   }
   module.exports = {
-    getConstructor: function(NAME, IS_MAP, ADDER) {
-      function C() {
-        var that = assert.inst(this, C, NAME),
-            iterable = arguments[0];
+    getConstructor: function(wrapper, NAME, IS_MAP, ADDER) {
+      var C = wrapper(function(that, iterable) {
+        assert.inst(that, C, NAME);
         set(that, O1, $.create(null));
         set(that, SIZE, 0);
         set(that, LAST, undefined);
         set(that, FIRST, undefined);
         if (iterable != undefined)
           forOf(iterable, IS_MAP, that[ADDER], that);
-      }
-      require("npm:core-js@0.9.13/modules/$.mix")(C.prototype, {
+      });
+      require("npm:core-js@0.9.16/modules/$.mix")(C.prototype, {
         clear: function clear() {
           for (var that = this,
               data = that[O1],
@@ -1409,7 +1435,7 @@ System.register("npm:core-js@0.9.13/modules/$.collection-strong", ["npm:core-js@
     },
     getEntry: getEntry,
     setIter: function(C, NAME, IS_MAP) {
-      require("npm:core-js@0.9.13/modules/$.iter-define")(C, NAME, function(iterated, kind) {
+      require("npm:core-js@0.9.16/modules/$.iter-define")(C, NAME, function(iterated, kind) {
         set(this, ITER, {
           o: iterated,
           k: kind
@@ -1436,53 +1462,58 @@ System.register("npm:core-js@0.9.13/modules/$.collection-strong", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.collection", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.for-of", "npm:core-js@0.9.13/modules/$.species", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.redef", "npm:core-js@0.9.13/modules/$.mix", "npm:core-js@0.9.13/modules/$.iter-detect", "npm:core-js@0.9.13/modules/$.cof"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.collection", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.for-of", "npm:core-js@0.9.16/modules/$.species", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.redef", "npm:core-js@0.9.16/modules/$.mix", "npm:core-js@0.9.16/modules/$.iter-detect", "npm:core-js@0.9.16/modules/$.cof"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      BUGGY = require("npm:core-js@0.9.13/modules/$.iter").BUGGY,
-      forOf = require("npm:core-js@0.9.13/modules/$.for-of"),
-      species = require("npm:core-js@0.9.13/modules/$.species"),
-      assertInstance = require("npm:core-js@0.9.13/modules/$.assert").inst;
-  module.exports = function(NAME, methods, common, IS_MAP, IS_WEAK) {
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      BUGGY = require("npm:core-js@0.9.16/modules/$.iter").BUGGY,
+      forOf = require("npm:core-js@0.9.16/modules/$.for-of"),
+      species = require("npm:core-js@0.9.16/modules/$.species"),
+      assertInstance = require("npm:core-js@0.9.16/modules/$.assert").inst;
+  module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
     var Base = $.g[NAME],
         C = Base,
         ADDER = IS_MAP ? 'set' : 'add',
         proto = C && C.prototype,
         O = {};
-    function fixMethod(KEY, CHAIN) {
-      if ($.FW) {
-        var method = proto[KEY];
-        require("npm:core-js@0.9.13/modules/$.redef")(proto, KEY, function(a, b) {
-          var result = method.call(this, a === 0 ? 0 : a, b);
-          return CHAIN ? this : result;
-        });
-      }
+    function fixMethod(KEY) {
+      var fn = proto[KEY];
+      require("npm:core-js@0.9.16/modules/$.redef")(proto, KEY, KEY == 'delete' ? function(a) {
+        return fn.call(this, a === 0 ? 0 : a);
+      } : KEY == 'has' ? function has(a) {
+        return fn.call(this, a === 0 ? 0 : a);
+      } : KEY == 'get' ? function get(a) {
+        return fn.call(this, a === 0 ? 0 : a);
+      } : KEY == 'add' ? function add(a) {
+        fn.call(this, a === 0 ? 0 : a);
+        return this;
+      } : function set(a, b) {
+        fn.call(this, a === 0 ? 0 : a, b);
+        return this;
+      });
     }
     if (!$.isFunction(C) || !(IS_WEAK || !BUGGY && proto.forEach && proto.entries)) {
-      C = common.getConstructor(NAME, IS_MAP, ADDER);
-      require("npm:core-js@0.9.13/modules/$.mix")(C.prototype, methods);
+      C = common.getConstructor(wrapper, NAME, IS_MAP, ADDER);
+      require("npm:core-js@0.9.16/modules/$.mix")(C.prototype, methods);
     } else {
       var inst = new C,
           chain = inst[ADDER](IS_WEAK ? {} : -0, 1),
           buggyZero;
-      if (!require("npm:core-js@0.9.13/modules/$.iter-detect")(function(iter) {
+      if (!require("npm:core-js@0.9.16/modules/$.iter-detect")(function(iter) {
         new C(iter);
       })) {
-        C = function() {
-          assertInstance(this, C, NAME);
-          var that = new Base,
-              iterable = arguments[0];
+        C = wrapper(function(target, iterable) {
+          assertInstance(target, C, NAME);
+          var that = new Base;
           if (iterable != undefined)
             forOf(iterable, IS_MAP, that[ADDER], that);
           return that;
-        };
+        });
         C.prototype = proto;
-        if ($.FW)
-          proto.constructor = C;
+        proto.constructor = C;
       }
       IS_WEAK || inst.forEach(function(val, key) {
         buggyZero = 1 / key === -Infinity;
@@ -1493,9 +1524,9 @@ System.register("npm:core-js@0.9.13/modules/$.collection", ["npm:core-js@0.9.13/
         IS_MAP && fixMethod('get');
       }
       if (buggyZero || chain !== inst)
-        fixMethod(ADDER, true);
+        fixMethod(ADDER);
     }
-    require("npm:core-js@0.9.13/modules/$.cof").set(C, NAME);
+    require("npm:core-js@0.9.16/modules/$.cof").set(C, NAME);
     O[NAME] = C;
     $def($def.G + $def.W + $def.F * (C != Base), O);
     species(C);
@@ -1508,29 +1539,33 @@ System.register("npm:core-js@0.9.13/modules/$.collection", ["npm:core-js@0.9.13/
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.set", ["npm:core-js@0.9.13/modules/$.collection-strong", "npm:core-js@0.9.13/modules/$.collection"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.set", ["npm:core-js@0.9.16/modules/$.collection-strong", "npm:core-js@0.9.16/modules/$.collection"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var strong = require("npm:core-js@0.9.13/modules/$.collection-strong");
-  require("npm:core-js@0.9.13/modules/$.collection")('Set', {add: function add(value) {
+  var strong = require("npm:core-js@0.9.16/modules/$.collection-strong");
+  require("npm:core-js@0.9.16/modules/$.collection")('Set', function(get) {
+    return function Set() {
+      return get(this, arguments[0]);
+    };
+  }, {add: function add(value) {
       return strong.def(this, value = value === 0 ? 0 : value, value);
     }}, strong);
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.collection-weak", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.for-of", "npm:core-js@0.9.13/modules/$.array-methods", "npm:core-js@0.9.13/modules/$.mix"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.collection-weak", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.for-of", "npm:core-js@0.9.16/modules/$.array-methods", "npm:core-js@0.9.16/modules/$.mix"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      safe = require("npm:core-js@0.9.13/modules/$.uid").safe,
-      assert = require("npm:core-js@0.9.13/modules/$.assert"),
-      forOf = require("npm:core-js@0.9.13/modules/$.for-of"),
-      _has = $.has,
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      safe = require("npm:core-js@0.9.16/modules/$.uid").safe,
+      assert = require("npm:core-js@0.9.16/modules/$.assert"),
+      forOf = require("npm:core-js@0.9.16/modules/$.for-of"),
+      $has = $.has,
       isObject = $.isObject,
       hide = $.hide,
       isExtensible = Object.isExtensible || isObject,
@@ -1538,7 +1573,7 @@ System.register("npm:core-js@0.9.13/modules/$.collection-weak", ["npm:core-js@0.
       ID = safe('id'),
       WEAK = safe('weak'),
       LEAK = safe('leak'),
-      method = require("npm:core-js@0.9.13/modules/$.array-methods"),
+      method = require("npm:core-js@0.9.16/modules/$.array-methods"),
       find = method(5),
       findIndex = method(6);
   function findFrozen(store, key) {
@@ -1575,27 +1610,26 @@ System.register("npm:core-js@0.9.13/modules/$.collection-weak", ["npm:core-js@0.
     })[LEAK];
   }
   module.exports = {
-    getConstructor: function(NAME, IS_MAP, ADDER) {
-      function C() {
-        $.set(assert.inst(this, C, NAME), ID, id++);
-        var iterable = arguments[0];
+    getConstructor: function(wrapper, NAME, IS_MAP, ADDER) {
+      var C = wrapper(function(that, iterable) {
+        $.set(assert.inst(that, C, NAME), ID, id++);
         if (iterable != undefined)
-          forOf(iterable, IS_MAP, this[ADDER], this);
-      }
-      require("npm:core-js@0.9.13/modules/$.mix")(C.prototype, {
+          forOf(iterable, IS_MAP, that[ADDER], that);
+      });
+      require("npm:core-js@0.9.16/modules/$.mix")(C.prototype, {
         'delete': function(key) {
           if (!isObject(key))
             return false;
           if (!isExtensible(key))
             return leakStore(this)['delete'](key);
-          return _has(key, WEAK) && _has(key[WEAK], this[ID]) && delete key[WEAK][this[ID]];
+          return $has(key, WEAK) && $has(key[WEAK], this[ID]) && delete key[WEAK][this[ID]];
         },
         has: function has(key) {
           if (!isObject(key))
             return false;
           if (!isExtensible(key))
             return leakStore(this).has(key);
-          return _has(key, WEAK) && _has(key[WEAK], this[ID]);
+          return $has(key, WEAK) && $has(key[WEAK], this[ID]);
         }
       });
       return C;
@@ -1604,7 +1638,7 @@ System.register("npm:core-js@0.9.13/modules/$.collection-weak", ["npm:core-js@0.
       if (!isExtensible(assert.obj(key))) {
         leakStore(that).set(key, value);
       } else {
-        _has(key, WEAK) || hide(key, WEAK, {});
+        $has(key, WEAK) || hide(key, WEAK, {});
         key[WEAK][that[ID]] = value;
       }
       return that;
@@ -1617,25 +1651,29 @@ System.register("npm:core-js@0.9.13/modules/$.collection-weak", ["npm:core-js@0.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.weak-set", ["npm:core-js@0.9.13/modules/$.collection-weak", "npm:core-js@0.9.13/modules/$.collection"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.weak-set", ["npm:core-js@0.9.16/modules/$.collection-weak", "npm:core-js@0.9.16/modules/$.collection"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var weak = require("npm:core-js@0.9.13/modules/$.collection-weak");
-  require("npm:core-js@0.9.13/modules/$.collection")('WeakSet', {add: function add(value) {
+  var weak = require("npm:core-js@0.9.16/modules/$.collection-weak");
+  require("npm:core-js@0.9.16/modules/$.collection")('WeakSet', function(get) {
+    return function WeakSet() {
+      return get(this, arguments[0]);
+    };
+  }, {add: function add(value) {
       return weak.def(this, value, true);
     }}, weak, false, true);
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.own-keys", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.assert"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.own-keys", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.assert"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      assertObject = require("npm:core-js@0.9.13/modules/$.assert").obj;
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      assertObject = require("npm:core-js@0.9.16/modules/$.assert").obj;
   module.exports = function ownKeys(it) {
     assertObject(it);
     var keys = $.getNames(it),
@@ -1646,27 +1684,28 @@ System.register("npm:core-js@0.9.13/modules/$.own-keys", ["npm:core-js@0.9.13/mo
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.array.includes", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.array-includes", "npm:core-js@0.9.13/modules/$.unscope"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $includes = require("npm:core-js@0.9.13/modules/$.array-includes")(true);
-  $def($def.P, 'Array', {includes: function includes(el) {
-      return $includes(this, el, arguments[1]);
-    }});
-  require("npm:core-js@0.9.13/modules/$.unscope")('includes');
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:core-js@0.9.13/modules/es7.string.at", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.string-at"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.array.includes", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.array-includes", "npm:core-js@0.9.16/modules/$.unscope"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $at = require("npm:core-js@0.9.13/modules/$.string-at")(true);
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $includes = require("npm:core-js@0.9.16/modules/$.array-includes")(true);
+  $def($def.P, 'Array', {includes: function includes(el) {
+      return $includes(this, el, arguments[1]);
+    }});
+  require("npm:core-js@0.9.16/modules/$.unscope")('includes');
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.16/modules/es7.string.at", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.string-at"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $at = require("npm:core-js@0.9.16/modules/$.string-at")(true);
   $def($def.P, 'String', {at: function at(pos) {
       return $at(this, pos);
     }});
@@ -1674,12 +1713,12 @@ System.register("npm:core-js@0.9.13/modules/es7.string.at", ["npm:core-js@0.9.13
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.string-pad", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.string-repeat"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.string-pad", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.string-repeat"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      repeat = require("npm:core-js@0.9.13/modules/$.string-repeat");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      repeat = require("npm:core-js@0.9.16/modules/$.string-repeat");
   module.exports = function(that, minLength, fillChar, left) {
     var S = String($.assertDefined(that));
     if (minLength === undefined)
@@ -1699,13 +1738,13 @@ System.register("npm:core-js@0.9.13/modules/$.string-pad", ["npm:core-js@0.9.13/
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.string.rpad", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.string-pad"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.string.rpad", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.string-pad"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $pad = require("npm:core-js@0.9.13/modules/$.string-pad");
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $pad = require("npm:core-js@0.9.16/modules/$.string-pad");
   $def($def.P, 'String', {rpad: function rpad(n) {
       return $pad(this, n, arguments[1], false);
     }});
@@ -1713,23 +1752,23 @@ System.register("npm:core-js@0.9.13/modules/es7.string.rpad", ["npm:core-js@0.9.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.regexp.escape", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.replacer"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.regexp.escape", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.replacer"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def");
-  $def($def.S, 'RegExp', {escape: require("npm:core-js@0.9.13/modules/$.replacer")(/([\\\-[\]{}()*+?.,^$|])/g, '\\$1', true)});
+  var $def = require("npm:core-js@0.9.16/modules/$.def");
+  $def($def.S, 'RegExp', {escape: require("npm:core-js@0.9.16/modules/$.replacer")(/([\\\-[\]{}()*+?.,^$|])/g, '\\$1', true)});
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.object.get-own-property-descriptors", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.own-keys"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.object.get-own-property-descriptors", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.own-keys"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      ownKeys = require("npm:core-js@0.9.13/modules/$.own-keys");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      ownKeys = require("npm:core-js@0.9.16/modules/$.own-keys");
   $def($def.S, 'Object', {getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object) {
       var O = $.toObject(object),
           result = {};
@@ -1742,12 +1781,12 @@ System.register("npm:core-js@0.9.13/modules/es7.object.get-own-property-descript
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.object.to-array", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.object.to-array", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def");
   function createObjectToArray(isEntries) {
     return function(object) {
       var O = $.toObject(object),
@@ -1773,12 +1812,12 @@ System.register("npm:core-js@0.9.13/modules/es7.object.to-array", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.collection-to-json", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.for-of"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.collection-to-json", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.for-of"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      forOf = require("npm:core-js@0.9.13/modules/$.for-of");
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      forOf = require("npm:core-js@0.9.16/modules/$.for-of");
   module.exports = function(NAME) {
     $def($def.P, NAME, {toJSON: function toJSON() {
         var arr = [];
@@ -1790,21 +1829,21 @@ System.register("npm:core-js@0.9.13/modules/$.collection-to-json", ["npm:core-js
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.set.to-json", ["npm:core-js@0.9.13/modules/$.collection-to-json"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.set.to-json", ["npm:core-js@0.9.16/modules/$.collection-to-json"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.13/modules/$.collection-to-json")('Set');
+  require("npm:core-js@0.9.16/modules/$.collection-to-json")('Set');
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/js.array.statics", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.ctx"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/js.array.statics", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.ctx"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       $Array = $.core.Array || Array,
       statics = {};
   function setStatics(keys, length) {
@@ -1812,7 +1851,7 @@ System.register("npm:core-js@0.9.13/modules/js.array.statics", ["npm:core-js@0.9
       if (length == undefined && key in $Array)
         statics[key] = $Array[key];
       else if (key in [])
-        statics[key] = require("npm:core-js@0.9.13/modules/$.ctx")(Function.call, [][key], length);
+        statics[key] = require("npm:core-js@0.9.16/modules/$.ctx")(Function.call, [][key], length);
     });
   }
   setStatics('pop,reverse,shift,keys,values,entries', 1);
@@ -1823,14 +1862,14 @@ System.register("npm:core-js@0.9.13/modules/js.array.statics", ["npm:core-js@0.9
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.partial", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.invoke", "npm:core-js@0.9.13/modules/$.assert"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.partial", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.invoke", "npm:core-js@0.9.16/modules/$.assert"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      invoke = require("npm:core-js@0.9.13/modules/$.invoke"),
-      assertFunction = require("npm:core-js@0.9.13/modules/$.assert").fn;
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      invoke = require("npm:core-js@0.9.16/modules/$.invoke"),
+      assertFunction = require("npm:core-js@0.9.16/modules/$.assert").fn;
   module.exports = function() {
     var fn = assertFunction(this),
         length = arguments.length,
@@ -1863,12 +1902,12 @@ System.register("npm:core-js@0.9.13/modules/$.partial", ["npm:core-js@0.9.13/mod
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/web.immediate", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.task"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/web.immediate", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.task"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $task = require("npm:core-js@0.9.13/modules/$.task");
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $task = require("npm:core-js@0.9.16/modules/$.task");
   $def($def.G + $def.B, {
     setImmediate: $task.set,
     clearImmediate: $task.clear
@@ -1877,14 +1916,14 @@ System.register("npm:core-js@0.9.13/modules/web.immediate", ["npm:core-js@0.9.13
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/web.dom.iterable", ["npm:core-js@0.9.13/modules/es6.array.iterator", "npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/web.dom.iterable", ["npm:core-js@0.9.16/modules/es6.array.iterator", "npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.13/modules/es6.array.iterator");
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      Iterators = require("npm:core-js@0.9.13/modules/$.iter").Iterators,
-      ITERATOR = require("npm:core-js@0.9.13/modules/$.wks")('iterator'),
+  require("npm:core-js@0.9.16/modules/es6.array.iterator");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      Iterators = require("npm:core-js@0.9.16/modules/$.iter").Iterators,
+      ITERATOR = require("npm:core-js@0.9.16/modules/$.wks")('iterator'),
       ArrayValues = Iterators.Array,
       NL = $.g.NodeList,
       HTC = $.g.HTMLCollection,
@@ -1901,19 +1940,19 @@ System.register("npm:core-js@0.9.13/modules/web.dom.iterable", ["npm:core-js@0.9
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.dict", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.ctx", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.assign", "npm:core-js@0.9.13/modules/$.keyof", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.for-of"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.dict", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.ctx", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.assign", "npm:core-js@0.9.16/modules/$.keyof", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.for-of"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      ctx = require("npm:core-js@0.9.13/modules/$.ctx"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      assign = require("npm:core-js@0.9.13/modules/$.assign"),
-      keyOf = require("npm:core-js@0.9.13/modules/$.keyof"),
-      ITER = require("npm:core-js@0.9.13/modules/$.uid").safe('iter'),
-      assert = require("npm:core-js@0.9.13/modules/$.assert"),
-      $iter = require("npm:core-js@0.9.13/modules/$.iter"),
-      forOf = require("npm:core-js@0.9.13/modules/$.for-of"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      ctx = require("npm:core-js@0.9.16/modules/$.ctx"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      assign = require("npm:core-js@0.9.16/modules/$.assign"),
+      keyOf = require("npm:core-js@0.9.16/modules/$.keyof"),
+      ITER = require("npm:core-js@0.9.16/modules/$.uid").safe('iter'),
+      assert = require("npm:core-js@0.9.16/modules/$.assert"),
+      $iter = require("npm:core-js@0.9.16/modules/$.iter"),
+      forOf = require("npm:core-js@0.9.16/modules/$.for-of"),
       step = $iter.step,
       getKeys = $.getKeys,
       toObject = $.toObject,
@@ -2068,33 +2107,33 @@ System.register("npm:core-js@0.9.13/modules/core.dict", ["npm:core-js@0.9.13/mod
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.iter-helpers", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.iter"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.iter-helpers", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.iter"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var core = require("npm:core-js@0.9.13/modules/$").core,
-      $iter = require("npm:core-js@0.9.13/modules/$.iter");
+  var core = require("npm:core-js@0.9.16/modules/$").core,
+      $iter = require("npm:core-js@0.9.16/modules/$.iter");
   core.isIterable = $iter.is;
   core.getIterator = $iter.get;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.$for", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.ctx", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.for-of", "npm:core-js@0.9.13/modules/$.iter-call", "npm:core-js@0.9.13/modules/$.mix"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.$for", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.ctx", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.for-of", "npm:core-js@0.9.16/modules/$.iter-call", "npm:core-js@0.9.16/modules/$.mix"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      ctx = require("npm:core-js@0.9.13/modules/$.ctx"),
-      safe = require("npm:core-js@0.9.13/modules/$.uid").safe,
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $iter = require("npm:core-js@0.9.13/modules/$.iter"),
-      forOf = require("npm:core-js@0.9.13/modules/$.for-of"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      ctx = require("npm:core-js@0.9.16/modules/$.ctx"),
+      safe = require("npm:core-js@0.9.16/modules/$.uid").safe,
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $iter = require("npm:core-js@0.9.16/modules/$.iter"),
+      forOf = require("npm:core-js@0.9.16/modules/$.for-of"),
       ENTRIES = safe('entries'),
       FN = safe('fn'),
       ITER = safe('iter'),
-      call = require("npm:core-js@0.9.13/modules/$.iter-call"),
+      call = require("npm:core-js@0.9.16/modules/$.iter-call"),
       getIterator = $iter.get,
       setIterator = $iter.set,
       createIterator = $iter.create;
@@ -2132,7 +2171,7 @@ System.register("npm:core-js@0.9.13/modules/core.$for", ["npm:core-js@0.9.13/mod
         return step;
     }
   });
-  require("npm:core-js@0.9.13/modules/$.mix")($forProto, {
+  require("npm:core-js@0.9.16/modules/$.mix")($forProto, {
     of: function(fn, that) {
       forOf(this, this[ENTRIES], fn, that);
     },
@@ -2155,13 +2194,13 @@ System.register("npm:core-js@0.9.13/modules/core.$for", ["npm:core-js@0.9.13/mod
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.delay", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.partial"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.delay", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.partial"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      partial = require("npm:core-js@0.9.13/modules/$.partial");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      partial = require("npm:core-js@0.9.16/modules/$.partial");
   $def($def.G + $def.F, {delay: function(time) {
       return new ($.core.Promise || $.g.Promise)(function(resolve) {
         setTimeout(partial.call(resolve, true), time);
@@ -2171,26 +2210,26 @@ System.register("npm:core-js@0.9.13/modules/core.delay", ["npm:core-js@0.9.13/mo
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.function.part", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.partial"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.function.part", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.partial"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def");
   $.core._ = $.path._ = $.path._ || {};
-  $def($def.P + $def.F, 'Function', {part: require("npm:core-js@0.9.13/modules/$.partial")});
+  $def($def.P + $def.F, 'Function', {part: require("npm:core-js@0.9.16/modules/$.partial")});
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.object", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.own-keys", "npm:core-js@0.9.13/modules/$.cof"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.object", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.own-keys", "npm:core-js@0.9.16/modules/$.cof"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      ownKeys = require("npm:core-js@0.9.13/modules/$.own-keys");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      ownKeys = require("npm:core-js@0.9.16/modules/$.own-keys");
   function define(target, mixin) {
     var keys = ownKeys($.toObject(mixin)),
         length = keys.length,
@@ -2202,7 +2241,7 @@ System.register("npm:core-js@0.9.13/modules/core.object", ["npm:core-js@0.9.13/m
   }
   $def($def.S + $def.F, 'Object', {
     isObject: $.isObject,
-    classof: require("npm:core-js@0.9.13/modules/$.cof").classof,
+    classof: require("npm:core-js@0.9.16/modules/$.cof").classof,
     define: define,
     make: function(proto, mixin) {
       return define($.create(proto), mixin);
@@ -2212,14 +2251,14 @@ System.register("npm:core-js@0.9.13/modules/core.object", ["npm:core-js@0.9.13/m
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.array.turn", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.unscope"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.array.turn", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.unscope"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      assertFunction = require("npm:core-js@0.9.13/modules/$.assert").fn;
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      assertFunction = require("npm:core-js@0.9.16/modules/$.assert").fn;
   $def($def.P + $def.F, 'Array', {turn: function(fn, target) {
       assertFunction(fn);
       var memo = target == undefined ? [] : Object(target),
@@ -2231,19 +2270,19 @@ System.register("npm:core-js@0.9.13/modules/core.array.turn", ["npm:core-js@0.9.
           break;
       return memo;
     }});
-  require("npm:core-js@0.9.13/modules/$.unscope")('turn');
+  require("npm:core-js@0.9.16/modules/$.unscope")('turn');
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.number.iterator", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.iter-define"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.number.iterator", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.iter-define"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      ITER = require("npm:core-js@0.9.13/modules/$.uid").safe('iter');
-  require("npm:core-js@0.9.13/modules/$.iter-define")(Number, 'Number', function(iterated) {
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      ITER = require("npm:core-js@0.9.16/modules/$.uid").safe('iter');
+  require("npm:core-js@0.9.16/modules/$.iter-define")(Number, 'Number', function(iterated) {
     $.set(this, ITER, {
       l: $.toLength(iterated),
       i: 0
@@ -2261,14 +2300,14 @@ System.register("npm:core-js@0.9.13/modules/core.number.iterator", ["npm:core-js
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.number.math", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.invoke"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.number.math", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.invoke"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      invoke = require("npm:core-js@0.9.13/modules/$.invoke"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      invoke = require("npm:core-js@0.9.16/modules/$.invoke"),
       methods = {};
   methods.random = function(lim) {
     var a = +this,
@@ -2293,12 +2332,12 @@ System.register("npm:core-js@0.9.13/modules/core.number.math", ["npm:core-js@0.9
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.string.escape-html", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.replacer"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.string.escape-html", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.replacer"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      replacer = require("npm:core-js@0.9.13/modules/$.replacer");
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      replacer = require("npm:core-js@0.9.16/modules/$.replacer");
   var escapeHTMLDict = {
     '&': '&amp;',
     '<': '&lt;',
@@ -2318,12 +2357,12 @@ System.register("npm:core-js@0.9.13/modules/core.string.escape-html", ["npm:core
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.date", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.date", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       core = $.core,
       formatRegExp = /\b\w\w?\b/g,
       flexioRegExp = /:(.*)\|(.*)$/,
@@ -2413,22 +2452,22 @@ System.register("npm:core-js@0.9.13/modules/core.date", ["npm:core-js@0.9.13/mod
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.global", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.global", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def");
-  $def($def.G + $def.F, {global: require("npm:core-js@0.9.13/modules/$").g});
+  var $def = require("npm:core-js@0.9.16/modules/$.def");
+  $def($def.G + $def.F, {global: require("npm:core-js@0.9.16/modules/$").g});
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/core.log", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.assign"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/core.log", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.assign"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
       log = {},
       enabled = true;
   $.each.call(('assert,clear,count,debug,dir,dirxml,error,exception,' + 'group,groupCollapsed,groupEnd,info,isIndependentlyComposed,log,' + 'markTimeline,profile,profileEnd,table,time,timeEnd,timeline,' + 'timelineEnd,timeStamp,trace,warn').split(','), function(key) {
@@ -2438,7 +2477,7 @@ System.register("npm:core-js@0.9.13/modules/core.log", ["npm:core-js@0.9.13/modu
       }
     };
   });
-  $def($def.G + $def.F, {log: require("npm:core-js@0.9.13/modules/$.assign")(log.log, log, {
+  $def($def.G + $def.F, {log: require("npm:core-js@0.9.16/modules/$.assign")(log.log, log, {
       enable: function() {
         enabled = true;
       },
@@ -2450,9 +2489,9 @@ System.register("npm:core-js@0.9.13/modules/core.log", ["npm:core-js@0.9.13/modu
   return module.exports;
 });
 
-System.register("github:aurelia/logging@0.4.0/index", [], function(_export) {
-  var _classCallCheck,
-      logLevel,
+System.register("github:aurelia/logging@0.5.0/index", [], function(_export) {
+  'use strict';
+  var logLevel,
       loggers,
       currentLevel,
       appenders,
@@ -2463,6 +2502,11 @@ System.register("github:aurelia/logging@0.4.0/index", [], function(_export) {
   _export('getLogger', getLogger);
   _export('addAppender', addAppender);
   _export('setLevel', setLevel);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function AggregateError(msg, inner, skipIfAlreadyAggregate) {
     if (inner) {
       if (inner.innerError && skipIfAlreadyAggregate) {
@@ -2542,12 +2586,6 @@ System.register("github:aurelia/logging@0.4.0/index", [], function(_export) {
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       logLevel = {
         none: 0,
         error: 1,
@@ -2580,34 +2618,33 @@ System.register("github:aurelia/logging@0.4.0/index", [], function(_export) {
   };
 });
 
-System.register("github:aurelia/metadata@0.5.0/origin", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/metadata@0.6.0/origin", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _classCallCheck,
       originStorage,
       unknownOrigin,
       Origin;
-  function ensureType(value) {
-    if (value instanceof Origin) {
-      return value;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
     }
-    return new Origin(value);
   }
   return {
     setters: [function(_coreJs) {
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       originStorage = new Map();
       unknownOrigin = Object.freeze({
         moduleId: undefined,
         moduleMember: undefined
       });
+      if (!window.System) {
+        window.System = {};
+      }
+      if (!System.forEachModule) {
+        System.forEachModule = function() {};
+      }
       Origin = (function() {
         function Origin(moduleId, moduleMember) {
           _classCallCheck(this, Origin);
@@ -2616,20 +2653,25 @@ System.register("github:aurelia/metadata@0.5.0/origin", ["npm:core-js@0.9.13"], 
         }
         Origin.get = function get(fn) {
           var origin = originStorage.get(fn);
-          if (origin !== undefined) {
-            return origin;
-          }
-          if (typeof fn.origin === 'function') {
-            originStorage.set(fn, origin = ensureType(fn.origin()));
-          } else if (fn.origin !== undefined) {
-            originStorage.set(fn, origin = ensureType(fn.origin));
+          if (origin === undefined) {
+            System.forEachModule(function(key, value) {
+              for (var name in value) {
+                var exp = value[name];
+                if (exp === fn) {
+                  originStorage.set(fn, origin = new Origin(key, name));
+                  return ;
+                }
+              }
+              if (value === fn) {
+                originStorage.set(fn, origin = new Origin(key, 'default'));
+                return ;
+              }
+            });
           }
           return origin || unknownOrigin;
         };
         Origin.set = function set(fn, origin) {
-          if (Origin.get(fn) === unknownOrigin) {
-            originStorage.set(fn, origin);
-          }
+          originStorage.set(fn, origin);
         };
         return Origin;
       })();
@@ -2638,7 +2680,8 @@ System.register("github:aurelia/metadata@0.5.0/origin", ["npm:core-js@0.9.13"], 
   };
 });
 
-System.register("github:aurelia/metadata@0.5.0/reflect-metadata", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/metadata@0.6.0/reflect-metadata", ["npm:core-js@0.9.16"], function(_export) {
+  "use strict";
   var core,
       functionPrototype,
       _Map,
@@ -2826,11 +2869,11 @@ System.register("github:aurelia/metadata@0.5.0/reflect-metadata", ["npm:core-js@
   function OrdinaryHasMetadata(_x, _x2, _x3) {
     var _again = true;
     _function: while (_again) {
-      hasOwn = parent = undefined;
-      _again = false;
       var MetadataKey = _x,
           O = _x2,
           P = _x3;
+      hasOwn = parent = undefined;
+      _again = false;
       var hasOwn = OrdinaryHasOwnMetadata(MetadataKey, O, P);
       if (hasOwn) {
         return true;
@@ -2856,11 +2899,11 @@ System.register("github:aurelia/metadata@0.5.0/reflect-metadata", ["npm:core-js@
   function OrdinaryGetMetadata(_x4, _x5, _x6) {
     var _again2 = true;
     _function2: while (_again2) {
-      hasOwn = parent = undefined;
-      _again2 = false;
       var MetadataKey = _x4,
           O = _x5,
           P = _x6;
+      hasOwn = parent = undefined;
+      _again2 = false;
       var hasOwn = OrdinaryHasOwnMetadata(MetadataKey, O, P);
       if (hasOwn) {
         return OrdinaryGetOwnMetadata(MetadataKey, O, P);
@@ -2978,7 +3021,6 @@ System.register("github:aurelia/metadata@0.5.0/reflect-metadata", ["npm:core-js@
       core = _coreJs["default"];
     }],
     execute: function() {
-      "use strict";
       functionPrototype = Object.getPrototypeOf(Function);
       _Map = Map;
       _Set = Set;
@@ -2998,21 +3040,20 @@ System.register("github:aurelia/metadata@0.5.0/reflect-metadata", ["npm:core-js@
   };
 });
 
-System.register("github:aurelia/metadata@0.5.0/decorator-applicator", ["github:aurelia/metadata@0.5.0/metadata"], function(_export) {
+System.register("github:aurelia/metadata@0.6.0/decorator-applicator", ["github:aurelia/metadata@0.6.0/metadata"], function(_export) {
+  'use strict';
   var Metadata,
-      _classCallCheck,
       DecoratorApplicator;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_metadata) {
       Metadata = _metadata.Metadata;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       DecoratorApplicator = (function() {
         function DecoratorApplicator() {
           _classCallCheck(this, DecoratorApplicator);
@@ -3021,33 +3062,25 @@ System.register("github:aurelia/metadata@0.5.0/decorator-applicator", ["github:a
           this._third = null;
           this._rest = null;
         }
-        DecoratorApplicator.prototype.decorator = (function(_decorator) {
-          function decorator(_x) {
-            return _decorator.apply(this, arguments);
-          }
-          decorator.toString = function() {
-            return _decorator.toString();
-          };
-          return decorator;
-        })(function(decorator) {
+        DecoratorApplicator.prototype.decorator = function decorator(_decorator) {
           if (this._first === null) {
-            this._first = decorator;
+            this._first = _decorator;
             return this;
           }
           if (this._second === null) {
-            this._second = decorator;
+            this._second = _decorator;
             return this;
           }
           if (this._third === null) {
-            this._third = decorator;
+            this._third = _decorator;
             return this;
           }
           if (this._rest === null) {
             this._rest = [];
           }
-          this._rest.push(decorator);
+          this._rest.push(_decorator);
           return this;
-        });
+        };
         DecoratorApplicator.prototype._decorate = function _decorate(target) {
           var i,
               ii,
@@ -3075,11 +3108,9 @@ System.register("github:aurelia/metadata@0.5.0/decorator-applicator", ["github:a
   };
 });
 
-System.register("github:aurelia/dependency-injection@0.7.1/metadata", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/dependency-injection@0.8.1/metadata", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _createClass,
-      _inherits,
-      _classCallCheck,
       TransientRegistration,
       SingletonRegistration,
       Resolver,
@@ -3089,49 +3120,48 @@ System.register("github:aurelia/dependency-injection@0.7.1/metadata", ["npm:core
       Parent,
       ClassActivator,
       FactoryActivator;
+  var _createClass = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_coreJs) {
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _createClass = (function() {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ('value' in descriptor)
-              descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        return function(Constructor, protoProps, staticProps) {
-          if (protoProps)
-            defineProperties(Constructor.prototype, protoProps);
-          if (staticProps)
-            defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      })();
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       TransientRegistration = (function() {
         function TransientRegistration(key) {
           _classCallCheck(this, TransientRegistration);
@@ -3278,15 +3308,20 @@ System.register("github:aurelia/dependency-injection@0.7.1/metadata", ["npm:core
   };
 });
 
-System.register("github:aurelia/dependency-injection@0.7.1/container", ["npm:core-js@0.9.13", "github:aurelia/metadata@0.5.0", "github:aurelia/logging@0.4.0", "github:aurelia/dependency-injection@0.7.1/metadata"], function(_export) {
+System.register("github:aurelia/dependency-injection@0.8.1/container", ["npm:core-js@0.9.16", "github:aurelia/metadata@0.6.0", "github:aurelia/logging@0.5.0", "github:aurelia/dependency-injection@0.8.1/metadata"], function(_export) {
+  'use strict';
   var core,
       Metadata,
       AggregateError,
       Resolver,
       ClassActivator,
-      _classCallCheck,
       emptyParameters,
       Container;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function test() {}
   return {
     setters: [function(_coreJs) {
@@ -3300,12 +3335,6 @@ System.register("github:aurelia/dependency-injection@0.7.1/container", ["npm:cor
       ClassActivator = _metadata.ClassActivator;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       Metadata.registration = 'aurelia:registration';
       Metadata.instanceActivator = 'aurelia:instance-activator';
       if (!test.name) {
@@ -3357,11 +3386,15 @@ System.register("github:aurelia/dependency-injection@0.7.1/container", ["npm:cor
           if (fn === null || fn === undefined) {
             throw new Error('fn cannot be null or undefined.');
           }
-          registration = Metadata.get(Metadata.registration, fn);
-          if (registration !== undefined) {
-            registration.register(this, key || fn, fn);
+          if (typeof fn === 'function') {
+            registration = Metadata.get(Metadata.registration, fn);
+            if (registration !== undefined) {
+              registration.register(this, key || fn, fn);
+            } else {
+              this.registerSingleton(key || fn, fn);
+            }
           } else {
-            this.registerSingleton(key || fn, fn);
+            this.registerInstance(fn, fn);
           }
         };
         Container.prototype.autoRegisterAll = function autoRegisterAll(fns) {
@@ -3441,7 +3474,13 @@ System.register("github:aurelia/dependency-injection@0.7.1/container", ["npm:cor
             }
             return info.activator.invoke(fn, args);
           } catch (e) {
-            throw AggregateError('Error instantiating ' + fn.name + '.', e, true);
+            var activatingText = info.activator instanceof ClassActivator ? 'instantiating' : 'invoking';
+            var message = 'Error ' + activatingText + ' ' + fn.name + '.';
+            if (i < ii) {
+              message += ' The argument at index ' + i + ' (key:' + keys[i] + ') could not be satisfied.';
+            }
+            message += ' Check the inner error for details.';
+            throw AggregateError(message, e, true);
           }
         };
         Container.prototype.getOrCreateEntry = function getOrCreateEntry(key) {
@@ -3488,7 +3527,8 @@ System.register("github:aurelia/dependency-injection@0.7.1/container", ["npm:cor
   };
 });
 
-System.register("github:aurelia/path@0.6.1/index", [], function(_export) {
+System.register("github:aurelia/path@0.7.0/index", [], function(_export) {
+  'use strict';
   var r20,
       rbracket,
       class2type;
@@ -3604,7 +3644,6 @@ System.register("github:aurelia/path@0.6.1/index", [], function(_export) {
   return {
     setters: [],
     execute: function() {
-      'use strict';
       r20 = /%20/g;
       rbracket = /\[\]$/;
       class2type = {};
@@ -3615,14 +3654,21 @@ System.register("github:aurelia/path@0.6.1/index", [], function(_export) {
   };
 });
 
-System.register("github:aurelia/loader@0.6.0/loader", ["npm:core-js@0.9.13", "github:aurelia/loader@0.6.0/template-registry-entry"], function(_export) {
+System.register("github:aurelia/loader@0.7.0/loader", ["npm:core-js@0.9.16", "github:aurelia/loader@0.7.0/template-registry-entry"], function(_export) {
+  'use strict';
   var core,
       TemplateRegistryEntry,
-      _classCallCheck,
       hasTemplateElement,
       Loader;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function importElements(frag, link, callback) {
-    document.head.appendChild(frag);
+    if (frag) {
+      document.head.appendChild(frag);
+    }
     if (window.Polymer && Polymer.whenReady) {
       Polymer.whenReady(callback);
     } else {
@@ -3636,12 +3682,6 @@ System.register("github:aurelia/loader@0.6.0/loader", ["npm:core-js@0.9.13", "gi
       TemplateRegistryEntry = _templateRegistryEntry.TemplateRegistryEntry;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       hasTemplateElement = 'content' in document.createElement('template');
       Loader = (function() {
         function Loader() {
@@ -3679,6 +3719,23 @@ System.register("github:aurelia/loader@0.6.0/loader", ["npm:core-js@0.9.13", "gi
             });
           });
         };
+        Loader.prototype.importBundle = function importBundle(link) {
+          return new Promise(function(resolve, reject) {
+            if (link['import']) {
+              if (!hasTemplateElement) {
+                HTMLTemplateElement.bootstrap(link['import']);
+              }
+              resolve(link['import']);
+            } else {
+              importElements(null, link, function() {
+                if (!hasTemplateElement) {
+                  HTMLTemplateElement.bootstrap(link['import']);
+                }
+                resolve(link['import']);
+              });
+            }
+          });
+        };
         Loader.prototype.importTemplate = function importTemplate(url) {
           var _this = this;
           return this.importDocument(url).then(function(doc) {
@@ -3695,6 +3752,30 @@ System.register("github:aurelia/loader@0.6.0/loader", ["npm:core-js@0.9.13", "gi
           }
           return template;
         };
+        Loader.prototype.findBundledTemplate = function findBundledTemplate(name, entry) {
+          var _this2 = this;
+          if (this.bundle) {
+            var found = this.bundle.getElementById(name);
+            if (found) {
+              entry.setTemplate(found);
+              return Promise.resolve(true);
+            }
+          } else if (!this.bundleChecked) {
+            this.bundleChecked = true;
+            var bundleLink = document.querySelector('link[aurelia-view-bundle]');
+            if (bundleLink) {
+              return this.importBundle(bundleLink).then(function(doc) {
+                _this2.bundle = doc;
+                var found = _this2.bundle.getElementById(name);
+                if (found) {
+                  entry.setTemplate(found);
+                  return Promise.resolve(true);
+                }
+              });
+            }
+          }
+          return Promise.resolve(false);
+        };
         return Loader;
       })();
       _export('Loader', Loader);
@@ -3702,13 +3783,18 @@ System.register("github:aurelia/loader@0.6.0/loader", ["npm:core-js@0.9.13", "gi
   };
 });
 
-System.register("github:aurelia/framework@0.11.0/plugins", ["npm:core-js@0.9.13", "github:aurelia/logging@0.4.0", "github:aurelia/metadata@0.5.0"], function(_export) {
+System.register("github:aurelia/framework@0.12.0/plugins", ["npm:core-js@0.9.16", "github:aurelia/logging@0.5.0", "github:aurelia/metadata@0.6.0"], function(_export) {
+  'use strict';
   var core,
       LogManager,
       Metadata,
-      _classCallCheck,
       logger,
       Plugins;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function loadPlugin(aurelia, loader, info) {
     logger.debug('Loading plugin ' + info.moduleId + '.');
     aurelia.currentPluginId = info.moduleId;
@@ -3733,12 +3819,6 @@ System.register("github:aurelia/framework@0.11.0/plugins", ["npm:core-js@0.9.13"
       Metadata = _aureliaMetadata.Metadata;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       logger = LogManager.getLogger('aurelia');
       Plugins = (function() {
         function Plugins(aurelia) {
@@ -3747,15 +3827,7 @@ System.register("github:aurelia/framework@0.11.0/plugins", ["npm:core-js@0.9.13"
           this.info = [];
           this.processed = false;
         }
-        Plugins.prototype.plugin = (function(_plugin) {
-          function plugin(_x, _x2) {
-            return _plugin.apply(this, arguments);
-          }
-          plugin.toString = function() {
-            return _plugin.toString();
-          };
-          return plugin;
-        })(function(moduleId, config) {
+        Plugins.prototype.plugin = function plugin(moduleId, config) {
           var plugin = {
             moduleId: moduleId,
             config: config || {}
@@ -3766,7 +3838,7 @@ System.register("github:aurelia/framework@0.11.0/plugins", ["npm:core-js@0.9.13"
             this.info.push(plugin);
           }
           return this;
-        });
+        };
         Plugins.prototype._process = function _process() {
           var _this = this;
           var aurelia = this.aurelia,
@@ -3776,21 +3848,13 @@ System.register("github:aurelia/framework@0.11.0/plugins", ["npm:core-js@0.9.13"
           if (this.processed) {
             return ;
           }
-          var next = (function(_next) {
-            function next() {
-              return _next.apply(this, arguments);
-            }
-            next.toString = function() {
-              return _next.toString();
-            };
-            return next;
-          })(function() {
+          var next = function next() {
             if (current = info.shift()) {
               return loadPlugin(aurelia, loader, current).then(next);
             }
             _this.processed = true;
             return Promise.resolve();
-          });
+          };
           return next();
         };
         return Plugins;
@@ -3800,10 +3864,15 @@ System.register("github:aurelia/framework@0.11.0/plugins", ["npm:core-js@0.9.13"
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/value-converter", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/value-converter", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _classCallCheck,
       ValueConverterResource;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function camelCase(name) {
     return name.charAt(0).toLowerCase() + name.slice(1);
   }
@@ -3812,12 +3881,6 @@ System.register("github:aurelia/binding@0.6.1/value-converter", ["npm:core-js@0.
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       ValueConverterResource = (function() {
         function ValueConverterResource(name) {
           _classCallCheck(this, ValueConverterResource);
@@ -3844,19 +3907,192 @@ System.register("github:aurelia/binding@0.6.1/value-converter", ["npm:core-js@0.
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/event-manager", [], function(_export) {
-  var _classCallCheck,
-      DefaultEventStrategy,
-      EventManager;
+System.register("github:aurelia/binding@0.7.3/class-list", [], function(_export) {
+  "use strict";
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
+      if (!("classList" in document.createElement("_")) || document.createElementNS && !("classList" in document.createElementNS("http://www.w3.org/2000/svg", "g"))) {
+        (function(view) {
+          "use strict";
+          if (!("Element" in view))
+            return ;
+          var classListProp = "classList",
+              protoProp = "prototype",
+              elemCtrProto = view.Element[protoProp],
+              objCtr = Object,
+              strTrim = String[protoProp].trim || function() {
+                return this.replace(/^\s+|\s+$/g, "");
+              },
+              arrIndexOf = Array[protoProp].indexOf || function(item) {
+                var i = 0,
+                    len = this.length;
+                for (; i < len; i++) {
+                  if (i in this && this[i] === item) {
+                    return i;
+                  }
+                }
+                return -1;
+              },
+              DOMEx = function DOMEx(type, message) {
+                this.name = type;
+                this.code = DOMException[type];
+                this.message = message;
+              },
+              checkTokenAndGetIndex = function checkTokenAndGetIndex(classList, token) {
+                if (token === "") {
+                  throw new DOMEx("SYNTAX_ERR", "An invalid or illegal string was specified");
+                }
+                if (/\s/.test(token)) {
+                  throw new DOMEx("INVALID_CHARACTER_ERR", "String contains an invalid character");
+                }
+                return arrIndexOf.call(classList, token);
+              },
+              ClassList = function ClassList(elem) {
+                var trimmedClasses = strTrim.call(elem.getAttribute("class") || ""),
+                    classes = trimmedClasses ? trimmedClasses.split(/\s+/) : [],
+                    i = 0,
+                    len = classes.length;
+                for (; i < len; i++) {
+                  this.push(classes[i]);
+                }
+                this._updateClassName = function() {
+                  elem.setAttribute("class", this.toString());
+                };
+              },
+              classListProto = ClassList[protoProp] = [],
+              classListGetter = function classListGetter() {
+                return new ClassList(this);
+              };
+          DOMEx[protoProp] = Error[protoProp];
+          classListProto.item = function(i) {
+            return this[i] || null;
+          };
+          classListProto.contains = function(token) {
+            token += "";
+            return checkTokenAndGetIndex(this, token) !== -1;
+          };
+          classListProto.add = function() {
+            var tokens = arguments,
+                i = 0,
+                l = tokens.length,
+                token,
+                updated = false;
+            do {
+              token = tokens[i] + "";
+              if (checkTokenAndGetIndex(this, token) === -1) {
+                this.push(token);
+                updated = true;
+              }
+            } while (++i < l);
+            if (updated) {
+              this._updateClassName();
+            }
+          };
+          classListProto.remove = function() {
+            var tokens = arguments,
+                i = 0,
+                l = tokens.length,
+                token,
+                updated = false,
+                index;
+            do {
+              token = tokens[i] + "";
+              index = checkTokenAndGetIndex(this, token);
+              while (index !== -1) {
+                this.splice(index, 1);
+                updated = true;
+                index = checkTokenAndGetIndex(this, token);
+              }
+            } while (++i < l);
+            if (updated) {
+              this._updateClassName();
+            }
+          };
+          classListProto.toggle = function(token, force) {
+            token += "";
+            var result = this.contains(token),
+                method = result ? force !== true && "remove" : force !== false && "add";
+            if (method) {
+              this[method](token);
+            }
+            if (force === true || force === false) {
+              return force;
+            } else {
+              return !result;
+            }
+          };
+          classListProto.toString = function() {
+            return this.join(" ");
+          };
+          if (objCtr.defineProperty) {
+            var classListPropDesc = {
+              get: classListGetter,
+              enumerable: true,
+              configurable: true
+            };
+            try {
+              objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+            } catch (ex) {
+              if (ex.number === -2146823252) {
+                classListPropDesc.enumerable = false;
+                objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+              }
+            }
+          } else if (objCtr[protoProp].__defineGetter__) {
+            elemCtrProto.__defineGetter__(classListProp, classListGetter);
+          }
+        })(self);
+      } else {
+        (function() {
+          "use strict";
+          var testElement = document.createElement("_");
+          testElement.classList.add("c1", "c2");
+          if (!testElement.classList.contains("c2")) {
+            var createMethod = function createMethod(method) {
+              var original = DOMTokenList.prototype[method];
+              DOMTokenList.prototype[method] = function(token) {
+                var i,
+                    len = arguments.length;
+                for (i = 0; i < len; i++) {
+                  token = arguments[i];
+                  original.call(this, token);
+                }
+              };
+            };
+            createMethod("add");
+            createMethod("remove");
+          }
+          testElement.classList.toggle("c3", false);
+          if (testElement.classList.contains("c3")) {
+            var _toggle = DOMTokenList.prototype.toggle;
+            DOMTokenList.prototype.toggle = function(token, force) {
+              if (1 in arguments && !this.contains(token) === !force) {
+                return force;
+              } else {
+                return _toggle.call(this, token);
+              }
+            };
+          }
+          testElement = null;
+        })();
+      }
+    }
+  };
+});
+
+System.register("github:aurelia/binding@0.7.3/event-manager", [], function(_export) {
+  'use strict';
+  var DefaultEventStrategy,
+      EventManager;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [],
+    execute: function() {
       DefaultEventStrategy = (function() {
         function DefaultEventStrategy() {
           _classCallCheck(this, DefaultEventStrategy);
@@ -3909,9 +4145,9 @@ System.register("github:aurelia/binding@0.6.1/event-manager", [], function(_expo
         };
         DefaultEventStrategy.prototype.subscribe = function subscribe(target, targetEvent, callback, delegate) {
           if (delegate) {
-            return this.subscribeToDirectEvent(target, targetEvent, callback);
-          } else {
             return this.subscribeToDelegatedEvent(target, targetEvent, callback);
+          } else {
+            return this.subscribeToDirectEvent(target, targetEvent, callback);
           }
         };
         return DefaultEventStrategy;
@@ -3939,6 +4175,13 @@ System.register("github:aurelia/binding@0.6.1/event-manager", [], function(_expo
           this.registerElementConfig({
             tagName: 'content editable',
             properties: {value: ['change', 'input', 'blur', 'keyup', 'paste']}
+          });
+          this.registerElementConfig({
+            tagName: 'scrollable element',
+            properties: {
+              scrollTop: ['scroll'],
+              scrollLeft: ['scroll']
+            }
           });
           this.defaultEventStrategy = new DefaultEventStrategy();
         }
@@ -3980,7 +4223,10 @@ System.register("github:aurelia/binding@0.6.1/event-manager", [], function(_expo
               return lookup[tagName][propertyName];
             }
             if (propertyName === 'textContent' || propertyName === 'innerHTML') {
-              return lookup['content editable'].value;
+              return lookup['content editable']['value'];
+            }
+            if (propertyName === 'scrollTop' || propertyName === 'scrollLeft') {
+              return lookup['scrollable element'][propertyName];
             }
           }
           return null;
@@ -3995,11 +4241,16 @@ System.register("github:aurelia/binding@0.6.1/event-manager", [], function(_expo
   };
 });
 
-System.register("github:aurelia/task-queue@0.4.0/index", [], function(_export) {
-  var _classCallCheck,
-      BrowserMutationObserver,
+System.register("github:aurelia/task-queue@0.5.0/index", [], function(_export) {
+  'use strict';
+  var BrowserMutationObserver,
       hasSetImmediate,
       TaskQueue;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function makeRequestFlushFromMutationObserver(flush) {
     var toggle = 1;
     var observer = new BrowserMutationObserver(flush);
@@ -4024,12 +4275,6 @@ System.register("github:aurelia/task-queue@0.4.0/index", [], function(_export) {
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       BrowserMutationObserver = window.MutationObserver || window.WebKitMutationObserver;
       hasSetImmediate = typeof setImmediate === 'function';
       TaskQueue = (function() {
@@ -4122,13 +4367,13 @@ System.register("github:aurelia/task-queue@0.4.0/index", [], function(_export) {
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/environment", [], function(_export) {
+System.register("github:aurelia/binding@0.7.3/environment", [], function(_export) {
+  'use strict';
   var hasObjectObserve,
       hasArrayObserve;
   return {
     setters: [],
     execute: function() {
-      'use strict';
       hasObjectObserve = (function detectObjectObserve() {
         if (typeof Object.observe !== 'function') {
           return false;
@@ -4143,9 +4388,8 @@ System.register("github:aurelia/binding@0.6.1/environment", [], function(_export
         test.id = 2;
         delete test.id;
         Object.deliverChangeRecords(callback);
-        if (records.length !== 3) {
+        if (records.length !== 3)
           return false;
-        }
         if (records[0].type != 'add' || records[1].type != 'update' || records[2].type != 'delete') {
           return false;
         }
@@ -4166,9 +4410,8 @@ System.register("github:aurelia/binding@0.6.1/environment", [], function(_export
         arr.push(1, 2);
         arr.length = 0;
         Object.deliverChangeRecords(callback);
-        if (records.length !== 2) {
+        if (records.length !== 2)
           return false;
-        }
         if (records[0].type != 'splice' || records[1].type != 'splice') {
           return false;
         }
@@ -4180,7 +4423,8 @@ System.register("github:aurelia/binding@0.6.1/environment", [], function(_export
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/array-change-records", [], function(_export) {
+System.register("github:aurelia/binding@0.7.3/array-change-records", [], function(_export) {
+  'use strict';
   var EDIT_LEAVE,
       EDIT_UPDATE,
       EDIT_ADD,
@@ -4206,24 +4450,20 @@ System.register("github:aurelia/binding@0.6.1/array-change-records", [], functio
     return arraySplice.calcSplices(current, currentStart, currentEnd, old, oldStart, oldEnd);
   }
   function intersect(start1, end1, start2, end2) {
-    if (end1 < start2 || end2 < start1) {
+    if (end1 < start2 || end2 < start1)
       return -1;
-    }
-    if (end1 == start2 || end2 == start1) {
+    if (end1 == start2 || end2 == start1)
       return 0;
-    }
     if (start1 < start2) {
-      if (end1 < end2) {
+      if (end1 < end2)
         return end1 - start2;
-      } else {
+      else
         return end2 - start2;
-      }
     } else {
-      if (end2 < end1) {
+      if (end2 < end1)
         return end2 - start1;
-      } else {
+      else
         return end1 - start1;
-      }
     }
   }
   function mergeSplice(splices, index, removed, addedCount) {
@@ -4313,7 +4553,6 @@ System.register("github:aurelia/binding@0.6.1/array-change-records", [], functio
   return {
     setters: [],
     execute: function() {
-      'use strict';
       EDIT_LEAVE = 0;
       EDIT_UPDATE = 1;
       EDIT_ADD = 2;
@@ -4405,17 +4644,15 @@ System.register("github:aurelia/binding@0.6.1/array-change-records", [], functio
           oldStart += prefixCount;
           currentEnd -= suffixCount;
           oldEnd -= suffixCount;
-          if (currentEnd - currentStart == 0 && oldEnd - oldStart == 0) {
+          if (currentEnd - currentStart == 0 && oldEnd - oldStart == 0)
             return [];
-          }
           if (currentStart == currentEnd) {
             var splice = newSplice(currentStart, [], 0);
             while (oldStart < oldEnd)
               splice.removed.push(old[oldStart++]);
             return [splice];
-          } else if (oldStart == oldEnd) {
+          } else if (oldStart == oldEnd)
             return [newSplice(currentStart, [], currentEnd - currentStart)];
-          }
           var ops = this.spliceOperationsFromEditDistances(this.calcEditDistances(current, currentStart, currentEnd, old, oldStart, oldEnd));
           var splice = undefined;
           var splices = [];
@@ -4460,9 +4697,8 @@ System.register("github:aurelia/binding@0.6.1/array-change-records", [], functio
         },
         sharedPrefix: function sharedPrefix(current, old, searchLength) {
           for (var i = 0; i < searchLength; ++i)
-            if (!this.equals(current[i], old[i])) {
+            if (!this.equals(current[i], old[i]))
               return i;
-            }
           return searchLength;
         },
         sharedSuffix: function sharedSuffix(current, old, searchLength) {
@@ -4485,7 +4721,8 @@ System.register("github:aurelia/binding@0.6.1/array-change-records", [], functio
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/map-change-records", [], function(_export) {
+System.register("github:aurelia/binding@0.7.3/map-change-records", [], function(_export) {
+  'use strict';
   _export('getChangeRecords', getChangeRecords);
   function newRecord(type, object, key, oldValue) {
     return {
@@ -4519,21 +4756,36 @@ System.register("github:aurelia/binding@0.6.1/map-change-records", [], function(
   }
   return {
     setters: [],
-    execute: function() {
-      'use strict';
-    }
+    execute: function() {}
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/map-observation", ["npm:core-js@0.9.13", "github:aurelia/binding@0.6.1/map-change-records", "github:aurelia/binding@0.6.1/collection-observation"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/map-observation", ["npm:core-js@0.9.16", "github:aurelia/binding@0.7.3/map-change-records", "github:aurelia/binding@0.7.3/collection-observation"], function(_export) {
+  'use strict';
   var core,
       getChangeRecords,
       ModifyCollectionObserver,
-      _classCallCheck,
-      _inherits,
       mapProto,
       ModifyMapObserver;
   _export('getMapObserver', getMapObserver);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
   function getMapObserver(taskQueue, map) {
     return ModifyMapObserver.create(taskQueue, map);
   }
@@ -4546,25 +4798,6 @@ System.register("github:aurelia/binding@0.6.1/map-observation", ["npm:core-js@0.
       ModifyCollectionObserver = _collectionObservation.ModifyCollectionObserver;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
       mapProto = Map.prototype;
       ModifyMapObserver = (function(_ModifyCollectionObserver) {
         function ModifyMapObserver(taskQueue, map) {
@@ -4574,10 +4807,10 @@ System.register("github:aurelia/binding@0.6.1/map-observation", ["npm:core-js@0.
         _inherits(ModifyMapObserver, _ModifyCollectionObserver);
         ModifyMapObserver.create = function create(taskQueue, map) {
           var observer = new ModifyMapObserver(taskQueue, map);
-          map.set = function() {
+          map['set'] = function() {
             var oldValue = map.get(arguments[0]);
             var type = oldValue ? 'update' : 'add';
-            var methodCallResult = mapProto.set.apply(map, arguments);
+            var methodCallResult = mapProto['set'].apply(map, arguments);
             observer.addChangeRecord({
               type: type,
               object: map,
@@ -4597,8 +4830,8 @@ System.register("github:aurelia/binding@0.6.1/map-observation", ["npm:core-js@0.
             });
             return methodCallResult;
           };
-          map.clear = function() {
-            var methodCallResult = mapProto.clear.apply(map, arguments);
+          map['clear'] = function() {
+            var methodCallResult = mapProto['clear'].apply(map, arguments);
             observer.addChangeRecord({
               type: 'clear',
               object: map
@@ -4613,19 +4846,18 @@ System.register("github:aurelia/binding@0.6.1/map-observation", ["npm:core-js@0.
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/dirty-checking", [], function(_export) {
-  var _classCallCheck,
-      DirtyChecker,
+System.register("github:aurelia/binding@0.7.3/dirty-checking", [], function(_export) {
+  "use strict";
+  var DirtyChecker,
       DirtyCheckProperty;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       DirtyChecker = (function() {
         function DirtyChecker() {
           _classCallCheck(this, DirtyChecker);
@@ -4727,24 +4959,23 @@ System.register("github:aurelia/binding@0.6.1/dirty-checking", [], function(_exp
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/property-observation", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _classCallCheck,
       SetterObserver,
-      OoObjectObserver,
       OoPropertyObserver,
+      OoObjectObserver,
       UndefinedPropertyObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_coreJs) {
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       SetterObserver = (function() {
         function SetterObserver(taskQueue, obj, propertyName) {
           _classCallCheck(this, SetterObserver);
@@ -4812,67 +5043,12 @@ System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-
         return SetterObserver;
       })();
       _export('SetterObserver', SetterObserver);
-      OoObjectObserver = (function() {
-        function OoObjectObserver(obj, observerLocator) {
-          _classCallCheck(this, OoObjectObserver);
-          this.obj = obj;
-          this.observers = {};
-          this.observerLocator = observerLocator;
-        }
-        OoObjectObserver.prototype.subscribe = function subscribe(propertyObserver, callback) {
-          var _this = this;
-          var callbacks = propertyObserver.callbacks;
-          callbacks.push(callback);
-          if (!this.observing) {
-            this.observing = true;
-            try {
-              Object.observe(this.obj, function(changes) {
-                return _this.handleChanges(changes);
-              }, ['update', 'add']);
-            } catch (_) {}
-          }
-          return function() {
-            callbacks.splice(callbacks.indexOf(callback), 1);
-          };
-        };
-        OoObjectObserver.prototype.getObserver = function getObserver(propertyName, descriptor) {
-          var propertyObserver = this.observers[propertyName];
-          if (!propertyObserver) {
-            if (descriptor) {
-              propertyObserver = this.observers[propertyName] = new OoPropertyObserver(this, this.obj, propertyName);
-            } else {
-              propertyObserver = this.observers[propertyName] = new UndefinedPropertyObserver(this, this.obj, propertyName);
-            }
-          }
-          return propertyObserver;
-        };
-        OoObjectObserver.prototype.handleChanges = function handleChanges(changeRecords) {
-          var updates = {},
-              observers = this.observers,
-              change,
-              observer;
-          for (var i = 0,
-              ii = changeRecords.length; i < ii; ++i) {
-            change = changeRecords[i];
-            updates[change.name] = change;
-          }
-          for (var key in updates) {
-            observer = observers[key], change = updates[key];
-            if (observer) {
-              observer.trigger(change.object[key], change.oldValue);
-            }
-          }
-        };
-        return OoObjectObserver;
-      })();
-      _export('OoObjectObserver', OoObjectObserver);
       OoPropertyObserver = (function() {
-        function OoPropertyObserver(owner, obj, propertyName) {
+        function OoPropertyObserver(obj, propertyName, subscribe) {
           _classCallCheck(this, OoPropertyObserver);
-          this.owner = owner;
           this.obj = obj;
           this.propertyName = propertyName;
-          this.callbacks = [];
+          this.subscribe = subscribe;
         }
         OoPropertyObserver.prototype.getValue = function getValue() {
           return this.obj[this.propertyName];
@@ -4880,19 +5056,92 @@ System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-
         OoPropertyObserver.prototype.setValue = function setValue(newValue) {
           this.obj[this.propertyName] = newValue;
         };
-        OoPropertyObserver.prototype.trigger = function trigger(newValue, oldValue) {
-          var callbacks = this.callbacks,
-              i = callbacks.length;
-          while (i--) {
-            callbacks[i](newValue, oldValue);
-          }
-        };
-        OoPropertyObserver.prototype.subscribe = function subscribe(callback) {
-          return this.owner.subscribe(this, callback);
-        };
         return OoPropertyObserver;
       })();
       _export('OoPropertyObserver', OoPropertyObserver);
+      OoObjectObserver = (function() {
+        function OoObjectObserver(obj, observerLocator) {
+          _classCallCheck(this, OoObjectObserver);
+          this.obj = obj;
+          this.observerLocator = observerLocator;
+          this.observers = {};
+          this.callbacks = {};
+          this.callbackCount = 0;
+        }
+        OoObjectObserver.prototype.subscribe = function subscribe(propertyName, callback) {
+          if (this.callbacks[propertyName]) {
+            this.callbacks[propertyName].push(callback);
+          } else {
+            this.callbacks[propertyName] = [callback];
+            this.callbacks[propertyName].oldValue = this.obj[propertyName];
+          }
+          if (this.callbackCount === 0) {
+            this.handler = this.handleChanges.bind(this);
+            try {
+              Object.observe(this.obj, this.handler, ['update', 'add']);
+            } catch (_) {}
+          }
+          this.callbackCount++;
+          return this.unsubscribe.bind(this, propertyName, callback);
+        };
+        OoObjectObserver.prototype.unsubscribe = function unsubscribe(propertyName, callback) {
+          var callbacks = this.callbacks[propertyName],
+              index = callbacks.indexOf(callback);
+          if (index === -1) {
+            return ;
+          }
+          callbacks.splice(index, 1);
+          if (callbacks.count = 0) {
+            callbacks.oldValue = null;
+            this.callbacks[propertyName] = null;
+          }
+          this.callbackCount--;
+          if (this.callbackCount === 0) {
+            try {
+              Object.unobserve(this.obj, this.handler);
+            } catch (_) {}
+          }
+        };
+        OoObjectObserver.prototype.getObserver = function getObserver(propertyName, descriptor) {
+          var propertyObserver = this.observers[propertyName];
+          if (!propertyObserver) {
+            if (descriptor) {
+              propertyObserver = this.observers[propertyName] = new OoPropertyObserver(this.obj, propertyName, this.subscribe.bind(this, propertyName));
+            } else {
+              propertyObserver = this.observers[propertyName] = new UndefinedPropertyObserver(this, this.obj, propertyName);
+            }
+          }
+          return propertyObserver;
+        };
+        OoObjectObserver.prototype.handleChanges = function handleChanges(changes) {
+          var properties = {},
+              i,
+              ii,
+              change,
+              propertyName,
+              oldValue,
+              newValue,
+              callbacks;
+          for (i = 0, ii = changes.length; i < ii; i++) {
+            change = changes[i];
+            properties[change.name] = change;
+          }
+          for (name in properties) {
+            callbacks = this.callbacks[name];
+            if (!callbacks) {
+              continue;
+            }
+            change = properties[name];
+            newValue = change.object[name];
+            oldValue = change.oldValue;
+            for (i = 0, ii = callbacks.length; i < ii; i++) {
+              callbacks[i](newValue, oldValue);
+            }
+          }
+        };
+        return OoObjectObserver;
+      })();
+      _export('OoObjectObserver', OoObjectObserver);
       UndefinedPropertyObserver = (function() {
         function UndefinedPropertyObserver(owner, obj, propertyName) {
           _classCallCheck(this, UndefinedPropertyObserver);
@@ -4900,7 +5149,6 @@ System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-
           this.obj = obj;
           this.propertyName = propertyName;
           this.callbackMap = new Map();
-          this.callbacks = [];
         }
         UndefinedPropertyObserver.prototype.getValue = function getValue() {
           if (this.actual) {
@@ -4947,7 +5195,7 @@ System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-
           }
           observerLocator = this.owner.observerLocator;
           delete this.owner.observers[this.propertyName];
-          delete observerLocator.getObserversLookup(this.obj, observerLocator)[this.propertyName];
+          delete observerLocator.getOrCreateObserversLookup(this.obj, observerLocator)[this.propertyName];
           this.actual = observerLocator.getObserver(this.obj, this.propertyName);
           for (var _iterator2 = this.callbackMap.keys(),
               _isArray2 = Array.isArray(_iterator2),
@@ -4967,7 +5215,7 @@ System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-
           }
         };
         UndefinedPropertyObserver.prototype.subscribe = function subscribe(callback) {
-          var _this2 = this;
+          var _this = this;
           if (!this.actual) {
             this.getObserver();
           }
@@ -4975,14 +5223,14 @@ System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-
             return this.actual.subscribe(callback);
           }
           if (!this.subscription) {
-            this.subscription = this.owner.subscribe(this);
+            this.subscription = this.owner.subscribe(this.propertyName, this.trigger.bind(this));
           }
           this.callbackMap.set(callback, null);
           return function() {
-            var actualDispose = _this2.callbackMap.get(callback);
+            var actualDispose = _this.callbackMap.get(callback);
             if (actualDispose)
               actualDispose();
-            _this2.callbackMap['delete'](callback);
+            _this.callbackMap['delete'](callback);
           };
         };
         return UndefinedPropertyObserver;
@@ -4992,23 +5240,22 @@ System.register("github:aurelia/binding@0.6.1/property-observation", ["npm:core-
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/element-observation", [], function(_export) {
-  var _classCallCheck,
-      XLinkAttributeObserver,
+System.register("github:aurelia/binding@0.7.3/element-observation", [], function(_export) {
+  'use strict';
+  var XLinkAttributeObserver,
       DataAttributeObserver,
       StyleObserver,
       ValueAttributeObserver,
       SelectValueObserver,
       CheckedObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       XLinkAttributeObserver = (function() {
         function XLinkAttributeObserver(element, propertyName, attributeName) {
           _classCallCheck(this, XLinkAttributeObserver);
@@ -5023,7 +5270,7 @@ System.register("github:aurelia/binding@0.6.1/element-observation", [], function
           return this.element.setAttributeNS('http://www.w3.org/1999/xlink', this.attributeName, newValue);
         };
         XLinkAttributeObserver.prototype.subscribe = function subscribe(callback) {
-          throw new Error('Observation of an Element\'s "' + this.propertyName + '" property is not supported.');
+          throw new Error('Observation of a "' + this.element.nodeName + '" element\'s "' + this.propertyName + '" property is not supported.');
         };
         return XLinkAttributeObserver;
       })();
@@ -5041,7 +5288,7 @@ System.register("github:aurelia/binding@0.6.1/element-observation", [], function
           return this.element.setAttribute(this.propertyName, newValue);
         };
         DataAttributeObserver.prototype.subscribe = function subscribe(callback) {
-          throw new Error('Observation of an Element\'s "' + this.propertyName + '" property is not supported.');
+          throw new Error('Observation of a "' + this.element.nodeName + '" element\'s "' + this.propertyName + '" property is not supported.');
         };
         return DataAttributeObserver;
       })();
@@ -5062,7 +5309,7 @@ System.register("github:aurelia/binding@0.6.1/element-observation", [], function
           this.element.style.cssText = newValue;
         };
         StyleObserver.prototype.subscribe = function subscribe(callback) {
-          throw new Error('Observation of an Element\'s "' + this.propertyName + '" property is not supported.');
+          throw new Error('Observation of a "' + this.element.nodeName + '" element\'s "' + this.propertyName + '" property is not supported.');
         };
         StyleObserver.prototype.flattenCss = function flattenCss(object) {
           var s = '';
@@ -5361,11 +5608,80 @@ System.register("github:aurelia/binding@0.6.1/element-observation", [], function
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/computed-observation", [], function(_export) {
-  var _classCallCheck,
-      ComputedPropertyObserver;
+System.register("github:aurelia/binding@0.7.3/class-observer", [], function(_export) {
+  'use strict';
+  var ClassObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [],
+    execute: function() {
+      ClassObserver = (function() {
+        function ClassObserver(element) {
+          _classCallCheck(this, ClassObserver);
+          this.element = element;
+          this.doNotCache = true;
+          this.value = '';
+          this.version = 0;
+        }
+        ClassObserver.prototype.getValue = function getValue() {
+          return this.value;
+        };
+        ClassObserver.prototype.setValue = function setValue(newValue) {
+          var nameIndex = this.nameIndex || {},
+              version = this.version,
+              names,
+              name,
+              i;
+          if (newValue !== null && newValue !== undefined && newValue.length) {
+            names = newValue.split(' ');
+            i = names.length;
+            while (i--) {
+              name = names[i];
+              if (name === '') {
+                continue;
+              }
+              nameIndex[name] = version;
+              this.element.classList.add(name);
+            }
+          }
+          this.value = newValue;
+          this.nameIndex = nameIndex;
+          this.version += 1;
+          if (version === 0) {
+            return ;
+          }
+          version -= 1;
+          for (name in nameIndex) {
+            if (!nameIndex.hasOwnProperty(name) || nameIndex[name] !== version) {
+              continue;
+            }
+            this.element.classList.remove(name);
+          }
+        };
+        ClassObserver.prototype.subscribe = function subscribe(callback) {
+          throw new Error('Observation of a "' + this.element.nodeName + '" element\'s "class" property is not supported.');
+        };
+        return ClassObserver;
+      })();
+      _export('ClassObserver', ClassObserver);
+    }
+  };
+});
+
+System.register("github:aurelia/binding@0.7.3/computed-observation", [], function(_export) {
+  'use strict';
+  var ComputedPropertyObserver;
   _export('hasDeclaredDependencies', hasDeclaredDependencies);
   _export('declarePropertyDependencies', declarePropertyDependencies);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function hasDeclaredDependencies(descriptor) {
     return descriptor && descriptor.get && !descriptor.set && descriptor.get.dependencies && descriptor.get.dependencies.length;
   }
@@ -5378,12 +5694,6 @@ System.register("github:aurelia/binding@0.6.1/computed-observation", [], functio
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       ComputedPropertyObserver = (function() {
         function ComputedPropertyObserver(obj, propertyName, descriptor, observerLocator) {
           _classCallCheck(this, ComputedPropertyObserver);
@@ -5408,9 +5718,8 @@ System.register("github:aurelia/binding@0.6.1/computed-observation", [], functio
         };
         ComputedPropertyObserver.prototype.evaluate = function evaluate() {
           var newValue = this.getValue();
-          if (this.oldValue === newValue) {
+          if (this.oldValue === newValue)
             return ;
-          }
           this.trigger(newValue, this.oldValue);
           this.oldValue = newValue;
         };
@@ -5447,12 +5756,242 @@ System.register("github:aurelia/binding@0.6.1/computed-observation", [], functio
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/binding-modes", [], function(_export) {
+System.register("github:aurelia/binding@0.7.3/svg", [], function(_export) {
+  'use strict';
+  var elements,
+      presentationElements,
+      presentationAttributes;
+  _export('isStandardSvgAttribute', isStandardSvgAttribute);
+  function isStandardSvgAttribute(nodeName, attributeName) {
+    return presentationElements[nodeName] && presentationAttributes[attributeName] || elements[nodeName] && elements[nodeName].indexOf(attributeName) !== -1;
+  }
+  function createElement(html) {
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    return div.firstChild;
+  }
+  return {
+    setters: [],
+    execute: function() {
+      elements = {
+        a: ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'target', 'transform', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        altGlyph: ['class', 'dx', 'dy', 'externalResourcesRequired', 'format', 'glyphRef', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'rotate', 'style', 'systemLanguage', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        altGlyphDef: ['id', 'xml:base', 'xml:lang', 'xml:space'],
+        altGlyphItem: ['id', 'xml:base', 'xml:lang', 'xml:space'],
+        animate: ['accumulate', 'additive', 'attributeName', 'attributeType', 'begin', 'by', 'calcMode', 'dur', 'end', 'externalResourcesRequired', 'fill', 'from', 'id', 'keySplines', 'keyTimes', 'max', 'min', 'onbegin', 'onend', 'onload', 'onrepeat', 'repeatCount', 'repeatDur', 'requiredExtensions', 'requiredFeatures', 'restart', 'systemLanguage', 'to', 'values', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        animateColor: ['accumulate', 'additive', 'attributeName', 'attributeType', 'begin', 'by', 'calcMode', 'dur', 'end', 'externalResourcesRequired', 'fill', 'from', 'id', 'keySplines', 'keyTimes', 'max', 'min', 'onbegin', 'onend', 'onload', 'onrepeat', 'repeatCount', 'repeatDur', 'requiredExtensions', 'requiredFeatures', 'restart', 'systemLanguage', 'to', 'values', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        animateMotion: ['accumulate', 'additive', 'begin', 'by', 'calcMode', 'dur', 'end', 'externalResourcesRequired', 'fill', 'from', 'id', 'keyPoints', 'keySplines', 'keyTimes', 'max', 'min', 'onbegin', 'onend', 'onload', 'onrepeat', 'origin', 'path', 'repeatCount', 'repeatDur', 'requiredExtensions', 'requiredFeatures', 'restart', 'rotate', 'systemLanguage', 'to', 'values', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        animateTransform: ['accumulate', 'additive', 'attributeName', 'attributeType', 'begin', 'by', 'calcMode', 'dur', 'end', 'externalResourcesRequired', 'fill', 'from', 'id', 'keySplines', 'keyTimes', 'max', 'min', 'onbegin', 'onend', 'onload', 'onrepeat', 'repeatCount', 'repeatDur', 'requiredExtensions', 'requiredFeatures', 'restart', 'systemLanguage', 'to', 'type', 'values', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        circle: ['class', 'cx', 'cy', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'r', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        clipPath: ['class', 'clipPathUnits', 'externalResourcesRequired', 'id', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        'color-profile': ['id', 'local', 'name', 'rendering-intent', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        cursor: ['externalResourcesRequired', 'id', 'requiredExtensions', 'requiredFeatures', 'systemLanguage', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        defs: ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        desc: ['class', 'id', 'style', 'xml:base', 'xml:lang', 'xml:space'],
+        ellipse: ['class', 'cx', 'cy', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'rx', 'ry', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        feBlend: ['class', 'height', 'id', 'in', 'in2', 'mode', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feColorMatrix: ['class', 'height', 'id', 'in', 'result', 'style', 'type', 'values', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feComponentTransfer: ['class', 'height', 'id', 'in', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feComposite: ['class', 'height', 'id', 'in', 'in2', 'k1', 'k2', 'k3', 'k4', 'operator', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feConvolveMatrix: ['bias', 'class', 'divisor', 'edgeMode', 'height', 'id', 'in', 'kernelMatrix', 'kernelUnitLength', 'order', 'preserveAlpha', 'result', 'style', 'targetX', 'targetY', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feDiffuseLighting: ['class', 'diffuseConstant', 'height', 'id', 'in', 'kernelUnitLength', 'result', 'style', 'surfaceScale', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feDisplacementMap: ['class', 'height', 'id', 'in', 'in2', 'result', 'scale', 'style', 'width', 'x', 'xChannelSelector', 'xml:base', 'xml:lang', 'xml:space', 'y', 'yChannelSelector'],
+        feDistantLight: ['azimuth', 'elevation', 'id', 'xml:base', 'xml:lang', 'xml:space'],
+        feFlood: ['class', 'height', 'id', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feFuncA: ['amplitude', 'exponent', 'id', 'intercept', 'offset', 'slope', 'tableValues', 'type', 'xml:base', 'xml:lang', 'xml:space'],
+        feFuncB: ['amplitude', 'exponent', 'id', 'intercept', 'offset', 'slope', 'tableValues', 'type', 'xml:base', 'xml:lang', 'xml:space'],
+        feFuncG: ['amplitude', 'exponent', 'id', 'intercept', 'offset', 'slope', 'tableValues', 'type', 'xml:base', 'xml:lang', 'xml:space'],
+        feFuncR: ['amplitude', 'exponent', 'id', 'intercept', 'offset', 'slope', 'tableValues', 'type', 'xml:base', 'xml:lang', 'xml:space'],
+        feGaussianBlur: ['class', 'height', 'id', 'in', 'result', 'stdDeviation', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feImage: ['class', 'externalResourcesRequired', 'height', 'id', 'preserveAspectRatio', 'result', 'style', 'width', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feMerge: ['class', 'height', 'id', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feMergeNode: ['id', 'xml:base', 'xml:lang', 'xml:space'],
+        feMorphology: ['class', 'height', 'id', 'in', 'operator', 'radius', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feOffset: ['class', 'dx', 'dy', 'height', 'id', 'in', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        fePointLight: ['id', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y', 'z'],
+        feSpecularLighting: ['class', 'height', 'id', 'in', 'kernelUnitLength', 'result', 'specularConstant', 'specularExponent', 'style', 'surfaceScale', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feSpotLight: ['id', 'limitingConeAngle', 'pointsAtX', 'pointsAtY', 'pointsAtZ', 'specularExponent', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y', 'z'],
+        feTile: ['class', 'height', 'id', 'in', 'result', 'style', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        feTurbulence: ['baseFrequency', 'class', 'height', 'id', 'numOctaves', 'result', 'seed', 'stitchTiles', 'style', 'type', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        filter: ['class', 'externalResourcesRequired', 'filterRes', 'filterUnits', 'height', 'id', 'primitiveUnits', 'style', 'width', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        font: ['class', 'externalResourcesRequired', 'horiz-adv-x', 'horiz-origin-x', 'horiz-origin-y', 'id', 'style', 'vert-adv-y', 'vert-origin-x', 'vert-origin-y', 'xml:base', 'xml:lang', 'xml:space'],
+        'font-face': ['accent-height', 'alphabetic', 'ascent', 'bbox', 'cap-height', 'descent', 'font-family', 'font-size', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'hanging', 'id', 'ideographic', 'mathematical', 'overline-position', 'overline-thickness', 'panose-1', 'slope', 'stemh', 'stemv', 'strikethrough-position', 'strikethrough-thickness', 'underline-position', 'underline-thickness', 'unicode-range', 'units-per-em', 'v-alphabetic', 'v-hanging', 'v-ideographic', 'v-mathematical', 'widths', 'x-height', 'xml:base', 'xml:lang', 'xml:space'],
+        'font-face-format': ['id', 'string', 'xml:base', 'xml:lang', 'xml:space'],
+        'font-face-name': ['id', 'name', 'xml:base', 'xml:lang', 'xml:space'],
+        'font-face-src': ['id', 'xml:base', 'xml:lang', 'xml:space'],
+        'font-face-uri': ['id', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        foreignObject: ['class', 'externalResourcesRequired', 'height', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        g: ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        glyph: ['arabic-form', 'class', 'd', 'glyph-name', 'horiz-adv-x', 'id', 'lang', 'orientation', 'style', 'unicode', 'vert-adv-y', 'vert-origin-x', 'vert-origin-y', 'xml:base', 'xml:lang', 'xml:space'],
+        glyphRef: ['class', 'dx', 'dy', 'format', 'glyphRef', 'id', 'style', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        hkern: ['g1', 'g2', 'id', 'k', 'u1', 'u2', 'xml:base', 'xml:lang', 'xml:space'],
+        image: ['class', 'externalResourcesRequired', 'height', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'preserveAspectRatio', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'width', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        line: ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'x1', 'x2', 'xml:base', 'xml:lang', 'xml:space', 'y1', 'y2'],
+        linearGradient: ['class', 'externalResourcesRequired', 'gradientTransform', 'gradientUnits', 'id', 'spreadMethod', 'style', 'x1', 'x2', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y1', 'y2'],
+        marker: ['class', 'externalResourcesRequired', 'id', 'markerHeight', 'markerUnits', 'markerWidth', 'orient', 'preserveAspectRatio', 'refX', 'refY', 'style', 'viewBox', 'xml:base', 'xml:lang', 'xml:space'],
+        mask: ['class', 'externalResourcesRequired', 'height', 'id', 'maskContentUnits', 'maskUnits', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        metadata: ['id', 'xml:base', 'xml:lang', 'xml:space'],
+        'missing-glyph': ['class', 'd', 'horiz-adv-x', 'id', 'style', 'vert-adv-y', 'vert-origin-x', 'vert-origin-y', 'xml:base', 'xml:lang', 'xml:space'],
+        mpath: ['externalResourcesRequired', 'id', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        path: ['class', 'd', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'pathLength', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        pattern: ['class', 'externalResourcesRequired', 'height', 'id', 'patternContentUnits', 'patternTransform', 'patternUnits', 'preserveAspectRatio', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'viewBox', 'width', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        polygon: ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'points', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        polyline: ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'points', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        radialGradient: ['class', 'cx', 'cy', 'externalResourcesRequired', 'fx', 'fy', 'gradientTransform', 'gradientUnits', 'id', 'r', 'spreadMethod', 'style', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        rect: ['class', 'externalResourcesRequired', 'height', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'rx', 'ry', 'style', 'systemLanguage', 'transform', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        script: ['externalResourcesRequired', 'id', 'type', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        set: ['attributeName', 'attributeType', 'begin', 'dur', 'end', 'externalResourcesRequired', 'fill', 'id', 'max', 'min', 'onbegin', 'onend', 'onload', 'onrepeat', 'repeatCount', 'repeatDur', 'requiredExtensions', 'requiredFeatures', 'restart', 'systemLanguage', 'to', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        stop: ['class', 'id', 'offset', 'style', 'xml:base', 'xml:lang', 'xml:space'],
+        style: ['id', 'media', 'title', 'type', 'xml:base', 'xml:lang', 'xml:space'],
+        svg: ['baseProfile', 'class', 'contentScriptType', 'contentStyleType', 'externalResourcesRequired', 'height', 'id', 'onabort', 'onactivate', 'onclick', 'onerror', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onresize', 'onscroll', 'onunload', 'onzoom', 'preserveAspectRatio', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'version', 'viewBox', 'width', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y', 'zoomAndPan'],
+        'switch': ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'xml:base', 'xml:lang', 'xml:space'],
+        symbol: ['class', 'externalResourcesRequired', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'preserveAspectRatio', 'style', 'viewBox', 'xml:base', 'xml:lang', 'xml:space'],
+        text: ['class', 'dx', 'dy', 'externalResourcesRequired', 'id', 'lengthAdjust', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'rotate', 'style', 'systemLanguage', 'textLength', 'transform', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        textPath: ['class', 'externalResourcesRequired', 'id', 'lengthAdjust', 'method', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'spacing', 'startOffset', 'style', 'systemLanguage', 'textLength', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space'],
+        title: ['class', 'id', 'style', 'xml:base', 'xml:lang', 'xml:space'],
+        tref: ['class', 'dx', 'dy', 'externalResourcesRequired', 'id', 'lengthAdjust', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'rotate', 'style', 'systemLanguage', 'textLength', 'x', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        tspan: ['class', 'dx', 'dy', 'externalResourcesRequired', 'id', 'lengthAdjust', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'rotate', 'style', 'systemLanguage', 'textLength', 'x', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        use: ['class', 'externalResourcesRequired', 'height', 'id', 'onactivate', 'onclick', 'onfocusin', 'onfocusout', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'requiredExtensions', 'requiredFeatures', 'style', 'systemLanguage', 'transform', 'width', 'x', 'xlink:actuate', 'xlink:arcrole', 'xlink:href', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type', 'xml:base', 'xml:lang', 'xml:space', 'y'],
+        view: ['externalResourcesRequired', 'id', 'preserveAspectRatio', 'viewBox', 'viewTarget', 'xml:base', 'xml:lang', 'xml:space', 'zoomAndPan'],
+        vkern: ['g1', 'g2', 'id', 'k', 'u1', 'u2', 'xml:base', 'xml:lang', 'xml:space']
+      };
+      _export('elements', elements);
+      presentationElements = {
+        'a': true,
+        'altGlyph': true,
+        'animate': true,
+        'animateColor': true,
+        'circle': true,
+        'clipPath': true,
+        'defs': true,
+        'ellipse': true,
+        'feBlend': true,
+        'feColorMatrix': true,
+        'feComponentTransfer': true,
+        'feComposite': true,
+        'feConvolveMatrix': true,
+        'feDiffuseLighting': true,
+        'feDisplacementMap': true,
+        'feFlood': true,
+        'feGaussianBlur': true,
+        'feImage': true,
+        'feMerge': true,
+        'feMorphology': true,
+        'feOffset': true,
+        'feSpecularLighting': true,
+        'feTile': true,
+        'feTurbulence': true,
+        'filter': true,
+        'font': true,
+        'foreignObject': true,
+        'g': true,
+        'glyph': true,
+        'glyphRef': true,
+        'image': true,
+        'line': true,
+        'linearGradient': true,
+        'marker': true,
+        'mask': true,
+        'missing-glyph': true,
+        'path': true,
+        'pattern': true,
+        'polygon': true,
+        'polyline': true,
+        'radialGradient': true,
+        'rect': true,
+        'stop': true,
+        'svg': true,
+        'switch': true,
+        'symbol': true,
+        'text': true,
+        'textPath': true,
+        'tref': true,
+        'tspan': true,
+        'use': true
+      };
+      _export('presentationElements', presentationElements);
+      presentationAttributes = {
+        'alignment-baseline': true,
+        'baseline-shift': true,
+        'clip-path': true,
+        'clip-rule': true,
+        'clip': true,
+        'color-interpolation-filters': true,
+        'color-interpolation': true,
+        'color-profile': true,
+        'color-rendering': true,
+        'color': true,
+        'cursor': true,
+        'direction': true,
+        'display': true,
+        'dominant-baseline': true,
+        'enable-background': true,
+        'fill-opacity': true,
+        'fill-rule': true,
+        'fill': true,
+        'filter': true,
+        'flood-color': true,
+        'flood-opacity': true,
+        'font-family': true,
+        'font-size-adjust': true,
+        'font-size': true,
+        'font-stretch': true,
+        'font-style': true,
+        'font-variant': true,
+        'font-weight': true,
+        'glyph-orientation-horizontal': true,
+        'glyph-orientation-vertical': true,
+        'image-rendering': true,
+        'kerning': true,
+        'letter-spacing': true,
+        'lighting-color': true,
+        'marker-end': true,
+        'marker-mid': true,
+        'marker-start': true,
+        'mask': true,
+        'opacity': true,
+        'overflow': true,
+        'pointer-events': true,
+        'shape-rendering': true,
+        'stop-color': true,
+        'stop-opacity': true,
+        'stroke-dasharray': true,
+        'stroke-dashoffset': true,
+        'stroke-linecap': true,
+        'stroke-linejoin': true,
+        'stroke-miterlimit': true,
+        'stroke-opacity': true,
+        'stroke-width': true,
+        'stroke': true,
+        'text-anchor': true,
+        'text-decoration': true,
+        'text-rendering': true,
+        'unicode-bidi': true,
+        'visibility': true,
+        'word-spacing': true,
+        'writing-mode': true
+      };
+      _export('presentationAttributes', presentationAttributes);
+      if (createElement('<svg><altGlyph /></svg>').firstElementChild.nodeName === 'altglyph') {
+        elements.altglyph = elements.altGlyph;
+        delete elements.altGlyph;
+        elements.altglyphdef = elements.altGlyphDef;
+        delete elements.altGlyphDef;
+        elements.altglyphitem = elements.altGlyphItem;
+        delete elements.altGlyphItem;
+        elements.glyphref = elements.glyphRef;
+        delete elements.glyphRef;
+      }
+    }
+  };
+});
+
+System.register("github:aurelia/binding@0.7.3/binding-modes", [], function(_export) {
+  "use strict";
   var bindingMode;
   return {
     setters: [],
     execute: function() {
-      "use strict";
       bindingMode = {
         oneTime: 0,
         oneWay: 1,
@@ -5463,9 +6002,9 @@ System.register("github:aurelia/binding@0.6.1/binding-modes", [], function(_expo
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/lexer", [], function(_export) {
-  var _classCallCheck,
-      Token,
+System.register("github:aurelia/binding@0.7.3/lexer", [], function(_export) {
+  'use strict';
+  var Token,
       Lexer,
       Scanner,
       OPERATORS,
@@ -5519,6 +6058,11 @@ System.register("github:aurelia/binding@0.6.1/lexer", [], function(_export) {
       $BAR,
       $RBRACE,
       $NBSP;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function isWhitespace(code) {
     return code >= $TAB && code <= $SPACE || code === $NBSP;
   }
@@ -5561,12 +6105,6 @@ System.register("github:aurelia/binding@0.6.1/lexer", [], function(_export) {
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       Token = (function() {
         function Token(index, text) {
           _classCallCheck(this, Token);
@@ -5860,18 +6398,17 @@ System.register("github:aurelia/binding@0.6.1/lexer", [], function(_export) {
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/path-observer", [], function(_export) {
-  var _classCallCheck,
-      PathObserver;
+System.register("github:aurelia/binding@0.7.3/path-observer", [], function(_export) {
+  "use strict";
+  var PathObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       PathObserver = (function() {
         function PathObserver(leftObserver, getRightObserver, value) {
           var _this = this;
@@ -5925,18 +6462,17 @@ System.register("github:aurelia/binding@0.6.1/path-observer", [], function(_expo
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/composite-observer", [], function(_export) {
-  var _classCallCheck,
-      CompositeObserver;
+System.register("github:aurelia/binding@0.7.3/composite-observer", [], function(_export) {
+  "use strict";
+  var CompositeObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       CompositeObserver = (function() {
         function CompositeObserver(observers, evaluate) {
           var _this = this;
@@ -5977,18 +6513,17 @@ System.register("github:aurelia/binding@0.6.1/composite-observer", [], function(
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/access-keyed-observer", [], function(_export) {
-  var _classCallCheck,
-      AccessKeyedObserver;
+System.register("github:aurelia/binding@0.7.3/access-keyed-observer", [], function(_export) {
+  "use strict";
+  var AccessKeyedObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       AccessKeyedObserver = (function() {
         function AccessKeyedObserver(objectInfo, keyInfo, observerLocator, evaluate) {
           var _this = this;
@@ -6065,22 +6600,21 @@ System.register("github:aurelia/binding@0.6.1/access-keyed-observer", [], functi
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/binding-expression", ["github:aurelia/binding@0.6.1/binding-modes"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/binding-expression", ["github:aurelia/binding@0.7.3/binding-modes"], function(_export) {
+  'use strict';
   var bindingMode,
-      _classCallCheck,
       BindingExpression,
       Binding;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_bindingModes) {
       bindingMode = _bindingModes.bindingMode;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       BindingExpression = (function() {
         function BindingExpression(observerLocator, targetProperty, sourceExpression, mode, valueConverterLookupFunction, attribute) {
           _classCallCheck(this, BindingExpression);
@@ -6168,19 +6702,18 @@ System.register("github:aurelia/binding@0.6.1/binding-expression", ["github:aure
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/listener-expression", [], function(_export) {
-  var _classCallCheck,
-      ListenerExpression,
+System.register("github:aurelia/binding@0.7.3/listener-expression", [], function(_export) {
+  "use strict";
+  var ListenerExpression,
       Listener;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       ListenerExpression = (function() {
         function ListenerExpression(eventManager, targetEvent, sourceExpression, delegate, preventDefault) {
           _classCallCheck(this, ListenerExpression);
@@ -6239,25 +6772,24 @@ System.register("github:aurelia/binding@0.6.1/listener-expression", [], function
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/name-expression", [], function(_export) {
-  var _classCallCheck,
-      NameExpression,
+System.register("github:aurelia/binding@0.7.3/name-expression", [], function(_export) {
+  'use strict';
+  var NameExpression,
       NameBinder;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       NameExpression = (function() {
         function NameExpression(name, mode) {
           _classCallCheck(this, NameExpression);
           this.property = name;
           this.discrete = true;
-          this.mode = (mode || 'view-model').toLowerCase();
+          this.mode = mode;
         }
         NameExpression.prototype.createBinding = function createBinding(target) {
           return new NameBinder(this.property, target, this.mode);
@@ -6274,10 +6806,16 @@ System.register("github:aurelia/binding@0.6.1/name-expression", [], function(_ex
               this.target = target;
               break;
             case 'view-model':
-              this.target = target.primaryBehavior ? target.primaryBehavior.executionContext : target;
+              this.target = target.primaryBehavior.executionContext;
               break;
             default:
-              throw new Error('Name expressions do not support mode: ' + mode);
+              this.target = target[mode];
+              if (this.target === undefined) {
+                throw new Error('Attempted to reference "' + mode + '", but it was not found on the target element.');
+              } else {
+                this.target = this.target.executionContext || this.target;
+              }
+              break;
           }
         }
         NameBinder.prototype.bind = function bind(source) {
@@ -6299,19 +6837,18 @@ System.register("github:aurelia/binding@0.6.1/name-expression", [], function(_ex
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/call-expression", [], function(_export) {
-  var _classCallCheck,
-      CallExpression,
+System.register("github:aurelia/binding@0.7.3/call-expression", [], function(_export) {
+  "use strict";
+  var CallExpression,
       Call;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       CallExpression = (function() {
         function CallExpression(observerLocator, targetProperty, sourceExpression, valueConverterLookupFunction) {
           _classCallCheck(this, CallExpression);
@@ -6361,18 +6898,53 @@ System.register("github:aurelia/binding@0.6.1/call-expression", [], function(_ex
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/view-strategy", ["github:aurelia/metadata@0.5.0", "github:aurelia/path@0.6.1"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/view-strategy", ["github:aurelia/metadata@0.6.0", "github:aurelia/path@0.7.0"], function(_export) {
+  'use strict';
   var Metadata,
       Origin,
       relativeToFile,
-      _inherits,
-      _classCallCheck,
-      _createClass,
       ViewStrategy,
       UseViewStrategy,
       ConventionalViewStrategy,
       NoViewStrategy,
       TemplateRegistryViewStrategy;
+  var _createClass = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_aureliaMetadata) {
       Metadata = _aureliaMetadata.Metadata;
@@ -6381,44 +6953,6 @@ System.register("github:aurelia/templating@0.11.2/view-strategy", ["github:aurel
       relativeToFile = _aureliaPath.relativeToFile;
     }],
     execute: function() {
-      'use strict';
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _createClass = (function() {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ('value' in descriptor)
-              descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        return function(Constructor, protoProps, staticProps) {
-          if (protoProps)
-            defineProperties(Constructor.prototype, protoProps);
-          if (staticProps)
-            defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      })();
       ViewStrategy = (function() {
         function ViewStrategy() {
           _classCallCheck(this, ViewStrategy);
@@ -6530,12 +7064,29 @@ System.register("github:aurelia/templating@0.11.2/view-strategy", ["github:aurel
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/resource-registry", ["github:aurelia/path@0.6.1"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/resource-registry", ["github:aurelia/path@0.7.0"], function(_export) {
+  'use strict';
   var relativeToFile,
-      _inherits,
-      _classCallCheck,
       ResourceRegistry,
       ViewResources;
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function register(lookup, name, resource, type) {
     if (!name) {
       return ;
@@ -6554,25 +7105,6 @@ System.register("github:aurelia/templating@0.11.2/resource-registry", ["github:a
       relativeToFile = _aureliaPath.relativeToFile;
     }],
     execute: function() {
-      'use strict';
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       ResourceRegistry = (function() {
         function ResourceRegistry() {
           _classCallCheck(this, ResourceRegistry);
@@ -6635,18 +7167,17 @@ System.register("github:aurelia/templating@0.11.2/resource-registry", ["github:a
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/view", [], function(_export) {
-  var _classCallCheck,
-      View;
+System.register("github:aurelia/templating@0.12.1/view", [], function(_export) {
+  "use strict";
+  var View;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       View = (function() {
         function View(fragment, behaviors, bindings, children, systemControlled, contentSelectors) {
           _classCallCheck(this, View);
@@ -6808,12 +7339,17 @@ System.register("github:aurelia/templating@0.11.2/view", [], function(_export) {
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/content-selector", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/content-selector", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _classCallCheck,
       proto,
       placeholder,
       ContentSelector;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function findInsertionPoint(groups, index) {
     var insertionPoint;
     while (!insertionPoint && index >= 0) {
@@ -6827,12 +7363,6 @@ System.register("github:aurelia/templating@0.11.2/content-selector", ["npm:core-
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       if (Element && !Element.prototype.matches) {
         proto = Element.prototype;
         proto.matches = proto.matchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector || proto.oMatchesSelector || proto.webkitMatchesSelector;
@@ -6925,18 +7455,17 @@ System.register("github:aurelia/templating@0.11.2/content-selector", ["npm:core-
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/animator", [], function(_export) {
-  var _classCallCheck,
-      Animator;
+System.register("github:aurelia/templating@0.12.1/animator", [], function(_export) {
+  "use strict";
+  var Animator;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       Animator = (function() {
         function Animator() {
           _classCallCheck(this, Animator);
@@ -6959,6 +7488,12 @@ System.register("github:aurelia/templating@0.11.2/animator", [], function(_expor
         Animator.prototype.addClass = function addClass(element, className) {
           return Promise.resolve(false);
         };
+        Animator.prototype.animate = function animate(element, className, options) {
+          return Promise.resolve(false);
+        };
+        Animator.prototype.runSequence = function runSequence(sequence) {};
+        Animator.prototype.registerEffect = function registerEffect(effectName, properties) {};
+        Animator.prototype.unregisterEffect = function unregisterEffect(effectName) {};
         return Animator;
       })();
       _export("Animator", Animator);
@@ -6966,18 +7501,45 @@ System.register("github:aurelia/templating@0.11.2/animator", [], function(_expor
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/binding-language", [], function(_export) {
-  var _classCallCheck,
-      BindingLanguage;
+System.register("github:aurelia/templating@0.12.1/util", [], function(_export) {
+  "use strict";
+  var capitalMatcher;
+  _export("hyphenate", hyphenate);
+  _export("nextElementSibling", nextElementSibling);
+  function addHyphenAndLower(char) {
+    return "-" + char.toLowerCase();
+  }
+  function hyphenate(name) {
+    return (name.charAt(0).toLowerCase() + name.slice(1)).replace(capitalMatcher, addHyphenAndLower);
+  }
+  function nextElementSibling(element) {
+    if (element.nextElementSibling) {
+      return element.nextElementSibling;
+    }
+    do {
+      element = element.nextSibling;
+    } while (element && element.nodeType !== 1);
+    return element;
+  }
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
+      capitalMatcher = /([A-Z])/g;
+    }
+  };
+});
+
+System.register("github:aurelia/templating@0.12.1/binding-language", [], function(_export) {
+  'use strict';
+  var BindingLanguage;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [],
+    execute: function() {
       BindingLanguage = (function() {
         function BindingLanguage() {
           _classCallCheck(this, BindingLanguage);
@@ -6998,35 +7560,243 @@ System.register("github:aurelia/templating@0.11.2/binding-language", [], functio
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/util", [], function(_export) {
-  var capitalMatcher;
-  _export("hyphenate", hyphenate);
-  function addHyphenAndLower(char) {
-    return "-" + char.toLowerCase();
-  }
-  function hyphenate(name) {
-    return (name.charAt(0).toLowerCase() + name.slice(1)).replace(capitalMatcher, addHyphenAndLower);
+System.register("github:aurelia/templating@0.12.1/module-analyzer", ["github:aurelia/metadata@0.6.0", "github:aurelia/loader@0.7.0", "github:aurelia/binding@0.7.3", "github:aurelia/templating@0.12.1/html-behavior", "github:aurelia/templating@0.12.1/view-strategy", "github:aurelia/templating@0.12.1/util"], function(_export) {
+  'use strict';
+  var Metadata,
+      TemplateRegistryEntry,
+      ValueConverterResource,
+      HtmlBehaviorResource,
+      ViewStrategy,
+      TemplateRegistryViewStrategy,
+      hyphenate,
+      ResourceModule,
+      ResourceDescription,
+      ModuleAnalyzer;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
   }
   return {
-    setters: [],
+    setters: [function(_aureliaMetadata) {
+      Metadata = _aureliaMetadata.Metadata;
+    }, function(_aureliaLoader) {
+      TemplateRegistryEntry = _aureliaLoader.TemplateRegistryEntry;
+    }, function(_aureliaBinding) {
+      ValueConverterResource = _aureliaBinding.ValueConverterResource;
+    }, function(_htmlBehavior) {
+      HtmlBehaviorResource = _htmlBehavior.HtmlBehaviorResource;
+    }, function(_viewStrategy) {
+      ViewStrategy = _viewStrategy.ViewStrategy;
+      TemplateRegistryViewStrategy = _viewStrategy.TemplateRegistryViewStrategy;
+    }, function(_util) {
+      hyphenate = _util.hyphenate;
+    }],
     execute: function() {
-      "use strict";
-      capitalMatcher = /([A-Z])/g;
+      ResourceModule = (function() {
+        function ResourceModule(moduleId) {
+          _classCallCheck(this, ResourceModule);
+          this.id = moduleId;
+          this.moduleInstance = null;
+          this.mainResource = null;
+          this.resources = null;
+          this.viewStrategy = null;
+          this.isAnalyzed = false;
+        }
+        ResourceModule.prototype.analyze = function analyze(container) {
+          var current = this.mainResource,
+              resources = this.resources,
+              viewStrategy = this.viewStrategy,
+              i,
+              ii,
+              metadata;
+          if (this.isAnalyzed) {
+            return ;
+          }
+          this.isAnalyzed = true;
+          if (current) {
+            metadata = current.metadata;
+            metadata.viewStrategy = viewStrategy;
+            if ('analyze' in metadata) {
+              metadata.analyze(container, current.value);
+            }
+          }
+          for (i = 0, ii = resources.length; i < ii; ++i) {
+            current = resources[i];
+            metadata = current.metadata;
+            metadata.viewStrategy = viewStrategy;
+            if ('analyze' in metadata) {
+              metadata.analyze(container, current.value);
+            }
+          }
+        };
+        ResourceModule.prototype.register = function register(registry, name) {
+          var i,
+              ii,
+              resources = this.resources;
+          if (this.mainResource) {
+            this.mainResource.metadata.register(registry, name);
+            name = null;
+          }
+          for (i = 0, ii = resources.length; i < ii; ++i) {
+            resources[i].metadata.register(registry, name);
+            name = null;
+          }
+        };
+        ResourceModule.prototype.load = function load(container) {
+          if (this.onLoaded) {
+            return this.onLoaded;
+          }
+          var current = this.mainResource,
+              resources = this.resources,
+              i,
+              ii,
+              metadata,
+              loads = [];
+          if (current) {
+            metadata = current.metadata;
+            if ('load' in metadata) {
+              loads.push(metadata.load(container, current.value));
+            }
+          }
+          for (i = 0, ii = resources.length; i < ii; ++i) {
+            current = resources[i];
+            metadata = current.metadata;
+            if ('load' in metadata) {
+              loads.push(metadata.load(container, current.value));
+            }
+          }
+          this.onLoaded = Promise.all(loads);
+          return this.onLoaded;
+        };
+        return ResourceModule;
+      })();
+      ResourceDescription = function ResourceDescription(key, exportedValue, resourceTypeMeta) {
+        _classCallCheck(this, ResourceDescription);
+        if (!resourceTypeMeta) {
+          resourceTypeMeta = Metadata.get(Metadata.resource, exportedValue);
+          if (!resourceTypeMeta) {
+            resourceTypeMeta = new HtmlBehaviorResource();
+            resourceTypeMeta.elementName = hyphenate(key);
+            Reflect.defineMetadata(Metadata.resource, resourceTypeMeta, exportedValue);
+          }
+        }
+        if (resourceTypeMeta instanceof HtmlBehaviorResource) {
+          if (resourceTypeMeta.elementName === undefined) {
+            resourceTypeMeta.elementName = hyphenate(key);
+          } else if (resourceTypeMeta.attributeName === undefined) {
+            resourceTypeMeta.attributeName = hyphenate(key);
+          } else if (resourceTypeMeta.attributeName === null && resourceTypeMeta.elementName === null) {
+            HtmlBehaviorResource.convention(key, resourceTypeMeta);
+          }
+        } else if (!resourceTypeMeta.name) {
+          resourceTypeMeta.name = hyphenate(key);
+        }
+        this.metadata = resourceTypeMeta;
+        this.value = exportedValue;
+      };
+      ModuleAnalyzer = (function() {
+        function ModuleAnalyzer() {
+          _classCallCheck(this, ModuleAnalyzer);
+          this.cache = {};
+        }
+        ModuleAnalyzer.prototype.getAnalysis = function getAnalysis(moduleId) {
+          return this.cache[moduleId];
+        };
+        ModuleAnalyzer.prototype.analyze = function analyze(moduleId, moduleInstance, viewModelMember) {
+          var mainResource,
+              fallbackValue,
+              fallbackKey,
+              resourceTypeMeta,
+              key,
+              exportedValue,
+              resources = [],
+              conventional,
+              viewStrategy,
+              resourceModule;
+          resourceModule = this.cache[moduleId];
+          if (resourceModule) {
+            return resourceModule;
+          }
+          resourceModule = new ResourceModule(moduleId);
+          this.cache[moduleId] = resourceModule;
+          if (typeof moduleInstance === 'function') {
+            moduleInstance = {'default': moduleInstance};
+          }
+          if (viewModelMember) {
+            mainResource = new ResourceDescription(viewModelMember, moduleInstance[viewModelMember]);
+          }
+          for (key in moduleInstance) {
+            exportedValue = moduleInstance[key];
+            if (key === viewModelMember || typeof exportedValue !== 'function') {
+              continue;
+            }
+            resourceTypeMeta = Metadata.get(Metadata.resource, exportedValue);
+            if (resourceTypeMeta) {
+              if (resourceTypeMeta.attributeName === null && resourceTypeMeta.elementName === null) {
+                HtmlBehaviorResource.convention(key, resourceTypeMeta);
+              }
+              if (resourceTypeMeta.attributeName === null && resourceTypeMeta.elementName === null) {
+                resourceTypeMeta.elementName = hyphenate(key);
+              }
+              if (!mainResource && resourceTypeMeta instanceof HtmlBehaviorResource && resourceTypeMeta.elementName !== null) {
+                mainResource = new ResourceDescription(key, exportedValue, resourceTypeMeta);
+              } else {
+                resources.push(new ResourceDescription(key, exportedValue, resourceTypeMeta));
+              }
+            } else if (exportedValue instanceof ViewStrategy) {
+              viewStrategy = exportedValue;
+            } else if (exportedValue instanceof TemplateRegistryEntry) {
+              viewStrategy = new TemplateRegistryViewStrategy(moduleId, exportedValue);
+            } else {
+              if (conventional = HtmlBehaviorResource.convention(key)) {
+                if (conventional.elementName !== null && !mainResource) {
+                  mainResource = new ResourceDescription(key, exportedValue, conventional);
+                } else {
+                  resources.push(new ResourceDescription(key, exportedValue, conventional));
+                }
+                Reflect.defineMetadata(Metadata.resource, conventional, exportedValue);
+              } else if (conventional = ValueConverterResource.convention(key)) {
+                resources.push(new ResourceDescription(key, exportedValue, conventional));
+                Reflect.defineMetadata(Metadata.resource, conventional, exportedValue);
+              } else if (!fallbackValue) {
+                fallbackValue = exportedValue;
+                fallbackKey = key;
+              }
+            }
+          }
+          if (!mainResource && fallbackValue) {
+            mainResource = new ResourceDescription(fallbackKey, fallbackValue);
+          }
+          resourceModule.moduleInstance = moduleInstance;
+          resourceModule.mainResource = mainResource;
+          resourceModule.resources = resources;
+          resourceModule.viewStrategy = viewStrategy;
+          return resourceModule;
+        };
+        return ModuleAnalyzer;
+      })();
+      _export('ModuleAnalyzer', ModuleAnalyzer);
     }
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/bindable-property", ["npm:core-js@0.9.13", "github:aurelia/templating@0.11.2/util", "github:aurelia/binding@0.6.1"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/bindable-property", ["npm:core-js@0.9.16", "github:aurelia/templating@0.12.1/util", "github:aurelia/binding@0.7.3"], function(_export) {
+  'use strict';
   var core,
       hyphenate,
       bindingMode,
-      _classCallCheck,
       BindableProperty,
       BehaviorPropertyObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function getObserver(behavior, instance, name) {
     var lookup = instance.__observers__;
     if (lookup === undefined) {
-      lookup = behavior.observerLocator.getObserversLookup(instance);
+      lookup = behavior.observerLocator.getOrCreateObserversLookup(instance);
       behavior.ensurePropertiesDefined(instance, lookup);
     }
     return lookup[name];
@@ -7040,12 +7810,6 @@ System.register("github:aurelia/templating@0.11.2/bindable-property", ["npm:core
       bindingMode = _aureliaBinding.bindingMode;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       BindableProperty = (function() {
         function BindableProperty(nameOrConfig) {
           _classCallCheck(this, BindableProperty);
@@ -7087,6 +7851,9 @@ System.register("github:aurelia/templating@0.11.2/bindable-property", ["npm:core
           };
           descriptor.set = function(value) {
             getObserver(behavior, this, name).setValue(value);
+          };
+          descriptor.get.getObserver = function(obj) {
+            return getObserver(behavior, obj, name);
           };
           return descriptor;
         };
@@ -7165,7 +7932,7 @@ System.register("github:aurelia/templating@0.11.2/bindable-property", ["npm:core
             };
           } else if ('dynamicPropertyChanged' in executionContext) {
             selfSubscriber = function(newValue, oldValue) {
-              return executionContext.dynamicPropertyChanged(name, newValue, oldValue);
+              return executionContext['dynamicPropertyChanged'](name, newValue, oldValue);
             };
           }
           observer = observerLookup[name] = new BehaviorPropertyObserver(this.owner.taskQueue, executionContext, name, selfSubscriber);
@@ -7249,25 +8016,24 @@ System.register("github:aurelia/templating@0.11.2/bindable-property", ["npm:core
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/behavior-instance", [], function(_export) {
-  var _classCallCheck,
-      BehaviorInstance;
+System.register("github:aurelia/templating@0.12.1/behavior-instance", [], function(_export) {
+  "use strict";
+  var BehaviorInstance;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       BehaviorInstance = (function() {
         function BehaviorInstance(behavior, executionContext, instruction) {
           _classCallCheck(this, BehaviorInstance);
           this.behavior = behavior;
           this.executionContext = executionContext;
           this.isAttached = false;
-          var observerLookup = behavior.observerLocator.getObserversLookup(executionContext),
+          var observerLookup = behavior.observerLocator.getOrCreateObserversLookup(executionContext),
               handlesBind = behavior.handlesBind,
               attributes = instruction.attributes,
               boundProperties = this.boundProperties = [],
@@ -7356,20 +8122,19 @@ System.register("github:aurelia/templating@0.11.2/behavior-instance", [], functi
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/children", [], function(_export) {
-  var _classCallCheck,
-      noMutations,
+System.register("github:aurelia/templating@0.12.1/children", [], function(_export) {
+  "use strict";
+  var noMutations,
       ChildObserver,
       ChildObserverBinder;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      "use strict";
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError("Cannot call a class as a function");
-        }
-      };
       noMutations = [];
       ChildObserver = (function() {
         function ChildObserver(property, changeHandler, selector) {
@@ -7471,21 +8236,20 @@ System.register("github:aurelia/templating@0.11.2/children", [], function(_expor
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/element-config", ["github:aurelia/binding@0.6.1"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/element-config", ["github:aurelia/binding@0.7.3"], function(_export) {
+  'use strict';
   var EventManager,
-      _classCallCheck,
       ElementConfigResource;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_aureliaBinding) {
       EventManager = _aureliaBinding.EventManager;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       ElementConfigResource = (function() {
         function ElementConfigResource() {
           _classCallCheck(this, ElementConfigResource);
@@ -7504,15 +8268,20 @@ System.register("github:aurelia/templating@0.11.2/element-config", ["github:aure
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/composition-engine", ["github:aurelia/metadata@0.5.0", "github:aurelia/templating@0.11.2/view-strategy", "github:aurelia/templating@0.11.2/view-engine", "github:aurelia/templating@0.11.2/html-behavior"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/composition-engine", ["github:aurelia/metadata@0.6.0", "github:aurelia/templating@0.12.1/view-strategy", "github:aurelia/templating@0.12.1/view-engine", "github:aurelia/templating@0.12.1/html-behavior"], function(_export) {
+  'use strict';
   var Origin,
       Metadata,
       ViewStrategy,
       UseViewStrategy,
       ViewEngine,
       HtmlBehaviorResource,
-      _classCallCheck,
       CompositionEngine;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_aureliaMetadata) {
       Origin = _aureliaMetadata.Origin;
@@ -7526,12 +8295,6 @@ System.register("github:aurelia/templating@0.11.2/composition-engine", ["github:
       HtmlBehaviorResource = _htmlBehavior.HtmlBehaviorResource;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       CompositionEngine = (function() {
         function CompositionEngine(viewEngine) {
           _classCallCheck(this, CompositionEngine);
@@ -7585,8 +8348,8 @@ System.register("github:aurelia/templating@0.11.2/composition-engine", ["github:
             } else {
               metadata = new HtmlBehaviorResource();
               metadata.elementName = 'dynamic-element';
+              metadata.analyze(instruction.container || childContainer, viewModel.constructor);
               doneLoading = metadata.load(childContainer, viewModel.constructor, instruction.view, true).then(function(viewFactory) {
-                metadata.analyze(instruction.container || childContainer, viewModel.constructor);
                 return viewFactory;
               });
             }
@@ -7594,7 +8357,8 @@ System.register("github:aurelia/templating@0.11.2/composition-engine", ["github:
               return metadata.create(childContainer, {
                 executionContext: viewModel,
                 viewFactory: viewFactory,
-                suppressBind: true
+                suppressBind: true,
+                host: instruction.host
               });
             });
           });
@@ -7604,6 +8368,9 @@ System.register("github:aurelia/templating@0.11.2/composition-engine", ["github:
           instruction.viewModel = instruction.viewResources ? instruction.viewResources.relativeToView(instruction.viewModel) : instruction.viewModel;
           return this.viewEngine.importViewModelResource(instruction.viewModel).then(function(viewModelResource) {
             childContainer.autoRegister(viewModelResource.value);
+            if (instruction.host) {
+              childContainer.registerInstance(Element, instruction.host);
+            }
             instruction.viewModel = childContainer.viewModel = childContainer.get(viewModelResource.value);
             instruction.viewModelResource = viewModelResource;
             return instruction;
@@ -7642,7 +8409,8 @@ System.register("github:aurelia/templating@0.11.2/composition-engine", ["github:
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/decorators", ["npm:core-js@0.9.13", "github:aurelia/metadata@0.5.0", "github:aurelia/templating@0.11.2/bindable-property", "github:aurelia/templating@0.11.2/children", "github:aurelia/templating@0.11.2/element-config", "github:aurelia/templating@0.11.2/view-strategy", "github:aurelia/templating@0.11.2/html-behavior"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/decorators", ["npm:core-js@0.9.16", "github:aurelia/metadata@0.6.0", "github:aurelia/templating@0.12.1/bindable-property", "github:aurelia/templating@0.12.1/children", "github:aurelia/templating@0.12.1/element-config", "github:aurelia/templating@0.12.1/view-strategy", "github:aurelia/templating@0.12.1/html-behavior"], function(_export) {
+  'use strict';
   var core,
       Metadata,
       Decorators,
@@ -7662,10 +8430,16 @@ System.register("github:aurelia/templating@0.11.2/decorators", ["npm:core-js@0.9
   _export('syncChildren', syncChildren);
   _export('useShadowDOM', useShadowDOM);
   _export('skipContentProcessing', skipContentProcessing);
+  _export('containerless', containerless);
   _export('viewStrategy', viewStrategy);
   _export('useView', useView);
   _export('noView', noView);
   _export('elementConfig', elementConfig);
+  function validateBehaviorName(name, type) {
+    if (/[A-Z]/.test(name)) {
+      throw new Error('\'' + name + '\' is not a valid ' + type + ' name.  Upper-case letters are not allowed because the DOM is not case-sensitive.');
+    }
+  }
   function behavior(override) {
     return function(target) {
       if (override instanceof HtmlBehaviorResource) {
@@ -7677,15 +8451,18 @@ System.register("github:aurelia/templating@0.11.2/decorators", ["npm:core-js@0.9
     };
   }
   function customElement(name) {
+    validateBehaviorName(name, 'custom element');
     return function(target) {
       var resource = Metadata.getOrCreateOwn(Metadata.resource, HtmlBehaviorResource, target);
       resource.elementName = name;
     };
   }
-  function customAttribute(name) {
+  function customAttribute(name, defaultBindingMode) {
+    validateBehaviorName(name, 'custom attribute');
     return function(target) {
       var resource = Metadata.getOrCreateOwn(Metadata.resource, HtmlBehaviorResource, target);
       resource.attributeName = name;
+      resource.attributeDefaultBindingMode = defaultBindingMode;
     };
   }
   function templateController(target) {
@@ -7744,6 +8521,13 @@ System.register("github:aurelia/templating@0.11.2/decorators", ["npm:core-js@0.9
     };
     return target ? deco(target) : deco;
   }
+  function containerless(target) {
+    var deco = function deco(target) {
+      var resource = Metadata.getOrCreateOwn(Metadata.resource, HtmlBehaviorResource, target);
+      resource.containerless = true;
+    };
+    return target ? deco(target) : deco;
+  }
   function viewStrategy(strategy) {
     return function(target) {
       Reflect.defineMetadata(ViewStrategy.metadataKey, strategy, target);
@@ -7784,7 +8568,6 @@ System.register("github:aurelia/templating@0.11.2/decorators", ["npm:core-js@0.9
       HtmlBehaviorResource = _htmlBehavior.HtmlBehaviorResource;
     }],
     execute: function() {
-      'use strict';
       Decorators.configure.parameterizedDecorator('behavior', behavior);
       Decorators.configure.parameterizedDecorator('customElement', customElement);
       Decorators.configure.parameterizedDecorator('customAttribute', customAttribute);
@@ -7794,6 +8577,7 @@ System.register("github:aurelia/templating@0.11.2/decorators", ["npm:core-js@0.9
       Decorators.configure.parameterizedDecorator('syncChildren', syncChildren);
       Decorators.configure.simpleDecorator('useShadowDOM', useShadowDOM);
       Decorators.configure.simpleDecorator('skipContentProcessing', skipContentProcessing);
+      Decorators.configure.simpleDecorator('containerless', containerless);
       Decorators.configure.parameterizedDecorator('viewStrategy', useView);
       Decorators.configure.parameterizedDecorator('useView', useView);
       Decorators.configure.simpleDecorator('noView', noView);
@@ -7802,18 +8586,17 @@ System.register("github:aurelia/templating@0.11.2/decorators", ["npm:core-js@0.9
   };
 });
 
-System.register("github:aurelia/logging-console@0.4.0/index", [], function(_export) {
-  var _classCallCheck,
-      ConsoleAppender;
+System.register("github:aurelia/logging-console@0.5.0/index", [], function(_export) {
+  'use strict';
+  var ConsoleAppender;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       (function(global) {
         'use strict';
         global.console = global.console || {};
@@ -7879,7 +8662,8 @@ System.register("github:aurelia/logging-console@0.4.0/index", [], function(_expo
   };
 });
 
-System.register("github:aurelia/templating-binding@0.11.0/syntax-interpreter", ["github:aurelia/binding@0.6.1"], function(_export) {
+System.register("github:aurelia/templating-binding@0.12.0/syntax-interpreter", ["github:aurelia/binding@0.7.3"], function(_export) {
+  'use strict';
   var Parser,
       ObserverLocator,
       EventManager,
@@ -7888,8 +8672,12 @@ System.register("github:aurelia/templating-binding@0.11.0/syntax-interpreter", [
       NameExpression,
       CallExpression,
       bindingMode,
-      _classCallCheck,
       SyntaxInterpreter;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_aureliaBinding) {
       Parser = _aureliaBinding.Parser;
@@ -7902,12 +8690,6 @@ System.register("github:aurelia/templating-binding@0.11.0/syntax-interpreter", [
       bindingMode = _aureliaBinding.bindingMode;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       SyntaxInterpreter = (function() {
         function SyntaxInterpreter(parser, observerLocator, eventManager) {
           _classCallCheck(this, SyntaxInterpreter);
@@ -7942,6 +8724,8 @@ System.register("github:aurelia/templating-binding@0.11.0/syntax-interpreter", [
             return attrName == 'value' ? bindingMode.twoWay : bindingMode.oneWay;
           } else if (attrName === 'textcontent' || attrName === 'innerhtml') {
             return element.contentEditable === 'true' ? bindingMode.twoWay : bindingMode.oneWay;
+          } else if (attrName === 'scrolltop' || attrName === 'scrollleft') {
+            return bindingMode.twoWay;
           }
           return bindingMode.oneWay;
         };
@@ -8009,24 +8793,29 @@ System.register("github:aurelia/templating-binding@0.11.0/syntax-interpreter", [
       })();
       _export('SyntaxInterpreter', SyntaxInterpreter);
       SyntaxInterpreter.prototype['for'] = function(resources, element, info, existingInstruction) {
-        var parts = info.attrValue.split(' of ');
+        var parts,
+            keyValue,
+            instruction,
+            attrValue,
+            isDestructuring;
+        attrValue = info.attrValue;
+        isDestructuring = attrValue.match(/[[].+[\]]/);
+        parts = isDestructuring ? attrValue.split('of ') : attrValue.split(' of ');
         if (parts.length !== 2) {
-          throw new Error('Incorrect syntax for "for". The form is: "$local of $items".');
+          throw new Error('Incorrect syntax for "for". The form is: "$local of $items" or "[$key, $value] of $items".');
         }
-        var instruction = existingInstruction || {
+        instruction = existingInstruction || {
           attrName: info.attrName,
           attributes: {}
         };
-        if (parts[0].match(/[[].+[,]\s.+[\]]/)) {
-          var firstPart = parts[0];
-          parts[0] = firstPart.substr(1, firstPart.indexOf(',') - 1);
-          parts.splice(1, 0, firstPart.substring(firstPart.indexOf(', ') + 2, firstPart.length - 1));
-          instruction.attributes.key = parts[0];
-          instruction.attributes.value = parts[1];
+        if (isDestructuring) {
+          keyValue = parts[0].replace(/[[\]]/g, '').replace(/,/g, ' ').replace(/\s+/g, ' ').trim().split(' ');
+          instruction.attributes.key = keyValue[0];
+          instruction.attributes.value = keyValue[1];
         } else {
           instruction.attributes.local = parts[0];
         }
-        instruction.attributes.items = new BindingExpression(this.observerLocator, 'items', this.parser.parse(parts[parts.length - 1]), bindingMode.oneWay, resources.valueConverterLookupFunction);
+        instruction.attributes.items = new BindingExpression(this.observerLocator, 'items', this.parser.parse(parts[1]), bindingMode.oneWay, resources.valueConverterLookupFunction);
         return instruction;
       };
       SyntaxInterpreter.prototype['two-way'] = function(resources, element, info, existingInstruction) {
@@ -8053,25 +8842,21 @@ System.register("github:aurelia/templating-binding@0.11.0/syntax-interpreter", [
         instruction.attributes[info.attrName] = new BindingExpression(this.observerLocator, this.attributeMap[info.attrName] || info.attrName, this.parser.parse(info.attrValue), bindingMode.oneTime, resources.valueConverterLookupFunction);
         return instruction;
       };
-      SyntaxInterpreter.prototype['view-model'] = function(resources, element, info) {
-        return new NameExpression(info.attrValue, 'view-model');
-      };
     }
   };
 });
 
-System.register("github:aurelia/route-recognizer@0.4.0/state", [], function(_export) {
-  var _classCallCheck,
-      State;
+System.register("github:aurelia/route-recognizer@0.5.0/state", [], function(_export) {
+  'use strict';
+  var State;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       State = (function() {
         function State(charSpec) {
           _classCallCheck(this, State);
@@ -8143,23 +8928,22 @@ System.register("github:aurelia/route-recognizer@0.4.0/state", [], function(_exp
   };
 });
 
-System.register("github:aurelia/route-recognizer@0.4.0/segments", [], function(_export) {
-  var _classCallCheck,
-      specials,
+System.register("github:aurelia/route-recognizer@0.5.0/segments", [], function(_export) {
+  'use strict';
+  var specials,
       escapeRegex,
       StaticSegment,
       DynamicSegment,
       StarSegment,
       EpsilonSegment;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       specials = ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'];
       escapeRegex = new RegExp('(\\' + specials.join('|\\') + ')', 'g');
       StaticSegment = (function() {
@@ -8256,11 +9040,16 @@ System.register("github:aurelia/route-recognizer@0.4.0/segments", [], function(_
   };
 });
 
-System.register("github:aurelia/router@0.8.0/navigation-commands", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/router@0.9.0/navigation-commands", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _classCallCheck,
       Redirect;
   _export('isNavigationCommand', isNavigationCommand);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function isNavigationCommand(obj) {
     return obj && typeof obj.navigate === 'function';
   }
@@ -8269,12 +9058,6 @@ System.register("github:aurelia/router@0.8.0/navigation-commands", ["npm:core-js
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       Redirect = (function() {
         function Redirect(url, options) {
           _classCallCheck(this, Redirect);
@@ -8299,35 +9082,106 @@ System.register("github:aurelia/router@0.8.0/navigation-commands", ["npm:core-js
   };
 });
 
-System.register("github:aurelia/router@0.8.0/navigation-instruction", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/router@0.9.0/util", [], function(_export) {
+  'use strict';
+  var isRootedPath,
+      isAbsoluteUrl;
+  _export('processPotential', processPotential);
+  _export('normalizeAbsolutePath', normalizeAbsolutePath);
+  _export('createRootedPath', createRootedPath);
+  _export('resolveUrl', resolveUrl);
+  function processPotential(obj, resolve, reject) {
+    if (obj && typeof obj.then === 'function') {
+      var dfd = obj.then(resolve);
+      if (typeof dfd['catch'] === 'function') {
+        return dfd['catch'](reject);
+      } else if (typeof dfd.fail === 'function') {
+        return dfd.fail(reject);
+      }
+      return dfd;
+    } else {
+      try {
+        return resolve(obj);
+      } catch (error) {
+        return reject(error);
+      }
+    }
+  }
+  function normalizeAbsolutePath(path, hasPushState) {
+    if (!hasPushState && path[0] !== '#') {
+      path = '#' + path;
+    }
+    return path;
+  }
+  function createRootedPath(fragment, baseUrl, hasPushState) {
+    if (isAbsoluteUrl.test(fragment)) {
+      return fragment;
+    }
+    var path = '';
+    if (baseUrl.length && baseUrl[0] !== '/') {
+      path += '/';
+    }
+    path += baseUrl;
+    if ((!path.length || path[path.length - 1] != '/') && fragment[0] != '/') {
+      path += '/';
+    }
+    if (path.length && path[path.length - 1] == '/' && fragment[0] == '/') {
+      path = path.substring(0, path.length - 1);
+    }
+    return normalizeAbsolutePath(path + fragment, hasPushState);
+  }
+  function resolveUrl(fragment, baseUrl, hasPushState) {
+    if (isRootedPath.test(fragment)) {
+      return normalizeAbsolutePath(fragment, hasPushState);
+    } else {
+      return createRootedPath(fragment, baseUrl, hasPushState);
+    }
+  }
+  return {
+    setters: [],
+    execute: function() {
+      isRootedPath = /^#?\//;
+      isAbsoluteUrl = /^([a-z][a-z0-9+\-.]*:)?\/\//i;
+    }
+  };
+});
+
+System.register("github:aurelia/router@0.9.0/navigation-instruction", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _classCallCheck,
       NavigationInstruction;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_coreJs) {
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       NavigationInstruction = (function() {
         function NavigationInstruction(fragment, queryString, params, queryParams, config, parentInstruction) {
           _classCallCheck(this, NavigationInstruction);
-          var allParams = Object.assign({}, queryParams, params);
           this.fragment = fragment;
           this.queryString = queryString;
           this.params = params || {};
           this.queryParams = queryParams;
           this.config = config;
-          this.lifecycleArgs = [allParams, config, this];
           this.viewPortInstructions = {};
-          if (parentInstruction) {
-            this.params.$parent = parentInstruction.params;
-          }
+          this.parentInstruction = parentInstruction;
+          var ancestorParams = [];
+          var current = this;
+          do {
+            var currentParams = Object.assign({}, current.params);
+            if (current.config.hasChildRouter) {
+              delete currentParams[current.getWildCardName()];
+            }
+            ancestorParams.unshift(currentParams);
+            current = current.parentInstruction;
+          } while (current);
+          var allParams = Object.assign.apply(Object, [{}, queryParams].concat(ancestorParams));
+          this.lifecycleArgs = [allParams, config, this];
         }
         NavigationInstruction.prototype.addViewPortInstruction = function addViewPortInstruction(viewPortName, strategy, moduleId, component) {
           return this.viewPortInstructions[viewPortName] = {
@@ -8344,8 +9198,8 @@ System.register("github:aurelia/router@0.8.0/navigation-instruction", ["npm:core
           return this.config.route.substr(wildcardIndex + 1);
         };
         NavigationInstruction.prototype.getWildcardPath = function getWildcardPath() {
-          var wildcardName = this.getWildCardName(),
-              path = this.params[wildcardName];
+          var wildcardName = this.getWildCardName();
+          var path = this.params[wildcardName] || '';
           if (this.queryString) {
             path += '?' + this.queryString;
           }
@@ -8355,8 +9209,8 @@ System.register("github:aurelia/router@0.8.0/navigation-instruction", ["npm:core
           if (!this.params) {
             return this.fragment;
           }
-          var wildcardName = this.getWildCardName(),
-              path = this.params[wildcardName];
+          var wildcardName = this.getWildCardName();
+          var path = this.params[wildcardName] || '';
           if (!path) {
             return this.fragment;
           }
@@ -8369,12 +9223,52 @@ System.register("github:aurelia/router@0.8.0/navigation-instruction", ["npm:core
   };
 });
 
-System.register("github:aurelia/router@0.8.0/route-filters", ["github:aurelia/dependency-injection@0.7.1"], function(_export) {
+System.register("github:aurelia/router@0.9.0/nav-model", [], function(_export) {
+  "use strict";
+  var NavModel;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  return {
+    setters: [],
+    execute: function() {
+      NavModel = (function() {
+        function NavModel(router, relativeHref) {
+          _classCallCheck(this, NavModel);
+          this.router = router;
+          this.relativeHref = relativeHref;
+          this.isActive = false;
+          this.title = null;
+          this.href = null;
+          this.settings = {};
+          this.config = null;
+        }
+        NavModel.prototype.setTitle = function setTitle(title) {
+          this.title = title;
+          if (this.isActive) {
+            this.router.updateTitle();
+          }
+        };
+        return NavModel;
+      })();
+      _export("NavModel", NavModel);
+    }
+  };
+});
+
+System.register("github:aurelia/router@0.9.0/route-filters", ["github:aurelia/dependency-injection@0.8.1"], function(_export) {
+  'use strict';
   var Container,
-      _classCallCheck,
       RouteFilterContainer,
       RouteFilterStep;
   _export('createRouteFilterStep', createRouteFilterStep);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function createRouteFilterStep(name) {
     function create(routeFilterContainer) {
       return new RouteFilterStep(name, routeFilterContainer);
@@ -8390,12 +9284,6 @@ System.register("github:aurelia/router@0.8.0/route-filters", ["github:aurelia/de
       Container = _aureliaDependencyInjection.Container;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       RouteFilterContainer = (function() {
         function RouteFilterContainer(container) {
           _classCallCheck(this, RouteFilterContainer);
@@ -8456,45 +9344,17 @@ System.register("github:aurelia/router@0.8.0/route-filters", ["github:aurelia/de
   };
 });
 
-System.register("github:aurelia/router@0.8.0/util", [], function(_export) {
-  _export('processPotential', processPotential);
-  function processPotential(obj, resolve, reject) {
-    if (obj && typeof obj.then === 'function') {
-      var dfd = obj.then(resolve);
-      if (typeof dfd['catch'] === 'function') {
-        return dfd['catch'](reject);
-      } else if (typeof dfd.fail === 'function') {
-        return dfd.fail(reject);
-      }
-      return dfd;
-    } else {
-      try {
-        return resolve(obj);
-      } catch (error) {
-        return reject(error);
-      }
+System.register("github:aurelia/history@0.5.0/index", [], function(_export) {
+  'use strict';
+  var History;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
     }
   }
   return {
     setters: [],
     execute: function() {
-      'use strict';
-    }
-  };
-});
-
-System.register("github:aurelia/history@0.4.0/index", [], function(_export) {
-  var _classCallCheck,
-      History;
-  return {
-    setters: [],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       History = (function() {
         function History() {
           _classCallCheck(this, History);
@@ -8518,11 +9378,16 @@ System.register("github:aurelia/history@0.4.0/index", [], function(_export) {
   };
 });
 
-System.register("github:aurelia/router@0.8.0/pipeline", ["npm:core-js@0.9.13"], function(_export) {
+System.register("github:aurelia/router@0.9.0/pipeline", ["npm:core-js@0.9.16"], function(_export) {
+  'use strict';
   var core,
-      _classCallCheck,
       pipelineStatus,
       Pipeline;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function createResult(ctx, next) {
     return {
       status: next.status,
@@ -8536,12 +9401,6 @@ System.register("github:aurelia/router@0.8.0/pipeline", ["npm:core-js@0.9.13"], 
       core = _coreJs['default'];
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       pipelineStatus = {
         completed: 'completed',
         cancelled: 'cancelled',
@@ -8604,7 +9463,7 @@ System.register("github:aurelia/router@0.8.0/pipeline", ["npm:core-js@0.9.13"], 
           next.reject = function(error) {
             next.status = pipelineStatus.rejected;
             next.output = error;
-            return Promise.reject(createResult(ctx, next));
+            return Promise.resolve(createResult(ctx, next));
           };
           next.status = pipelineStatus.running;
           return next();
@@ -8616,14 +9475,19 @@ System.register("github:aurelia/router@0.8.0/pipeline", ["npm:core-js@0.9.13"], 
   };
 });
 
-System.register("github:aurelia/router@0.8.0/route-loading", ["github:aurelia/router@0.8.0/navigation-plan", "github:aurelia/router@0.8.0/router-configuration"], function(_export) {
+System.register("github:aurelia/router@0.9.0/route-loading", ["github:aurelia/router@0.9.0/navigation-plan", "github:aurelia/router@0.9.0/router-configuration"], function(_export) {
+  'use strict';
   var activationStrategy,
       buildNavigationPlan,
       RouterConfiguration,
-      _classCallCheck,
       RouteLoader,
       LoadRouteStep;
   _export('loadNewRoute', loadNewRoute);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function loadNewRoute(routeLoader, navigationContext) {
     var toLoad = determineWhatToLoad(navigationContext);
     var loadPromises = toLoad.map(function(current) {
@@ -8665,11 +9529,12 @@ System.register("github:aurelia/router@0.8.0/route-loading", ["github:aurelia/ro
       if (childRouter) {
         var path = next.getWildcardPath();
         return childRouter.createNavigationInstruction(path, next).then(function(childInstruction) {
-          viewPortPlan.childNavigationContext = childRouter.createNavigationContext(childInstruction);
-          return buildNavigationPlan(viewPortPlan.childNavigationContext).then(function(childPlan) {
-            viewPortPlan.childNavigationContext.plan = childPlan;
-            viewPortInstruction.childNavigationContext = viewPortPlan.childNavigationContext;
-            return loadNewRoute(routeLoader, viewPortPlan.childNavigationContext);
+          var childNavigationContext = childRouter.createNavigationContext(childInstruction);
+          viewPortPlan.childNavigationContext = childNavigationContext;
+          return buildNavigationPlan(childNavigationContext).then(function(childPlan) {
+            childNavigationContext.plan = childPlan;
+            viewPortInstruction.childNavigationContext = childNavigationContext;
+            return loadNewRoute(routeLoader, childNavigationContext);
           });
         });
       }
@@ -8702,12 +9567,6 @@ System.register("github:aurelia/router@0.8.0/route-loading", ["github:aurelia/ro
       RouterConfiguration = _routerConfiguration.RouterConfiguration;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       RouteLoader = (function() {
         function RouteLoader() {
           _classCallCheck(this, RouteLoader);
@@ -8736,16 +9595,21 @@ System.register("github:aurelia/router@0.8.0/route-loading", ["github:aurelia/ro
   };
 });
 
-System.register("github:aurelia/router@0.8.0/activation", ["github:aurelia/router@0.8.0/navigation-plan", "github:aurelia/router@0.8.0/navigation-commands", "github:aurelia/router@0.8.0/util"], function(_export) {
+System.register("github:aurelia/router@0.9.0/activation", ["github:aurelia/router@0.9.0/navigation-plan", "github:aurelia/router@0.9.0/navigation-commands", "github:aurelia/router@0.9.0/util"], function(_export) {
+  'use strict';
   var activationStrategy,
       isNavigationCommand,
       processPotential,
-      _classCallCheck,
       affirmations,
       CanDeactivatePreviousStep,
       CanActivateNextStep,
       DeactivatePreviousStep,
       ActivateNextStep;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function processDeactivatable(plan, callbackName, next, ignoreResult) {
     var infos = findDeactivatable(plan, callbackName),
         i = infos.length;
@@ -8884,12 +9748,6 @@ System.register("github:aurelia/router@0.8.0/activation", ["github:aurelia/route
       processPotential = _util.processPotential;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       affirmations = ['yes', 'ok', 'true'];
       _export('affirmations', affirmations);
       CanDeactivatePreviousStep = (function() {
@@ -8932,6 +9790,1387 @@ System.register("github:aurelia/router@0.8.0/activation", ["github:aurelia/route
         return ActivateNextStep;
       })();
       _export('ActivateNextStep', ActivateNextStep);
+    }
+  };
+});
+
+System.register("github:aurelia/event-aggregator@0.5.0/index", ["github:aurelia/logging@0.5.0"], function(_export) {
+  'use strict';
+  var LogManager,
+      logger,
+      Handler,
+      EventAggregator;
+  _export('includeEventsIn', includeEventsIn);
+  _export('configure', configure);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function executeHandler(handler) {
+    try {
+      handler();
+    } catch (e) {
+      logger.error(e);
+    }
+  }
+  function includeEventsIn(obj) {
+    var ea = new EventAggregator();
+    obj.subscribeOnce = function(event, callback) {
+      return ea.subscribeOnce(event, callback);
+    };
+    obj.subscribe = function(event, callback) {
+      return ea.subscribe(event, callback);
+    };
+    obj.publish = function(event, data) {
+      ea.publish(event, data);
+    };
+    return ea;
+  }
+  function configure(aurelia) {
+    aurelia.withInstance(EventAggregator, includeEventsIn(aurelia));
+  }
+  return {
+    setters: [function(_aureliaLogging) {
+      LogManager = _aureliaLogging;
+    }],
+    execute: function() {
+      logger = LogManager.getLogger('event-aggregator');
+      Handler = (function() {
+        function Handler(messageType, callback) {
+          _classCallCheck(this, Handler);
+          this.messageType = messageType;
+          this.callback = callback;
+        }
+        Handler.prototype.handle = function handle(message) {
+          var _this = this;
+          if (message instanceof this.messageType) {
+            executeHandler(function() {
+              return _this.callback.call(null, message);
+            });
+          }
+        };
+        return Handler;
+      })();
+      EventAggregator = (function() {
+        function EventAggregator() {
+          _classCallCheck(this, EventAggregator);
+          this.eventLookup = {};
+          this.messageHandlers = [];
+        }
+        EventAggregator.prototype.publish = function publish(event, data) {
+          var subscribers,
+              i;
+          if (typeof event === 'string') {
+            subscribers = this.eventLookup[event];
+            if (subscribers) {
+              subscribers = subscribers.slice();
+              i = subscribers.length;
+              while (i--) {
+                executeHandler(function() {
+                  return subscribers[i](data, event);
+                });
+              }
+            }
+          } else {
+            subscribers = this.messageHandlers.slice();
+            i = subscribers.length;
+            while (i--) {
+              subscribers[i].handle(event);
+            }
+          }
+        };
+        EventAggregator.prototype.subscribe = function subscribe(event, callback) {
+          var subscribers,
+              handler;
+          if (typeof event === 'string') {
+            subscribers = this.eventLookup[event] || (this.eventLookup[event] = []);
+            subscribers.push(callback);
+            return function() {
+              var idx = subscribers.indexOf(callback);
+              if (idx != -1) {
+                subscribers.splice(idx, 1);
+              }
+            };
+          } else {
+            handler = new Handler(event, callback);
+            subscribers = this.messageHandlers;
+            subscribers.push(handler);
+            return function() {
+              var idx = subscribers.indexOf(handler);
+              if (idx != -1) {
+                subscribers.splice(idx, 1);
+              }
+            };
+          }
+        };
+        EventAggregator.prototype.subscribeOnce = function subscribeOnce(event, callback) {
+          var sub = this.subscribe(event, function(data, event) {
+            sub();
+            return callback(data, event);
+          });
+          return sub;
+        };
+        return EventAggregator;
+      })();
+      _export('EventAggregator', EventAggregator);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-router@0.13.0/route-loader", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1", "github:aurelia/router@0.9.0", "github:aurelia/path@0.7.0", "github:aurelia/metadata@0.6.0"], function(_export) {
+  'use strict';
+  var inject,
+      CompositionEngine,
+      RouteLoader,
+      Router,
+      relativeToFile,
+      Origin,
+      TemplatingRouteLoader;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTemplating) {
+      CompositionEngine = _aureliaTemplating.CompositionEngine;
+    }, function(_aureliaRouter) {
+      RouteLoader = _aureliaRouter.RouteLoader;
+      Router = _aureliaRouter.Router;
+    }, function(_aureliaPath) {
+      relativeToFile = _aureliaPath.relativeToFile;
+    }, function(_aureliaMetadata) {
+      Origin = _aureliaMetadata.Origin;
+    }],
+    execute: function() {
+      TemplatingRouteLoader = (function(_RouteLoader) {
+        function TemplatingRouteLoader(compositionEngine) {
+          _classCallCheck(this, _TemplatingRouteLoader);
+          _RouteLoader.call(this);
+          this.compositionEngine = compositionEngine;
+        }
+        _inherits(TemplatingRouteLoader, _RouteLoader);
+        var _TemplatingRouteLoader = TemplatingRouteLoader;
+        _TemplatingRouteLoader.prototype.loadRoute = function loadRoute(router, config) {
+          var childContainer = router.container.createChild(),
+              instruction = {
+                viewModel: relativeToFile(config.moduleId, Origin.get(router.container.viewModel.constructor).moduleId),
+                childContainer: childContainer,
+                view: config.view || config.viewStrategy
+              };
+          childContainer.getChildRouter = function() {
+            var childRouter;
+            childContainer.registerHandler(Router, function(c) {
+              return childRouter || (childRouter = router.createChild(childContainer));
+            });
+            return childContainer.get(Router);
+          };
+          return this.compositionEngine.createViewModel(instruction).then(function(instruction) {
+            instruction.executionContext = instruction.viewModel;
+            instruction.router = router;
+            return instruction;
+          });
+        };
+        TemplatingRouteLoader = inject(CompositionEngine)(TemplatingRouteLoader) || TemplatingRouteLoader;
+        return TemplatingRouteLoader;
+      })(RouteLoader);
+      _export('TemplatingRouteLoader', TemplatingRouteLoader);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-router@0.13.0/router-view", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1", "github:aurelia/router@0.9.0", "github:aurelia/metadata@0.6.0"], function(_export) {
+  'use strict';
+  var Container,
+      inject,
+      ViewSlot,
+      ViewStrategy,
+      customElement,
+      noView,
+      Router,
+      Metadata,
+      Origin,
+      RouterView;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      Container = _aureliaDependencyInjection.Container;
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTemplating) {
+      ViewSlot = _aureliaTemplating.ViewSlot;
+      ViewStrategy = _aureliaTemplating.ViewStrategy;
+      customElement = _aureliaTemplating.customElement;
+      noView = _aureliaTemplating.noView;
+    }, function(_aureliaRouter) {
+      Router = _aureliaRouter.Router;
+    }, function(_aureliaMetadata) {
+      Metadata = _aureliaMetadata.Metadata;
+      Origin = _aureliaMetadata.Origin;
+    }],
+    execute: function() {
+      RouterView = (function() {
+        function RouterView(element, container, viewSlot, router) {
+          _classCallCheck(this, _RouterView);
+          this.element = element;
+          this.container = container;
+          this.viewSlot = viewSlot;
+          this.router = router;
+          this.router.registerViewPort(this, this.element.getAttribute('name'));
+        }
+        var _RouterView = RouterView;
+        _RouterView.prototype.bind = function bind(executionContext) {
+          this.container.viewModel = executionContext;
+        };
+        _RouterView.prototype.process = function process(viewPortInstruction, waitToSwap) {
+          var _this = this;
+          var component = viewPortInstruction.component,
+              viewStrategy = component.view,
+              childContainer = component.childContainer,
+              viewModel = component.executionContext,
+              viewModelResource = component.viewModelResource,
+              metadata = viewModelResource.metadata;
+          if (!viewStrategy && 'getViewStrategy' in viewModel) {
+            viewStrategy = viewModel.getViewStrategy();
+          }
+          if (viewStrategy) {
+            viewStrategy = ViewStrategy.normalize(viewStrategy);
+            viewStrategy.makeRelativeTo(Origin.get(component.router.container.viewModel.constructor).moduleId);
+          }
+          return metadata.load(childContainer, viewModelResource.value, viewStrategy, true).then(function(viewFactory) {
+            viewPortInstruction.behavior = metadata.create(childContainer, {
+              executionContext: viewModel,
+              viewFactory: viewFactory,
+              suppressBind: true,
+              host: _this.element
+            });
+            if (waitToSwap) {
+              return ;
+            }
+            _this.swap(viewPortInstruction);
+          });
+        };
+        _RouterView.prototype.swap = function swap(viewPortInstruction) {
+          viewPortInstruction.behavior.view.bind(viewPortInstruction.behavior.executionContext);
+          this.viewSlot.swap(viewPortInstruction.behavior.view);
+          if (this.view) {
+            this.view.unbind();
+          }
+          this.view = viewPortInstruction.behavior.view;
+        };
+        RouterView = inject(Element, Container, ViewSlot, Router)(RouterView) || RouterView;
+        RouterView = noView(RouterView) || RouterView;
+        RouterView = customElement('router-view')(RouterView) || RouterView;
+        return RouterView;
+      })();
+      _export('RouterView', RouterView);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-router@0.13.0/route-href", ["github:aurelia/templating@0.12.1", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/router@0.9.0"], function(_export) {
+  'use strict';
+  var customAttribute,
+      bindable,
+      inject,
+      Router,
+      RouteHref;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaTemplating) {
+      customAttribute = _aureliaTemplating.customAttribute;
+      bindable = _aureliaTemplating.bindable;
+    }, function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaRouter) {
+      Router = _aureliaRouter.Router;
+    }],
+    execute: function() {
+      RouteHref = (function() {
+        function RouteHref(router, element) {
+          _classCallCheck(this, _RouteHref);
+          this.router = router;
+          this.element = element;
+        }
+        var _RouteHref = RouteHref;
+        _RouteHref.prototype.bind = function bind() {
+          this.processChange();
+        };
+        _RouteHref.prototype.attributeChanged = function attributeChanged(value, previous) {
+          if (previous) {
+            this.element.removeAttribute(previous);
+          }
+          this.processChange();
+        };
+        _RouteHref.prototype.processChange = function processChange() {
+          var href = this.router.generate(this.route, this.params);
+          this.element.setAttribute(this.attribute, href);
+        };
+        RouteHref = inject(Router, Element)(RouteHref) || RouteHref;
+        RouteHref = bindable({
+          name: 'attribute',
+          defaultValue: 'href'
+        })(RouteHref) || RouteHref;
+        RouteHref = bindable({
+          name: 'params',
+          changeHandler: 'processChange'
+        })(RouteHref) || RouteHref;
+        RouteHref = bindable({
+          name: 'route',
+          changeHandler: 'processChange'
+        })(RouteHref) || RouteHref;
+        RouteHref = customAttribute('route-href')(RouteHref) || RouteHref;
+        return RouteHref;
+      })();
+      _export('RouteHref', RouteHref);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/compose", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/task-queue@0.5.0", "github:aurelia/templating@0.12.1"], function(_export) {
+  'use strict';
+  var Container,
+      inject,
+      TaskQueue,
+      CompositionEngine,
+      ViewSlot,
+      ViewResources,
+      customElement,
+      bindable,
+      noView,
+      Compose;
+  var _createDecoratedClass = (function() {
+    function defineProperties(target, descriptors, initializers) {
+      for (var i = 0; i < descriptors.length; i++) {
+        var descriptor = descriptors[i];
+        var decorators = descriptor.decorators;
+        var key = descriptor.key;
+        delete descriptor.key;
+        delete descriptor.decorators;
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor || descriptor.initializer)
+          descriptor.writable = true;
+        if (decorators) {
+          for (var f = 0; f < decorators.length; f++) {
+            var decorator = decorators[f];
+            if (typeof decorator === 'function') {
+              descriptor = decorator(target, key, descriptor) || descriptor;
+            } else {
+              throw new TypeError('The decorator for method ' + descriptor.key + ' is of the invalid type ' + typeof decorator);
+            }
+          }
+          if (descriptor.initializer !== undefined) {
+            initializers[key] = descriptor;
+            continue;
+          }
+        }
+        Object.defineProperty(target, key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps, protoInitializers, staticInitializers) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps, protoInitializers);
+      if (staticProps)
+        defineProperties(Constructor, staticProps, staticInitializers);
+      return Constructor;
+    };
+  })();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _defineDecoratedPropertyDescriptor(target, key, descriptors) {
+    var _descriptor = descriptors[key];
+    if (!_descriptor)
+      return ;
+    var descriptor = {};
+    for (var _key in _descriptor)
+      descriptor[_key] = _descriptor[_key];
+    descriptor.value = descriptor.initializer.call(target);
+    Object.defineProperty(target, key, descriptor);
+  }
+  function createInstruction(composer, instruction) {
+    return Object.assign(instruction, {
+      executionContext: composer.executionContext,
+      container: composer.container,
+      viewSlot: composer.viewSlot,
+      viewResources: composer.viewResources,
+      currentBehavior: composer.currentBehavior,
+      host: composer.element
+    });
+  }
+  function processInstruction(composer, instruction) {
+    composer.currentInstruction = null;
+    composer.compositionEngine.compose(instruction).then(function(next) {
+      composer.currentBehavior = next;
+      composer.currentViewModel = next ? next.executionContext : null;
+    });
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      Container = _aureliaDependencyInjection.Container;
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTaskQueue) {
+      TaskQueue = _aureliaTaskQueue.TaskQueue;
+    }, function(_aureliaTemplating) {
+      CompositionEngine = _aureliaTemplating.CompositionEngine;
+      ViewSlot = _aureliaTemplating.ViewSlot;
+      ViewResources = _aureliaTemplating.ViewResources;
+      customElement = _aureliaTemplating.customElement;
+      bindable = _aureliaTemplating.bindable;
+      noView = _aureliaTemplating.noView;
+    }],
+    execute: function() {
+      Compose = (function() {
+        var _instanceInitializers = {};
+        function Compose(element, container, compositionEngine, viewSlot, viewResources, taskQueue) {
+          _classCallCheck(this, _Compose);
+          _defineDecoratedPropertyDescriptor(this, 'model', _instanceInitializers);
+          _defineDecoratedPropertyDescriptor(this, 'view', _instanceInitializers);
+          _defineDecoratedPropertyDescriptor(this, 'viewModel', _instanceInitializers);
+          this.element = element;
+          this.container = container;
+          this.compositionEngine = compositionEngine;
+          this.viewSlot = viewSlot;
+          this.viewResources = viewResources;
+          this.taskQueue = taskQueue;
+        }
+        var _Compose = Compose;
+        _Compose.prototype.bind = function bind(executionContext) {
+          this.executionContext = executionContext;
+          processInstruction(this, createInstruction(this, {
+            view: this.view,
+            viewModel: this.viewModel,
+            model: this.model
+          }));
+        };
+        _Compose.prototype.modelChanged = function modelChanged(newValue, oldValue) {
+          var _this = this;
+          if (this.currentInstruction) {
+            this.currentInstruction.model = newValue;
+            return ;
+          }
+          this.taskQueue.queueMicroTask(function() {
+            if (_this.currentInstruction) {
+              _this.currentInstruction.model = newValue;
+              return ;
+            }
+            var vm = _this.currentViewModel;
+            if (vm && typeof vm.activate === 'function') {
+              vm.activate(newValue);
+            }
+          });
+        };
+        _Compose.prototype.viewChanged = function viewChanged(newValue, oldValue) {
+          var _this2 = this;
+          var instruction = createInstruction(this, {
+            view: newValue,
+            viewModel: this.currentViewModel || this.viewModel,
+            model: this.model
+          });
+          if (this.currentInstruction) {
+            this.currentInstruction = instruction;
+            return ;
+          }
+          this.currentInstruction = instruction;
+          this.taskQueue.queueMicroTask(function() {
+            return processInstruction(_this2, _this2.currentInstruction);
+          });
+        };
+        _Compose.prototype.viewModelChanged = function viewModelChanged(newValue, oldValue) {
+          var _this3 = this;
+          var instruction = createInstruction(this, {
+            viewModel: newValue,
+            view: this.view,
+            model: this.model
+          });
+          if (this.currentInstruction) {
+            this.currentInstruction = instruction;
+            return ;
+          }
+          this.currentInstruction = instruction;
+          this.taskQueue.queueMicroTask(function() {
+            return processInstruction(_this3, _this3.currentInstruction);
+          });
+        };
+        _createDecoratedClass(_Compose, [{
+          key: 'model',
+          decorators: [bindable],
+          initializer: null,
+          enumerable: true
+        }, {
+          key: 'view',
+          decorators: [bindable],
+          initializer: null,
+          enumerable: true
+        }, {
+          key: 'viewModel',
+          decorators: [bindable],
+          initializer: null,
+          enumerable: true
+        }], null, _instanceInitializers);
+        Compose = inject(Element, Container, CompositionEngine, ViewSlot, ViewResources, TaskQueue)(Compose) || Compose;
+        Compose = noView(Compose) || Compose;
+        Compose = customElement('compose')(Compose) || Compose;
+        return Compose;
+      })();
+      _export('Compose', Compose);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/if", ["github:aurelia/templating@0.12.1", "github:aurelia/dependency-injection@0.8.1"], function(_export) {
+  'use strict';
+  var BoundViewFactory,
+      ViewSlot,
+      customAttribute,
+      templateController,
+      inject,
+      If;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaTemplating) {
+      BoundViewFactory = _aureliaTemplating.BoundViewFactory;
+      ViewSlot = _aureliaTemplating.ViewSlot;
+      customAttribute = _aureliaTemplating.customAttribute;
+      templateController = _aureliaTemplating.templateController;
+    }, function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }],
+    execute: function() {
+      If = (function() {
+        function If(viewFactory, viewSlot) {
+          _classCallCheck(this, _If);
+          this.viewFactory = viewFactory;
+          this.viewSlot = viewSlot;
+          this.showing = false;
+        }
+        var _If = If;
+        _If.prototype.bind = function bind(executionContext) {
+          this.executionContext = executionContext;
+          this.valueChanged(this.value);
+        };
+        _If.prototype.valueChanged = function valueChanged(newValue) {
+          if (!newValue) {
+            if (this.view) {
+              this.viewSlot.remove(this.view);
+              this.view.unbind();
+            }
+            this.showing = false;
+            return ;
+          }
+          if (!this.view) {
+            this.view = this.viewFactory.create(this.executionContext);
+          }
+          if (!this.showing) {
+            this.showing = true;
+            if (!this.view.isBound) {
+              this.view.bind();
+            }
+            this.viewSlot.add(this.view);
+          }
+        };
+        If = inject(BoundViewFactory, ViewSlot)(If) || If;
+        If = templateController(If) || If;
+        If = customAttribute('if')(If) || If;
+        return If;
+      })();
+      _export('If', If);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/with", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1"], function(_export) {
+  'use strict';
+  var inject,
+      BoundViewFactory,
+      ViewSlot,
+      customAttribute,
+      templateController,
+      With;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTemplating) {
+      BoundViewFactory = _aureliaTemplating.BoundViewFactory;
+      ViewSlot = _aureliaTemplating.ViewSlot;
+      customAttribute = _aureliaTemplating.customAttribute;
+      templateController = _aureliaTemplating.templateController;
+    }],
+    execute: function() {
+      With = (function() {
+        function With(viewFactory, viewSlot) {
+          _classCallCheck(this, _With);
+          this.viewFactory = viewFactory;
+          this.viewSlot = viewSlot;
+        }
+        var _With = With;
+        _With.prototype.valueChanged = function valueChanged(newValue) {
+          if (!this.view) {
+            this.view = this.viewFactory.create(newValue);
+            this.viewSlot.add(this.view);
+          } else {
+            this.view.bind(newValue);
+          }
+        };
+        With = inject(BoundViewFactory, ViewSlot)(With) || With;
+        With = templateController(With) || With;
+        With = customAttribute('with')(With) || With;
+        return With;
+      })();
+      _export('With', With);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/repeat", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/binding@0.7.3", "github:aurelia/templating@0.12.1"], function(_export) {
+  'use strict';
+  var inject,
+      ObserverLocator,
+      calcSplices,
+      getChangeRecords,
+      BoundViewFactory,
+      ViewSlot,
+      customAttribute,
+      bindable,
+      templateController,
+      Repeat;
+  var _createDecoratedClass = (function() {
+    function defineProperties(target, descriptors, initializers) {
+      for (var i = 0; i < descriptors.length; i++) {
+        var descriptor = descriptors[i];
+        var decorators = descriptor.decorators;
+        var key = descriptor.key;
+        delete descriptor.key;
+        delete descriptor.decorators;
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor || descriptor.initializer)
+          descriptor.writable = true;
+        if (decorators) {
+          for (var f = 0; f < decorators.length; f++) {
+            var decorator = decorators[f];
+            if (typeof decorator === 'function') {
+              descriptor = decorator(target, key, descriptor) || descriptor;
+            } else {
+              throw new TypeError('The decorator for method ' + descriptor.key + ' is of the invalid type ' + typeof decorator);
+            }
+          }
+          if (descriptor.initializer !== undefined) {
+            initializers[key] = descriptor;
+            continue;
+          }
+        }
+        Object.defineProperty(target, key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps, protoInitializers, staticInitializers) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps, protoInitializers);
+      if (staticProps)
+        defineProperties(Constructor, staticProps, staticInitializers);
+      return Constructor;
+    };
+  })();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _defineDecoratedPropertyDescriptor(target, key, descriptors) {
+    var _descriptor = descriptors[key];
+    if (!_descriptor)
+      return ;
+    var descriptor = {};
+    for (var _key in _descriptor)
+      descriptor[_key] = _descriptor[_key];
+    descriptor.value = descriptor.initializer.call(target);
+    Object.defineProperty(target, key, descriptor);
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaBinding) {
+      ObserverLocator = _aureliaBinding.ObserverLocator;
+      calcSplices = _aureliaBinding.calcSplices;
+      getChangeRecords = _aureliaBinding.getChangeRecords;
+    }, function(_aureliaTemplating) {
+      BoundViewFactory = _aureliaTemplating.BoundViewFactory;
+      ViewSlot = _aureliaTemplating.ViewSlot;
+      customAttribute = _aureliaTemplating.customAttribute;
+      bindable = _aureliaTemplating.bindable;
+      templateController = _aureliaTemplating.templateController;
+    }],
+    execute: function() {
+      Repeat = (function() {
+        var _instanceInitializers = {};
+        function Repeat(viewFactory, viewSlot, observerLocator) {
+          _classCallCheck(this, _Repeat);
+          _defineDecoratedPropertyDescriptor(this, 'items', _instanceInitializers);
+          _defineDecoratedPropertyDescriptor(this, 'local', _instanceInitializers);
+          _defineDecoratedPropertyDescriptor(this, 'key', _instanceInitializers);
+          _defineDecoratedPropertyDescriptor(this, 'value', _instanceInitializers);
+          this.viewFactory = viewFactory;
+          this.viewSlot = viewSlot;
+          this.observerLocator = observerLocator;
+          this.local = 'item';
+          this.key = 'key';
+          this.value = 'value';
+        }
+        var _Repeat = Repeat;
+        _Repeat.prototype.bind = function bind(executionContext) {
+          var _this = this;
+          var items = this.items,
+              observer;
+          this.executionContext = executionContext;
+          if (!items) {
+            if (this.oldItems) {
+              this.removeAll();
+            }
+            return ;
+          }
+          if (this.oldItems === items) {
+            if (items instanceof Map) {
+              var records = getChangeRecords(items);
+              observer = this.observerLocator.getMapObserver(items);
+              this.handleMapChangeRecords(items, records);
+              this.disposeSubscription = observer.subscribe(function(records) {
+                _this.handleMapChangeRecords(items, records);
+              });
+            } else {
+              var splices = calcSplices(items, 0, items.length, this.lastBoundItems, 0, this.lastBoundItems.length);
+              observer = this.observerLocator.getArrayObserver(items);
+              this.handleSplices(items, splices);
+              this.lastBoundItems = this.oldItems = null;
+              this.disposeSubscription = observer.subscribe(function(splices) {
+                _this.handleSplices(items, splices);
+              });
+              return ;
+            }
+          } else if (this.oldItems) {
+            this.removeAll();
+          }
+          this.processItems();
+        };
+        _Repeat.prototype.unbind = function unbind() {
+          this.oldItems = this.items;
+          if (this.items instanceof Array) {
+            this.lastBoundItems = this.items.slice(0);
+          }
+          if (this.disposeSubscription) {
+            this.disposeSubscription();
+            this.disposeSubscription = null;
+          }
+        };
+        _Repeat.prototype.itemsChanged = function itemsChanged() {
+          this.processItems();
+        };
+        _Repeat.prototype.processItems = function processItems() {
+          var items = this.items;
+          if (this.disposeSubscription) {
+            this.disposeSubscription();
+            this.removeAll();
+          }
+          if (!items) {
+            return ;
+          }
+          if (items instanceof Array) {
+            this.processArrayItems(items);
+          } else if (items instanceof Map) {
+            this.processMapEntries(items);
+          } else if (typeof items === 'number') {
+            this.processNumber(items);
+          } else {
+            throw new Error('Object in "repeat" must be of type Array, Map or Number');
+          }
+        };
+        _Repeat.prototype.processArrayItems = function processArrayItems(items) {
+          var _this2 = this;
+          var viewFactory = this.viewFactory,
+              viewSlot = this.viewSlot,
+              i,
+              ii,
+              row,
+              view,
+              observer;
+          observer = this.observerLocator.getArrayObserver(items);
+          for (i = 0, ii = items.length; i < ii; ++i) {
+            row = this.createFullExecutionContext(items[i], i, ii);
+            view = viewFactory.create(row);
+            viewSlot.add(view);
+          }
+          this.disposeSubscription = observer.subscribe(function(splices) {
+            _this2.handleSplices(items, splices);
+          });
+        };
+        _Repeat.prototype.processMapEntries = function processMapEntries(items) {
+          var _this3 = this;
+          var viewFactory = this.viewFactory,
+              viewSlot = this.viewSlot,
+              index = 0,
+              row,
+              view,
+              observer;
+          observer = this.observerLocator.getMapObserver(items);
+          items.forEach(function(value, key) {
+            row = _this3.createFullExecutionKvpContext(key, value, index, items.size);
+            view = viewFactory.create(row);
+            viewSlot.add(view);
+            ++index;
+          });
+          this.disposeSubscription = observer.subscribe(function(record) {
+            _this3.handleMapChangeRecords(items, record);
+          });
+        };
+        _Repeat.prototype.processNumber = function processNumber(value) {
+          var viewFactory = this.viewFactory,
+              viewSlot = this.viewSlot,
+              i,
+              ii,
+              row,
+              view;
+          for (i = 0, ii = Math.floor(value); i < ii; ++i) {
+            row = this.createFullExecutionContext(i, i, ii);
+            view = viewFactory.create(row);
+            viewSlot.add(view);
+          }
+        };
+        _Repeat.prototype.createBaseExecutionContext = function createBaseExecutionContext(data) {
+          var context = {};
+          context[this.local] = data;
+          context.$parent = this.executionContext;
+          return context;
+        };
+        _Repeat.prototype.createBaseExecutionKvpContext = function createBaseExecutionKvpContext(key, value) {
+          var context = {};
+          context[this.key] = key;
+          context[this.value] = value;
+          context.$parent = this.executionContext;
+          return context;
+        };
+        _Repeat.prototype.createFullExecutionContext = function createFullExecutionContext(data, index, length) {
+          var context = this.createBaseExecutionContext(data);
+          return this.updateExecutionContext(context, index, length);
+        };
+        _Repeat.prototype.createFullExecutionKvpContext = function createFullExecutionKvpContext(key, value, index, length) {
+          var context = this.createBaseExecutionKvpContext(key, value);
+          return this.updateExecutionContext(context, index, length);
+        };
+        _Repeat.prototype.updateExecutionContext = function updateExecutionContext(context, index, length) {
+          var first = index === 0,
+              last = index === length - 1,
+              even = index % 2 === 0;
+          context.$index = index;
+          context.$first = first;
+          context.$last = last;
+          context.$middle = !(first || last);
+          context.$odd = !even;
+          context.$even = even;
+          return context;
+        };
+        _Repeat.prototype.handleSplices = function handleSplices(array, splices) {
+          var viewLookup = new Map(),
+              viewSlot = this.viewSlot,
+              spliceIndexLow,
+              viewOrPromise,
+              view,
+              i,
+              ii,
+              j,
+              jj,
+              row,
+              splice,
+              addIndex,
+              end,
+              itemsLeftToAdd,
+              removed,
+              model,
+              children,
+              length;
+          for (i = 0, ii = splices.length; i < ii; ++i) {
+            splice = splices[i];
+            addIndex = splice.index;
+            itemsLeftToAdd = splice.addedCount;
+            end = splice.index + splice.addedCount;
+            removed = splice.removed;
+            if (typeof spliceIndexLow === 'undefined' || spliceIndexLow === null || spliceIndexLow > splice.index) {
+              spliceIndexLow = splice.index;
+            }
+            for (j = 0, jj = removed.length; j < jj; ++j) {
+              if (itemsLeftToAdd > 0) {
+                view = viewSlot.children[splice.index + j];
+                view.executionContext[this.local] = array[addIndex + j];
+                --itemsLeftToAdd;
+              } else {
+                viewOrPromise = viewSlot.removeAt(addIndex + splice.addedCount);
+                if (viewOrPromise) {
+                  viewLookup.set(removed[j], viewOrPromise);
+                }
+              }
+            }
+            addIndex += removed.length;
+            for (; 0 < itemsLeftToAdd; ++addIndex) {
+              model = array[addIndex];
+              viewOrPromise = viewLookup.get(model);
+              if (viewOrPromise instanceof Promise) {
+                (function(localAddIndex, localModel) {
+                  viewOrPromise.then(function(view) {
+                    viewLookup['delete'](localModel);
+                    viewSlot.insert(localAddIndex, view);
+                  });
+                })(addIndex, model);
+              } else if (viewOrPromise) {
+                viewLookup['delete'](model);
+                viewSlot.insert(addIndex, viewOrPromise);
+              } else {
+                row = this.createBaseExecutionContext(model);
+                view = this.viewFactory.create(row);
+                viewSlot.insert(addIndex, view);
+              }
+              --itemsLeftToAdd;
+            }
+          }
+          children = this.viewSlot.children;
+          length = children.length;
+          if (spliceIndexLow > 0) {
+            spliceIndexLow = spliceIndexLow - 1;
+          }
+          for (; spliceIndexLow < length; ++spliceIndexLow) {
+            this.updateExecutionContext(children[spliceIndexLow].executionContext, spliceIndexLow, length);
+          }
+          viewLookup.forEach(function(x) {
+            if (x instanceof Promise) {
+              x.then(function(y) {
+                return y.unbind();
+              });
+            } else {
+              x.unbind();
+            }
+          });
+        };
+        _Repeat.prototype.handleMapChangeRecords = function handleMapChangeRecords(map, records) {
+          var viewSlot = this.viewSlot,
+              key,
+              i,
+              ii,
+              view,
+              children,
+              length,
+              row,
+              removeIndex,
+              record;
+          for (i = 0, ii = records.length; i < ii; ++i) {
+            record = records[i];
+            key = record.key;
+            switch (record.type) {
+              case 'update':
+                removeIndex = this.getViewIndexByKey(key);
+                viewSlot.removeAt(removeIndex);
+                row = this.createBaseExecutionKvpContext(key, map.get(key));
+                view = this.viewFactory.create(row);
+                viewSlot.insert(removeIndex, view);
+                break;
+              case 'add':
+                row = this.createBaseExecutionKvpContext(key, map.get(key));
+                view = this.viewFactory.create(row);
+                viewSlot.insert(map.size, view);
+                break;
+              case 'delete':
+                if (!record.oldValue) {
+                  return ;
+                }
+                removeIndex = this.getViewIndexByKey(key);
+                viewSlot.removeAt(removeIndex);
+                break;
+              case 'clear':
+                viewSlot.removeAll();
+            }
+          }
+          children = viewSlot.children;
+          length = children.length;
+          for (i = 0; i < length; i++) {
+            this.updateExecutionContext(children[i].executionContext, i, length);
+          }
+        };
+        _Repeat.prototype.getViewIndexByKey = function getViewIndexByKey(key) {
+          var viewSlot = this.viewSlot,
+              i,
+              ii,
+              child;
+          for (i = 0, ii = viewSlot.children.length; i < ii; ++i) {
+            child = viewSlot.children[i];
+            if (child.bindings[0].source[this.key] === key) {
+              return i;
+            }
+          }
+        };
+        _Repeat.prototype.removeAll = function removeAll() {
+          var viewSlot = this.viewSlot,
+              views,
+              i;
+          views = viewSlot.children;
+          viewSlot.removeAll();
+          i = views.length;
+          while (i--) {
+            views[i].unbind();
+          }
+        };
+        _createDecoratedClass(_Repeat, [{
+          key: 'items',
+          decorators: [bindable],
+          initializer: null,
+          enumerable: true
+        }, {
+          key: 'local',
+          decorators: [bindable],
+          initializer: null,
+          enumerable: true
+        }, {
+          key: 'key',
+          decorators: [bindable],
+          initializer: null,
+          enumerable: true
+        }, {
+          key: 'value',
+          decorators: [bindable],
+          initializer: null,
+          enumerable: true
+        }], null, _instanceInitializers);
+        Repeat = inject(BoundViewFactory, ViewSlot, ObserverLocator)(Repeat) || Repeat;
+        Repeat = templateController(Repeat) || Repeat;
+        Repeat = customAttribute('repeat')(Repeat) || Repeat;
+        return Repeat;
+      })();
+      _export('Repeat', Repeat);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/show", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1"], function(_export) {
+  'use strict';
+  var inject,
+      customAttribute,
+      Show;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function addStyleString(str) {
+    var node = document.createElement('style');
+    node.innerHTML = str;
+    node.type = 'text/css';
+    document.head.appendChild(node);
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTemplating) {
+      customAttribute = _aureliaTemplating.customAttribute;
+    }],
+    execute: function() {
+      addStyleString('.aurelia-hide { display:none !important; }');
+      Show = (function() {
+        function Show(element) {
+          _classCallCheck(this, _Show);
+          this.element = element;
+        }
+        var _Show = Show;
+        _Show.prototype.valueChanged = function valueChanged(newValue) {
+          if (newValue) {
+            this.element.classList.remove('aurelia-hide');
+          } else {
+            this.element.classList.add('aurelia-hide');
+          }
+        };
+        Show = inject(Element)(Show) || Show;
+        Show = customAttribute('show')(Show) || Show;
+        return Show;
+      })();
+      _export('Show', Show);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/global-behavior", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1", "github:aurelia/logging@0.5.0"], function(_export) {
+  'use strict';
+  var inject,
+      customAttribute,
+      dynamicOptions,
+      AggregateError,
+      LogManager,
+      GlobalBehavior;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTemplating) {
+      customAttribute = _aureliaTemplating.customAttribute;
+      dynamicOptions = _aureliaTemplating.dynamicOptions;
+    }, function(_aureliaLogging) {
+      AggregateError = _aureliaLogging.AggregateError;
+      LogManager = _aureliaLogging;
+    }],
+    execute: function() {
+      GlobalBehavior = (function() {
+        function GlobalBehavior(element) {
+          _classCallCheck(this, _GlobalBehavior);
+          this.element = element;
+        }
+        var _GlobalBehavior = GlobalBehavior;
+        _GlobalBehavior.prototype.bind = function bind() {
+          var handler = GlobalBehavior.handlers[this.aureliaAttrName];
+          if (!handler) {
+            throw new Error('Binding handler not found for \'' + this.aureliaAttrName + '.' + this.aureliaCommand + '\'. Element:\n' + this.element.outerHTML + '\n');
+          }
+          try {
+            this.handler = handler.bind(this, this.element, this.aureliaCommand) || handler;
+          } catch (error) {
+            throw AggregateError('Conventional binding handler failed.', error);
+          }
+        };
+        _GlobalBehavior.prototype.attached = function attached() {
+          if (this.handler && 'attached' in this.handler) {
+            this.handler.attached(this, this.element);
+          }
+        };
+        _GlobalBehavior.prototype.detached = function detached() {
+          if (this.handler && 'detached' in this.handler) {
+            this.handler.detached(this, this.element);
+          }
+        };
+        _GlobalBehavior.prototype.unbind = function unbind() {
+          if (this.handler && 'unbind' in this.handler) {
+            this.handler.unbind(this, this.element);
+          }
+          this.handler = null;
+        };
+        GlobalBehavior = inject(Element)(GlobalBehavior) || GlobalBehavior;
+        GlobalBehavior = dynamicOptions(GlobalBehavior) || GlobalBehavior;
+        GlobalBehavior = customAttribute('global-behavior')(GlobalBehavior) || GlobalBehavior;
+        return GlobalBehavior;
+      })();
+      _export('GlobalBehavior', GlobalBehavior);
+      GlobalBehavior.createSettingsFromBehavior = function(behavior) {
+        var settings = {};
+        for (var key in behavior) {
+          if (key === 'aureliaAttrName' || key === 'aureliaCommand' || !behavior.hasOwnProperty(key)) {
+            continue;
+          }
+          settings[key] = behavior[key];
+        }
+        return settings;
+      };
+      GlobalBehavior.jQueryPlugins = {};
+      GlobalBehavior.handlers = {jquery: {
+          bind: function bind(behavior, element, command) {
+            var settings = GlobalBehavior.createSettingsFromBehavior(behavior);
+            var pluginName = GlobalBehavior.jQueryPlugins[command] || command;
+            var jqueryElement = window.jQuery(element);
+            if (!jqueryElement[pluginName]) {
+              LogManager.getLogger('templating-resources').warn('Could not find the jQuery plugin ' + pluginName + ', possibly due to case mismatch. Trying to enumerate jQuery methods in lowercase. Add the correctly cased plugin name to the GlobalBehavior to avoid this performance hit.');
+              for (var prop in jqueryElement) {
+                if (prop.toLowerCase() === pluginName) {
+                  pluginName = prop;
+                }
+              }
+            }
+            behavior.plugin = jqueryElement[pluginName](settings);
+          },
+          unbind: function unbind(behavior, element) {
+            if (typeof behavior.plugin.destroy === 'function') {
+              behavior.plugin.destroy();
+              behavior.plugin = null;
+            }
+          }
+        }};
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/sanitize-html", ["github:aurelia/binding@0.7.3"], function(_export) {
+  'use strict';
+  var valueConverter,
+      SCRIPT_REGEX,
+      SanitizeHtmlValueConverter;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaBinding) {
+      valueConverter = _aureliaBinding.valueConverter;
+    }],
+    execute: function() {
+      SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+      SanitizeHtmlValueConverter = (function() {
+        function SanitizeHtmlValueConverter() {
+          _classCallCheck(this, _SanitizeHtmlValueConverter);
+          this.sanitizer = SanitizeHtmlValueConverter.defaultSanitizer;
+        }
+        var _SanitizeHtmlValueConverter = SanitizeHtmlValueConverter;
+        _SanitizeHtmlValueConverter.defaultSanitizer = function defaultSanitizer(untrustedMarkup) {
+          return untrustedMarkup.replace(SCRIPT_REGEX, '');
+        };
+        _SanitizeHtmlValueConverter.prototype.toView = function toView(untrustedMarkup) {
+          if (untrustedMarkup === null) {
+            return null;
+          }
+          return this.sanitizer(untrustedMarkup);
+        };
+        SanitizeHtmlValueConverter = valueConverter('sanitizeHtml')(SanitizeHtmlValueConverter) || SanitizeHtmlValueConverter;
+        return SanitizeHtmlValueConverter;
+      })();
+      _export('SanitizeHtmlValueConverter', SanitizeHtmlValueConverter);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/replaceable", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1"], function(_export) {
+  'use strict';
+  var inject,
+      BoundViewFactory,
+      ViewSlot,
+      customAttribute,
+      templateController,
+      Replaceable;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTemplating) {
+      BoundViewFactory = _aureliaTemplating.BoundViewFactory;
+      ViewSlot = _aureliaTemplating.ViewSlot;
+      customAttribute = _aureliaTemplating.customAttribute;
+      templateController = _aureliaTemplating.templateController;
+    }],
+    execute: function() {
+      Replaceable = (function() {
+        function Replaceable(viewFactory, viewSlot) {
+          _classCallCheck(this, _Replaceable);
+          viewSlot.add(viewFactory.create());
+        }
+        var _Replaceable = Replaceable;
+        Replaceable = inject(BoundViewFactory, ViewSlot)(Replaceable) || Replaceable;
+        Replaceable = templateController(Replaceable) || Replaceable;
+        Replaceable = customAttribute('replaceable')(Replaceable) || Replaceable;
+        return Replaceable;
+      })();
+      _export('Replaceable', Replaceable);
+    }
+  };
+});
+
+System.register("github:aurelia/templating-resources@0.12.1/focus", ["github:aurelia/templating@0.12.1", "github:aurelia/binding@0.7.3", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/task-queue@0.5.0"], function(_export) {
+  'use strict';
+  var customAttribute,
+      bindingMode,
+      inject,
+      TaskQueue,
+      Focus;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  return {
+    setters: [function(_aureliaTemplating) {
+      customAttribute = _aureliaTemplating.customAttribute;
+    }, function(_aureliaBinding) {
+      bindingMode = _aureliaBinding.bindingMode;
+    }, function(_aureliaDependencyInjection) {
+      inject = _aureliaDependencyInjection.inject;
+    }, function(_aureliaTaskQueue) {
+      TaskQueue = _aureliaTaskQueue.TaskQueue;
+    }],
+    execute: function() {
+      Focus = (function() {
+        function Focus(element, taskQueue) {
+          var _this = this;
+          _classCallCheck(this, _Focus);
+          this.element = element;
+          this.taskQueue = taskQueue;
+          this.focusListener = function(e) {
+            _this.value = true;
+          };
+          this.blurListener = function(e) {
+            if (document.activeElement !== _this.element) {
+              _this.value = false;
+            }
+          };
+        }
+        var _Focus = Focus;
+        _Focus.prototype.valueChanged = function valueChanged(newValue) {
+          if (newValue) {
+            this.giveFocus();
+          } else {
+            this.element.blur();
+          }
+        };
+        _Focus.prototype.giveFocus = function giveFocus() {
+          var _this2 = this;
+          this.taskQueue.queueMicroTask(function() {
+            if (_this2.value) {
+              _this2.element.focus();
+            }
+          });
+        };
+        _Focus.prototype.attached = function attached() {
+          this.element.addEventListener('focus', this.focusListener);
+          this.element.addEventListener('blur', this.blurListener);
+        };
+        _Focus.prototype.detached = function detached() {
+          this.element.removeEventListener('focus', this.focusListener);
+          this.element.removeEventListener('blur', this.blurListener);
+        };
+        Focus = inject(Element, TaskQueue)(Focus) || Focus;
+        Focus = customAttribute('focus', bindingMode.twoWay)(Focus) || Focus;
+        return Focus;
+      })();
+      _export('Focus', Focus);
     }
   };
 });
@@ -9044,952 +11283,33 @@ System.register("github:aurelia/event-aggregator@0.4.0/index", [], function(_exp
   };
 });
 
-System.register("github:aurelia/templating-router@0.12.0/route-loader", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2", "github:aurelia/router@0.8.0", "github:aurelia/path@0.6.1", "github:aurelia/metadata@0.5.0"], function(_export) {
-  var inject,
-      CompositionEngine,
-      RouteLoader,
-      Router,
-      relativeToFile,
-      Origin,
-      _classCallCheck,
-      _inherits,
-      TemplatingRouteLoader;
-  return {
-    setters: [function(_aureliaDependencyInjection) {
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaTemplating) {
-      CompositionEngine = _aureliaTemplating.CompositionEngine;
-    }, function(_aureliaRouter) {
-      RouteLoader = _aureliaRouter.RouteLoader;
-      Router = _aureliaRouter.Router;
-    }, function(_aureliaPath) {
-      relativeToFile = _aureliaPath.relativeToFile;
-    }, function(_aureliaMetadata) {
-      Origin = _aureliaMetadata.Origin;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
-      TemplatingRouteLoader = (function(_RouteLoader) {
-        function TemplatingRouteLoader(compositionEngine) {
-          _classCallCheck(this, _TemplatingRouteLoader);
-          _RouteLoader.call(this);
-          this.compositionEngine = compositionEngine;
-        }
-        _inherits(TemplatingRouteLoader, _RouteLoader);
-        var _TemplatingRouteLoader = TemplatingRouteLoader;
-        _TemplatingRouteLoader.prototype.loadRoute = function loadRoute(router, config) {
-          var childContainer = router.container.createChild(),
-              instruction = {
-                viewModel: relativeToFile(config.moduleId, Origin.get(router.container.viewModel.constructor).moduleId),
-                childContainer: childContainer,
-                view: config.view || config.viewStrategy
-              };
-          childContainer.getChildRouter = function() {
-            var childRouter;
-            childContainer.registerHandler(Router, function(c) {
-              return childRouter || (childRouter = router.createChild(childContainer));
-            });
-            return childContainer.get(Router);
-          };
-          return this.compositionEngine.createViewModel(instruction).then(function(instruction) {
-            instruction.executionContext = instruction.viewModel;
-            instruction.router = router;
-            return instruction;
-          });
-        };
-        TemplatingRouteLoader = inject(CompositionEngine)(TemplatingRouteLoader) || TemplatingRouteLoader;
-        return TemplatingRouteLoader;
-      })(RouteLoader);
-      _export('TemplatingRouteLoader', TemplatingRouteLoader);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-router@0.12.0/router-view", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2", "github:aurelia/router@0.8.0", "github:aurelia/metadata@0.5.0"], function(_export) {
-  var Container,
-      inject,
-      ViewSlot,
-      ViewStrategy,
-      customElement,
-      noView,
-      Router,
-      Metadata,
-      Origin,
-      _classCallCheck,
-      RouterView;
-  return {
-    setters: [function(_aureliaDependencyInjection) {
-      Container = _aureliaDependencyInjection.Container;
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaTemplating) {
-      ViewSlot = _aureliaTemplating.ViewSlot;
-      ViewStrategy = _aureliaTemplating.ViewStrategy;
-      customElement = _aureliaTemplating.customElement;
-      noView = _aureliaTemplating.noView;
-    }, function(_aureliaRouter) {
-      Router = _aureliaRouter.Router;
-    }, function(_aureliaMetadata) {
-      Metadata = _aureliaMetadata.Metadata;
-      Origin = _aureliaMetadata.Origin;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      RouterView = (function() {
-        function RouterView(element, container, viewSlot, router) {
-          _classCallCheck(this, _RouterView);
-          this.element = element;
-          this.container = container;
-          this.viewSlot = viewSlot;
-          this.router = router;
-          this.router.registerViewPort(this, this.element.getAttribute('name'));
-        }
-        var _RouterView = RouterView;
-        _RouterView.prototype.bind = function bind(executionContext) {
-          this.container.viewModel = executionContext;
-        };
-        _RouterView.prototype.process = function process(viewPortInstruction, waitToSwap) {
-          var _this = this;
-          var component = viewPortInstruction.component,
-              viewStrategy = component.view,
-              childContainer = component.childContainer,
-              viewModel = component.executionContext,
-              viewModelResource = component.viewModelResource,
-              metadata = viewModelResource.metadata;
-          if (!viewStrategy && 'getViewStrategy' in viewModel) {
-            viewStrategy = viewModel.getViewStrategy();
-          }
-          if (viewStrategy) {
-            viewStrategy = ViewStrategy.normalize(viewStrategy);
-            viewStrategy.makeRelativeTo(Origin.get(component.router.container.viewModel.constructor).moduleId);
-          }
-          return metadata.load(childContainer, viewModelResource.value, viewStrategy, true).then(function(viewFactory) {
-            viewPortInstruction.behavior = metadata.create(childContainer, {
-              executionContext: viewModel,
-              viewFactory: viewFactory,
-              suppressBind: true
-            });
-            if (waitToSwap) {
-              return ;
-            }
-            _this.swap(viewPortInstruction);
-          });
-        };
-        _RouterView.prototype.swap = function swap(viewPortInstruction) {
-          viewPortInstruction.behavior.view.bind(viewPortInstruction.behavior.executionContext);
-          this.viewSlot.swap(viewPortInstruction.behavior.view);
-          if (this.view) {
-            this.view.unbind();
-          }
-          this.view = viewPortInstruction.behavior.view;
-        };
-        RouterView = inject(Element, Container, ViewSlot, Router)(RouterView) || RouterView;
-        RouterView = noView(RouterView) || RouterView;
-        RouterView = customElement('router-view')(RouterView) || RouterView;
-        return RouterView;
-      })();
-      _export('RouterView', RouterView);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-router@0.12.0/route-href", ["github:aurelia/templating@0.11.2", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/router@0.8.0"], function(_export) {
-  var customAttribute,
-      bindable,
-      inject,
-      Router,
-      _classCallCheck,
-      RouteHref;
-  return {
-    setters: [function(_aureliaTemplating) {
-      customAttribute = _aureliaTemplating.customAttribute;
-      bindable = _aureliaTemplating.bindable;
-    }, function(_aureliaDependencyInjection) {
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaRouter) {
-      Router = _aureliaRouter.Router;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      RouteHref = (function() {
-        function RouteHref(router, element) {
-          _classCallCheck(this, _RouteHref);
-          this.router = router;
-          this.element = element;
-        }
-        var _RouteHref = RouteHref;
-        _RouteHref.prototype.bind = function bind() {
-          this.processChange();
-        };
-        _RouteHref.prototype.attributeChanged = function attributeChanged(value, previous) {
-          if (previous) {
-            this.element.removeAttribute(previous);
-          }
-          this.processChange();
-        };
-        _RouteHref.prototype.processChange = function processChange() {
-          var href = this.router.generate(this.route, this.params);
-          this.element.setAttribute(this.attribute, href);
-        };
-        RouteHref = inject(Router, Element)(RouteHref) || RouteHref;
-        RouteHref = bindable({
-          name: 'attribute',
-          defaultValue: 'href'
-        })(RouteHref) || RouteHref;
-        RouteHref = bindable({
-          name: 'params',
-          changeHandler: 'processChange'
-        })(RouteHref) || RouteHref;
-        RouteHref = bindable({
-          name: 'route',
-          changeHandler: 'processChange'
-        })(RouteHref) || RouteHref;
-        RouteHref = customAttribute('route-href')(RouteHref) || RouteHref;
-        return RouteHref;
-      })();
-      _export('RouteHref', RouteHref);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-resources@0.11.0/compose", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2"], function(_export) {
-  var Container,
-      inject,
-      CompositionEngine,
-      ViewSlot,
-      ViewResources,
-      customElement,
-      bindable,
-      noView,
-      _classCallCheck,
-      Compose;
-  function processInstruction(composer, instruction) {
-    composer.compositionEngine.compose(Object.assign(instruction, {
-      executionContext: composer.executionContext,
-      container: composer.container,
-      viewSlot: composer.viewSlot,
-      viewResources: composer.viewResources,
-      currentBehavior: composer.currentBehavior
-    })).then(function(next) {
-      composer.currentBehavior = next;
-      composer.currentViewModel = next ? next.executionContext : null;
-    });
-  }
-  return {
-    setters: [function(_aureliaDependencyInjection) {
-      Container = _aureliaDependencyInjection.Container;
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaTemplating) {
-      CompositionEngine = _aureliaTemplating.CompositionEngine;
-      ViewSlot = _aureliaTemplating.ViewSlot;
-      ViewResources = _aureliaTemplating.ViewResources;
-      customElement = _aureliaTemplating.customElement;
-      bindable = _aureliaTemplating.bindable;
-      noView = _aureliaTemplating.noView;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      Compose = (function() {
-        function Compose(container, compositionEngine, viewSlot, viewResources) {
-          _classCallCheck(this, _Compose);
-          this.container = container;
-          this.compositionEngine = compositionEngine;
-          this.viewSlot = viewSlot;
-          this.viewResources = viewResources;
-        }
-        var _Compose = Compose;
-        _Compose.prototype.bind = function bind(executionContext) {
-          this.executionContext = executionContext;
-          processInstruction(this, {
-            view: this.view,
-            viewModel: this.viewModel,
-            model: this.model
-          });
-        };
-        _Compose.prototype.modelChanged = function modelChanged(newValue, oldValue) {
-          var vm = this.currentViewModel;
-          if (vm && typeof vm.activate === 'function') {
-            vm.activate(newValue);
-          }
-        };
-        _Compose.prototype.viewChanged = function viewChanged(newValue, oldValue) {
-          processInstruction(this, {
-            view: newValue,
-            viewModel: this.currentViewModel || this.viewModel,
-            model: this.model
-          });
-        };
-        _Compose.prototype.viewModelChanged = function viewModelChanged(newValue, oldValue) {
-          processInstruction(this, {
-            viewModel: newValue,
-            view: this.view,
-            model: this.model
-          });
-        };
-        Compose = inject(Container, CompositionEngine, ViewSlot, ViewResources)(Compose) || Compose;
-        Compose = noView(Compose) || Compose;
-        Compose = bindable('viewModel')(Compose) || Compose;
-        Compose = bindable('view')(Compose) || Compose;
-        Compose = bindable('model')(Compose) || Compose;
-        Compose = customElement('compose')(Compose) || Compose;
-        return Compose;
-      })();
-      _export('Compose', Compose);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-resources@0.11.0/if", ["github:aurelia/templating@0.11.2", "github:aurelia/dependency-injection@0.7.1"], function(_export) {
-  var BoundViewFactory,
-      ViewSlot,
-      customAttribute,
-      templateController,
-      inject,
-      _classCallCheck,
-      If;
-  return {
-    setters: [function(_aureliaTemplating) {
-      BoundViewFactory = _aureliaTemplating.BoundViewFactory;
-      ViewSlot = _aureliaTemplating.ViewSlot;
-      customAttribute = _aureliaTemplating.customAttribute;
-      templateController = _aureliaTemplating.templateController;
-    }, function(_aureliaDependencyInjection) {
-      inject = _aureliaDependencyInjection.inject;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      If = (function() {
-        function If(viewFactory, viewSlot) {
-          _classCallCheck(this, _If);
-          this.viewFactory = viewFactory;
-          this.viewSlot = viewSlot;
-          this.showing = false;
-        }
-        var _If = If;
-        _If.prototype.valueChanged = function valueChanged(newValue) {
-          if (!newValue) {
-            if (this.view) {
-              this.viewSlot.remove(this.view);
-              this.view.unbind();
-            }
-            this.showing = false;
-            return ;
-          }
-          if (!this.view) {
-            this.view = this.viewFactory.create();
-          }
-          if (!this.showing) {
-            this.showing = true;
-            if (!this.view.bound) {
-              this.view.bind();
-            }
-            this.viewSlot.add(this.view);
-          }
-        };
-        If = inject(BoundViewFactory, ViewSlot)(If) || If;
-        If = templateController(If) || If;
-        If = customAttribute('if')(If) || If;
-        return If;
-      })();
-      _export('If', If);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-resources@0.11.0/with", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2"], function(_export) {
-  var inject,
-      BoundViewFactory,
-      ViewSlot,
-      customAttribute,
-      templateController,
-      _classCallCheck,
-      With;
-  return {
-    setters: [function(_aureliaDependencyInjection) {
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaTemplating) {
-      BoundViewFactory = _aureliaTemplating.BoundViewFactory;
-      ViewSlot = _aureliaTemplating.ViewSlot;
-      customAttribute = _aureliaTemplating.customAttribute;
-      templateController = _aureliaTemplating.templateController;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      With = (function() {
-        function With(viewFactory, viewSlot) {
-          _classCallCheck(this, _With);
-          this.viewFactory = viewFactory;
-          this.viewSlot = viewSlot;
-        }
-        var _With = With;
-        _With.prototype.valueChanged = function valueChanged(newValue) {
-          if (!this.view) {
-            this.view = this.viewFactory.create(newValue);
-            this.viewSlot.add(this.view);
-          } else {
-            this.view.bind(newValue);
-          }
-        };
-        With = inject(BoundViewFactory, ViewSlot)(With) || With;
-        With = templateController(With) || With;
-        With = customAttribute('with')(With) || With;
-        return With;
-      })();
-      _export('With', With);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-resources@0.11.0/repeat", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/binding@0.6.1", "github:aurelia/templating@0.11.2"], function(_export) {
-  var inject,
-      ObserverLocator,
-      calcSplices,
-      getChangeRecords,
-      BoundViewFactory,
-      ViewSlot,
-      customAttribute,
-      bindable,
-      templateController,
-      _classCallCheck,
-      Repeat;
-  return {
-    setters: [function(_aureliaDependencyInjection) {
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaBinding) {
-      ObserverLocator = _aureliaBinding.ObserverLocator;
-      calcSplices = _aureliaBinding.calcSplices;
-      getChangeRecords = _aureliaBinding.getChangeRecords;
-    }, function(_aureliaTemplating) {
-      BoundViewFactory = _aureliaTemplating.BoundViewFactory;
-      ViewSlot = _aureliaTemplating.ViewSlot;
-      customAttribute = _aureliaTemplating.customAttribute;
-      bindable = _aureliaTemplating.bindable;
-      templateController = _aureliaTemplating.templateController;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      Repeat = (function() {
-        function Repeat(viewFactory, viewSlot, observerLocator) {
-          _classCallCheck(this, _Repeat);
-          this.viewFactory = viewFactory;
-          this.viewSlot = viewSlot;
-          this.observerLocator = observerLocator;
-          this.local = 'item';
-          this.key = 'key';
-          this.value = 'value';
-        }
-        var _Repeat = Repeat;
-        _Repeat.prototype.bind = function bind(executionContext) {
-          var _this = this;
-          var items = this.items,
-              observer;
-          this.executionContext = executionContext;
-          if (!items) {
-            if (this.oldItems) {
-              this.viewSlot.removeAll();
-            }
-            return ;
-          }
-          if (this.oldItems === items) {
-            if (items instanceof Map) {
-              var records = getChangeRecords(items);
-              observer = this.observerLocator.getMapObserver(items);
-              this.handleMapChangeRecords(items, records);
-              this.disposeSubscription = observer.subscribe(function(records) {
-                _this.handleMapChangeRecords(items, records);
-              });
-            } else {
-              var splices = calcSplices(items, 0, items.length, this.lastBoundItems, 0, this.lastBoundItems.length);
-              observer = this.observerLocator.getArrayObserver(items);
-              this.handleSplices(items, splices);
-              this.lastBoundItems = this.oldItems = null;
-              this.disposeSubscription = observer.subscribe(function(splices) {
-                _this.handleSplices(items, splices);
-              });
-            }
-          } else {
-            this.processItems();
-          }
-        };
-        _Repeat.prototype.unbind = function unbind() {
-          this.oldItems = this.items;
-          if (this.items instanceof Array) {
-            this.lastBoundItems = this.items.slice(0);
-          }
-          if (this.disposeSubscription) {
-            this.disposeSubscription();
-            this.disposeSubscription = null;
-          }
-        };
-        _Repeat.prototype.itemsChanged = function itemsChanged() {
-          this.processItems();
-        };
-        _Repeat.prototype.processItems = function processItems() {
-          var items = this.items,
-              viewSlot = this.viewSlot;
-          if (this.disposeSubscription) {
-            this.disposeSubscription();
-            viewSlot.removeAll();
-          }
-          if (!items) {
-            return ;
-          }
-          if (items instanceof Map) {
-            this.processMapEntries(items);
-          } else {
-            this.processArrayItems(items);
-          }
-        };
-        _Repeat.prototype.processArrayItems = function processArrayItems(items) {
-          var _this2 = this;
-          var viewFactory = this.viewFactory,
-              viewSlot = this.viewSlot,
-              i,
-              ii,
-              row,
-              view,
-              observer;
-          observer = this.observerLocator.getArrayObserver(items);
-          for (i = 0, ii = items.length; i < ii; ++i) {
-            row = this.createFullExecutionContext(items[i], i, ii);
-            view = viewFactory.create(row);
-            viewSlot.add(view);
-          }
-          this.disposeSubscription = observer.subscribe(function(splices) {
-            _this2.handleSplices(items, splices);
-          });
-        };
-        _Repeat.prototype.processMapEntries = function processMapEntries(items) {
-          var _this3 = this;
-          var viewFactory = this.viewFactory,
-              viewSlot = this.viewSlot,
-              index = 0,
-              row,
-              view,
-              observer;
-          observer = this.observerLocator.getMapObserver(items);
-          items.forEach(function(value, key) {
-            row = _this3.createFullExecutionKvpContext(key, value, index, items.size);
-            view = viewFactory.create(row);
-            viewSlot.add(view);
-            ++index;
-          });
-          this.disposeSubscription = observer.subscribe(function(record) {
-            _this3.handleMapChangeRecords(items, record);
-          });
-        };
-        _Repeat.prototype.createBaseExecutionContext = function createBaseExecutionContext(data) {
-          var context = {};
-          context[this.local] = data;
-          context.$parent = this.executionContext;
-          return context;
-        };
-        _Repeat.prototype.createBaseExecutionKvpContext = function createBaseExecutionKvpContext(key, value) {
-          var context = {};
-          context[this.key] = key;
-          context[this.value] = value;
-          context.$parent = this.executionContext;
-          return context;
-        };
-        _Repeat.prototype.createFullExecutionContext = function createFullExecutionContext(data, index, length) {
-          var context = this.createBaseExecutionContext(data);
-          return this.updateExecutionContext(context, index, length);
-        };
-        _Repeat.prototype.createFullExecutionKvpContext = function createFullExecutionKvpContext(key, value, index, length) {
-          var context = this.createBaseExecutionKvpContext(key, value);
-          return this.updateExecutionContext(context, index, length);
-        };
-        _Repeat.prototype.updateExecutionContext = function updateExecutionContext(context, index, length) {
-          var first = index === 0,
-              last = index === length - 1,
-              even = index % 2 === 0;
-          context.$index = index;
-          context.$first = first;
-          context.$last = last;
-          context.$middle = !(first || last);
-          context.$odd = !even;
-          context.$even = even;
-          return context;
-        };
-        _Repeat.prototype.handleSplices = function handleSplices(array, splices) {
-          var viewLookup = new Map(),
-              viewSlot = this.viewSlot,
-              spliceIndexLow,
-              view,
-              i,
-              ii,
-              j,
-              jj,
-              row,
-              splice,
-              addIndex,
-              end,
-              itemsLeftToAdd,
-              removed,
-              model,
-              children,
-              length;
-          for (i = 0, ii = splices.length; i < ii; ++i) {
-            splice = splices[i];
-            addIndex = splice.index;
-            itemsLeftToAdd = splice.addedCount;
-            end = splice.index + splice.addedCount;
-            removed = splice.removed;
-            if (typeof spliceIndexLow === 'undefined' || spliceIndexLow === null || spliceIndexLow > splice.index) {
-              spliceIndexLow = splice.index;
-            }
-            for (j = 0, jj = removed.length; j < jj; ++j) {
-              if (itemsLeftToAdd > 0) {
-                view = viewSlot.children[splice.index + j];
-                view.executionContext[this.local] = array[addIndex + j];
-                --itemsLeftToAdd;
-              } else {
-                view = viewSlot.removeAt(addIndex + splice.addedCount);
-                if (view) {
-                  viewLookup.set(removed[j], view);
-                }
-              }
-            }
-            addIndex += removed.length;
-            for (; 0 < itemsLeftToAdd; ++addIndex) {
-              model = array[addIndex];
-              view = viewLookup.get(model);
-              if (view) {
-                viewLookup['delete'](model);
-                viewSlot.insert(addIndex, view);
-              } else {
-                row = this.createBaseExecutionContext(model);
-                view = this.viewFactory.create(row);
-                viewSlot.insert(addIndex, view);
-              }
-              --itemsLeftToAdd;
-            }
-          }
-          children = this.viewSlot.children;
-          length = children.length;
-          if (spliceIndexLow > 0) {
-            spliceIndexLow = spliceIndexLow - 1;
-          }
-          for (; spliceIndexLow < length; ++spliceIndexLow) {
-            this.updateExecutionContext(children[spliceIndexLow].executionContext, spliceIndexLow, length);
-          }
-          viewLookup.forEach(function(x) {
-            return x.unbind();
-          });
-        };
-        _Repeat.prototype.handleMapChangeRecords = function handleMapChangeRecords(map, records) {
-          var viewSlot = this.viewSlot,
-              key,
-              i,
-              ii,
-              view,
-              children,
-              length,
-              row,
-              removeIndex,
-              record;
-          for (i = 0, ii = records.length; i < ii; ++i) {
-            record = records[i];
-            key = record.key;
-            switch (record.type) {
-              case 'update':
-                removeIndex = this.getViewIndexByKey(key);
-                viewSlot.removeAt(removeIndex);
-                row = this.createBaseExecutionKvpContext(key, map.get(key));
-                view = this.viewFactory.create(row);
-                viewSlot.insert(removeIndex, view);
-                break;
-              case 'add':
-                row = this.createBaseExecutionKvpContext(key, map.get(key));
-                view = this.viewFactory.create(row);
-                viewSlot.insert(map.size, view);
-                break;
-              case 'delete':
-                if (!record.oldValue) {
-                  return ;
-                }
-                removeIndex = this.getViewIndexByKey(key);
-                viewSlot.removeAt(removeIndex);
-                break;
-              case 'clear':
-                viewSlot.removeAll();
-            }
-          }
-          children = viewSlot.children;
-          length = children.length;
-          for (i = 0; i < length; i++) {
-            this.updateExecutionContext(children[i].executionContext, i, length);
-          }
-        };
-        _Repeat.prototype.getViewIndexByKey = function getViewIndexByKey(key) {
-          var viewSlot = this.viewSlot,
-              i,
-              ii,
-              child;
-          for (i = 0, ii = viewSlot.children.length; i < ii; ++i) {
-            child = viewSlot.children[i];
-            if (child.bindings[0].source[this.key] === key) {
-              return i;
-            }
-          }
-        };
-        Repeat = inject(BoundViewFactory, ViewSlot, ObserverLocator)(Repeat) || Repeat;
-        Repeat = templateController(Repeat) || Repeat;
-        Repeat = bindable('value')(Repeat) || Repeat;
-        Repeat = bindable('key')(Repeat) || Repeat;
-        Repeat = bindable('local')(Repeat) || Repeat;
-        Repeat = bindable('items')(Repeat) || Repeat;
-        Repeat = customAttribute('repeat')(Repeat) || Repeat;
-        return Repeat;
-      })();
-      _export('Repeat', Repeat);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-resources@0.11.0/show", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2"], function(_export) {
-  var inject,
-      customAttribute,
-      _classCallCheck,
-      Show;
-  function addStyleString(str) {
-    var node = document.createElement('style');
-    node.innerHTML = str;
-    node.type = 'text/css';
-    document.head.appendChild(node);
-  }
-  return {
-    setters: [function(_aureliaDependencyInjection) {
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaTemplating) {
-      customAttribute = _aureliaTemplating.customAttribute;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      addStyleString('.aurelia-hide { display:none !important; }');
-      Show = (function() {
-        function Show(element) {
-          _classCallCheck(this, _Show);
-          this.element = element;
-        }
-        var _Show = Show;
-        _Show.prototype.valueChanged = function valueChanged(newValue) {
-          if (newValue) {
-            this.element.classList.remove('aurelia-hide');
-          } else {
-            this.element.classList.add('aurelia-hide');
-          }
-        };
-        Show = inject(Element)(Show) || Show;
-        Show = customAttribute('show')(Show) || Show;
-        return Show;
-      })();
-      _export('Show', Show);
-    }
-  };
-});
-
-System.register("github:aurelia/templating-resources@0.11.0/global-behavior", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2", "github:aurelia/logging@0.4.0"], function(_export) {
-  var inject,
-      customAttribute,
-      dynamicOptions,
-      AggregateError,
-      LogManager,
-      _classCallCheck,
-      GlobalBehavior;
-  return {
-    setters: [function(_aureliaDependencyInjection) {
-      inject = _aureliaDependencyInjection.inject;
-    }, function(_aureliaTemplating) {
-      customAttribute = _aureliaTemplating.customAttribute;
-      dynamicOptions = _aureliaTemplating.dynamicOptions;
-    }, function(_aureliaLogging) {
-      AggregateError = _aureliaLogging.AggregateError;
-      LogManager = _aureliaLogging;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      GlobalBehavior = (function() {
-        function GlobalBehavior(element) {
-          _classCallCheck(this, _GlobalBehavior);
-          this.element = element;
-        }
-        var _GlobalBehavior = GlobalBehavior;
-        _GlobalBehavior.prototype.bind = function bind() {
-          var handler = GlobalBehavior.handlers[this.aureliaAttrName];
-          if (!handler) {
-            throw new Error('Binding handler not found for \'' + this.aureliaAttrName + '.' + this.aureliaCommand + '\'. Element:\n' + this.element.outerHTML + '\n');
-          }
-          try {
-            this.handler = handler.bind(this, this.element, this.aureliaCommand) || handler;
-          } catch (error) {
-            throw AggregateError('Conventional binding handler failed.', error);
-          }
-        };
-        _GlobalBehavior.prototype.attached = function attached() {
-          if (this.handler && 'attached' in this.handler) {
-            this.handler.attached(this, this.element);
-          }
-        };
-        _GlobalBehavior.prototype.detached = function detached() {
-          if (this.handler && 'detached' in this.handler) {
-            this.handler.detached(this, this.element);
-          }
-        };
-        _GlobalBehavior.prototype.unbind = function unbind() {
-          if (this.handler && 'unbind' in this.handler) {
-            this.handler.unbind(this, this.element);
-          }
-          this.handler = null;
-        };
-        GlobalBehavior = inject(Element)(GlobalBehavior) || GlobalBehavior;
-        GlobalBehavior = dynamicOptions(GlobalBehavior) || GlobalBehavior;
-        GlobalBehavior = customAttribute('global-behavior')(GlobalBehavior) || GlobalBehavior;
-        return GlobalBehavior;
-      })();
-      _export('GlobalBehavior', GlobalBehavior);
-      GlobalBehavior.createSettingsFromBehavior = function(behavior) {
-        var settings = {};
-        for (var key in behavior) {
-          if (key === 'aureliaAttrName' || key === 'aureliaCommand' || !behavior.hasOwnProperty(key)) {
-            continue;
-          }
-          settings[key] = behavior[key];
-        }
-        return settings;
-      };
-      GlobalBehavior.jQueryPlugins = {};
-      GlobalBehavior.handlers = {jquery: {
-          bind: function bind(behavior, element, command) {
-            var settings = GlobalBehavior.createSettingsFromBehavior(behavior);
-            var pluginName = GlobalBehavior.jQueryPlugins[command] || command;
-            var jqueryElement = window.jQuery(element);
-            if (!jqueryElement[pluginName]) {
-              LogManager.getLogger('templating-resources').warn('Could not find the jQuery plugin ' + pluginName + ', possibly due to case mismatch. Trying to enumerate jQuery methods in lowercase. Add the correctly cased plugin name to the GlobalBehavior to avoid this performance hit.');
-              for (var prop in jqueryElement) {
-                if (prop.toLowerCase() === pluginName) {
-                  pluginName = prop;
-                }
-              }
-            }
-            behavior.plugin = jqueryElement[pluginName](settings);
-          },
-          unbind: function unbind(behavior, element) {
-            if (typeof behavior.plugin.destroy === 'function') {
-              behavior.plugin.destroy();
-              behavior.plugin = null;
-            }
-          }
-        }};
-    }
-  };
-});
-
-System.register("github:aurelia/templating-resources@0.11.0/sanitize-html", ["github:aurelia/binding@0.6.1"], function(_export) {
-  var valueConverter,
-      _classCallCheck,
-      SCRIPT_REGEX,
-      SanitizeHtmlValueConverter;
-  return {
-    setters: [function(_aureliaBinding) {
-      valueConverter = _aureliaBinding.valueConverter;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-      SanitizeHtmlValueConverter = (function() {
-        function SanitizeHtmlValueConverter() {
-          _classCallCheck(this, _SanitizeHtmlValueConverter);
-          this.sanitizer = SanitizeHtmlValueConverter.defaultSanitizer;
-        }
-        var _SanitizeHtmlValueConverter = SanitizeHtmlValueConverter;
-        _SanitizeHtmlValueConverter.defaultSanitizer = function defaultSanitizer(untrustedMarkup) {
-          return untrustedMarkup.replace(SCRIPT_REGEX, '');
-        };
-        _SanitizeHtmlValueConverter.prototype.toView = function toView(untrustedMarkup) {
-          if (untrustedMarkup === null) {
-            return null;
-          }
-          return this.sanitizer(untrustedMarkup);
-        };
-        SanitizeHtmlValueConverter = valueConverter('sanitizeHtml')(SanitizeHtmlValueConverter) || SanitizeHtmlValueConverter;
-        return SanitizeHtmlValueConverter;
-      })();
-      _export('SanitizeHtmlValueConverter', SanitizeHtmlValueConverter);
-    }
-  };
-});
-
-System.register("github:aurelia/loader-default@0.7.0/index", ["github:aurelia/metadata@0.5.0", "github:aurelia/loader@0.6.0"], function(_export) {
+System.register("github:aurelia/loader-default@0.8.0/index", ["github:aurelia/metadata@0.6.0", "github:aurelia/loader@0.7.0"], function(_export) {
+  'use strict';
   var Origin,
       Loader,
-      _classCallCheck,
-      _inherits,
       polyfilled,
       sys,
+      defined,
+      modules,
       DefaultLoader;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
   function ensureOriginOnExports(executed, name) {
     var target = executed,
         key,
@@ -10013,25 +11333,6 @@ System.register("github:aurelia/loader-default@0.7.0/index", ["github:aurelia/me
       Loader = _aureliaLoader.Loader;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
       polyfilled = false;
       if (!window.System || !window.System['import']) {
         sys = window.System = window.System || {};
@@ -10045,6 +11346,23 @@ System.register("github:aurelia/loader-default@0.7.0/index", ["github:aurelia/me
         sys.normalize = function(url) {
           return Promise.resolve(url);
         };
+        if (window.requirejs && requirejs.s && requirejs.s.contexts && requirejs.s.contexts._ && requirejs.s.contexts._.defined) {
+          defined = requirejs.s.contexts._.defined;
+          sys.forEachModule = function(callback) {
+            for (var key in defined) {
+              callback(key, defined[key]);
+            }
+          };
+        } else {
+          sys.forEachModule = function(callback) {};
+        }
+      } else {
+        modules = System._loader.modules;
+        System.forEachModule = function(callback) {
+          for (var key in modules) {
+            callback(key, modules[key].module);
+          }
+        };
       }
       DefaultLoader = (function(_Loader) {
         function DefaultLoader() {
@@ -10053,41 +11371,44 @@ System.register("github:aurelia/loader-default@0.7.0/index", ["github:aurelia/me
           this.moduleRegistry = {};
           var that = this;
           if (polyfilled) {
-            define('view', [], {load: function load(name, req, onload, config) {
+            define('view', [], {'load': function load(name, req, onload, config) {
                 var entry = that.getOrCreateTemplateRegistryEntry(name),
                     address;
                 if (entry.templateIsLoaded) {
                   onload(entry);
                   return ;
                 }
-                address = req.toUrl(name);
-                that.importTemplate(address).then(function(template) {
-                  entry.setTemplate(template);
-                  onload(entry);
+                that.findBundledTemplate(name, entry).then(function(found) {
+                  if (found) {
+                    onload(entry);
+                  } else {
+                    address = req.toUrl(name);
+                    that.importTemplate(address).then(function(template) {
+                      entry.setTemplate(template);
+                      onload(entry);
+                    });
+                  }
                 });
               }});
           } else {
             System.set('view', System.newModule({
-              fetch: (function(_fetch) {
-                function fetch(_x, _x2) {
-                  return _fetch.apply(this, arguments);
-                }
-                fetch.toString = function() {
-                  return _fetch.toString();
-                };
-                return fetch;
-              })(function(load, fetch) {
+              'fetch': function fetch(load, _fetch) {
                 var id = load.name.substring(0, load.name.indexOf('!'));
                 var entry = load.metadata.templateRegistryEntry = that.getOrCreateTemplateRegistryEntry(id);
                 if (entry.templateIsLoaded) {
                   return '';
                 }
-                return that.importTemplate(load.address).then(function(template) {
-                  entry.setTemplate(template);
-                  return '';
+                return that.findBundledTemplate(load.name, entry).then(function(found) {
+                  if (found) {
+                    return '';
+                  }
+                  return that.importTemplate(load.address).then(function(template) {
+                    entry.setTemplate(template);
+                    return '';
+                  });
                 });
-              }),
-              instantiate: function instantiate(load) {
+              },
+              'instantiate': function instantiate(load) {
                 return load.metadata.templateRegistryEntry;
               }
             }));
@@ -10129,17 +11450,35 @@ System.register("github:aurelia/loader-default@0.7.0/index", ["github:aurelia/me
   };
 });
 
-System.register("github:aurelia/history-browser@0.4.0/index", ["npm:core-js@0.9.13", "github:aurelia/history@0.4.0"], function(_export) {
+System.register("github:aurelia/history-browser@0.5.0/index", ["npm:core-js@0.9.16", "github:aurelia/history@0.5.0"], function(_export) {
+  'use strict';
   var core,
       History,
-      _classCallCheck,
-      _inherits,
       routeStripper,
       rootStripper,
       isExplorer,
       trailingSlash,
+      absoluteUrl,
       BrowserHistory;
   _export('configure', configure);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
   function updateHash(location, fragment, replace) {
     if (replace) {
       var href = location.href.replace(/(javascript:|#).*$/, '');
@@ -10158,29 +11497,11 @@ System.register("github:aurelia/history-browser@0.4.0/index", ["npm:core-js@0.9.
       History = _aureliaHistory.History;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
-      routeStripper = /^[#\/]|\s+$/g;
+      routeStripper = /^#?\/*|\s+$/g;
       rootStripper = /^\/+|\/+$/g;
       isExplorer = /msie [\w.]+/;
       trailingSlash = /\/$/;
+      absoluteUrl = /^([a-z][a-z0-9+\-.]*:)?\/\//i;
       BrowserHistory = (function(_History) {
         function BrowserHistory() {
           _classCallCheck(this, BrowserHistory);
@@ -10278,7 +11599,7 @@ System.register("github:aurelia/history-browser@0.4.0/index", ["npm:core-js@0.9.
           return this.options.routeHandler ? this.options.routeHandler(fragment) : false;
         };
         BrowserHistory.prototype.navigate = function navigate(fragment, options) {
-          if (fragment && fragment.indexOf('://') != -1) {
+          if (fragment && absoluteUrl.test(fragment)) {
             window.location.href = fragment;
             return true;
           }
@@ -10328,7 +11649,7 @@ System.register("github:aurelia/history-browser@0.4.0/index", ["npm:core-js@0.9.
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-locale", [], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation-locale", [], function(_export) {
   var _classCallCheck,
       ValidationLocale,
       ValidationLocaleRepository;
@@ -10418,7 +11739,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-locale", 
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validate-custom-attribute-view-strategy", [], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validate-custom-attribute-view-strategy", [], function(_export) {
   var _inherits,
       _classCallCheck,
       ValidateCustomAttributeViewStrategyBase,
@@ -10582,7 +11903,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validate-custom-attr
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/utilities", [], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/utilities", [], function(_export) {
   var _classCallCheck,
       Utilities;
   return {
@@ -10634,7 +11955,7 @@ System.register("github:aurelia/validation@0.2.4/validation/utilities", [], func
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-rules-collection", ["github:aurelia/validation@0.2.4/validation/utilities", "github:aurelia/validation@0.2.4/validation/validation-locale"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation-rules-collection", ["github:aurelia/validation@0.2.5/validation/utilities", "github:aurelia/validation@0.2.5/validation/validation-locale"], function(_export) {
   var Utilities,
       ValidationLocale,
       _classCallCheck,
@@ -10731,7 +12052,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules-col
         };
         ValidationRulesCollection.prototype.addValidationRule = function addValidationRule(validationRule) {
           if (validationRule.validate === undefined)
-            throw new exception('That\'s not a valid validationRule');
+            throw new Error('That\'s not a valid validationRule');
           this.validationRules.push(validationRule);
         };
         ValidationRulesCollection.prototype.addValidationRuleCollection = function addValidationRuleCollection(validationRulesCollection) {
@@ -10824,7 +12145,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules-col
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/path-observer", ["github:aurelia/binding@0.6.1"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/path-observer", ["github:aurelia/binding@0.7.3"], function(_export) {
   var ObserverLocator,
       _classCallCheck,
       PathObserver;
@@ -10898,11 +12219,12 @@ System.register("github:aurelia/validation@0.2.4/validation/path-observer", ["gi
         };
         PathObserver.prototype.observePart = function observePart(part) {
           if (part !== this.path[this.path.length - 1]) {
-            this.observerParts();
+            this.observeParts();
           }
         };
         PathObserver.prototype.getObserver = function getObserver() {
           if (this.path.length == 1) {
+            var resolve = this.subject[this.path[0]];
             return this.observerLocator.getObserver(this.subject, this.path[0]);
           }
           return this;
@@ -10943,7 +12265,7 @@ System.register("github:aurelia/validation@0.2.4/validation/path-observer", ["gi
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/debouncer", ["github:aurelia/validation@0.2.4/validation/validation"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/debouncer", ["github:aurelia/validation@0.2.5/validation/validation"], function(_export) {
   var Validation,
       _classCallCheck,
       Debouncer;
@@ -10983,7 +12305,7 @@ System.register("github:aurelia/validation@0.2.4/validation/debouncer", ["github
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-result", [], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation-result", [], function(_export) {
   var _classCallCheck,
       ValidationResult,
       ValidationResultProperty;
@@ -11068,10 +12390,9 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-result", 
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validate-custom-attribute", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validate-custom-attribute", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1"], function(_export) {
   var inject,
       customAttribute,
-      Behavior,
       _classCallCheck,
       ValidateCustomAttribute;
   return {
@@ -11079,7 +12400,6 @@ System.register("github:aurelia/validation@0.2.4/validation/validate-custom-attr
       inject = _aureliaDependencyInjection.inject;
     }, function(_aureliaTemplating) {
       customAttribute = _aureliaTemplating.customAttribute;
-      Behavior = _aureliaTemplating.Behavior;
     }],
     execute: function() {
       'use strict';
@@ -11136,7 +12456,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validate-custom-attr
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/decorators", [], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/decorators", [], function(_export) {
   var _classCallCheck,
       ValidationMetadata,
       ValidationPropertyMetadata;
@@ -19283,6 +20603,9 @@ System.register("models/cityInfo", [], function(_export) {
 System.register("models/drug", [], function(_export) {
   'use strict';
   var drugPriceColorClasses,
+      drugPriceChangeDirectionClasses,
+      drugThresholdChangeClasses,
+      setThreshold,
       Drug;
   var _createClass = (function() {
     function defineProperties(target, props) {
@@ -19312,29 +20635,42 @@ System.register("models/drug", [], function(_export) {
     setters: [],
     execute: function() {
       drugPriceColorClasses = ['cheapest-drug-cost', 'middle-cheapest-drug-cost', 'middle-drug-cost', 'middle-expensive-drug-cost', 'most-expensive-drug-cost'];
+      drugPriceChangeDirectionClasses = {
+        'down': 'fa fa-arrow-down',
+        'up': 'fa fa-arrow-up',
+        'even': ''
+      };
+      drugThresholdChangeClasses = ['noBands', 'oneBand', 'twoBands', 'threeBands', 'fourBands'];
+      setThreshold = function setThreshold(newPrice, obj) {
+        var curThreshold = obj.ThresholdLevel;
+        if (newPrice >= obj.MaxPrice) {
+          obj.ThresholdLevel = 4;
+        } else if (newPrice <= obj.MinPrice) {
+          obj.ThresholdLevel = 0;
+        } else {
+          obj.ThresholdLevel = Math.floor((obj.Price - obj.MinPrice) / (obj.MaxPrice - obj.MinPrice) * 100 / 20);
+        }
+        obj.thresholdLevelBandsChanged = obj.ThresholdLevel - curThreshold;
+      };
       Drug = (function() {
         function Drug(nameIn, minPriceIn, maxPriceIn) {
           _classCallCheck(this, Drug);
           this.MaxPrice = 1;
           this.MinPrice = 1;
-          this.price = 1;
+          this.price = null;
           this.Available = true;
           this.Name = '';
           this.ThresholdLevel = 2;
+          this.directionChange = 'even';
+          this.thresholdLevelBandsChanged = 0;
           this.Name = nameIn;
           this.MaxPrice = maxPriceIn;
           this.MinPrice = minPriceIn;
         }
         _createClass(Drug, [{
-          key: 'SetThreshold',
-          value: function SetThreshold(newPrice) {
-            if (newPrice >= this.MaxPrice) {
-              this.ThresholdLevel = 4;
-            } else if (newPrice <= this.MinPrice) {
-              this.ThresholdLevel = 0;
-            } else {
-              this.ThresholdLevel = Math.floor((this.Price - this.MinPrice) / (this.MaxPrice - this.MinPrice) * 100 / 20);
-            }
+          key: 'PriceChangeDirectionClass',
+          get: function() {
+            return drugPriceChangeDirectionClasses[this.directionChange];
           }
         }, {
           key: 'ThresholdColorClass',
@@ -19342,13 +20678,21 @@ System.register("models/drug", [], function(_export) {
             return drugPriceColorClasses[this.ThresholdLevel];
           }
         }, {
+          key: 'ThresholdChangeClass',
+          get: function() {
+            return drugThresholdChangeClasses[this.thresholdLevelBandsChanged];
+          }
+        }, {
           key: 'Price',
           get: function() {
             return this.price;
           },
           set: function(newVal) {
+            if (this.price !== null) {
+              this.directionChange = newVal > this.price ? 'up' : newVal < this.price ? 'down' : 'even';
+            }
             this.price = newVal;
-            this.SetThreshold(newVal);
+            setThreshold(newVal, this);
           }
         }]);
         return Drug;
@@ -19764,7 +21108,7 @@ System.register("converters/percent-format", ["npm:numeral@1.5.3"], function(_ex
   };
 });
 
-System.register("city", ["github:aurelia/framework@0.11.0"], function(_export) {
+System.register("city", ["github:aurelia/framework@0.12.0"], function(_export) {
   'use strict';
   var bindable,
       City;
@@ -19862,7 +21206,7 @@ System.register("city", ["github:aurelia/framework@0.11.0"], function(_export) {
   };
 });
 
-System.register("city-list", ["github:aurelia/framework@0.11.0", "engines/gameEngine"], function(_export) {
+System.register("city-list", ["github:aurelia/framework@0.12.0", "engines/gameEngine"], function(_export) {
   'use strict';
   var bindable,
       inject,
@@ -19920,7 +21264,7 @@ System.register("city-list", ["github:aurelia/framework@0.11.0", "engines/gameEn
   };
 });
 
-System.register("day", ["github:aurelia/framework@0.11.0"], function(_export) {
+System.register("day", ["github:aurelia/framework@0.12.0"], function(_export) {
   'use strict';
   var bindable,
       Day;
@@ -20018,7 +21362,7 @@ System.register("day", ["github:aurelia/framework@0.11.0"], function(_export) {
   };
 });
 
-System.register("drug-list", ["github:aurelia/framework@0.11.0", "github:aurelia/event-aggregator@0.4.0", "services/playerService", "services/drugService"], function(_export) {
+System.register("drug-list", ["github:aurelia/framework@0.12.0", "github:aurelia/event-aggregator@0.4.0", "services/playerService", "services/drugService"], function(_export) {
   'use strict';
   var inject,
       bindable,
@@ -20318,7 +21662,7 @@ System.register("footer-bar", [], function(_export) {
   };
 });
 
-System.register("game", ["github:aurelia/framework@0.11.0", "github:aurelia/event-aggregator@0.4.0", "engines/gameEngine"], function(_export) {
+System.register("game", ["github:aurelia/framework@0.12.0", "github:aurelia/event-aggregator@0.4.0", "engines/gameEngine"], function(_export) {
   'use strict';
   var inject,
       EventAggregator,
@@ -20425,7 +21769,7 @@ System.register("game", ["github:aurelia/framework@0.11.0", "github:aurelia/even
   };
 });
 
-System.register("player", ["github:aurelia/framework@0.11.0"], function(_export) {
+System.register("player", ["github:aurelia/framework@0.12.0"], function(_export) {
   "use strict";
   var bindable,
       Player;
@@ -20521,7 +21865,7 @@ System.register("player", ["github:aurelia/framework@0.11.0"], function(_export)
   };
 });
 
-System.register("drugViews/buyDrug", ["github:aurelia/framework@0.11.0", "github:aurelia/validation@0.2.4", "github:aurelia/event-aggregator@0.4.0", "services/playerService"], function(_export) {
+System.register("drugViews/buyDrug", ["github:aurelia/framework@0.12.0", "github:aurelia/validation@0.2.5", "github:aurelia/event-aggregator@0.4.0", "services/playerService"], function(_export) {
   'use strict';
   var inject,
       bindable,
@@ -20734,7 +22078,7 @@ System.register("drugViews/buySellIssue", [], function(_export) {
   };
 });
 
-System.register("drugViews/sellDrug", ["github:aurelia/framework@0.11.0", "github:aurelia/validation@0.2.4", "github:aurelia/event-aggregator@0.4.0", "services/playerService"], function(_export) {
+System.register("drugViews/sellDrug", ["github:aurelia/framework@0.12.0", "github:aurelia/validation@0.2.5", "github:aurelia/event-aggregator@0.4.0", "services/playerService"], function(_export) {
   'use strict';
   var inject,
       bindable,
@@ -20828,7 +22172,7 @@ System.register("drugViews/sellDrug", ["github:aurelia/framework@0.11.0", "githu
   };
 });
 
-System.register("modalBodies/payDebt", ["github:aurelia/framework@0.11.0", "github:aurelia/validation@0.2.4", "services/playerService"], function(_export) {
+System.register("modalBodies/payDebt", ["github:aurelia/framework@0.12.0", "github:aurelia/validation@0.2.5", "services/playerService"], function(_export) {
   'use strict';
   var inject,
       bindable,
@@ -20972,7 +22316,7 @@ System.register("modalBodies/surpriseEvents", [], function(_export) {
   };
 });
 
-System.register("npm:core-js@0.9.13/modules/$", ["npm:core-js@0.9.13/modules/$.fw"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$", ["npm:core-js@0.9.16/modules/$.fw"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -21024,7 +22368,7 @@ System.register("npm:core-js@0.9.13/modules/$", ["npm:core-js@0.9.13/modules/$.f
       throw TypeError("Can't call method on  " + it);
     return it;
   }
-  var $ = module.exports = require("npm:core-js@0.9.13/modules/$.fw")({
+  var $ = module.exports = require("npm:core-js@0.9.16/modules/$.fw")({
     g: global,
     core: core,
     html: global.document && document.documentElement,
@@ -21072,28 +22416,28 @@ System.register("npm:core-js@0.9.13/modules/$", ["npm:core-js@0.9.13/modules/$.f
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.wks", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.shared", "npm:core-js@0.9.13/modules/$.uid"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.wks", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.shared", "npm:core-js@0.9.16/modules/$.uid"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var global = require("npm:core-js@0.9.13/modules/$").g,
-      store = require("npm:core-js@0.9.13/modules/$.shared")('wks');
+  var global = require("npm:core-js@0.9.16/modules/$").g,
+      store = require("npm:core-js@0.9.16/modules/$.shared")('wks');
   module.exports = function(name) {
-    return store[name] || (store[name] = global.Symbol && global.Symbol[name] || require("npm:core-js@0.9.13/modules/$.uid").safe('Symbol.' + name));
+    return store[name] || (store[name] = global.Symbol && global.Symbol[name] || require("npm:core-js@0.9.16/modules/$.uid").safe('Symbol.' + name));
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.def", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.def", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
       global = $.g,
       core = $.core,
       isFunction = $.isFunction,
-      $redef = require("npm:core-js@0.9.13/modules/$.redef");
+      $redef = require("npm:core-js@0.9.16/modules/$.redef");
   function ctx(fn, that) {
     return function() {
       return fn.apply(that, arguments);
@@ -21137,11 +22481,11 @@ System.register("npm:core-js@0.9.13/modules/$.def", ["npm:core-js@0.9.13/modules
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.ctx", ["npm:core-js@0.9.13/modules/$.assert"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.ctx", ["npm:core-js@0.9.16/modules/$.assert"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var assertFunction = require("npm:core-js@0.9.13/modules/$.assert").fn;
+  var assertFunction = require("npm:core-js@0.9.16/modules/$.assert").fn;
   module.exports = function(fn, that, length) {
     assertFunction(fn);
     if (~length && that === undefined)
@@ -21168,20 +22512,20 @@ System.register("npm:core-js@0.9.13/modules/$.ctx", ["npm:core-js@0.9.13/modules
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.symbol", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.shared", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.redef", "npm:core-js@0.9.13/modules/$.keyof", "npm:core-js@0.9.13/modules/$.enum-keys", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.symbol", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.shared", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.redef", "npm:core-js@0.9.16/modules/$.keyof", "npm:core-js@0.9.16/modules/$.enum-keys", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.get-names", "npm:core-js@0.9.16/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      setTag = require("npm:core-js@0.9.13/modules/$.cof").set,
-      uid = require("npm:core-js@0.9.13/modules/$.uid"),
-      shared = require("npm:core-js@0.9.13/modules/$.shared"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $redef = require("npm:core-js@0.9.13/modules/$.redef"),
-      keyOf = require("npm:core-js@0.9.13/modules/$.keyof"),
-      enumKeys = require("npm:core-js@0.9.13/modules/$.enum-keys"),
-      assertObject = require("npm:core-js@0.9.13/modules/$.assert").obj,
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      setTag = require("npm:core-js@0.9.16/modules/$.cof").set,
+      uid = require("npm:core-js@0.9.16/modules/$.uid"),
+      shared = require("npm:core-js@0.9.16/modules/$.shared"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $redef = require("npm:core-js@0.9.16/modules/$.redef"),
+      keyOf = require("npm:core-js@0.9.16/modules/$.keyof"),
+      enumKeys = require("npm:core-js@0.9.16/modules/$.enum-keys"),
+      assertObject = require("npm:core-js@0.9.16/modules/$.assert").obj,
       ObjectProto = Object.prototype,
       DESC = $.DESC,
       has = $.has,
@@ -21189,7 +22533,8 @@ System.register("npm:core-js@0.9.13/modules/es6.symbol", ["npm:core-js@0.9.13/mo
       getDesc = $.getDesc,
       setDesc = $.setDesc,
       desc = $.desc,
-      getNames = $.getNames,
+      $names = require("npm:core-js@0.9.16/modules/$.get-names"),
+      getNames = $names.get,
       toObject = $.toObject,
       $Symbol = $.g.Symbol,
       setter = false,
@@ -21298,10 +22643,10 @@ System.register("npm:core-js@0.9.13/modules/es6.symbol", ["npm:core-js@0.9.13/mo
     $.setDesc = defineProperty;
     $.getDesc = getOwnPropertyDescriptor;
     $.setDescs = defineProperties;
-    $.getNames = getOwnPropertyNames;
+    $.getNames = $names.get = getOwnPropertyNames;
     $.getSymbols = getOwnPropertySymbols;
     if ($.DESC && $.FW)
-      $redef(Object.prototype, 'propertyIsEnumerable', propertyIsEnumerable, true);
+      $redef(ObjectProto, 'propertyIsEnumerable', propertyIsEnumerable, true);
   }
   var symbolStatics = {
     'for': function(key) {
@@ -21318,7 +22663,7 @@ System.register("npm:core-js@0.9.13/modules/es6.symbol", ["npm:core-js@0.9.13/mo
     }
   };
   $.each.call(('hasInstance,isConcatSpreadable,iterator,match,replace,search,' + 'species,split,toPrimitive,toStringTag,unscopables').split(','), function(it) {
-    var sym = require("npm:core-js@0.9.13/modules/$.wks")(it);
+    var sym = require("npm:core-js@0.9.16/modules/$.wks")(it);
     symbolStatics[it] = useNative ? sym : wrap(sym);
   });
   setter = true;
@@ -21339,36 +22684,46 @@ System.register("npm:core-js@0.9.13/modules/es6.symbol", ["npm:core-js@0.9.13/mo
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.object.assign", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.assign"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.object.assign", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.assign"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def");
-  $def($def.S, 'Object', {assign: require("npm:core-js@0.9.13/modules/$.assign")});
+  var $def = require("npm:core-js@0.9.16/modules/$.def");
+  $def($def.S, 'Object', {assign: require("npm:core-js@0.9.16/modules/$.assign")});
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.object.set-prototype-of", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.set-proto"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.object.is", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.same"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def");
-  $def($def.S, 'Object', {setPrototypeOf: require("npm:core-js@0.9.13/modules/$.set-proto").set});
+  var $def = require("npm:core-js@0.9.16/modules/$.def");
+  $def($def.S, 'Object', {is: require("npm:core-js@0.9.16/modules/$.same")});
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.iterator", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.string-at", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.iter-define"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.object.set-prototype-of", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.set-proto"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var set = require("npm:core-js@0.9.13/modules/$").set,
-      $at = require("npm:core-js@0.9.13/modules/$.string-at")(true),
-      ITER = require("npm:core-js@0.9.13/modules/$.uid").safe('iter'),
-      $iter = require("npm:core-js@0.9.13/modules/$.iter"),
+  var $def = require("npm:core-js@0.9.16/modules/$.def");
+  $def($def.S, 'Object', {setPrototypeOf: require("npm:core-js@0.9.16/modules/$.set-proto").set});
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.16/modules/es6.string.iterator", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.string-at", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.iter-define"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var set = require("npm:core-js@0.9.16/modules/$").set,
+      $at = require("npm:core-js@0.9.16/modules/$.string-at")(true),
+      ITER = require("npm:core-js@0.9.16/modules/$.uid").safe('iter'),
+      $iter = require("npm:core-js@0.9.16/modules/$.iter"),
       step = $iter.step;
-  require("npm:core-js@0.9.13/modules/$.iter-define")(String, 'String', function(iterated) {
+  require("npm:core-js@0.9.16/modules/$.iter-define")(String, 'String', function(iterated) {
     set(this, ITER, {
       o: String(iterated),
       i: 0
@@ -21388,26 +22743,26 @@ System.register("npm:core-js@0.9.13/modules/es6.string.iterator", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.string.repeat", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.string-repeat"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.string.repeat", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.string-repeat"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.13/modules/$.def");
-  $def($def.P, 'String', {repeat: require("npm:core-js@0.9.13/modules/$.string-repeat")});
+  var $def = require("npm:core-js@0.9.16/modules/$.def");
+  $def($def.P, 'String', {repeat: require("npm:core-js@0.9.16/modules/$.string-repeat")});
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.from", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.ctx", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.iter-call", "npm:core-js@0.9.13/modules/$.iter-detect"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.from", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.ctx", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.iter-call", "npm:core-js@0.9.16/modules/$.iter-detect"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      ctx = require("npm:core-js@0.9.13/modules/$.ctx"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $iter = require("npm:core-js@0.9.13/modules/$.iter"),
-      call = require("npm:core-js@0.9.13/modules/$.iter-call");
-  $def($def.S + $def.F * !require("npm:core-js@0.9.13/modules/$.iter-detect")(function(iter) {
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      ctx = require("npm:core-js@0.9.16/modules/$.ctx"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $iter = require("npm:core-js@0.9.16/modules/$.iter"),
+      call = require("npm:core-js@0.9.16/modules/$.iter-call");
+  $def($def.S + $def.F * !require("npm:core-js@0.9.16/modules/$.iter-detect")(function(iter) {
     Array.from(iter);
   }), 'Array', {from: function from(arrayLike) {
       var O = Object($.assertDefined(arrayLike)),
@@ -21438,17 +22793,17 @@ System.register("npm:core-js@0.9.13/modules/es6.array.from", ["npm:core-js@0.9.1
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.iterator", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.unscope", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.iter-define"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.iterator", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.unscope", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.iter-define"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      setUnscope = require("npm:core-js@0.9.13/modules/$.unscope"),
-      ITER = require("npm:core-js@0.9.13/modules/$.uid").safe('iter'),
-      $iter = require("npm:core-js@0.9.13/modules/$.iter"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      setUnscope = require("npm:core-js@0.9.16/modules/$.unscope"),
+      ITER = require("npm:core-js@0.9.16/modules/$.uid").safe('iter'),
+      $iter = require("npm:core-js@0.9.16/modules/$.iter"),
       step = $iter.step,
       Iterators = $iter.Iterators;
-  require("npm:core-js@0.9.13/modules/$.iter-define")(Array, 'Array', function(iterated, kind) {
+  require("npm:core-js@0.9.16/modules/$.iter-define")(Array, 'Array', function(iterated, kind) {
     $.set(this, ITER, {
       o: $.toObject(iterated),
       i: 0,
@@ -21477,11 +22832,11 @@ System.register("npm:core-js@0.9.13/modules/es6.array.iterator", ["npm:core-js@0
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.array.species", ["npm:core-js@0.9.13/modules/$.species"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.array.species", ["npm:core-js@0.9.16/modules/$.species"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.13/modules/$.species")(Array);
+  require("npm:core-js@0.9.16/modules/$.species")(Array);
   global.define = __define;
   return module.exports;
 });
@@ -21495,13 +22850,17 @@ System.register("npm:process@0.10.1", ["npm:process@0.10.1/browser"], true, func
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.map", ["npm:core-js@0.9.13/modules/$.collection-strong", "npm:core-js@0.9.13/modules/$.collection"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.map", ["npm:core-js@0.9.16/modules/$.collection-strong", "npm:core-js@0.9.16/modules/$.collection"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var strong = require("npm:core-js@0.9.13/modules/$.collection-strong");
-  require("npm:core-js@0.9.13/modules/$.collection")('Map', {
+  var strong = require("npm:core-js@0.9.16/modules/$.collection-strong");
+  require("npm:core-js@0.9.16/modules/$.collection")('Map', function(get) {
+    return function Map() {
+      return get(this, arguments[0]);
+    };
+  }, {
     get: function get(key) {
       var entry = strong.getEntry(this, key);
       return entry && entry.v;
@@ -21514,13 +22873,13 @@ System.register("npm:core-js@0.9.13/modules/es6.map", ["npm:core-js@0.9.13/modul
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.weak-map", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.collection-weak", "npm:core-js@0.9.13/modules/$.collection", "npm:core-js@0.9.13/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.weak-map", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.collection-weak", "npm:core-js@0.9.16/modules/$.collection", "npm:core-js@0.9.16/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      weak = require("npm:core-js@0.9.13/modules/$.collection-weak"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      weak = require("npm:core-js@0.9.16/modules/$.collection-weak"),
       leakStore = weak.leakStore,
       ID = weak.ID,
       WEAK = weak.WEAK,
@@ -21528,7 +22887,11 @@ System.register("npm:core-js@0.9.13/modules/es6.weak-map", ["npm:core-js@0.9.13/
       isObject = $.isObject,
       isExtensible = Object.isExtensible || isObject,
       tmp = {};
-  var WeakMap = require("npm:core-js@0.9.13/modules/$.collection")('WeakMap', {
+  var $WeakMap = require("npm:core-js@0.9.16/modules/$.collection")('WeakMap', function(get) {
+    return function WeakMap() {
+      return get(this, arguments[0]);
+    };
+  }, {
     get: function get(key) {
       if (isObject(key)) {
         if (!isExtensible(key))
@@ -21541,11 +22904,11 @@ System.register("npm:core-js@0.9.13/modules/es6.weak-map", ["npm:core-js@0.9.13/
       return weak.def(this, key, value);
     }
   }, weak, true, true);
-  if ($.FW && new WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7) {
+  if (new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7) {
     $.each.call(['delete', 'has', 'get', 'set'], function(key) {
-      var proto = WeakMap.prototype,
+      var proto = $WeakMap.prototype,
           method = proto[key];
-      require("npm:core-js@0.9.13/modules/$.redef")(proto, key, function(a, b) {
+      require("npm:core-js@0.9.16/modules/$.redef")(proto, key, function(a, b) {
         if (isObject(a) && !isExtensible(a)) {
           var result = leakStore(this)[key](a, b);
           return key == 'set' ? this : result;
@@ -21558,18 +22921,18 @@ System.register("npm:core-js@0.9.13/modules/es6.weak-map", ["npm:core-js@0.9.13/
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.reflect", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.set-proto", "npm:core-js@0.9.13/modules/$.iter", "npm:core-js@0.9.13/modules/$.wks", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.own-keys"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.reflect", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.set-proto", "npm:core-js@0.9.16/modules/$.iter", "npm:core-js@0.9.16/modules/$.wks", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.own-keys"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      setProto = require("npm:core-js@0.9.13/modules/$.set-proto"),
-      $iter = require("npm:core-js@0.9.13/modules/$.iter"),
-      ITERATOR = require("npm:core-js@0.9.13/modules/$.wks")('iterator'),
-      ITER = require("npm:core-js@0.9.13/modules/$.uid").safe('iter'),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      setProto = require("npm:core-js@0.9.16/modules/$.set-proto"),
+      $iter = require("npm:core-js@0.9.16/modules/$.iter"),
+      ITERATOR = require("npm:core-js@0.9.16/modules/$.wks")('iterator'),
+      ITER = require("npm:core-js@0.9.16/modules/$.uid").safe('iter'),
       step = $iter.step,
-      assert = require("npm:core-js@0.9.13/modules/$.assert"),
+      assert = require("npm:core-js@0.9.16/modules/$.assert"),
       isObject = $.isObject,
       getProto = $.getProto,
       $Reflect = $.g.Reflect,
@@ -21643,7 +23006,7 @@ System.register("npm:core-js@0.9.13/modules/es6.reflect", ["npm:core-js@0.9.13/m
     isExtensible: function isExtensible(target) {
       return _isExtensible(assertObject(target));
     },
-    ownKeys: require("npm:core-js@0.9.13/modules/$.own-keys"),
+    ownKeys: require("npm:core-js@0.9.16/modules/$.own-keys"),
     preventExtensions: function preventExtensions(target) {
       assertObject(target);
       try {
@@ -21695,13 +23058,13 @@ System.register("npm:core-js@0.9.13/modules/es6.reflect", ["npm:core-js@0.9.13/m
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.string.lpad", ["npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.string-pad"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.string.lpad", ["npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.string-pad"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $def = require("npm:core-js@0.9.13/modules/$.def"),
-      $pad = require("npm:core-js@0.9.13/modules/$.string-pad");
+  var $def = require("npm:core-js@0.9.16/modules/$.def"),
+      $pad = require("npm:core-js@0.9.16/modules/$.string-pad");
   $def($def.P, 'String', {lpad: function lpad(n) {
       return $pad(this, n, arguments[1], true);
     }});
@@ -21709,23 +23072,23 @@ System.register("npm:core-js@0.9.13/modules/es7.string.lpad", ["npm:core-js@0.9.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/es7.map.to-json", ["npm:core-js@0.9.13/modules/$.collection-to-json"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es7.map.to-json", ["npm:core-js@0.9.16/modules/$.collection-to-json"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.13/modules/$.collection-to-json")('Map');
+  require("npm:core-js@0.9.16/modules/$.collection-to-json")('Map');
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/web.timers", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.invoke", "npm:core-js@0.9.13/modules/$.partial"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/web.timers", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.invoke", "npm:core-js@0.9.16/modules/$.partial"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      invoke = require("npm:core-js@0.9.13/modules/$.invoke"),
-      partial = require("npm:core-js@0.9.13/modules/$.partial"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      invoke = require("npm:core-js@0.9.16/modules/$.invoke"),
+      partial = require("npm:core-js@0.9.16/modules/$.partial"),
       navigator = $.g.navigator,
       MSIE = !!navigator && /MSIE .\./.test(navigator.userAgent);
   function wrap(set) {
@@ -21741,7 +23104,7 @@ System.register("npm:core-js@0.9.13/modules/web.timers", ["npm:core-js@0.9.13/mo
   return module.exports;
 });
 
-System.register("github:aurelia/logging@0.4.0", ["github:aurelia/logging@0.4.0/index"], function($__export) {
+System.register("github:aurelia/logging@0.5.0", ["github:aurelia/logging@0.5.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -21751,7 +23114,8 @@ System.register("github:aurelia/logging@0.4.0", ["github:aurelia/logging@0.4.0/i
   };
 });
 
-System.register("github:aurelia/metadata@0.5.0/metadata", ["github:aurelia/metadata@0.5.0/reflect-metadata"], function(_export) {
+System.register("github:aurelia/metadata@0.6.0/metadata", ["github:aurelia/metadata@0.6.0/reflect-metadata"], function(_export) {
+  'use strict';
   var meta,
       Metadata;
   function ensureDecorators(target) {
@@ -21773,7 +23137,6 @@ System.register("github:aurelia/metadata@0.5.0/metadata", ["github:aurelia/metad
       meta = _reflectMetadata['default'];
     }],
     execute: function() {
-      'use strict';
       Metadata = {
         resource: 'aurelia:resource',
         paramTypes: 'design:paramtypes',
@@ -21808,7 +23171,8 @@ System.register("github:aurelia/metadata@0.5.0/metadata", ["github:aurelia/metad
   };
 });
 
-System.register("github:aurelia/metadata@0.5.0/decorators", ["github:aurelia/metadata@0.5.0/decorator-applicator"], function(_export) {
+System.register("github:aurelia/metadata@0.6.0/decorators", ["github:aurelia/metadata@0.6.0/decorator-applicator"], function(_export) {
+  'use strict';
   var DecoratorApplicator,
       Decorators;
   return {
@@ -21816,7 +23180,6 @@ System.register("github:aurelia/metadata@0.5.0/decorators", ["github:aurelia/met
       DecoratorApplicator = _decoratorApplicator.DecoratorApplicator;
     }],
     execute: function() {
-      'use strict';
       Decorators = {configure: {
           parameterizedDecorator: function parameterizedDecorator(name, decorator) {
             Decorators[name] = function() {
@@ -21842,7 +23205,7 @@ System.register("github:aurelia/metadata@0.5.0/decorators", ["github:aurelia/met
   };
 });
 
-System.register("github:aurelia/path@0.6.1", ["github:aurelia/path@0.6.1/index"], function($__export) {
+System.register("github:aurelia/path@0.7.0", ["github:aurelia/path@0.7.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -21852,7 +23215,7 @@ System.register("github:aurelia/path@0.6.1", ["github:aurelia/path@0.6.1/index"]
   };
 });
 
-System.register("github:aurelia/task-queue@0.4.0", ["github:aurelia/task-queue@0.4.0/index"], function($__export) {
+System.register("github:aurelia/task-queue@0.5.0", ["github:aurelia/task-queue@0.5.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -21862,13 +23225,18 @@ System.register("github:aurelia/task-queue@0.4.0", ["github:aurelia/task-queue@0
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/collection-observation", ["github:aurelia/binding@0.6.1/array-change-records", "github:aurelia/binding@0.6.1/map-change-records"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/collection-observation", ["github:aurelia/binding@0.7.3/array-change-records", "github:aurelia/binding@0.7.3/map-change-records"], function(_export) {
+  'use strict';
   var calcSplices,
       projectArraySplices,
       getChangeRecords,
-      _classCallCheck,
       ModifyCollectionObserver,
       CollectionLengthObserver;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_arrayChangeRecords) {
       calcSplices = _arrayChangeRecords.calcSplices;
@@ -21877,12 +23245,6 @@ System.register("github:aurelia/binding@0.6.1/collection-observation", ["github:
       getChangeRecords = _mapChangeRecords.getChangeRecords;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       ModifyCollectionObserver = (function() {
         function ModifyCollectionObserver(taskQueue, collection) {
           _classCallCheck(this, ModifyCollectionObserver);
@@ -21995,12 +23357,11 @@ System.register("github:aurelia/binding@0.6.1/collection-observation", ["github:
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/ast", ["github:aurelia/binding@0.6.1/path-observer", "github:aurelia/binding@0.6.1/composite-observer", "github:aurelia/binding@0.6.1/access-keyed-observer"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/ast", ["github:aurelia/binding@0.7.3/path-observer", "github:aurelia/binding@0.7.3/composite-observer", "github:aurelia/binding@0.7.3/access-keyed-observer"], function(_export) {
+  'use strict';
   var PathObserver,
       CompositeObserver,
       AccessKeyedObserver,
-      _inherits,
-      _classCallCheck,
       Expression,
       Chain,
       ValueConverter,
@@ -22020,6 +23381,24 @@ System.register("github:aurelia/binding@0.6.1/ast", ["github:aurelia/binding@0.6
       LiteralObject,
       Unparser,
       evalListCache;
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function evalList(scope, list, valueConverters) {
     var length = list.length,
         cacheLength,
@@ -22094,25 +23473,6 @@ System.register("github:aurelia/binding@0.6.1/ast", ["github:aurelia/binding@0.6
       AccessKeyedObserver = _accessKeyedObserver.AccessKeyedObserver;
     }],
     execute: function() {
-      'use strict';
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       Expression = (function() {
         function Expression() {
           _classCallCheck(this, Expression);
@@ -22552,9 +23912,9 @@ System.register("github:aurelia/binding@0.6.1/ast", ["github:aurelia/binding@0.6
           var left = this.left.evaluate(scope);
           switch (this.operation) {
             case '&&':
-              return !!left && !!this.right.evaluate(scope);
+              return left && this.right.evaluate(scope);
             case '||':
-              return !!left || !!this.right.evaluate(scope);
+              return left || this.right.evaluate(scope);
           }
           var right = this.right.evaluate(scope);
           switch (this.operation) {
@@ -22570,20 +23930,16 @@ System.register("github:aurelia/binding@0.6.1/ast", ["github:aurelia/binding@0.6
           if (left === null || right === null) {
             switch (this.operation) {
               case '+':
-                if (left != null) {
+                if (left != null)
                   return left;
-                }
-                if (right != null) {
+                if (right != null)
                   return right;
-                }
                 return 0;
               case '-':
-                if (left != null) {
+                if (left != null)
                   return left;
-                }
-                if (right != null) {
+                if (right != null)
                   return 0 - right;
-                }
                 return 0;
             }
             return null;
@@ -22956,24 +24312,26 @@ System.register("github:aurelia/binding@0.6.1/ast", ["github:aurelia/binding@0.6
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/view-slot", ["github:aurelia/templating@0.11.2/content-selector", "github:aurelia/templating@0.11.2/animator"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/view-slot", ["github:aurelia/templating@0.12.1/content-selector", "github:aurelia/templating@0.12.1/animator", "github:aurelia/templating@0.12.1/util"], function(_export) {
+  'use strict';
   var ContentSelector,
       Animator,
-      _classCallCheck,
+      nextElementSibling,
       ViewSlot;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_contentSelector) {
       ContentSelector = _contentSelector.ContentSelector;
     }, function(_animator) {
       Animator = _animator.Animator;
+    }, function(_util) {
+      nextElementSibling = _util.nextElementSibling;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       ViewSlot = (function() {
         function ViewSlot(anchor, anchorIsContainer, executionContext) {
           var animator = arguments[3] === undefined ? Animator.instance : arguments[3];
@@ -23037,7 +24395,7 @@ System.register("github:aurelia/templating@0.11.2/view-slot", ["github:aurelia/t
           this.children.push(view);
           if (this.isAttached) {
             view.attached();
-            var element = view.firstChild ? view.firstChild.nextElementSibling : null;
+            var element = view.firstChild ? nextElementSibling(view.firstChild) : null;
             if (view.firstChild && view.firstChild.nodeType === 8 && element && element.nodeType === 1 && element.classList.contains('au-animate')) {
               this.animator.enter(element);
             }
@@ -23072,7 +24430,7 @@ System.register("github:aurelia/templating@0.11.2/view-slot", ["github:aurelia/t
             }
             return view;
           };
-          var element = view.firstChild && view.firstChild.nextElementSibling ? view.firstChild.nextElementSibling : null;
+          var element = view.firstChild ? nextElementSibling(view.firstChild) : null;
           if (view.firstChild && view.firstChild.nodeType === 8 && element && element.nodeType === 1 && element.classList.contains('au-animate')) {
             return this.animator.leave(element).then(function() {
               return removeAction();
@@ -23088,7 +24446,7 @@ System.register("github:aurelia/templating@0.11.2/view-slot", ["github:aurelia/t
               i;
           var rmPromises = [];
           children.forEach(function(child) {
-            var element = child.firstChild ? child.firstChild.nextElementSibling : null;
+            var element = child.firstChild ? nextElementSibling(child.firstChild) : null;
             if (child.firstChild && child.firstChild.nodeType === 8 && element && element.nodeType === 1 && element.classList.contains('au-animate')) {
               rmPromises.push(_this2.animator.leave(element).then(function() {
                 child.removeNodes();
@@ -23137,7 +24495,7 @@ System.register("github:aurelia/templating@0.11.2/view-slot", ["github:aurelia/t
           for (i = 0, ii = children.length; i < ii; ++i) {
             child = children[i];
             child.attached();
-            var element = child.firstChild ? child.firstChild.nextElementSibling : null;
+            var element = child.firstChild ? nextElementSibling(child.firstChild) : null;
             if (child.firstChild && child.firstChild.nodeType === 8 && element && element.nodeType === 1 && element.classList.contains('au-animate')) {
               this.animator.enter(element);
             }
@@ -23240,234 +24598,7 @@ System.register("github:aurelia/templating@0.11.2/view-slot", ["github:aurelia/t
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/module-analyzer", ["github:aurelia/metadata@0.5.0", "github:aurelia/loader@0.6.0", "github:aurelia/binding@0.6.1", "github:aurelia/templating@0.11.2/html-behavior", "github:aurelia/templating@0.11.2/view-strategy", "github:aurelia/templating@0.11.2/util"], function(_export) {
-  var Metadata,
-      TemplateRegistryEntry,
-      ValueConverterResource,
-      HtmlBehaviorResource,
-      ViewStrategy,
-      TemplateRegistryViewStrategy,
-      hyphenate,
-      _classCallCheck,
-      ResourceModule,
-      ResourceDescription,
-      ModuleAnalyzer;
-  return {
-    setters: [function(_aureliaMetadata) {
-      Metadata = _aureliaMetadata.Metadata;
-    }, function(_aureliaLoader) {
-      TemplateRegistryEntry = _aureliaLoader.TemplateRegistryEntry;
-    }, function(_aureliaBinding) {
-      ValueConverterResource = _aureliaBinding.ValueConverterResource;
-    }, function(_htmlBehavior) {
-      HtmlBehaviorResource = _htmlBehavior.HtmlBehaviorResource;
-    }, function(_viewStrategy) {
-      ViewStrategy = _viewStrategy.ViewStrategy;
-      TemplateRegistryViewStrategy = _viewStrategy.TemplateRegistryViewStrategy;
-    }, function(_util) {
-      hyphenate = _util.hyphenate;
-    }],
-    execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      ResourceModule = (function() {
-        function ResourceModule(moduleId) {
-          _classCallCheck(this, ResourceModule);
-          this.id = moduleId;
-          this.moduleInstance = null;
-          this.mainResource = null;
-          this.resources = null;
-          this.viewStrategy = null;
-          this.isAnalyzed = false;
-        }
-        ResourceModule.prototype.analyze = function analyze(container) {
-          var current = this.mainResource,
-              resources = this.resources,
-              viewStrategy = this.viewStrategy,
-              i,
-              ii,
-              metadata;
-          if (this.isAnalyzed) {
-            return ;
-          }
-          this.isAnalyzed = true;
-          if (current) {
-            metadata = current.metadata;
-            metadata.viewStrategy = viewStrategy;
-            if ('analyze' in metadata && !metadata.isAnalyzed) {
-              metadata.isAnalyzed = true;
-              metadata.analyze(container, current.value);
-            }
-          }
-          for (i = 0, ii = resources.length; i < ii; ++i) {
-            current = resources[i];
-            metadata = current.metadata;
-            metadata.viewStrategy = viewStrategy;
-            if ('analyze' in metadata && !metadata.isAnalyzed) {
-              metadata.isAnalyzed = true;
-              metadata.analyze(container, current.value);
-            }
-          }
-        };
-        ResourceModule.prototype.register = function register(registry, name) {
-          var i,
-              ii,
-              resources = this.resources;
-          if (this.mainResource) {
-            this.mainResource.metadata.register(registry, name);
-            name = null;
-          }
-          for (i = 0, ii = resources.length; i < ii; ++i) {
-            resources[i].metadata.register(registry, name);
-            name = null;
-          }
-        };
-        ResourceModule.prototype.load = function load(container) {
-          var current = this.mainResource,
-              resources = this.resources,
-              i,
-              ii,
-              metadata,
-              loads;
-          if (this.isLoaded) {
-            return Promise.resolve();
-          }
-          this.isLoaded = true;
-          loads = [];
-          if (current) {
-            metadata = current.metadata;
-            if ('load' in metadata && !metadata.isLoaded) {
-              metadata.isLoaded = true;
-              loads.push(metadata.load(container, current.value));
-            }
-          }
-          for (i = 0, ii = resources.length; i < ii; ++i) {
-            current = resources[i];
-            metadata = current.metadata;
-            if ('load' in metadata && !metadata.isLoaded) {
-              metadata.isLoaded = true;
-              loads.push(metadata.load(container, current.value));
-            }
-          }
-          return Promise.all(loads);
-        };
-        return ResourceModule;
-      })();
-      ResourceDescription = function ResourceDescription(key, exportedValue, resourceTypeMeta) {
-        _classCallCheck(this, ResourceDescription);
-        if (!resourceTypeMeta) {
-          resourceTypeMeta = Metadata.get(Metadata.resource, exportedValue);
-          if (!resourceTypeMeta) {
-            resourceTypeMeta = new HtmlBehaviorResource();
-            resourceTypeMeta.elementName = hyphenate(key);
-            Reflect.defineMetadata(Metadata.resource, resourceTypeMeta, exportedValue);
-          }
-        }
-        if (resourceTypeMeta instanceof HtmlBehaviorResource) {
-          if (resourceTypeMeta.elementName === undefined) {
-            resourceTypeMeta.elementName = hyphenate(key);
-          } else if (resourceTypeMeta.attributeName === undefined) {
-            resourceTypeMeta.attributeName = hyphenate(key);
-          } else if (resourceTypeMeta.attributeName === null && resourceTypeMeta.elementName === null) {
-            HtmlBehaviorResource.convention(key, resourceTypeMeta);
-          }
-        } else if (!resourceTypeMeta.name) {
-          resourceTypeMeta.name = hyphenate(key);
-        }
-        this.metadata = resourceTypeMeta;
-        this.value = exportedValue;
-      };
-      ModuleAnalyzer = (function() {
-        function ModuleAnalyzer() {
-          _classCallCheck(this, ModuleAnalyzer);
-          this.cache = {};
-        }
-        ModuleAnalyzer.prototype.getAnalysis = function getAnalysis(moduleId) {
-          return this.cache[moduleId];
-        };
-        ModuleAnalyzer.prototype.analyze = function analyze(moduleId, moduleInstance, viewModelMember) {
-          var mainResource,
-              fallbackValue,
-              fallbackKey,
-              resourceTypeMeta,
-              key,
-              exportedValue,
-              resources = [],
-              conventional,
-              viewStrategy,
-              resourceModule;
-          resourceModule = this.cache[moduleId];
-          if (resourceModule) {
-            return resourceModule;
-          }
-          resourceModule = new ResourceModule(moduleId);
-          this.cache[moduleId] = resourceModule;
-          if (typeof moduleInstance === 'function') {
-            moduleInstance = {'default': moduleInstance};
-          }
-          if (viewModelMember) {
-            mainResource = new ResourceDescription(viewModelMember, moduleInstance[viewModelMember]);
-          }
-          for (key in moduleInstance) {
-            exportedValue = moduleInstance[key];
-            if (key === viewModelMember || typeof exportedValue !== 'function') {
-              continue;
-            }
-            resourceTypeMeta = Metadata.get(Metadata.resource, exportedValue);
-            if (resourceTypeMeta) {
-              if (resourceTypeMeta.attributeName === null && resourceTypeMeta.elementName === null) {
-                HtmlBehaviorResource.convention(key, resourceTypeMeta);
-              }
-              if (resourceTypeMeta.attributeName === null && resourceTypeMeta.elementName === null) {
-                resourceTypeMeta.elementName = hyphenate(key);
-              }
-              if (!mainResource && resourceTypeMeta instanceof HtmlBehaviorResource && resourceTypeMeta.elementName !== null) {
-                mainResource = new ResourceDescription(key, exportedValue, resourceTypeMeta);
-              } else {
-                resources.push(new ResourceDescription(key, exportedValue, resourceTypeMeta));
-              }
-            } else if (exportedValue instanceof ViewStrategy) {
-              viewStrategy = exportedValue;
-            } else if (exportedValue instanceof TemplateRegistryEntry) {
-              viewStrategy = new TemplateRegistryViewStrategy(moduleId, exportedValue);
-            } else {
-              if (conventional = HtmlBehaviorResource.convention(key)) {
-                if (conventional.elementName !== null && !mainResource) {
-                  mainResource = new ResourceDescription(key, exportedValue, conventional);
-                } else {
-                  resources.push(new ResourceDescription(key, exportedValue, conventional));
-                }
-                Reflect.defineMetadata(Metadata.resource, conventional, exportedValue);
-              } else if (conventional = ValueConverterResource.convention(key)) {
-                resources.push(new ResourceDescription(key, exportedValue, conventional));
-                Reflect.defineMetadata(Metadata.resource, conventional, exportedValue);
-              } else if (!fallbackValue) {
-                fallbackValue = exportedValue;
-                fallbackKey = key;
-              }
-            }
-          }
-          if (!mainResource && fallbackValue) {
-            mainResource = new ResourceDescription(fallbackKey, fallbackValue);
-          }
-          resourceModule.moduleInstance = moduleInstance;
-          resourceModule.mainResource = mainResource;
-          resourceModule.resources = resources;
-          resourceModule.viewStrategy = viewStrategy;
-          return resourceModule;
-        };
-        return ModuleAnalyzer;
-      })();
-      _export('ModuleAnalyzer', ModuleAnalyzer);
-    }
-  };
-});
-
-System.register("github:aurelia/logging-console@0.4.0", ["github:aurelia/logging-console@0.4.0/index"], function($__export) {
+System.register("github:aurelia/logging-console@0.5.0", ["github:aurelia/logging-console@0.5.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -23477,7 +24608,8 @@ System.register("github:aurelia/logging-console@0.4.0", ["github:aurelia/logging
   };
 });
 
-System.register("github:aurelia/templating-binding@0.11.0/binding-language", ["github:aurelia/templating@0.11.2", "github:aurelia/binding@0.6.1", "github:aurelia/templating-binding@0.11.0/syntax-interpreter", "github:aurelia/logging@0.4.0"], function(_export) {
+System.register("github:aurelia/templating-binding@0.12.0/binding-language", ["github:aurelia/templating@0.12.1", "github:aurelia/binding@0.7.3", "github:aurelia/templating-binding@0.12.0/syntax-interpreter", "github:aurelia/logging@0.5.0"], function(_export) {
+  'use strict';
   var BindingLanguage,
       Parser,
       ObserverLocator,
@@ -23486,13 +24618,29 @@ System.register("github:aurelia/templating-binding@0.11.0/binding-language", ["g
       bindingMode,
       SyntaxInterpreter,
       LogManager,
-      _classCallCheck,
-      _inherits,
       info,
       logger,
       TemplatingBindingLanguage,
       InterpolationBindingExpression,
       InterpolationBinding;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
   return {
     setters: [function(_aureliaTemplating) {
       BindingLanguage = _aureliaTemplating.BindingLanguage;
@@ -23508,25 +24656,6 @@ System.register("github:aurelia/templating-binding@0.11.0/binding-language", ["g
       LogManager = _aureliaLogging;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
       info = {};
       logger = LogManager.getLogger('templating-binding');
       TemplatingBindingLanguage = (function(_BindingLanguage) {
@@ -23539,19 +24668,22 @@ System.register("github:aurelia/templating-binding@0.11.0/binding-language", ["g
           this.emptyStringExpression = this.parser.parse('\'\'');
           syntaxInterpreter.language = this;
           this.attributeMap = syntaxInterpreter.attributeMap = {
-            'class': 'className',
-            contenteditable: 'contentEditable',
+            'contenteditable': 'contentEditable',
             'for': 'htmlFor',
-            tabindex: 'tabIndex',
-            textcontent: 'textContent',
-            innerhtml: 'innerHTML',
-            maxlength: 'maxLength',
-            minlength: 'minLength',
-            formaction: 'formAction',
-            formenctype: 'formEncType',
-            formmethod: 'formMethod',
-            formnovalidate: 'formNoValidate',
-            formtarget: 'formTarget'
+            'tabindex': 'tabIndex',
+            'textcontent': 'textContent',
+            'innerhtml': 'innerHTML',
+            'maxlength': 'maxLength',
+            'minlength': 'minLength',
+            'formaction': 'formAction',
+            'formenctype': 'formEncType',
+            'formmethod': 'formMethod',
+            'formnovalidate': 'formNoValidate',
+            'formtarget': 'formTarget',
+            'rowspan': 'rowSpan',
+            'colspan': 'colSpan',
+            'scrolltop': 'scrollTop',
+            'scrollleft': 'scrollLeft'
           };
         }
         _inherits(TemplatingBindingLanguage, _BindingLanguage);
@@ -23565,7 +24697,13 @@ System.register("github:aurelia/templating-binding@0.11.0/binding-language", ["g
             info.attrName = parts[0].trim();
             info.attrValue = attrValue;
             info.command = parts[1].trim();
-            info.expression = null;
+            if (info.command === 'ref') {
+              info.expression = new NameExpression(attrValue, info.attrName);
+              info.command = null;
+              info.attrName = 'ref';
+            } else {
+              info.expression = null;
+            }
           } else if (attrName == 'ref') {
             info.attrName = attrName;
             info.attrValue = attrValue;
@@ -23823,16 +24961,21 @@ System.register("github:aurelia/templating-binding@0.11.0/binding-language", ["g
   };
 });
 
-System.register("github:aurelia/route-recognizer@0.4.0/index", ["npm:core-js@0.9.13", "github:aurelia/route-recognizer@0.4.0/state", "github:aurelia/route-recognizer@0.4.0/segments"], function(_export) {
+System.register("github:aurelia/route-recognizer@0.5.0/index", ["npm:core-js@0.9.16", "github:aurelia/route-recognizer@0.5.0/state", "github:aurelia/route-recognizer@0.5.0/segments"], function(_export) {
+  'use strict';
   var core,
       State,
       StaticSegment,
       DynamicSegment,
       StarSegment,
       EpsilonSegment,
-      _classCallCheck,
       RouteRecognizer,
       RecognizeResults;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function parse(route, names, types) {
     if (route.charAt(0) === '/') {
       route = route.substr(1);
@@ -23944,12 +25087,6 @@ System.register("github:aurelia/route-recognizer@0.4.0/index", ["npm:core-js@0.9
       EpsilonSegment = _segments.EpsilonSegment;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       RouteRecognizer = (function() {
         function RouteRecognizer() {
           _classCallCheck(this, RouteRecognizer);
@@ -24082,7 +25219,10 @@ System.register("github:aurelia/route-recognizer@0.4.0/index", ["npm:core-js@0.9
         RouteRecognizer.prototype.generateQueryString = function generateQueryString(params) {
           var pairs = [],
               keys = [],
-              encode = encodeURIComponent;
+              encode = encodeURIComponent,
+              encodeKey = function encodeKey(k) {
+                return encode(k).replace('%24', '$');
+              };
           for (var key in params) {
             if (params.hasOwnProperty(key)) {
               keys.push(key);
@@ -24097,13 +25237,13 @@ System.register("github:aurelia/route-recognizer@0.4.0/index", ["npm:core-js@0.9
               continue;
             }
             if (Array.isArray(value)) {
-              var arrayKey = '' + encode(key) + '[]';
+              var arrayKey = '' + encodeKey(key) + '[]';
               for (var j = 0,
                   l = value.length; j < l; j++) {
                 pairs.push('' + arrayKey + '=' + encode(value[j]));
               }
             } else {
-              pairs.push('' + encode(key) + '=' + encode(value));
+              pairs.push('' + encodeKey(key) + '=' + encode(value));
             }
           }
           if (pairs.length === 0) {
@@ -24207,17 +25347,30 @@ System.register("github:aurelia/route-recognizer@0.4.0/index", ["npm:core-js@0.9
   };
 });
 
-System.register("github:aurelia/router@0.8.0/navigation-plan", ["github:aurelia/router@0.8.0/navigation-commands"], function(_export) {
+System.register("github:aurelia/router@0.9.0/navigation-plan", ["github:aurelia/router@0.9.0/navigation-commands", "github:aurelia/router@0.9.0/util"], function(_export) {
+  'use strict';
   var Redirect,
-      _classCallCheck,
+      resolveUrl,
       activationStrategy,
       BuildNavigationPlanStep;
   _export('buildNavigationPlan', buildNavigationPlan);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function buildNavigationPlan(navigationContext, forceLifecycleMinimum) {
     var prev = navigationContext.prevInstruction;
     var next = navigationContext.nextInstruction;
     var plan = {},
         viewPortName;
+    if ('redirect' in next.config) {
+      var redirectLocation = resolveUrl(next.config.redirect, getInstructionBaseUrl(next));
+      if (next.queryString) {
+        redirectLocation += '?' + next.queryString;
+      }
+      return Promise.reject(new Redirect(redirectLocation));
+    }
     if (prev) {
       var newParams = hasDifferentParameterValues(prev, next);
       var pending = [];
@@ -24270,26 +25423,38 @@ System.register("github:aurelia/router@0.8.0/navigation-plan", ["github:aurelia/
         nextParams = next.params,
         nextWildCardName = next.config.hasChildRouter ? next.getWildCardName() : null;
     for (var key in nextParams) {
-      if (key == nextWildCardName) {
+      if (key === nextWildCardName) {
         continue;
       }
-      if (prevParams[key] != nextParams[key]) {
+      if (prevParams[key] !== nextParams[key]) {
+        return true;
+      }
+    }
+    for (var key in prevParams) {
+      if (key === nextWildCardName) {
+        continue;
+      }
+      if (prevParams[key] !== nextParams[key]) {
         return true;
       }
     }
     return false;
   }
+  function getInstructionBaseUrl(instruction) {
+    var instructionBaseUrlParts = [];
+    while (instruction = instruction.parentInstruction) {
+      instructionBaseUrlParts.unshift(instruction.getBaseUrl());
+    }
+    instructionBaseUrlParts.unshift('/');
+    return instructionBaseUrlParts.join('');
+  }
   return {
     setters: [function(_navigationCommands) {
       Redirect = _navigationCommands.Redirect;
+    }, function(_util) {
+      resolveUrl = _util.resolveUrl;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       activationStrategy = {
         noChange: 'no-change',
         invokeLifecycle: 'invoke-lifecycle',
@@ -24301,9 +25466,6 @@ System.register("github:aurelia/router@0.8.0/navigation-plan", ["github:aurelia/
           _classCallCheck(this, BuildNavigationPlanStep);
         }
         BuildNavigationPlanStep.prototype.run = function run(navigationContext, next) {
-          if (navigationContext.nextInstruction.config.redirect) {
-            return next.cancel(new Redirect(navigationContext.nextInstruction.config.redirect));
-          }
           return buildNavigationPlan(navigationContext).then(function(plan) {
             navigationContext.plan = plan;
             return next();
@@ -24316,33 +25478,20 @@ System.register("github:aurelia/router@0.8.0/navigation-plan", ["github:aurelia/
   };
 });
 
-System.register("github:aurelia/router@0.8.0/router-configuration", ["github:aurelia/router@0.8.0/route-filters"], function(_export) {
+System.register("github:aurelia/router@0.9.0/router-configuration", ["github:aurelia/router@0.9.0/route-filters"], function(_export) {
+  'use strict';
   var RouteFilterContainer,
-      _classCallCheck,
       RouterConfiguration;
-  function ensureConfigValue(config, property, getter) {
-    var value = config[property];
-    if (value || value === '') {
-      return value;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
     }
-    return getter(config);
-  }
-  function stripParametersFromRoute(route) {
-    var colonIndex = route.indexOf(':');
-    var length = colonIndex > 0 ? colonIndex - 1 : route.length;
-    return route.substr(0, length);
   }
   return {
     setters: [function(_routeFilters) {
       RouteFilterContainer = _routeFilters.RouteFilterContainer;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       RouterConfiguration = (function() {
         function RouterConfiguration() {
           _classCallCheck(this, RouterConfiguration);
@@ -24356,40 +25505,35 @@ System.register("github:aurelia/router@0.8.0/router-configuration", ["github:aur
             step: step
           });
         };
-        RouterConfiguration.prototype.map = function map(route, config) {
+        RouterConfiguration.prototype.map = function map(route) {
           if (Array.isArray(route)) {
-            for (var i = 0; i < route.length; i++) {
-              this.map(route[i]);
-            }
+            route.forEach(this.map.bind(this));
             return this;
           }
-          if (typeof route == 'string') {
-            if (!config) {
-              config = {};
-            } else if (typeof config == 'string') {
-              config = {moduleId: config};
-            }
-            config.route = route;
-          } else {
-            config = route;
-          }
-          return this.mapRoute(config);
+          return this.mapRoute(route);
         };
         RouterConfiguration.prototype.mapRoute = function mapRoute(config) {
-          var _this = this;
           this.instructions.push(function(router) {
+            var routeConfigs = [];
             if (Array.isArray(config.route)) {
-              var navModel = {},
-                  i,
-                  ii,
-                  current;
-              for (i = 0, ii = config.route.length; i < ii; ++i) {
-                current = Object.assign({}, config);
+              for (var i = 0,
+                  ii = config.route.length; i < ii; ++i) {
+                var current = Object.assign({}, config);
                 current.route = config.route[i];
-                _this.configureRoute(router, current, navModel);
+                routeConfigs.push(current);
               }
             } else {
-              _this.configureRoute(router, Object.assign({}, config));
+              routeConfigs.push(Object.assign({}, config));
+            }
+            var navModel = undefined;
+            for (var i = 0,
+                ii = routeConfigs.length; i < ii; ++i) {
+              var routeConfig = routeConfigs[i];
+              routeConfig.settings = routeConfig.settings || {};
+              if (!navModel) {
+                navModel = router.createNavModel(routeConfig);
+              }
+              router.addRoute(routeConfig, navModel);
             }
           });
           return this;
@@ -24399,12 +25543,9 @@ System.register("github:aurelia/router@0.8.0/router-configuration", ["github:aur
           return this;
         };
         RouterConfiguration.prototype.exportToRouter = function exportToRouter(router) {
-          var instructions = this.instructions,
-              pipelineSteps = this.pipelineSteps,
-              i,
-              ii,
-              filterContainer;
-          for (i = 0, ii = instructions.length; i < ii; ++i) {
+          var instructions = this.instructions;
+          for (var i = 0,
+              ii = instructions.length; i < ii; ++i) {
             instructions[i](router);
           }
           if (this.title) {
@@ -24414,41 +25555,20 @@ System.register("github:aurelia/router@0.8.0/router-configuration", ["github:aur
             router.handleUnknownRoutes(this.unknownRouteConfig);
           }
           router.options = this.options;
+          var pipelineSteps = this.pipelineSteps;
           if (pipelineSteps.length) {
             if (!router.isRoot) {
               throw new Error('Pipeline steps can only be added to the root router');
             }
-            filterContainer = router.container.get(RouteFilterContainer);
-            for (i = 0, ii = pipelineSteps.length; i < ii; ++i) {
+            var filterContainer = router.container.get(RouteFilterContainer);
+            for (var i = 0,
+                ii = pipelineSteps.length; i < ii; ++i) {
               var _pipelineSteps$i = pipelineSteps[i];
-              var name = _pipelineSteps$i.name;
+              var _name = _pipelineSteps$i.name;
               var step = _pipelineSteps$i.step;
-              filterContainer.addStep(name, step);
+              filterContainer.addStep(_name, step);
             }
           }
-        };
-        RouterConfiguration.prototype.configureRoute = function configureRoute(router, config, navModel) {
-          this.ensureDefaultsForRouteConfig(config);
-          router.addRoute(config, navModel);
-        };
-        RouterConfiguration.prototype.ensureDefaultsForRouteConfig = function ensureDefaultsForRouteConfig(config) {
-          config.name = ensureConfigValue(config, 'name', this.deriveName);
-          config.route = ensureConfigValue(config, 'route', this.deriveRoute);
-          config.title = ensureConfigValue(config, 'title', this.deriveTitle);
-          config.moduleId = ensureConfigValue(config, 'moduleId', this.deriveModuleId);
-        };
-        RouterConfiguration.prototype.deriveName = function deriveName(config) {
-          return config.title || (config.route ? stripParametersFromRoute(config.route) : config.moduleId);
-        };
-        RouterConfiguration.prototype.deriveRoute = function deriveRoute(config) {
-          return config.moduleId || config.name;
-        };
-        RouterConfiguration.prototype.deriveTitle = function deriveTitle(config) {
-          var value = config.name;
-          return value ? value.substr(0, 1).toUpperCase() + value.substr(1) : null;
-        };
-        RouterConfiguration.prototype.deriveModuleId = function deriveModuleId(config) {
-          return stripParametersFromRoute(config.route);
         };
         return RouterConfiguration;
       })();
@@ -24457,7 +25577,7 @@ System.register("github:aurelia/router@0.8.0/router-configuration", ["github:aur
   };
 });
 
-System.register("github:aurelia/history@0.4.0", ["github:aurelia/history@0.4.0/index"], function($__export) {
+System.register("github:aurelia/history@0.5.0", ["github:aurelia/history@0.5.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -24467,7 +25587,8 @@ System.register("github:aurelia/history@0.4.0", ["github:aurelia/history@0.4.0/i
   };
 });
 
-System.register("github:aurelia/router@0.8.0/pipeline-provider", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/router@0.8.0/pipeline", "github:aurelia/router@0.8.0/navigation-plan", "github:aurelia/router@0.8.0/route-loading", "github:aurelia/router@0.8.0/navigation-context", "github:aurelia/router@0.8.0/activation", "github:aurelia/router@0.8.0/route-filters"], function(_export) {
+System.register("github:aurelia/router@0.9.0/pipeline-provider", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/router@0.9.0/pipeline", "github:aurelia/router@0.9.0/navigation-plan", "github:aurelia/router@0.9.0/route-loading", "github:aurelia/router@0.9.0/navigation-context", "github:aurelia/router@0.9.0/activation", "github:aurelia/router@0.9.0/route-filters"], function(_export) {
+  'use strict';
   var Container,
       Pipeline,
       BuildNavigationPlanStep,
@@ -24478,8 +25599,12 @@ System.register("github:aurelia/router@0.8.0/pipeline-provider", ["github:aureli
       DeactivatePreviousStep,
       ActivateNextStep,
       createRouteFilterStep,
-      _classCallCheck,
       PipelineProvider;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_aureliaDependencyInjection) {
       Container = _aureliaDependencyInjection.Container;
@@ -24500,12 +25625,6 @@ System.register("github:aurelia/router@0.8.0/pipeline-provider", ["github:aureli
       createRouteFilterStep = _routeFilters.createRouteFilterStep;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       PipelineProvider = (function() {
         function PipelineProvider(container) {
           _classCallCheck(this, PipelineProvider);
@@ -24530,7 +25649,7 @@ System.register("github:aurelia/router@0.8.0/pipeline-provider", ["github:aureli
   };
 });
 
-System.register("github:aurelia/event-aggregator@0.4.0", ["github:aurelia/event-aggregator@0.4.0/index"], function($__export) {
+System.register("github:aurelia/event-aggregator@0.5.0", ["github:aurelia/event-aggregator@0.5.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -24540,16 +25659,19 @@ System.register("github:aurelia/event-aggregator@0.4.0", ["github:aurelia/event-
   };
 });
 
-System.register("github:aurelia/templating-resources@0.11.0/index", ["github:aurelia/templating-resources@0.11.0/compose", "github:aurelia/templating-resources@0.11.0/if", "github:aurelia/templating-resources@0.11.0/with", "github:aurelia/templating-resources@0.11.0/repeat", "github:aurelia/templating-resources@0.11.0/show", "github:aurelia/templating-resources@0.11.0/global-behavior", "github:aurelia/templating-resources@0.11.0/sanitize-html"], function(_export) {
+System.register("github:aurelia/templating-resources@0.12.1/index", ["github:aurelia/templating-resources@0.12.1/compose", "github:aurelia/templating-resources@0.12.1/if", "github:aurelia/templating-resources@0.12.1/with", "github:aurelia/templating-resources@0.12.1/repeat", "github:aurelia/templating-resources@0.12.1/show", "github:aurelia/templating-resources@0.12.1/global-behavior", "github:aurelia/templating-resources@0.12.1/sanitize-html", "github:aurelia/templating-resources@0.12.1/replaceable", "github:aurelia/templating-resources@0.12.1/focus"], function(_export) {
+  'use strict';
   var Compose,
       If,
       With,
       Repeat,
       Show,
       GlobalBehavior,
-      SanitizeHtmlValueConverter;
+      SanitizeHtmlValueConverter,
+      Replaceable,
+      Focus;
   function configure(aurelia) {
-    aurelia.globalizeResources('./compose', './if', './with', './repeat', './show', './global-behavior', './sanitize-html');
+    aurelia.globalizeResources('./compose', './if', './with', './repeat', './show', './replaceable', './global-behavior', './sanitize-html', './focus');
   }
   return {
     setters: [function(_compose) {
@@ -24566,9 +25688,12 @@ System.register("github:aurelia/templating-resources@0.11.0/index", ["github:aur
       GlobalBehavior = _globalBehavior.GlobalBehavior;
     }, function(_sanitizeHtml) {
       SanitizeHtmlValueConverter = _sanitizeHtml.SanitizeHtmlValueConverter;
+    }, function(_replaceable) {
+      Replaceable = _replaceable.Replaceable;
+    }, function(_focus) {
+      Focus = _focus.Focus;
     }],
     execute: function() {
-      'use strict';
       _export('Compose', Compose);
       _export('If', If);
       _export('With', With);
@@ -24576,12 +25701,14 @@ System.register("github:aurelia/templating-resources@0.11.0/index", ["github:aur
       _export('Show', Show);
       _export('SanitizeHtmlValueConverter', SanitizeHtmlValueConverter);
       _export('GlobalBehavior', GlobalBehavior);
+      _export('Replaceable', Replaceable);
+      _export('Focus', Focus);
       _export('configure', configure);
     }
   };
 });
 
-System.register("github:aurelia/loader-default@0.7.0", ["github:aurelia/loader-default@0.7.0/index"], function($__export) {
+System.register("github:aurelia/event-aggregator@0.4.0", ["github:aurelia/event-aggregator@0.4.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -24591,7 +25718,7 @@ System.register("github:aurelia/loader-default@0.7.0", ["github:aurelia/loader-d
   };
 });
 
-System.register("github:aurelia/history-browser@0.4.0", ["github:aurelia/history-browser@0.4.0/index"], function($__export) {
+System.register("github:aurelia/loader-default@0.8.0", ["github:aurelia/loader-default@0.8.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -24601,7 +25728,17 @@ System.register("github:aurelia/history-browser@0.4.0", ["github:aurelia/history
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-config", ["github:aurelia/validation@0.2.4/validation/validation-locale", "github:aurelia/validation@0.2.4/validation/validate-custom-attribute-view-strategy"], function(_export) {
+System.register("github:aurelia/history-browser@0.5.0", ["github:aurelia/history-browser@0.5.0/index"], function($__export) {
+  return {
+    setters: [function(m) {
+      for (var p in m)
+        $__export(p, m[p]);
+    }],
+    execute: function() {}
+  };
+});
+
+System.register("github:aurelia/validation@0.2.5/validation/validation-config", ["github:aurelia/validation@0.2.5/validation/validation-locale", "github:aurelia/validation@0.2.5/validation/validate-custom-attribute-view-strategy"], function(_export) {
   var ValidationLocale,
       ValidateCustomAttributeViewStrategy,
       _classCallCheck,
@@ -24665,7 +25802,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-config", 
               var id = ++ValidationConfig.uniqueListenerId;
               _this.changedHandlers.set(id, callback);
               return {v: function() {
-                  changedHandlers['delete'](id);
+                  _this.changedHandlers['delete'](id);
                 }};
             })();
             if (typeof _ret === 'object') {
@@ -24715,12 +25852,13 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-config", 
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-rules", ["github:aurelia/validation@0.2.4/validation/utilities", "github:aurelia/validation@0.2.4/validation/validation-locale"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation-rules", ["github:aurelia/validation@0.2.5/validation/utilities", "github:aurelia/validation@0.2.5/validation/validation-locale"], function(_export) {
   var Utilities,
       ValidationLocale,
       _inherits,
       _classCallCheck,
       ValidationRule,
+      URLValidationRule,
       EmailValidationRule,
       MinimumLengthValidationRule,
       MaximumLengthValidationRule,
@@ -24735,6 +25873,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
       MaximumInclusiveValueValidationRule,
       BetweenValueValidationRule,
       DigitValidationRule,
+      NoSpacesValidationRule,
       AlphaNumericValidationRule,
       AlphaValidationRule,
       AlphaOrWhitespaceValidationRule,
@@ -24831,21 +25970,177 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
         return ValidationRule;
       })();
       _export('ValidationRule', ValidationRule);
-      EmailValidationRule = (function(_ValidationRule) {
-        function EmailValidationRule() {
+      URLValidationRule = (function(_ValidationRule) {
+        function URLValidationRule(threshold) {
           var _this2 = this;
+          _classCallCheck(this, URLValidationRule);
+          var default_url_options = {
+            protocols: ['http', 'https', 'ftp'],
+            require_tld: true,
+            require_protocol: false,
+            allow_underscores: true,
+            allow_trailing_dot: false,
+            allow_protocol_relative_urls: true
+          };
+          if (threshold === undefined) {
+            threshold = default_url_options;
+          }
+          _ValidationRule.call(this, threshold, function(newValue, threshold) {
+            var url = newValue;
+            if (!url || url.length >= 2083 || /\s/.test(url)) {
+              return false;
+            }
+            if (url.indexOf('mailto:') === 0) {
+              return false;
+            }
+            var protocol,
+                auth,
+                host,
+                hostname,
+                port,
+                port_str,
+                split;
+            split = url.split('://');
+            if (split.length > 1) {
+              protocol = split.shift();
+              if (threshold.protocols.indexOf(protocol) === -1) {
+                return false;
+              }
+            } else if (threshold.require_protocol) {
+              return false;
+            } else if (threshold.allow_protocol_relative_urls && url.substr(0, 2) === '//') {
+              split[0] = url.substr(2);
+            }
+            url = split.join('://');
+            split = url.split('#');
+            url = split.shift();
+            split = url.split('?');
+            url = split.shift();
+            split = url.split('/');
+            url = split.shift();
+            split = url.split('@');
+            if (split.length > 1) {
+              auth = split.shift();
+              if (auth.indexOf(':') >= 0 && auth.split(':').length > 2) {
+                return false;
+              }
+            }
+            hostname = split.join('@');
+            split = hostname.split(':');
+            host = split.shift();
+            if (split.length) {
+              port_str = split.join(':');
+              port = parseInt(port_str, 10);
+              if (!/^[0-9]+$/.test(port_str) || port <= 0 || port > 65535) {
+                return false;
+              }
+            }
+            if (!_this2.isIP(host) && !_this2.isFQDN(host, threshold) && host !== 'localhost') {
+              return false;
+            }
+            if (threshold.host_whitelist && threshold.host_whitelist.indexOf(host) === -1) {
+              return false;
+            }
+            if (threshold.host_blacklist && threshold.host_blacklist.indexOf(host) !== -1) {
+              return false;
+            }
+            return true;
+          });
+          this.isIP = function(str, version) {
+            var ipv4Maybe = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/,
+                ipv6Block = /^[0-9A-F]{1,4}$/i;
+            if (!version) {
+              return this.isIP(str, 4) || this.isIP(str, 6);
+            } else if (version === 4) {
+              if (!ipv4Maybe.test(str)) {
+                return false;
+              }
+              var parts = str.split('.').sort(function(a, b) {
+                return a - b;
+              });
+              return parts[3] <= 255;
+            } else if (version === 6) {
+              var blocks = str.split(':');
+              var foundOmissionBlock = false;
+              if (blocks.length > 8)
+                return false;
+              if (str === '::') {
+                return true;
+              } else if (str.substr(0, 2) === '::') {
+                blocks.shift();
+                blocks.shift();
+                foundOmissionBlock = true;
+              } else if (str.substr(str.length - 2) === '::') {
+                blocks.pop();
+                blocks.pop();
+                foundOmissionBlock = true;
+              }
+              for (var i = 0; i < blocks.length; ++i) {
+                if (blocks[i] === '' && i > 0 && i < blocks.length - 1) {
+                  if (foundOmissionBlock)
+                    return false;
+                  foundOmissionBlock = true;
+                } else if (!ipv6Block.test(blocks[i])) {
+                  return false;
+                }
+              }
+              if (foundOmissionBlock) {
+                return blocks.length >= 1;
+              } else {
+                return blocks.length === 8;
+              }
+            }
+            return false;
+          };
+          this.isFQDN = function(str, options) {
+            if (options.allow_trailing_dot && str[str.length - 1] === '.') {
+              str = str.substring(0, str.length - 1);
+            }
+            var parts = str.split('.');
+            if (options.require_tld) {
+              var tld = parts.pop();
+              if (!parts.length || !/^([a-z\u00a1-\uffff]{2,}|xn[a-z0-9-]{2,})$/i.test(tld)) {
+                return false;
+              }
+            }
+            for (var part,
+                i = 0; i < parts.length; i++) {
+              part = parts[i];
+              if (options.allow_underscores) {
+                if (part.indexOf('__') >= 0) {
+                  return false;
+                }
+                part = part.replace(/_/g, '');
+              }
+              if (!/^[a-z\u00a1-\uffff0-9-]+$/i.test(part)) {
+                return false;
+              }
+              if (part[0] === '-' || part[part.length - 1] === '-' || part.indexOf('---') >= 0) {
+                return false;
+              }
+            }
+            return true;
+          };
+        }
+        _inherits(URLValidationRule, _ValidationRule);
+        return URLValidationRule;
+      })(ValidationRule);
+      _export('URLValidationRule', URLValidationRule);
+      EmailValidationRule = (function(_ValidationRule2) {
+        function EmailValidationRule() {
+          var _this3 = this;
           _classCallCheck(this, EmailValidationRule);
-          _ValidationRule.call(this, null, function(newValue, threshold) {
+          _ValidationRule2.call(this, null, function(newValue, threshold) {
             if (/\s/.test(newValue)) {
               return false;
             }
             var parts = newValue.split('@');
             var domain = parts.pop();
             var user = parts.join('@');
-            if (!_this2.isFQDN(domain)) {
+            if (!_this3.isFQDN(domain)) {
               return false;
             }
-            return _this2.emailUserUtf8Regex.test(user);
+            return _this3.emailUserUtf8Regex.test(user);
           });
           this.emailUserUtf8Regex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))$/i;
           this.isFQDN = function(str) {
@@ -24867,76 +26162,76 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
             return true;
           };
         }
-        _inherits(EmailValidationRule, _ValidationRule);
+        _inherits(EmailValidationRule, _ValidationRule2);
         return EmailValidationRule;
       })(ValidationRule);
       _export('EmailValidationRule', EmailValidationRule);
-      MinimumLengthValidationRule = (function(_ValidationRule2) {
+      MinimumLengthValidationRule = (function(_ValidationRule3) {
         function MinimumLengthValidationRule(minimumLength) {
           _classCallCheck(this, MinimumLengthValidationRule);
-          _ValidationRule2.call(this, minimumLength, function(newValue, minimumLength) {
+          _ValidationRule3.call(this, minimumLength, function(newValue, minimumLength) {
             return newValue.length !== undefined && newValue.length >= minimumLength;
           });
         }
-        _inherits(MinimumLengthValidationRule, _ValidationRule2);
+        _inherits(MinimumLengthValidationRule, _ValidationRule3);
         return MinimumLengthValidationRule;
       })(ValidationRule);
       _export('MinimumLengthValidationRule', MinimumLengthValidationRule);
-      MaximumLengthValidationRule = (function(_ValidationRule3) {
+      MaximumLengthValidationRule = (function(_ValidationRule4) {
         function MaximumLengthValidationRule(maximumLength) {
           _classCallCheck(this, MaximumLengthValidationRule);
-          _ValidationRule3.call(this, maximumLength, function(newValue, maximumLength) {
+          _ValidationRule4.call(this, maximumLength, function(newValue, maximumLength) {
             return newValue.length !== undefined && newValue.length <= maximumLength;
           });
         }
-        _inherits(MaximumLengthValidationRule, _ValidationRule3);
+        _inherits(MaximumLengthValidationRule, _ValidationRule4);
         return MaximumLengthValidationRule;
       })(ValidationRule);
       _export('MaximumLengthValidationRule', MaximumLengthValidationRule);
-      BetweenLengthValidationRule = (function(_ValidationRule4) {
+      BetweenLengthValidationRule = (function(_ValidationRule5) {
         function BetweenLengthValidationRule(minimumLength, maximumLength) {
           _classCallCheck(this, BetweenLengthValidationRule);
-          _ValidationRule4.call(this, {
+          _ValidationRule5.call(this, {
             minimumLength: minimumLength,
             maximumLength: maximumLength
           }, function(newValue, threshold) {
             return newValue.length !== undefined && newValue.length >= threshold.minimumLength && newValue.length <= threshold.maximumLength;
           });
         }
-        _inherits(BetweenLengthValidationRule, _ValidationRule4);
+        _inherits(BetweenLengthValidationRule, _ValidationRule5);
         return BetweenLengthValidationRule;
       })(ValidationRule);
       _export('BetweenLengthValidationRule', BetweenLengthValidationRule);
-      CustomFunctionValidationRule = (function(_ValidationRule5) {
+      CustomFunctionValidationRule = (function(_ValidationRule6) {
         function CustomFunctionValidationRule(customFunction, threshold) {
           _classCallCheck(this, CustomFunctionValidationRule);
-          _ValidationRule5.call(this, threshold, customFunction);
+          _ValidationRule6.call(this, threshold, customFunction);
         }
-        _inherits(CustomFunctionValidationRule, _ValidationRule5);
+        _inherits(CustomFunctionValidationRule, _ValidationRule6);
         return CustomFunctionValidationRule;
       })(ValidationRule);
       _export('CustomFunctionValidationRule', CustomFunctionValidationRule);
-      NumericValidationRule = (function(_ValidationRule6) {
+      NumericValidationRule = (function(_ValidationRule7) {
         function NumericValidationRule() {
           _classCallCheck(this, NumericValidationRule);
-          _ValidationRule6.call(this, null, function(newValue, threshold, locale) {
+          _ValidationRule7.call(this, null, function(newValue, threshold, locale) {
             var numericRegex = locale.setting('numericRegex');
             var floatValue = parseFloat(newValue);
-            return !Number.isNaN(parseFloat(floatValue)) && Number.isFinite(floatValue) && numericRegex.test(newValue);
+            return !Number.isNaN(parseFloat(newValue)) && Number.isFinite(floatValue) && numericRegex.test(newValue);
           });
         }
-        _inherits(NumericValidationRule, _ValidationRule6);
+        _inherits(NumericValidationRule, _ValidationRule7);
         return NumericValidationRule;
       })(ValidationRule);
       _export('NumericValidationRule', NumericValidationRule);
-      RegexValidationRule = (function(_ValidationRule7) {
+      RegexValidationRule = (function(_ValidationRule8) {
         function RegexValidationRule(regex) {
           _classCallCheck(this, RegexValidationRule);
-          _ValidationRule7.call(this, regex, function(newValue, regex) {
+          _ValidationRule8.call(this, regex, function(newValue, regex) {
             return regex.test(newValue);
           });
         }
-        _inherits(RegexValidationRule, _ValidationRule7);
+        _inherits(RegexValidationRule, _ValidationRule8);
         return RegexValidationRule;
       })(ValidationRule);
       _export('RegexValidationRule', RegexValidationRule);
@@ -24949,133 +26244,146 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
         return ContainsOnlyValidationRule;
       })(RegexValidationRule);
       _export('ContainsOnlyValidationRule', ContainsOnlyValidationRule);
-      MinimumValueValidationRule = (function(_ValidationRule8) {
+      MinimumValueValidationRule = (function(_ValidationRule9) {
         function MinimumValueValidationRule(minimumValue) {
           _classCallCheck(this, MinimumValueValidationRule);
-          _ValidationRule8.call(this, minimumValue, function(newValue, minimumValue) {
+          _ValidationRule9.call(this, minimumValue, function(newValue, minimumValue) {
             return Utilities.getValue(minimumValue) < newValue;
           });
         }
-        _inherits(MinimumValueValidationRule, _ValidationRule8);
+        _inherits(MinimumValueValidationRule, _ValidationRule9);
         return MinimumValueValidationRule;
       })(ValidationRule);
       _export('MinimumValueValidationRule', MinimumValueValidationRule);
-      MinimumInclusiveValueValidationRule = (function(_ValidationRule9) {
+      MinimumInclusiveValueValidationRule = (function(_ValidationRule10) {
         function MinimumInclusiveValueValidationRule(minimumValue) {
           _classCallCheck(this, MinimumInclusiveValueValidationRule);
-          _ValidationRule9.call(this, minimumValue, function(newValue, minimumValue) {
+          _ValidationRule10.call(this, minimumValue, function(newValue, minimumValue) {
             return Utilities.getValue(minimumValue) <= newValue;
           });
         }
-        _inherits(MinimumInclusiveValueValidationRule, _ValidationRule9);
+        _inherits(MinimumInclusiveValueValidationRule, _ValidationRule10);
         return MinimumInclusiveValueValidationRule;
       })(ValidationRule);
       _export('MinimumInclusiveValueValidationRule', MinimumInclusiveValueValidationRule);
-      MaximumValueValidationRule = (function(_ValidationRule10) {
+      MaximumValueValidationRule = (function(_ValidationRule11) {
         function MaximumValueValidationRule(maximumValue) {
           _classCallCheck(this, MaximumValueValidationRule);
-          _ValidationRule10.call(this, maximumValue, function(newValue, maximumValue) {
+          _ValidationRule11.call(this, maximumValue, function(newValue, maximumValue) {
             return newValue < Utilities.getValue(maximumValue);
           });
         }
-        _inherits(MaximumValueValidationRule, _ValidationRule10);
+        _inherits(MaximumValueValidationRule, _ValidationRule11);
         return MaximumValueValidationRule;
       })(ValidationRule);
       _export('MaximumValueValidationRule', MaximumValueValidationRule);
-      MaximumInclusiveValueValidationRule = (function(_ValidationRule11) {
+      MaximumInclusiveValueValidationRule = (function(_ValidationRule12) {
         function MaximumInclusiveValueValidationRule(maximumValue) {
           _classCallCheck(this, MaximumInclusiveValueValidationRule);
-          _ValidationRule11.call(this, maximumValue, function(newValue, maximumValue) {
+          _ValidationRule12.call(this, maximumValue, function(newValue, maximumValue) {
             return newValue <= Utilities.getValue(maximumValue);
           });
         }
-        _inherits(MaximumInclusiveValueValidationRule, _ValidationRule11);
+        _inherits(MaximumInclusiveValueValidationRule, _ValidationRule12);
         return MaximumInclusiveValueValidationRule;
       })(ValidationRule);
       _export('MaximumInclusiveValueValidationRule', MaximumInclusiveValueValidationRule);
-      BetweenValueValidationRule = (function(_ValidationRule12) {
+      BetweenValueValidationRule = (function(_ValidationRule13) {
         function BetweenValueValidationRule(minimumValue, maximumValue) {
           _classCallCheck(this, BetweenValueValidationRule);
-          _ValidationRule12.call(this, {
+          _ValidationRule13.call(this, {
             minimumValue: minimumValue,
             maximumValue: maximumValue
           }, function(newValue, threshold) {
             return Utilities.getValue(threshold.minimumValue) <= newValue && newValue <= Utilities.getValue(threshold.maximumValue);
           });
         }
-        _inherits(BetweenValueValidationRule, _ValidationRule12);
+        _inherits(BetweenValueValidationRule, _ValidationRule13);
         return BetweenValueValidationRule;
       })(ValidationRule);
       _export('BetweenValueValidationRule', BetweenValueValidationRule);
-      DigitValidationRule = (function(_ValidationRule13) {
+      DigitValidationRule = (function(_ValidationRule14) {
         function DigitValidationRule() {
-          var _this3 = this;
+          var _this4 = this;
           _classCallCheck(this, DigitValidationRule);
-          _ValidationRule13.call(this, null, function(newValue, threshold) {
-            return _this3.digitRegex.test(newValue);
+          _ValidationRule14.call(this, null, function(newValue, threshold) {
+            return _this4.digitRegex.test(newValue);
           });
           this.digitRegex = /^\d+$/;
         }
-        _inherits(DigitValidationRule, _ValidationRule13);
+        _inherits(DigitValidationRule, _ValidationRule14);
         return DigitValidationRule;
       })(ValidationRule);
       _export('DigitValidationRule', DigitValidationRule);
-      AlphaNumericValidationRule = (function(_ValidationRule14) {
-        function AlphaNumericValidationRule() {
-          var _this4 = this;
-          _classCallCheck(this, AlphaNumericValidationRule);
-          _ValidationRule14.call(this, null, function(newValue, threshold) {
-            return _this4.alphaNumericRegex.test(newValue);
-          });
-          this.alphaNumericRegex = /^[a-z0-9]+$/i;
-        }
-        _inherits(AlphaNumericValidationRule, _ValidationRule14);
-        return AlphaNumericValidationRule;
-      })(ValidationRule);
-      _export('AlphaNumericValidationRule', AlphaNumericValidationRule);
-      AlphaValidationRule = (function(_ValidationRule15) {
-        function AlphaValidationRule() {
+      NoSpacesValidationRule = (function(_ValidationRule15) {
+        function NoSpacesValidationRule() {
           var _this5 = this;
-          _classCallCheck(this, AlphaValidationRule);
+          _classCallCheck(this, NoSpacesValidationRule);
           _ValidationRule15.call(this, null, function(newValue, threshold) {
-            return _this5.alphaRegex.test(newValue);
+            return _this5.regex.test(newValue);
           });
-          this.alphaRegex = /^[a-z]+$/i;
+          this.regex = /^\S*$/;
         }
-        _inherits(AlphaValidationRule, _ValidationRule15);
-        return AlphaValidationRule;
+        _inherits(NoSpacesValidationRule, _ValidationRule15);
+        return NoSpacesValidationRule;
       })(ValidationRule);
-      _export('AlphaValidationRule', AlphaValidationRule);
-      AlphaOrWhitespaceValidationRule = (function(_ValidationRule16) {
-        function AlphaOrWhitespaceValidationRule() {
+      _export('NoSpacesValidationRule', NoSpacesValidationRule);
+      AlphaNumericValidationRule = (function(_ValidationRule16) {
+        function AlphaNumericValidationRule() {
           var _this6 = this;
-          _classCallCheck(this, AlphaOrWhitespaceValidationRule);
+          _classCallCheck(this, AlphaNumericValidationRule);
           _ValidationRule16.call(this, null, function(newValue, threshold) {
             return _this6.alphaNumericRegex.test(newValue);
           });
+          this.alphaNumericRegex = /^[a-z0-9]+$/i;
+        }
+        _inherits(AlphaNumericValidationRule, _ValidationRule16);
+        return AlphaNumericValidationRule;
+      })(ValidationRule);
+      _export('AlphaNumericValidationRule', AlphaNumericValidationRule);
+      AlphaValidationRule = (function(_ValidationRule17) {
+        function AlphaValidationRule() {
+          var _this7 = this;
+          _classCallCheck(this, AlphaValidationRule);
+          _ValidationRule17.call(this, null, function(newValue, threshold) {
+            return _this7.alphaRegex.test(newValue);
+          });
+          this.alphaRegex = /^[a-z]+$/i;
+        }
+        _inherits(AlphaValidationRule, _ValidationRule17);
+        return AlphaValidationRule;
+      })(ValidationRule);
+      _export('AlphaValidationRule', AlphaValidationRule);
+      AlphaOrWhitespaceValidationRule = (function(_ValidationRule18) {
+        function AlphaOrWhitespaceValidationRule() {
+          var _this8 = this;
+          _classCallCheck(this, AlphaOrWhitespaceValidationRule);
+          _ValidationRule18.call(this, null, function(newValue, threshold) {
+            return _this8.alphaNumericRegex.test(newValue);
+          });
           this.alphaNumericRegex = /^[a-z\s]+$/i;
         }
-        _inherits(AlphaOrWhitespaceValidationRule, _ValidationRule16);
+        _inherits(AlphaOrWhitespaceValidationRule, _ValidationRule18);
         return AlphaOrWhitespaceValidationRule;
       })(ValidationRule);
       _export('AlphaOrWhitespaceValidationRule', AlphaOrWhitespaceValidationRule);
-      AlphaNumericOrWhitespaceValidationRule = (function(_ValidationRule17) {
+      AlphaNumericOrWhitespaceValidationRule = (function(_ValidationRule19) {
         function AlphaNumericOrWhitespaceValidationRule() {
-          var _this7 = this;
+          var _this9 = this;
           _classCallCheck(this, AlphaNumericOrWhitespaceValidationRule);
-          _ValidationRule17.call(this, null, function(newValue, threshold) {
-            return _this7.alphaNumericRegex.test(newValue);
+          _ValidationRule19.call(this, null, function(newValue, threshold) {
+            return _this9.alphaNumericRegex.test(newValue);
           });
           this.alphaNumericRegex = /^[a-z0-9\s]+$/i;
         }
-        _inherits(AlphaNumericOrWhitespaceValidationRule, _ValidationRule17);
+        _inherits(AlphaNumericOrWhitespaceValidationRule, _ValidationRule19);
         return AlphaNumericOrWhitespaceValidationRule;
       })(ValidationRule);
       _export('AlphaNumericOrWhitespaceValidationRule', AlphaNumericOrWhitespaceValidationRule);
-      MediumPasswordValidationRule = (function(_ValidationRule18) {
+      MediumPasswordValidationRule = (function(_ValidationRule20) {
         function MediumPasswordValidationRule(minimumComplexityLevel) {
           _classCallCheck(this, MediumPasswordValidationRule);
-          _ValidationRule18.call(this, minimumComplexityLevel ? minimumComplexityLevel : 3, function(newValue, threshold) {
+          _ValidationRule20.call(this, minimumComplexityLevel ? minimumComplexityLevel : 3, function(newValue, threshold) {
             if (typeof newValue !== 'string')
               return false;
             var strength = 0;
@@ -25086,7 +26394,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
             return strength >= threshold;
           });
         }
-        _inherits(MediumPasswordValidationRule, _ValidationRule18);
+        _inherits(MediumPasswordValidationRule, _ValidationRule20);
         return MediumPasswordValidationRule;
       })(ValidationRule);
       _export('MediumPasswordValidationRule', MediumPasswordValidationRule);
@@ -25099,10 +26407,10 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
         return StrongPasswordValidationRule;
       })(MediumPasswordValidationRule);
       _export('StrongPasswordValidationRule', StrongPasswordValidationRule);
-      EqualityValidationRuleBase = (function(_ValidationRule19) {
+      EqualityValidationRuleBase = (function(_ValidationRule21) {
         function EqualityValidationRuleBase(otherValue, equality, otherValueLabel) {
           _classCallCheck(this, EqualityValidationRuleBase);
-          _ValidationRule19.call(this, {
+          _ValidationRule21.call(this, {
             otherValue: otherValue,
             equality: equality,
             otherValueLabel: otherValueLabel
@@ -25113,7 +26421,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
             return threshold.equality === (newValue === otherValue);
           });
         }
-        _inherits(EqualityValidationRuleBase, _ValidationRule19);
+        _inherits(EqualityValidationRuleBase, _ValidationRule21);
         return EqualityValidationRuleBase;
       })(ValidationRule);
       _export('EqualityValidationRuleBase', EqualityValidationRuleBase);
@@ -25153,10 +26461,10 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
         return InEqualityWithOtherLabelValidationRule;
       })(EqualityValidationRuleBase);
       _export('InEqualityWithOtherLabelValidationRule', InEqualityWithOtherLabelValidationRule);
-      InCollectionValidationRule = (function(_ValidationRule20) {
+      InCollectionValidationRule = (function(_ValidationRule22) {
         function InCollectionValidationRule(collection) {
           _classCallCheck(this, InCollectionValidationRule);
-          _ValidationRule20.call(this, collection, function(newValue, threshold) {
+          _ValidationRule22.call(this, collection, function(newValue, threshold) {
             var collection = Utilities.getValue(threshold);
             for (var i = 0; i < collection.length; i++) {
               if (newValue === collection[i])
@@ -25165,7 +26473,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
             return false;
           });
         }
-        _inherits(InCollectionValidationRule, _ValidationRule20);
+        _inherits(InCollectionValidationRule, _ValidationRule22);
         return InCollectionValidationRule;
       })(ValidationRule);
       _export('InCollectionValidationRule', InCollectionValidationRule);
@@ -25173,7 +26481,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-rules", [
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-property", ["github:aurelia/validation@0.2.4/validation/validation-rules-collection", "github:aurelia/validation@0.2.4/validation/path-observer", "github:aurelia/validation@0.2.4/validation/debouncer"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation-property", ["github:aurelia/validation@0.2.5/validation/validation-rules-collection", "github:aurelia/validation@0.2.5/validation/path-observer", "github:aurelia/validation@0.2.5/validation/debouncer"], function(_export) {
   var AllCollections,
       PathObserver,
       Debouncer,
@@ -25228,7 +26536,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-property"
         }
         ValidationProperty.prototype.addValidationRule = function addValidationRule(validationRule) {
           if (validationRule.validate === undefined)
-            throw new exception('That\'s not a valid validationRule');
+            throw new Error('That\'s not a valid validationRule');
           this.collectionOfValidationRules.addValidationRule(validationRule);
           this.validateCurrentValue(false);
         };
@@ -25715,7 +27023,7 @@ System.register("services/surpriseService", ["models/surprise"], function(_expor
       Surprise = _modelsSurprise.Surprise;
     }],
     execute: function() {
-      surprises = [new Surprise(0.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugCheaper'), new Surprise(0.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugMoreExpensive'), new Surprise(0.25, 'PlayerService', 'SurpriseFindDrugsOnSubway'), new Surprise(0.05, 'PlayerService', 'SurpriseGetMugged')];
+      surprises = [new Surprise(0.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugCheaper'), new Surprise(0.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugMoreExpensive'), new Surprise(0.25, 'PlayerService', 'SurpriseFindDrugsOnSubway'), new Surprise(0.05, 'PlayerService', 'SurpriseGetMugged'), new Surprise(0.05, 'PlayerService', 'SurpriseFindMoney'), new Surprise(0.05, 'PlayerService', 'SurpriseBiggerBackpack')];
       SurpriseService = (function() {
         function SurpriseService() {
           _classCallCheck(this, SurpriseService);
@@ -25735,7 +27043,7 @@ System.register("services/surpriseService", ["models/surprise"], function(_expor
   };
 });
 
-System.register("app", ["github:aurelia/framework@0.11.0", "services/dayService", "models/dayOption", "services/difficultyService", "models/difficultyLevel", "github:twbs/bootstrap@3.3.4", "github:twbs/bootstrap@3.3.4/css/bootstrap.css!github:systemjs/plugin-css@0.1.9"], function(_export) {
+System.register("app", ["github:aurelia/framework@0.12.0", "services/dayService", "models/dayOption", "services/difficultyService", "models/difficultyLevel", "github:twbs/bootstrap@3.3.4", "github:twbs/bootstrap@3.3.4/css/bootstrap.css!github:systemjs/plugin-css@0.1.9"], function(_export) {
   'use strict';
   var bindable,
       inject,
@@ -25826,12 +27134,12 @@ System.register("app", ["github:aurelia/framework@0.11.0", "services/dayService"
   };
 });
 
-System.register("npm:core-js@0.9.13/modules/$.cof", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.cof", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      TAG = require("npm:core-js@0.9.13/modules/$.wks")('toStringTag'),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      TAG = require("npm:core-js@0.9.16/modules/$.wks")('toStringTag'),
       toString = {}.toString;
   function cof(it) {
     return toString.call(it).slice(8, -1);
@@ -25850,12 +27158,12 @@ System.register("npm:core-js@0.9.13/modules/$.cof", ["npm:core-js@0.9.13/modules
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.13/modules/$.array-methods", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.ctx"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.array-methods", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.ctx"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      ctx = require("npm:core-js@0.9.13/modules/$.ctx");
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      ctx = require("npm:core-js@0.9.16/modules/$.ctx");
   module.exports = function(TYPE) {
     var IS_MAP = TYPE == 1,
         IS_FILTER = TYPE == 2,
@@ -25910,7 +27218,8 @@ System.register("github:jspm/nodelibs-process@0.1.1/index", ["npm:process@0.10.1
   return module.exports;
 });
 
-System.register("github:aurelia/metadata@0.5.0/index", ["github:aurelia/metadata@0.5.0/origin", "github:aurelia/metadata@0.5.0/metadata", "github:aurelia/metadata@0.5.0/decorators"], function(_export) {
+System.register("github:aurelia/metadata@0.6.0/index", ["github:aurelia/metadata@0.6.0/origin", "github:aurelia/metadata@0.6.0/metadata", "github:aurelia/metadata@0.6.0/decorators"], function(_export) {
+  'use strict';
   return {
     setters: [function(_origin) {
       _export('Origin', _origin.Origin);
@@ -25919,48 +27228,44 @@ System.register("github:aurelia/metadata@0.5.0/index", ["github:aurelia/metadata
     }, function(_decorators) {
       _export('Decorators', _decorators.Decorators);
     }],
-    execute: function() {
-      'use strict';
-    }
+    execute: function() {}
   };
 });
 
-System.register("github:aurelia/loader@0.6.0/template-registry-entry", ["github:aurelia/path@0.6.1"], function(_export) {
+System.register("github:aurelia/loader@0.7.0/template-registry-entry", ["github:aurelia/path@0.7.0"], function(_export) {
+  'use strict';
   var relativeToFile,
-      _createClass,
-      _classCallCheck,
       TemplateDependency,
       TemplateRegistryEntry;
+  var _createClass = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_aureliaPath) {
       relativeToFile = _aureliaPath.relativeToFile;
     }],
     execute: function() {
-      'use strict';
-      _createClass = (function() {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ('value' in descriptor)
-              descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        return function(Constructor, protoProps, staticProps) {
-          if (protoProps)
-            defineProperties(Constructor.prototype, protoProps);
-          if (staticProps)
-            defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      })();
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       TemplateDependency = function TemplateDependency(src, name) {
         _classCallCheck(this, TemplateDependency);
         this.src = src;
@@ -26025,17 +27330,34 @@ System.register("github:aurelia/loader@0.6.0/template-registry-entry", ["github:
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurelia/binding@0.6.1/environment", "github:aurelia/binding@0.6.1/array-change-records", "github:aurelia/binding@0.6.1/collection-observation"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/array-observation", ["github:aurelia/binding@0.7.3/environment", "github:aurelia/binding@0.7.3/array-change-records", "github:aurelia/binding@0.7.3/collection-observation"], function(_export) {
+  'use strict';
   var hasArrayObserve,
       projectArraySplices,
       ModifyCollectionObserver,
       CollectionLengthObserver,
-      _classCallCheck,
-      _inherits,
       arrayProto,
       ModifyArrayObserver,
       ArrayObserveObserver;
   _export('getArrayObserver', getArrayObserver);
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
   function getArrayObserver(taskQueue, array) {
     if (hasArrayObserve) {
       return new ArrayObserveObserver(array);
@@ -26053,25 +27375,6 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
       CollectionLengthObserver = _collectionObservation.CollectionLengthObserver;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
       arrayProto = Array.prototype;
       ModifyArrayObserver = (function(_ModifyCollectionObserver) {
         function ModifyArrayObserver(taskQueue, array) {
@@ -26081,8 +27384,8 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
         _inherits(ModifyArrayObserver, _ModifyCollectionObserver);
         ModifyArrayObserver.create = function create(taskQueue, array) {
           var observer = new ModifyArrayObserver(taskQueue, array);
-          array.pop = function() {
-            var methodCallResult = arrayProto.pop.apply(array, arguments);
+          array['pop'] = function() {
+            var methodCallResult = arrayProto['pop'].apply(array, arguments);
             observer.addChangeRecord({
               type: 'delete',
               object: array,
@@ -26091,8 +27394,8 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
             });
             return methodCallResult;
           };
-          array.push = function() {
-            var methodCallResult = arrayProto.push.apply(array, arguments);
+          array['push'] = function() {
+            var methodCallResult = arrayProto['push'].apply(array, arguments);
             observer.addChangeRecord({
               type: 'splice',
               object: array,
@@ -26102,14 +27405,14 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
             });
             return methodCallResult;
           };
-          array.reverse = function() {
+          array['reverse'] = function() {
             var oldArray = array.slice();
-            var methodCallResult = arrayProto.reverse.apply(array, arguments);
+            var methodCallResult = arrayProto['reverse'].apply(array, arguments);
             observer.reset(oldArray);
             return methodCallResult;
           };
-          array.shift = function() {
-            var methodCallResult = arrayProto.shift.apply(array, arguments);
+          array['shift'] = function() {
+            var methodCallResult = arrayProto['shift'].apply(array, arguments);
             observer.addChangeRecord({
               type: 'delete',
               object: array,
@@ -26118,14 +27421,14 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
             });
             return methodCallResult;
           };
-          array.sort = function() {
+          array['sort'] = function() {
             var oldArray = array.slice();
-            var methodCallResult = arrayProto.sort.apply(array, arguments);
+            var methodCallResult = arrayProto['sort'].apply(array, arguments);
             observer.reset(oldArray);
             return methodCallResult;
           };
-          array.splice = function() {
-            var methodCallResult = arrayProto.splice.apply(array, arguments);
+          array['splice'] = function() {
+            var methodCallResult = arrayProto['splice'].apply(array, arguments);
             observer.addChangeRecord({
               type: 'splice',
               object: array,
@@ -26135,8 +27438,8 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
             });
             return methodCallResult;
           };
-          array.unshift = function() {
-            var methodCallResult = arrayProto.unshift.apply(array, arguments);
+          array['unshift'] = function() {
+            var methodCallResult = arrayProto['unshift'].apply(array, arguments);
             observer.addChangeRecord({
               type: 'splice',
               object: array,
@@ -26155,20 +27458,20 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
           _classCallCheck(this, ArrayObserveObserver);
           this.array = array;
           this.callbacks = [];
-          this.observing = false;
         }
         ArrayObserveObserver.prototype.subscribe = function subscribe(callback) {
           var _this = this;
           var callbacks = this.callbacks;
-          callbacks.push(callback);
-          if (!this.observing) {
-            this.observing = true;
-            Array.observe(this.array, function(changes) {
-              return _this.handleChanges(changes);
-            });
+          if (callbacks.length === 0) {
+            this.handler = this.handleChanges.bind(this);
+            Array.observe(this.array, this.handler);
           }
+          callbacks.push(callback);
           return function() {
             callbacks.splice(callbacks.indexOf(callback), 1);
+            if (callbacks.length === 0) {
+              Array.unobserve(_this.array, _this.handler);
+            }
           };
         };
         ArrayObserveObserver.prototype.getLengthObserver = function getLengthObserver() {
@@ -26194,7 +27497,8 @@ System.register("github:aurelia/binding@0.6.1/array-observation", ["github:aurel
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/parser", ["github:aurelia/binding@0.6.1/lexer", "github:aurelia/binding@0.6.1/ast"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/parser", ["github:aurelia/binding@0.7.3/lexer", "github:aurelia/binding@0.7.3/ast"], function(_export) {
+  'use strict';
   var Lexer,
       Token,
       Expression,
@@ -26215,11 +27519,33 @@ System.register("github:aurelia/binding@0.6.1/parser", ["github:aurelia/binding@
       LiteralArray,
       LiteralObject,
       LiteralString,
-      _createClass,
-      _classCallCheck,
       EOF,
       Parser,
       ParserImplementation;
+  var _createClass = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_lexer) {
       Lexer = _lexer.Lexer;
@@ -26245,31 +27571,6 @@ System.register("github:aurelia/binding@0.6.1/parser", ["github:aurelia/binding@
       LiteralString = _ast.LiteralString;
     }],
     execute: function() {
-      'use strict';
-      _createClass = (function() {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ('value' in descriptor)
-              descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        return function(Constructor, protoProps, staticProps) {
-          if (protoProps)
-            defineProperties(Constructor.prototype, protoProps);
-          if (staticProps)
-            defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      })();
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       EOF = new Token(-1, null);
       Parser = (function() {
         function Parser() {
@@ -26561,22 +27862,36 @@ System.register("github:aurelia/binding@0.6.1/parser", ["github:aurelia/binding@
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2/view", "github:aurelia/templating@0.11.2/view-slot", "github:aurelia/templating@0.11.2/content-selector", "github:aurelia/templating@0.11.2/resource-registry"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/view-factory", ["github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1/view", "github:aurelia/templating@0.12.1/view-slot", "github:aurelia/templating@0.12.1/content-selector", "github:aurelia/templating@0.12.1/resource-registry"], function(_export) {
+  'use strict';
   var Container,
       View,
       ViewSlot,
       ContentSelector,
       ViewResources,
-      _classCallCheck,
       BoundViewFactory,
       defaultFactoryOptions,
       ViewFactory;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function elementContainerGet(key) {
     if (key === Element) {
       return this.element;
     }
     if (key === BoundViewFactory) {
-      return this.boundViewFactory || (this.boundViewFactory = new BoundViewFactory(this, this.instruction.viewFactory, this.executionContext));
+      if (this.boundViewFactory) {
+        return this.boundViewFactory;
+      }
+      var factory = this.instruction.viewFactory,
+          partReplacements = this.partReplacements;
+      if (partReplacements) {
+        factory = partReplacements[factory.part] || factory;
+      }
+      factory.partReplacements = partReplacements;
+      return this.boundViewFactory = new BoundViewFactory(this, factory, this.executionContext);
     }
     if (key === ViewSlot) {
       if (this.viewSlot === undefined) {
@@ -26590,7 +27905,7 @@ System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aureli
     }
     return this.superGet(key);
   }
-  function createElementContainer(parent, element, instruction, executionContext, children, resources) {
+  function createElementContainer(parent, element, instruction, executionContext, children, partReplacements, resources) {
     var container = parent.createChild(),
         providers,
         i;
@@ -26599,6 +27914,7 @@ System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aureli
     container.executionContext = executionContext;
     container.children = children;
     container.viewResources = resources;
+    container.partReplacements = partReplacements;
     providers = instruction.providers;
     i = providers.length;
     while (i--) {
@@ -26608,7 +27924,24 @@ System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aureli
     container.get = elementContainerGet;
     return container;
   }
-  function applyInstructions(containers, executionContext, element, instruction, behaviors, bindings, children, contentSelectors, resources) {
+  function makeElementIntoAnchor(element, isCustomElement) {
+    var anchor = document.createComment('anchor');
+    if (isCustomElement) {
+      anchor.attributes = element.attributes;
+      anchor.hasAttribute = function(name) {
+        return element.hasAttribute(name);
+      };
+      anchor.getAttribute = function(name) {
+        return element.getAttribute(name);
+      };
+      anchor.setAttribute = function(name, value) {
+        element.setAttribute(name, value);
+      };
+    }
+    element.parentNode.replaceChild(anchor, element);
+    return anchor;
+  }
+  function applyInstructions(containers, executionContext, element, instruction, behaviors, bindings, children, contentSelectors, partReplacements, resources) {
     var behaviorInstructions = instruction.behaviorInstructions,
         expressions = instruction.expressions,
         elementContainer,
@@ -26622,14 +27955,19 @@ System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aureli
       return ;
     }
     if (instruction.contentSelector) {
-      contentSelectors.push(new ContentSelector(element, instruction.selector));
+      var commentAnchor = document.createComment('anchor');
+      element.parentNode.replaceChild(commentAnchor, element);
+      contentSelectors.push(new ContentSelector(commentAnchor, instruction.selector));
       return ;
     }
     if (behaviorInstructions.length) {
-      containers[instruction.injectorId] = elementContainer = createElementContainer(containers[instruction.parentInjectorId], element, instruction, executionContext, children, resources);
+      if (!instruction.anchorIsContainer) {
+        element = makeElementIntoAnchor(element, instruction.isCustomElement);
+      }
+      containers[instruction.injectorId] = elementContainer = createElementContainer(containers[instruction.parentInjectorId], element, instruction, executionContext, children, partReplacements, resources);
       for (i = 0, ii = behaviorInstructions.length; i < ii; ++i) {
         current = behaviorInstructions[i];
-        instance = current.type.create(elementContainer, current, element, bindings);
+        instance = current.type.create(elementContainer, current, element, bindings, current.partReplacements);
         if (instance.contentView) {
           children.push(instance.contentView);
         }
@@ -26653,12 +27991,6 @@ System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aureli
       ViewResources = _resourceRegistry.ViewResources;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       BoundViewFactory = (function() {
         function BoundViewFactory(parentContainer, viewFactory, executionContext) {
           _classCallCheck(this, BoundViewFactory);
@@ -26698,11 +28030,12 @@ System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aureli
               children = [],
               contentSelectors = [],
               containers = {root: container},
+              partReplacements = options.partReplacements || this.partReplacements,
               i,
               ii,
               view;
           for (i = 0, ii = instructables.length; i < ii; ++i) {
-            applyInstructions(containers, executionContext, instructables[i], instructions[i], behaviors, bindings, children, contentSelectors, resources);
+            applyInstructions(containers, executionContext, instructables[i], instructions[i], behaviors, bindings, children, contentSelectors, partReplacements, resources);
           }
           view = new View(fragment, behaviors, bindings, children, options.systemControlled, contentSelectors);
           view.created(executionContext);
@@ -26718,7 +28051,8 @@ System.register("github:aurelia/templating@0.11.2/view-factory", ["github:aureli
   };
 });
 
-System.register("github:aurelia/templating-binding@0.11.0/index", ["github:aurelia/templating@0.11.2", "github:aurelia/templating-binding@0.11.0/binding-language", "github:aurelia/templating-binding@0.11.0/syntax-interpreter"], function(_export) {
+System.register("github:aurelia/templating-binding@0.12.0/index", ["github:aurelia/templating@0.12.1", "github:aurelia/templating-binding@0.12.0/binding-language", "github:aurelia/templating-binding@0.12.0/syntax-interpreter"], function(_export) {
+  'use strict';
   var BindingLanguage,
       TemplatingBindingLanguage,
       SyntaxInterpreter;
@@ -26743,7 +28077,6 @@ System.register("github:aurelia/templating-binding@0.11.0/index", ["github:aurel
       SyntaxInterpreter = _syntaxInterpreter.SyntaxInterpreter;
     }],
     execute: function() {
-      'use strict';
       _export('TemplatingBindingLanguage', TemplatingBindingLanguage);
       _export('SyntaxInterpreter', SyntaxInterpreter);
       _export('configure', configure);
@@ -26751,7 +28084,7 @@ System.register("github:aurelia/templating-binding@0.11.0/index", ["github:aurel
   };
 });
 
-System.register("github:aurelia/route-recognizer@0.4.0", ["github:aurelia/route-recognizer@0.4.0/index"], function($__export) {
+System.register("github:aurelia/route-recognizer@0.5.0", ["github:aurelia/route-recognizer@0.5.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -26761,42 +28094,40 @@ System.register("github:aurelia/route-recognizer@0.4.0", ["github:aurelia/route-
   };
 });
 
-System.register("github:aurelia/router@0.8.0/navigation-context", ["github:aurelia/router@0.8.0/navigation-plan"], function(_export) {
+System.register("github:aurelia/router@0.9.0/navigation-context", ["github:aurelia/router@0.9.0/navigation-plan"], function(_export) {
+  'use strict';
   var activationStrategy,
-      _classCallCheck,
-      _createClass,
       NavigationContext,
       CommitChangesStep;
+  var _createClass = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_navigationPlan) {
       activationStrategy = _navigationPlan.activationStrategy;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _createClass = (function() {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ('value' in descriptor)
-              descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        return function(Constructor, protoProps, staticProps) {
-          if (protoProps)
-            defineProperties(Constructor.prototype, protoProps);
-          if (staticProps)
-            defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      })();
       NavigationContext = (function() {
         function NavigationContext(router, nextInstruction) {
           _classCallCheck(this, NavigationContext);
@@ -26859,6 +28190,12 @@ System.register("github:aurelia/router@0.8.0/navigation-context", ["github:aurel
             });
           });
         };
+        NavigationContext.prototype.updateTitle = function updateTitle() {
+          var title = this.buildTitle();
+          if (title) {
+            document.title = title;
+          }
+        };
         NavigationContext.prototype.buildTitle = function buildTitle() {
           var separator = arguments[0] === undefined ? ' | ' : arguments[0];
           var next = this.nextInstruction,
@@ -26919,10 +28256,7 @@ System.register("github:aurelia/router@0.8.0/navigation-context", ["github:aurel
         }
         CommitChangesStep.prototype.run = function run(navigationContext, next) {
           return navigationContext.commitChanges(true).then(function() {
-            var title = navigationContext.buildTitle();
-            if (title) {
-              document.title = title;
-            }
+            navigationContext.updateTitle();
             return next();
           });
         };
@@ -26933,7 +28267,8 @@ System.register("github:aurelia/router@0.8.0/navigation-context", ["github:aurel
   };
 });
 
-System.register("github:aurelia/router@0.8.0/app-router", ["npm:core-js@0.9.13", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/history@0.4.0", "github:aurelia/router@0.8.0/router", "github:aurelia/router@0.8.0/pipeline-provider", "github:aurelia/router@0.8.0/navigation-commands", "github:aurelia/event-aggregator@0.4.0", "github:aurelia/router@0.8.0/router-configuration"], function(_export) {
+System.register("github:aurelia/router@0.9.0/app-router", ["npm:core-js@0.9.16", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/history@0.5.0", "github:aurelia/router@0.9.0/router", "github:aurelia/router@0.9.0/pipeline-provider", "github:aurelia/router@0.9.0/navigation-commands", "github:aurelia/event-aggregator@0.5.0", "github:aurelia/router@0.9.0/router-configuration"], function(_export) {
+  'use strict';
   var core,
       Container,
       History,
@@ -26942,15 +28277,48 @@ System.register("github:aurelia/router@0.8.0/app-router", ["npm:core-js@0.9.13",
       isNavigationCommand,
       EventAggregator,
       RouterConfiguration,
-      _classCallCheck,
-      _createClass,
-      _inherits,
       AppRouter;
+  var _createClass = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  }
   function findAnchor(el) {
     while (el) {
-      if (el.tagName === 'A') {
+      if (el.tagName === 'A')
         return el;
-      }
       el = el.parentNode;
     }
   }
@@ -26995,44 +28363,6 @@ System.register("github:aurelia/router@0.8.0/app-router", ["npm:core-js@0.9.13",
       RouterConfiguration = _routerConfiguration.RouterConfiguration;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _createClass = (function() {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ('value' in descriptor)
-              descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        return function(Constructor, protoProps, staticProps) {
-          if (protoProps)
-            defineProperties(Constructor.prototype, protoProps);
-          if (staticProps)
-            defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      })();
-      _inherits = function(subClass, superClass) {
-        if (typeof superClass !== 'function' && superClass !== null) {
-          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-        }
-        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }});
-        if (superClass)
-          subClass.__proto__ = superClass;
-      };
       AppRouter = (function(_Router) {
         function AppRouter(container, history, pipelineProvider, events) {
           _classCallCheck(this, AppRouter);
@@ -27156,7 +28486,7 @@ System.register("github:aurelia/router@0.8.0/app-router", ["npm:core-js@0.9.13",
   };
 });
 
-System.register("github:aurelia/templating-resources@0.11.0", ["github:aurelia/templating-resources@0.11.0/index"], function($__export) {
+System.register("github:aurelia/templating-resources@0.12.1", ["github:aurelia/templating-resources@0.12.1/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -27166,7 +28496,7 @@ System.register("github:aurelia/templating-resources@0.11.0", ["github:aurelia/t
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-group-builder", ["github:aurelia/validation@0.2.4/validation/validation-rules", "github:aurelia/validation@0.2.4/validation/validation-rules-collection", "github:aurelia/validation@0.2.4/validation/validation-property", "github:aurelia/validation@0.2.4/validation/validation-config"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation-group-builder", ["github:aurelia/validation@0.2.5/validation/validation-rules", "github:aurelia/validation@0.2.5/validation/validation-rules-collection", "github:aurelia/validation@0.2.5/validation/validation-property", "github:aurelia/validation@0.2.5/validation/validation-config"], function(_export) {
   var AllRules,
       AllCollections,
       ValidationProperty,
@@ -27261,6 +28591,9 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-group-bui
         ValidationGroupBuilder.prototype.isEmail = function isEmail() {
           return this.passesRule(new AllRules.EmailValidationRule());
         };
+        ValidationGroupBuilder.prototype.isURL = function isURL() {
+          return this.passesRule(new AllRules.URLValidationRule());
+        };
         ValidationGroupBuilder.prototype.hasMinLength = function hasMinLength(minimumValue) {
           return this.passesRule(new AllRules.MinimumLengthValidationRule(minimumValue));
         };
@@ -27272,6 +28605,9 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-group-bui
         };
         ValidationGroupBuilder.prototype.isNumber = function isNumber() {
           return this.passesRule(new AllRules.NumericValidationRule());
+        };
+        ValidationGroupBuilder.prototype.containsNoSpaces = function containsNoSpaces() {
+          return this.passesRule(new AllRules.NoSpacesValidationRule());
         };
         ValidationGroupBuilder.prototype.containsOnlyDigits = function containsOnlyDigits() {
           return this.passesRule(new AllRules.DigitValidationRule());
@@ -27380,12 +28716,13 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-group-bui
   };
 });
 
-System.register("services/playerService", ["github:aurelia/framework@0.11.0", "github:aurelia/event-aggregator@0.4.0", "models/playerInfo", "services/drugService"], function(_export) {
+System.register("services/playerService", ["github:aurelia/framework@0.12.0", "github:aurelia/event-aggregator@0.4.0", "models/playerInfo", "services/drugService", "npm:numeral@1.5.3"], function(_export) {
   'use strict';
   var inject,
       EventAggregator,
       PlayerInfo,
       DrugService,
+      numeral,
       player,
       drugList,
       eventAggregator,
@@ -27423,6 +28760,8 @@ System.register("services/playerService", ["github:aurelia/framework@0.11.0", "g
       PlayerInfo = _modelsPlayerInfo.PlayerInfo;
     }, function(_servicesDrugService) {
       DrugService = _servicesDrugService.DrugService;
+    }, function(_numeral) {
+      numeral = _numeral['default'];
     }],
     execute: function() {
       player = new PlayerInfo();
@@ -27496,6 +28835,28 @@ System.register("services/playerService", ["github:aurelia/framework@0.11.0", "g
               resolve('You got jumped in the middle the middle of the night! They stole half of all your drugs and money!');
             });
           }
+        }, {
+          key: 'SurpriseFindMoney',
+          value: function SurpriseFindMoney() {
+            return new Promise(function(resolve, reject) {
+              var moneyToAdd = Math.floor(Math.random() * (player.Money / 2 - 1) + 1);
+              player.Money = player.Money + moneyToAdd;
+              resolve('You found a briefcase on the subway with ' + numeral(moneyToAdd).format('($0,0)') + ' in it!');
+            });
+          }
+        }, {
+          key: 'SurpriseBiggerBackpack',
+          value: function SurpriseBiggerBackpack() {
+            return new Promise(function(resolve, reject) {
+              var spaceToAdd = Math.floor(Math.random() * (player.BackpackSize / 5 - 1) + 1);
+              if (spaceToAdd <= 1) {
+                spaceToAdd = 2;
+              }
+              player.BackpackSize = player.BackpackSize + spaceToAdd;
+              player.BackpackSpace = player.BackpackSpace + spaceToAdd;
+              resolve('You were on your way to your next customer and found a new backpack with space for ' + spaceToAdd + ' more drugs in it!');
+            });
+          }
         }]);
         PlayerService = inject(EventAggregator, DrugService)(PlayerService) || PlayerService;
         return PlayerService;
@@ -27505,18 +28866,18 @@ System.register("services/playerService", ["github:aurelia/framework@0.11.0", "g
   };
 });
 
-System.register("npm:core-js@0.9.13/modules/es5", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.dom-create", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.invoke", "npm:core-js@0.9.13/modules/$.array-methods", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.array-includes", "npm:core-js@0.9.13/modules/$.replacer", "npm:core-js@0.9.13/modules/$.throws"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es5", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.dom-create", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.invoke", "npm:core-js@0.9.16/modules/$.array-methods", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.array-includes", "npm:core-js@0.9.16/modules/$.replacer", "npm:core-js@0.9.16/modules/$.throws"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.13/modules/$"),
-      cel = require("npm:core-js@0.9.13/modules/$.dom-create"),
-      cof = require("npm:core-js@0.9.13/modules/$.cof"),
-      $def = require("npm:core-js@0.9.13/modules/$.def"),
-      invoke = require("npm:core-js@0.9.13/modules/$.invoke"),
-      arrayMethod = require("npm:core-js@0.9.13/modules/$.array-methods"),
-      IE_PROTO = require("npm:core-js@0.9.13/modules/$.uid").safe('__proto__'),
-      assert = require("npm:core-js@0.9.13/modules/$.assert"),
+  var $ = require("npm:core-js@0.9.16/modules/$"),
+      cel = require("npm:core-js@0.9.16/modules/$.dom-create"),
+      cof = require("npm:core-js@0.9.16/modules/$.cof"),
+      $def = require("npm:core-js@0.9.16/modules/$.def"),
+      invoke = require("npm:core-js@0.9.16/modules/$.invoke"),
+      arrayMethod = require("npm:core-js@0.9.16/modules/$.array-methods"),
+      IE_PROTO = require("npm:core-js@0.9.16/modules/$.uid").safe('__proto__'),
+      assert = require("npm:core-js@0.9.16/modules/$.assert"),
       assertObject = assert.obj,
       ObjectProto = Object.prototype,
       html = $.html,
@@ -27534,7 +28895,7 @@ System.register("npm:core-js@0.9.13/modules/es5", ["npm:core-js@0.9.13/modules/$
       toLength = $.toLength,
       toIndex = $.toIndex,
       IE8_DOM_DEFINE = false,
-      $indexOf = require("npm:core-js@0.9.13/modules/$.array-includes")(false),
+      $indexOf = require("npm:core-js@0.9.16/modules/$.array-includes")(false),
       $forEach = arrayMethod(0),
       $map = arrayMethod(1),
       $filter = arrayMethod(2),
@@ -27766,7 +29127,7 @@ System.register("npm:core-js@0.9.13/modules/es5", ["npm:core-js@0.9.13/modules/$
       return -1;
     }
   });
-  $def($def.P, 'String', {trim: require("npm:core-js@0.9.13/modules/$.replacer")(/^\s*([\s\S]*\S)?\s*$/, '$1')});
+  $def($def.P, 'String', {trim: require("npm:core-js@0.9.16/modules/$.replacer")(/^\s*([\s\S]*\S)?\s*$/, '$1')});
   $def($def.S, 'Date', {now: function() {
       return +new Date;
     }});
@@ -27774,7 +29135,7 @@ System.register("npm:core-js@0.9.13/modules/es5", ["npm:core-js@0.9.13/modules/$
     return num > 9 ? num : '0' + num;
   }
   var date = new Date(-5e13 - 1),
-      brokenDate = !(date.toISOString && date.toISOString() == '0385-07-25T07:06:39.999Z' && require("npm:core-js@0.9.13/modules/$.throws")(function() {
+      brokenDate = !(date.toISOString && date.toISOString() == '0385-07-25T07:06:39.999Z' && require("npm:core-js@0.9.16/modules/$.throws")(function() {
         new Date(NaN).toISOString();
       }));
   $def($def.P + $def.F * brokenDate, 'Date', {toISOString: function() {
@@ -27806,7 +29167,7 @@ System.register("github:jspm/nodelibs-process@0.1.1", ["github:jspm/nodelibs-pro
   return module.exports;
 });
 
-System.register("github:aurelia/metadata@0.5.0", ["github:aurelia/metadata@0.5.0/index"], function($__export) {
+System.register("github:aurelia/metadata@0.6.0", ["github:aurelia/metadata@0.6.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -27816,7 +29177,8 @@ System.register("github:aurelia/metadata@0.5.0", ["github:aurelia/metadata@0.5.0
   };
 });
 
-System.register("github:aurelia/loader@0.6.0/index", ["github:aurelia/loader@0.6.0/template-registry-entry", "github:aurelia/loader@0.6.0/loader"], function(_export) {
+System.register("github:aurelia/loader@0.7.0/index", ["github:aurelia/loader@0.7.0/template-registry-entry", "github:aurelia/loader@0.7.0/loader"], function(_export) {
+  'use strict';
   return {
     setters: [function(_templateRegistryEntry) {
       _export('TemplateRegistryEntry', _templateRegistryEntry.TemplateRegistryEntry);
@@ -27824,17 +29186,16 @@ System.register("github:aurelia/loader@0.6.0/index", ["github:aurelia/loader@0.6
     }, function(_loader) {
       _export('Loader', _loader.Loader);
     }],
-    execute: function() {
-      'use strict';
-    }
+    execute: function() {}
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aurelia/task-queue@0.4.0", "github:aurelia/binding@0.6.1/environment", "github:aurelia/binding@0.6.1/array-observation", "github:aurelia/binding@0.6.1/map-observation", "github:aurelia/binding@0.6.1/event-manager", "github:aurelia/binding@0.6.1/dirty-checking", "github:aurelia/binding@0.6.1/property-observation", "github:aurelia/binding@0.6.1/element-observation", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/binding@0.6.1/computed-observation"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/observer-locator", ["github:aurelia/task-queue@0.5.0", "github:aurelia/binding@0.7.3/environment", "github:aurelia/binding@0.7.3/array-observation", "github:aurelia/binding@0.7.3/map-observation", "github:aurelia/binding@0.7.3/event-manager", "github:aurelia/binding@0.7.3/dirty-checking", "github:aurelia/binding@0.7.3/property-observation", "github:aurelia/binding@0.7.3/element-observation", "github:aurelia/binding@0.7.3/class-observer", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/binding@0.7.3/computed-observation", "github:aurelia/binding@0.7.3/svg"], function(_export) {
+  'use strict';
   var TaskQueue,
       hasObjectObserve,
-      getArrayObserver,
-      getMapObserver,
+      _getArrayObserver,
+      _getMapObserver,
       EventManager,
       DirtyChecker,
       DirtyCheckProperty,
@@ -27847,23 +29208,17 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
       XLinkAttributeObserver,
       DataAttributeObserver,
       StyleObserver,
+      ClassObserver,
       All,
       hasDeclaredDependencies,
       ComputedPropertyObserver,
-      _classCallCheck,
+      isStandardSvgAttribute,
       ObserverLocator,
       ObjectObservationAdapter;
-  function createObserversLookup(obj) {
-    var value = {};
-    try {
-      Object.defineProperty(obj, '__observers__', {
-        enumerable: false,
-        configurable: false,
-        writable: false,
-        value: value
-      });
-    } catch (_) {}
-    return value;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
   }
   function createObserverLookup(obj, observerLocator) {
     var value = new OoObjectObserver(obj, observerLocator);
@@ -27883,9 +29238,9 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
     }, function(_environment) {
       hasObjectObserve = _environment.hasObjectObserve;
     }, function(_arrayObservation) {
-      getArrayObserver = _arrayObservation.getArrayObserver;
+      _getArrayObserver = _arrayObservation.getArrayObserver;
     }, function(_mapObservation) {
-      getMapObserver = _mapObservation.getMapObserver;
+      _getMapObserver = _mapObservation.getMapObserver;
     }, function(_eventManager) {
       EventManager = _eventManager.EventManager;
     }, function(_dirtyChecking) {
@@ -27902,19 +29257,17 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
       XLinkAttributeObserver = _elementObservation.XLinkAttributeObserver;
       DataAttributeObserver = _elementObservation.DataAttributeObserver;
       StyleObserver = _elementObservation.StyleObserver;
+    }, function(_classObserver) {
+      ClassObserver = _classObserver.ClassObserver;
     }, function(_aureliaDependencyInjection) {
       All = _aureliaDependencyInjection.All;
     }, function(_computedObservation) {
       hasDeclaredDependencies = _computedObservation.hasDeclaredDependencies;
       ComputedPropertyObserver = _computedObservation.ComputedPropertyObserver;
+    }, function(_svg) {
+      isStandardSvgAttribute = _svg.isStandardSvgAttribute;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       if (typeof Object.getPropertyDescriptor !== 'function') {
         Object.getPropertyDescriptor = function(subject, name) {
           var pd = Object.getOwnPropertyDescriptor(subject, name);
@@ -27937,15 +29290,35 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
         ObserverLocator.inject = function inject() {
           return [TaskQueue, EventManager, DirtyChecker, All.of(ObjectObservationAdapter)];
         };
-        ObserverLocator.prototype.getObserversLookup = function getObserversLookup(obj) {
-          return obj.__observers__ || createObserversLookup(obj);
-        };
         ObserverLocator.prototype.getObserver = function getObserver(obj, propertyName) {
-          var observersLookup = this.getObserversLookup(obj);
-          if (propertyName in observersLookup) {
+          var observersLookup = obj.__observers__,
+              observer;
+          if (observersLookup && propertyName in observersLookup) {
             return observersLookup[propertyName];
           }
-          return observersLookup[propertyName] = this.createPropertyObserver(obj, propertyName);
+          observer = this.createPropertyObserver(obj, propertyName);
+          if (!observer.doNotCache) {
+            if (observersLookup === undefined) {
+              observersLookup = this.getOrCreateObserversLookup(obj);
+            }
+            observersLookup[propertyName] = observer;
+          }
+          return observer;
+        };
+        ObserverLocator.prototype.getOrCreateObserversLookup = function getOrCreateObserversLookup(obj) {
+          return obj.__observers__ || this.createObserversLookup(obj);
+        };
+        ObserverLocator.prototype.createObserversLookup = function createObserversLookup(obj) {
+          var value = {};
+          try {
+            Object.defineProperty(obj, '__observers__', {
+              enumerable: false,
+              configurable: false,
+              writable: false,
+              value: value
+            });
+          } catch (_) {}
+          return value;
         };
         ObserverLocator.prototype.getObservationAdapter = function getObservationAdapter(obj, propertyName, descriptor) {
           var i,
@@ -27953,9 +29326,8 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
               observationAdapter;
           for (i = 0, ii = this.observationAdapters.length; i < ii; i++) {
             observationAdapter = this.observationAdapters[i];
-            if (observationAdapter.handlesProperty(obj, propertyName, descriptor)) {
+            if (observationAdapter.handlesProperty(obj, propertyName, descriptor))
               return observationAdapter;
-            }
           }
           return null;
         };
@@ -27966,6 +29338,12 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
               observationAdapter,
               xlinkResult;
           if (obj instanceof Element) {
+            if (propertyName === 'class') {
+              return new ClassObserver(obj);
+            }
+            if (propertyName === 'style' || propertyName === 'css') {
+              return new StyleObserver(obj, propertyName);
+            }
             handler = this.eventManager.getElementHandler(obj, propertyName);
             if (propertyName === 'value' && obj.tagName.toLowerCase() === 'select') {
               return new SelectValueObserver(obj, handler, this);
@@ -27980,22 +29358,22 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
             if (xlinkResult) {
               return new XLinkAttributeObserver(obj, propertyName, xlinkResult[1]);
             }
-            if (/^\w+:|^data-|^aria-/.test(propertyName) || obj instanceof SVGElement) {
+            if (/^\w+:|^data-|^aria-/.test(propertyName) || obj instanceof SVGElement && isStandardSvgAttribute(obj.nodeName, propertyName)) {
               return new DataAttributeObserver(obj, propertyName);
-            }
-            if (propertyName === 'style' || propertyName === 'css') {
-              return new StyleObserver(obj, propertyName);
             }
           }
           descriptor = Object.getPropertyDescriptor(obj, propertyName);
           if (hasDeclaredDependencies(descriptor)) {
             return new ComputedPropertyObserver(obj, propertyName, descriptor, this);
           }
-          if (descriptor && (descriptor.get || descriptor.set)) {
-            observationAdapter = this.getObservationAdapter(obj, propertyName, descriptor);
-            if (observationAdapter) {
-              return observationAdapter.getObserver(obj, propertyName, descriptor);
+          var existingGetterOrSetter = undefined;
+          if (descriptor && (existingGetterOrSetter = descriptor.get || descriptor.set)) {
+            if (existingGetterOrSetter.getObserver) {
+              return existingGetterOrSetter.getObserver(obj);
             }
+            observationAdapter = this.getObservationAdapter(obj, propertyName, descriptor);
+            if (observationAdapter)
+              return observationAdapter.getObserver(obj, propertyName, descriptor);
             return new DirtyCheckProperty(this.dirtyChecker, obj, propertyName);
           }
           if (hasObjectObserve) {
@@ -28017,34 +29395,18 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
           }
           return new SetterObserver(this.taskQueue, obj, propertyName);
         };
-        ObserverLocator.prototype.getArrayObserver = (function(_getArrayObserver) {
-          function getArrayObserver(_x) {
-            return _getArrayObserver.apply(this, arguments);
-          }
-          getArrayObserver.toString = function() {
-            return _getArrayObserver.toString();
-          };
-          return getArrayObserver;
-        })(function(array) {
+        ObserverLocator.prototype.getArrayObserver = function getArrayObserver(array) {
           if ('__array_observer__' in array) {
             return array.__array_observer__;
           }
-          return array.__array_observer__ = getArrayObserver(this.taskQueue, array);
-        });
-        ObserverLocator.prototype.getMapObserver = (function(_getMapObserver) {
-          function getMapObserver(_x2) {
-            return _getMapObserver.apply(this, arguments);
-          }
-          getMapObserver.toString = function() {
-            return _getMapObserver.toString();
-          };
-          return getMapObserver;
-        })(function(map) {
+          return array.__array_observer__ = _getArrayObserver(this.taskQueue, array);
+        };
+        ObserverLocator.prototype.getMapObserver = function getMapObserver(map) {
           if ('__map_observer__' in map) {
             return map.__map_observer__;
           }
-          return map.__map_observer__ = getMapObserver(this.taskQueue, map);
-        });
+          return map.__map_observer__ = _getMapObserver(this.taskQueue, map);
+        };
         return ObserverLocator;
       })();
       _export('ObserverLocator', ObserverLocator);
@@ -28065,15 +29427,21 @@ System.register("github:aurelia/binding@0.6.1/observer-locator", ["github:aureli
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurelia/templating@0.11.2/resource-registry", "github:aurelia/templating@0.11.2/view-factory", "github:aurelia/templating@0.11.2/binding-language"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/view-compiler", ["github:aurelia/templating@0.12.1/resource-registry", "github:aurelia/templating@0.12.1/view-factory", "github:aurelia/templating@0.12.1/binding-language"], function(_export) {
+  'use strict';
   var ResourceRegistry,
       ViewFactory,
       BindingLanguage,
-      _classCallCheck,
       nextInjectorId,
       defaultCompileOptions,
       hasShadowDOM,
+      needsTemplateFixup,
       ViewCompiler;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function getNextInjectorId() {
     return ++nextInjectorId;
   }
@@ -28114,15 +29482,10 @@ System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurel
       BindingLanguage = _bindingLanguage.BindingLanguage;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       nextInjectorId = 0;
       defaultCompileOptions = {targetShadowDOM: false};
       hasShadowDOM = !!HTMLElement.prototype.createShadowRoot;
+      needsTemplateFixup = !('content' in document.createElement('template'));
       ViewCompiler = (function() {
         function ViewCompiler(bindingLanguage) {
           _classCallCheck(this, ViewCompiler);
@@ -28135,12 +29498,27 @@ System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurel
           var options = arguments[2] === undefined ? defaultCompileOptions : arguments[2];
           var instructions = [],
               targetShadowDOM = options.targetShadowDOM,
-              content;
+              content,
+              part,
+              factory,
+              temp;
           targetShadowDOM = targetShadowDOM && hasShadowDOM;
           if (options.beforeCompile) {
             options.beforeCompile(templateOrFragment);
           }
+          if (typeof templateOrFragment === 'string') {
+            temp = document.createElement('template');
+            temp.innerHTML = templateOrFragment;
+            if (needsTemplateFixup) {
+              temp.content = document.createDocumentFragment();
+              while (temp.firstChild) {
+                temp.content.appendChild(temp.firstChild);
+              }
+            }
+            templateOrFragment = temp;
+          }
           if (templateOrFragment.content) {
+            part = templateOrFragment.getAttribute('part');
             content = document.adoptNode(templateOrFragment.content, true);
           } else {
             content = templateOrFragment;
@@ -28148,7 +29526,11 @@ System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurel
           this.compileNode(content, resources, instructions, templateOrFragment, 'root', !targetShadowDOM);
           content.insertBefore(document.createComment('<view>'), content.firstChild);
           content.appendChild(document.createComment('</view>'));
-          return new ViewFactory(content, instructions, resources);
+          var factory = new ViewFactory(content, instructions, resources);
+          if (part) {
+            factory.part = part;
+          }
+          return factory;
         };
         ViewCompiler.prototype.compileNode = function compileNode(node, resources, instructions, parentNode, parentInjectorId, targetLightDOM) {
           switch (node.nodeType) {
@@ -28207,6 +29589,7 @@ System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurel
             return node.nextSibling;
           } else if (tagName === 'template') {
             viewFactory = this.compile(node, resources);
+            viewFactory.part = node.getAttribute('part');
           } else {
             type = resources.getElement(tagName);
             if (type) {
@@ -28214,6 +29597,7 @@ System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurel
                 type: type,
                 attributes: {}
               };
+              elementInstruction.anchorIsContainer = !node.hasAttribute('containerless') && !type.containerless;
               behaviorInstructions.push(elementInstruction);
             }
           }
@@ -28314,7 +29698,8 @@ System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurel
             if (expressions.length || behaviorInstructions.length) {
               makeIntoInstructionTarget(node);
               instructions.push({
-                anchorIsContainer: true,
+                anchorIsContainer: elementInstruction ? elementInstruction.anchorIsContainer : true,
+                isCustomElement: !!elementInstruction,
                 injectorId: injectorId,
                 parentInjectorId: parentInjectorId,
                 expressions: expressions,
@@ -28339,7 +29724,7 @@ System.register("github:aurelia/templating@0.11.2/view-compiler", ["github:aurel
   };
 });
 
-System.register("github:aurelia/templating-binding@0.11.0", ["github:aurelia/templating-binding@0.11.0/index"], function($__export) {
+System.register("github:aurelia/templating-binding@0.12.0", ["github:aurelia/templating-binding@0.12.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -28349,29 +29734,54 @@ System.register("github:aurelia/templating-binding@0.11.0", ["github:aurelia/tem
   };
 });
 
-System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "github:aurelia/route-recognizer@0.4.0", "github:aurelia/path@0.6.1", "github:aurelia/router@0.8.0/navigation-context", "github:aurelia/router@0.8.0/navigation-instruction", "github:aurelia/router@0.8.0/router-configuration", "github:aurelia/router@0.8.0/util"], function(_export) {
+System.register("github:aurelia/router@0.9.0/router", ["npm:core-js@0.9.16", "github:aurelia/route-recognizer@0.5.0", "github:aurelia/path@0.7.0", "github:aurelia/router@0.9.0/navigation-context", "github:aurelia/router@0.9.0/navigation-instruction", "github:aurelia/router@0.9.0/nav-model", "github:aurelia/router@0.9.0/router-configuration", "github:aurelia/router@0.9.0/util"], function(_export) {
+  'use strict';
   var core,
       RouteRecognizer,
       join,
       NavigationContext,
       NavigationInstruction,
+      NavModel,
       RouterConfiguration,
       processPotential,
-      _classCallCheck,
-      _createClass,
-      isRooted,
+      normalizeAbsolutePath,
+      createRootedPath,
+      resolveUrl,
       Router;
-  function validateRouteConfig(config) {
-    var isValid = typeof config === 'object' && (config.moduleId || config.redirect || config.viewPorts) && config.route !== null && config.route !== undefined;
-    if (!isValid) {
-      throw new Error('Invalid Route Config: You must have at least a route and a moduleId, redirect, or viewPorts.');
+  var _createClass = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ('value' in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
     }
   }
-  function normalizeAbsolutePath(path, hasPushState) {
-    if (!hasPushState && path[0] !== '#') {
-      path = '#' + path;
+  function validateRouteConfig(config) {
+    if (typeof config !== 'object') {
+      throw new Error('Invalid Route Config');
     }
-    return path;
+    if (typeof config.route !== 'string') {
+      throw new Error('Invalid Route Config: You must specify a route pattern.');
+    }
+    if (!('redirect' in config || config.moduleId || config.navigationStrategy || config.viewPorts)) {
+      throw new Error('Invalid Route Config: You must specify a moduleId, redirect, navigationStrategy, or viewPorts.');
+    }
   }
   function evaluateNavigationStrategy(instruction, evaluator, context) {
     return Promise.resolve(evaluator.call(context, instruction)).then(function() {
@@ -28392,38 +29802,17 @@ System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "gi
       NavigationContext = _navigationContext.NavigationContext;
     }, function(_navigationInstruction) {
       NavigationInstruction = _navigationInstruction.NavigationInstruction;
+    }, function(_navModel) {
+      NavModel = _navModel.NavModel;
     }, function(_routerConfiguration) {
       RouterConfiguration = _routerConfiguration.RouterConfiguration;
     }, function(_util) {
       processPotential = _util.processPotential;
+      normalizeAbsolutePath = _util.normalizeAbsolutePath;
+      createRootedPath = _util.createRootedPath;
+      resolveUrl = _util.resolveUrl;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
-      _createClass = (function() {
-        function defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ('value' in descriptor)
-              descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        return function(Constructor, protoProps, staticProps) {
-          if (protoProps)
-            defineProperties(Constructor.prototype, protoProps);
-          if (staticProps)
-            defineProperties(Constructor, staticProps);
-          return Constructor;
-        };
-      })();
-      isRooted = /^#?\//;
       Router = (function() {
         function Router(container, history) {
           _classCallCheck(this, Router);
@@ -28449,7 +29838,7 @@ System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "gi
           for (var i = 0,
               length = nav.length; i < length; i++) {
             var current = nav[i];
-            current.href = this.createRootedPath(current.relativeHref);
+            current.href = createRootedPath(current.relativeHref, this.baseUrl, this.history._hasPushState);
           }
         };
         Router.prototype.configure = function configure(callbackOrConfig) {
@@ -28463,30 +29852,11 @@ System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "gi
           }
           return this;
         };
-        Router.prototype.createRootedPath = function createRootedPath(fragment) {
-          var path = '';
-          if (this.baseUrl.length && this.baseUrl[0] !== '/') {
-            path += '/';
-          }
-          path += this.baseUrl;
-          if (path[path.length - 1] != '/' && fragment[0] != '/') {
-            path += '/';
-          }
-          return normalizeAbsolutePath(path + fragment, this.history._hasPushState);
-        };
         Router.prototype.navigate = function navigate(fragment, options) {
           if (!this.isConfigured && this.parent) {
             return this.parent.navigate(fragment, options);
           }
-          if (fragment === '') {
-            fragment = '/';
-          }
-          if (isRooted.test(fragment)) {
-            fragment = normalizeAbsolutePath(fragment, this.history._hasPushState);
-          } else {
-            fragment = this.createRootedPath(fragment);
-          }
-          return this.history.navigate(fragment, options);
+          return this.history.navigate(resolveUrl(fragment, this.baseUrl, this.history._hasPushState), options);
         };
         Router.prototype.navigateToRoute = function navigateToRoute(route, params, options) {
           var path = this.generate(route, params);
@@ -28526,44 +29896,51 @@ System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "gi
             var instruction = new NavigationInstruction(fragment, queryString, first.params, first.queryParams || results.queryParams, first.config || first.handler, parentInstruction);
             if (typeof first.handler === 'function') {
               return evaluateNavigationStrategy(instruction, first.handler, first);
-            } else if (first.config && 'navigationStrategy' in first.config) {
-              return evaluateNavigationStrategy(instruction, first.config.navigationStrategy, first.config);
+            } else if (first.handler && 'navigationStrategy' in first.handler) {
+              return evaluateNavigationStrategy(instruction, first.handler.navigationStrategy, first.handler);
             }
             return Promise.resolve(instruction);
           }
           return Promise.reject(new Error('Route not found: ' + url));
         };
         Router.prototype.createNavigationContext = function createNavigationContext(instruction) {
-          return new NavigationContext(this, instruction);
+          instruction.navigationContext = new NavigationContext(this, instruction);
+          return instruction.navigationContext;
         };
         Router.prototype.generate = function generate(name, params) {
           if ((!this.isConfigured || !this.recognizer.hasRoute(name)) && this.parent) {
             return this.parent.generate(name, params);
           }
           var path = this.recognizer.generate(name, params);
-          return this.createRootedPath(path);
+          return createRootedPath(path, this.baseUrl, this.history._hasPushState);
         };
-        Router.prototype.addRoute = function addRoute(config) {
-          var navModel = arguments[1] === undefined ? {} : arguments[1];
+        Router.prototype.createNavModel = function createNavModel(config) {
+          var navModel = new NavModel(this, 'href' in config ? config.href : config.route);
+          navModel.title = config.title;
+          navModel.order = config.nav;
+          navModel.href = config.href;
+          navModel.settings = config.settings;
+          navModel.config = config;
+          return navModel;
+        };
+        Router.prototype.addRoute = function addRoute(config, navModel) {
           validateRouteConfig(config);
-          if (!('viewPorts' in config)) {
+          if (!('viewPorts' in config) && !config.navigationStrategy) {
             config.viewPorts = {'default': {
                 moduleId: config.moduleId,
                 view: config.view
               }};
           }
-          navModel.title = navModel.title || config.title;
-          navModel.setTitle = function(newTitle) {
-            navModel.title = newTitle;
-          };
-          navModel.settings = config.settings || (config.settings = {});
+          if (!navModel) {
+            navModel = this.createNavModel(config);
+          }
           this.routes.push(config);
           var state = this.recognizer.add({
             path: config.route,
             handler: config
           });
           if (config.route) {
-            var withChild,
+            var withChild = undefined,
                 settings = config.settings;
             delete config.settings;
             withChild = JSON.parse(JSON.stringify(config));
@@ -28578,17 +29955,9 @@ System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "gi
             withChild.settings = config.settings;
           }
           config.navModel = navModel;
-          if ((config.nav || 'order' in navModel) && this.navigation.indexOf(navModel) === -1) {
-            navModel.order = navModel.order || config.nav;
-            navModel.href = navModel.href || config.href;
-            navModel.isActive = false;
-            navModel.config = config;
-            if (!config.href) {
-              if (state.types.dynamics || state.types.stars) {
-                throw new Error('Invalid route config: dynamic routes must specify an href to be included in the navigation model.');
-              }
-              navModel.relativeHref = config.route;
-              navModel.href = '';
+          if ((navModel.order || navModel.order === 0) && this.navigation.indexOf(navModel) === -1) {
+            if (!navModel.href && navModel.href != '' && (state.types.dynamics || state.types.stars)) {
+              throw new Error('Invalid route config: dynamic routes must specify an href to be included in the navigation model.');
             }
             if (typeof navModel.order != 'number') {
               navModel.order = ++this.fallbackOrder;
@@ -28629,6 +29998,12 @@ System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "gi
           };
           this.catchAllHandler = callback;
         };
+        Router.prototype.updateTitle = function updateTitle() {
+          if (this.parent) {
+            return this.parent.updateTitle();
+          }
+          this.currentInstruction.navigationContext.updateTitle();
+        };
         Router.prototype.reset = function reset() {
           this.fallbackOrder = 100;
           this.recognizer = new RouteRecognizer();
@@ -28651,7 +30026,7 @@ System.register("github:aurelia/router@0.8.0/router", ["npm:core-js@0.9.13", "gi
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation-group", ["github:aurelia/validation@0.2.4/validation/validation-group-builder", "github:aurelia/validation@0.2.4/validation/validation-result", "github:aurelia/validation@0.2.4/validation/validation-locale"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation-group", ["github:aurelia/validation@0.2.5/validation/validation-group-builder", "github:aurelia/validation@0.2.5/validation/validation-result", "github:aurelia/validation@0.2.5/validation/validation-locale"], function(_export) {
   var ValidationGroupBuilder,
       ValidationResult,
       ValidationLocale,
@@ -28853,6 +30228,9 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-group", [
         ValidationGroup.prototype.isEmail = function isEmail() {
           return this.builder.isEmail();
         };
+        ValidationGroup.prototype.isURL = function isURL() {
+          return this.builder.isURL();
+        };
         ValidationGroup.prototype.isIn = function isIn(collection) {
           return this.builder.isIn(collection);
         };
@@ -28867,6 +30245,9 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-group", [
         };
         ValidationGroup.prototype.isNumber = function isNumber() {
           return this.builder.isNumber();
+        };
+        ValidationGroup.prototype.containsNoSpaces = function containsNoSpaces() {
+          return this.builder.containsNoSpaces();
         };
         ValidationGroup.prototype.containsOnlyDigits = function containsOnlyDigits() {
           return this.builder.containsOnlyDigits();
@@ -28935,7 +30316,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation-group", [
   };
 });
 
-System.register("engines/gameEngine", ["github:aurelia/framework@0.11.0", "github:aurelia/event-aggregator@0.4.0", "services/cityService", "services/drugService", "services/playerService", "services/dayService", "services/difficultyService", "models/difficultyLevel", "services/surpriseService", "models/surprise"], function(_export) {
+System.register("engines/gameEngine", ["github:aurelia/framework@0.12.0", "github:aurelia/event-aggregator@0.4.0", "services/cityService", "services/drugService", "services/playerService", "services/dayService", "services/difficultyService", "models/difficultyLevel", "services/surpriseService", "models/surprise"], function(_export) {
   'use strict';
   var inject,
       EventAggregator,
@@ -29172,17 +30553,17 @@ System.register("engines/gameEngine", ["github:aurelia/framework@0.11.0", "githu
   };
 });
 
-System.register("npm:core-js@0.9.13/modules/$.task", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.ctx", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.invoke", "npm:core-js@0.9.13/modules/$.dom-create", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/$.task", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.ctx", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.invoke", "npm:core-js@0.9.16/modules/$.dom-create", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var $ = require("npm:core-js@0.9.13/modules/$"),
-        ctx = require("npm:core-js@0.9.13/modules/$.ctx"),
-        cof = require("npm:core-js@0.9.13/modules/$.cof"),
-        invoke = require("npm:core-js@0.9.13/modules/$.invoke"),
-        cel = require("npm:core-js@0.9.13/modules/$.dom-create"),
+    var $ = require("npm:core-js@0.9.16/modules/$"),
+        ctx = require("npm:core-js@0.9.16/modules/$.ctx"),
+        cof = require("npm:core-js@0.9.16/modules/$.cof"),
+        invoke = require("npm:core-js@0.9.16/modules/$.invoke"),
+        cel = require("npm:core-js@0.9.16/modules/$.dom-create"),
         global = $.g,
         isFunction = $.isFunction,
         html = $.html,
@@ -29260,7 +30641,8 @@ System.register("npm:core-js@0.9.13/modules/$.task", ["npm:core-js@0.9.13/module
   return module.exports;
 });
 
-System.register("github:aurelia/dependency-injection@0.7.1/index", ["github:aurelia/metadata@0.5.0", "github:aurelia/dependency-injection@0.7.1/metadata", "github:aurelia/dependency-injection@0.7.1/container"], function(_export) {
+System.register("github:aurelia/dependency-injection@0.8.1/index", ["github:aurelia/metadata@0.6.0", "github:aurelia/dependency-injection@0.8.1/metadata", "github:aurelia/dependency-injection@0.8.1/container"], function(_export) {
+  'use strict';
   var Decorators,
       Metadata,
       TransientRegistration,
@@ -29332,7 +30714,6 @@ System.register("github:aurelia/dependency-injection@0.7.1/index", ["github:aure
       _export('Container', _container.Container);
     }],
     execute: function() {
-      'use strict';
       Decorators.configure.simpleDecorator('autoinject', autoinject);
       Decorators.configure.parameterizedDecorator('inject', inject);
       Decorators.configure.parameterizedDecorator('registration', registration);
@@ -29344,7 +30725,7 @@ System.register("github:aurelia/dependency-injection@0.7.1/index", ["github:aure
   };
 });
 
-System.register("github:aurelia/loader@0.6.0", ["github:aurelia/loader@0.6.0/index"], function($__export) {
+System.register("github:aurelia/loader@0.7.0", ["github:aurelia/loader@0.7.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -29354,10 +30735,12 @@ System.register("github:aurelia/loader@0.6.0", ["github:aurelia/loader@0.6.0/ind
   };
 });
 
-System.register("github:aurelia/binding@0.6.1/index", ["github:aurelia/metadata@0.5.0", "github:aurelia/binding@0.6.1/value-converter", "github:aurelia/binding@0.6.1/event-manager", "github:aurelia/binding@0.6.1/observer-locator", "github:aurelia/binding@0.6.1/array-change-records", "github:aurelia/binding@0.6.1/binding-modes", "github:aurelia/binding@0.6.1/parser", "github:aurelia/binding@0.6.1/binding-expression", "github:aurelia/binding@0.6.1/listener-expression", "github:aurelia/binding@0.6.1/name-expression", "github:aurelia/binding@0.6.1/call-expression", "github:aurelia/binding@0.6.1/dirty-checking", "github:aurelia/binding@0.6.1/map-change-records", "github:aurelia/binding@0.6.1/computed-observation"], function(_export) {
+System.register("github:aurelia/binding@0.7.3/index", ["github:aurelia/metadata@0.6.0", "github:aurelia/binding@0.7.3/value-converter", "github:aurelia/binding@0.7.3/class-list", "github:aurelia/binding@0.7.3/event-manager", "github:aurelia/binding@0.7.3/observer-locator", "github:aurelia/binding@0.7.3/array-change-records", "github:aurelia/binding@0.7.3/binding-modes", "github:aurelia/binding@0.7.3/parser", "github:aurelia/binding@0.7.3/binding-expression", "github:aurelia/binding@0.7.3/listener-expression", "github:aurelia/binding@0.7.3/name-expression", "github:aurelia/binding@0.7.3/call-expression", "github:aurelia/binding@0.7.3/dirty-checking", "github:aurelia/binding@0.7.3/map-change-records", "github:aurelia/binding@0.7.3/computed-observation"], function(_export) {
+  'use strict';
   var Decorators,
       Metadata,
-      ValueConverterResource;
+      ValueConverterResource,
+      classList;
   _export('valueConverter', valueConverter);
   _export('computedFrom', computedFrom);
   function valueConverter(nameOrTarget) {
@@ -29389,6 +30772,8 @@ System.register("github:aurelia/binding@0.6.1/index", ["github:aurelia/metadata@
     }, function(_valueConverter) {
       ValueConverterResource = _valueConverter.ValueConverterResource;
       _export('ValueConverterResource', _valueConverter.ValueConverterResource);
+    }, function(_classList) {
+      classList = _classList;
     }, function(_eventManager) {
       _export('EventManager', _eventManager.EventManager);
     }, function(_observerLocator) {
@@ -29419,13 +30804,13 @@ System.register("github:aurelia/binding@0.6.1/index", ["github:aurelia/metadata@
       _export('declarePropertyDependencies', _computedObservation.declarePropertyDependencies);
     }],
     execute: function() {
-      'use strict';
       Decorators.configure.parameterizedDecorator('valueConverter', valueConverter);
     }
   };
 });
 
-System.register("github:aurelia/templating@0.11.2/view-engine", ["npm:core-js@0.9.13", "github:aurelia/logging@0.4.0", "github:aurelia/metadata@0.5.0", "github:aurelia/loader@0.6.0", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating@0.11.2/view-compiler", "github:aurelia/templating@0.11.2/resource-registry", "github:aurelia/templating@0.11.2/module-analyzer"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/view-engine", ["npm:core-js@0.9.16", "github:aurelia/logging@0.5.0", "github:aurelia/metadata@0.6.0", "github:aurelia/loader@0.7.0", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating@0.12.1/view-compiler", "github:aurelia/templating@0.12.1/resource-registry", "github:aurelia/templating@0.12.1/module-analyzer"], function(_export) {
+  'use strict';
   var core,
       LogManager,
       Origin,
@@ -29436,9 +30821,13 @@ System.register("github:aurelia/templating@0.11.2/view-engine", ["npm:core-js@0.
       ResourceRegistry,
       ViewResources,
       ModuleAnalyzer,
-      _classCallCheck,
       logger,
       ViewEngine;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function ensureRegistryEntry(loader, urlOrRegistryEntry) {
     if (urlOrRegistryEntry instanceof TemplateRegistryEntry) {
       return Promise.resolve(urlOrRegistryEntry);
@@ -29466,12 +30855,6 @@ System.register("github:aurelia/templating@0.11.2/view-engine", ["npm:core-js@0.
       ModuleAnalyzer = _moduleAnalyzer.ModuleAnalyzer;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       logger = LogManager.getLogger('templating');
       ViewEngine = (function() {
         function ViewEngine(loader, container, viewCompiler, moduleAnalyzer, appResources) {
@@ -29488,13 +30871,10 @@ System.register("github:aurelia/templating@0.11.2/view-engine", ["npm:core-js@0.
         ViewEngine.prototype.loadViewFactory = function loadViewFactory(urlOrRegistryEntry, compileOptions, associatedModuleId) {
           var _this = this;
           return ensureRegistryEntry(this.loader, urlOrRegistryEntry).then(function(viewRegistryEntry) {
-            if (viewRegistryEntry.isReady) {
-              return viewRegistryEntry.factory;
+            if (viewRegistryEntry.onReady) {
+              return viewRegistryEntry.onReady;
             }
-            return _this.loadTemplateResources(viewRegistryEntry, associatedModuleId).then(function(resources) {
-              if (viewRegistryEntry.isReady) {
-                return viewRegistryEntry.factory;
-              }
+            return viewRegistryEntry.onReady = _this.loadTemplateResources(viewRegistryEntry, associatedModuleId).then(function(resources) {
               viewRegistryEntry.setResources(resources);
               var viewFactory = _this.viewCompiler.compile(viewRegistryEntry.template, resources, compileOptions);
               viewRegistryEntry.setFactory(viewFactory);
@@ -29572,7 +30952,8 @@ System.register("github:aurelia/templating@0.11.2/view-engine", ["npm:core-js@0.
   };
 });
 
-System.register("github:aurelia/router@0.8.0/index", ["github:aurelia/router@0.8.0/router", "github:aurelia/router@0.8.0/app-router", "github:aurelia/router@0.8.0/pipeline-provider", "github:aurelia/router@0.8.0/navigation-commands", "github:aurelia/router@0.8.0/route-loading", "github:aurelia/router@0.8.0/router-configuration", "github:aurelia/router@0.8.0/navigation-plan", "github:aurelia/router@0.8.0/route-filters"], function(_export) {
+System.register("github:aurelia/router@0.9.0/index", ["github:aurelia/router@0.9.0/router", "github:aurelia/router@0.9.0/app-router", "github:aurelia/router@0.9.0/pipeline-provider", "github:aurelia/router@0.9.0/navigation-commands", "github:aurelia/router@0.9.0/route-loading", "github:aurelia/router@0.9.0/router-configuration", "github:aurelia/router@0.9.0/navigation-context", "github:aurelia/router@0.9.0/navigation-plan", "github:aurelia/router@0.9.0/route-filters"], function(_export) {
+  'use strict';
   return {
     setters: [function(_router) {
       _export('Router', _router.Router);
@@ -29586,19 +30967,19 @@ System.register("github:aurelia/router@0.8.0/index", ["github:aurelia/router@0.8
       _export('RouteLoader', _routeLoading.RouteLoader);
     }, function(_routerConfiguration) {
       _export('RouterConfiguration', _routerConfiguration.RouterConfiguration);
+    }, function(_navigationContext) {
+      _export('NavigationContext', _navigationContext.NavigationContext);
     }, function(_navigationPlan) {
       _export('activationStrategy', _navigationPlan.activationStrategy);
     }, function(_routeFilters) {
       _export('RouteFilterContainer', _routeFilters.RouteFilterContainer);
       _export('createRouteFilterStep', _routeFilters.createRouteFilterStep);
     }],
-    execute: function() {
-      'use strict';
-    }
+    execute: function() {}
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/validation/validation", ["github:aurelia/binding@0.6.1", "github:aurelia/validation@0.2.4/validation/validation-rules", "github:aurelia/validation@0.2.4/validation/validation-rules-collection", "github:aurelia/validation@0.2.4/validation/validation-group", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/validation@0.2.4/validation/validation-config"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/validation/validation", ["github:aurelia/binding@0.7.3", "github:aurelia/validation@0.2.5/validation/validation-rules", "github:aurelia/validation@0.2.5/validation/validation-rules-collection", "github:aurelia/validation@0.2.5/validation/validation-group", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/validation@0.2.5/validation/validation-config"], function(_export) {
   var ObserverLocator,
       AllRules,
       AllCollections,
@@ -29656,7 +31037,7 @@ System.register("github:aurelia/validation@0.2.4/validation/validation", ["githu
   };
 });
 
-System.register("nav-bar", ["github:aurelia/framework@0.11.0", "github:aurelia/router@0.8.0", "engines/gameEngine", "models/dayOption", "models/difficultyLevel"], function(_export) {
+System.register("nav-bar", ["github:aurelia/framework@0.12.0", "github:aurelia/router@0.9.0", "engines/gameEngine", "models/dayOption", "models/difficultyLevel"], function(_export) {
   'use strict';
   var bindable,
       inject,
@@ -29740,51 +31121,73 @@ System.register("nav-bar", ["github:aurelia/framework@0.11.0", "github:aurelia/r
   };
 });
 
-System.register("npm:core-js@0.9.13/modules/es6.promise", ["npm:core-js@0.9.13/modules/$", "npm:core-js@0.9.13/modules/$.ctx", "npm:core-js@0.9.13/modules/$.cof", "npm:core-js@0.9.13/modules/$.def", "npm:core-js@0.9.13/modules/$.assert", "npm:core-js@0.9.13/modules/$.for-of", "npm:core-js@0.9.13/modules/$.set-proto", "npm:core-js@0.9.13/modules/$.species", "npm:core-js@0.9.13/modules/$.wks", "npm:core-js@0.9.13/modules/$.uid", "npm:core-js@0.9.13/modules/$.task", "npm:core-js@0.9.13/modules/$.mix", "npm:core-js@0.9.13/modules/$.iter-detect", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/modules/es6.promise", ["npm:core-js@0.9.16/modules/$", "npm:core-js@0.9.16/modules/$.ctx", "npm:core-js@0.9.16/modules/$.cof", "npm:core-js@0.9.16/modules/$.def", "npm:core-js@0.9.16/modules/$.assert", "npm:core-js@0.9.16/modules/$.for-of", "npm:core-js@0.9.16/modules/$.set-proto", "npm:core-js@0.9.16/modules/$.same", "npm:core-js@0.9.16/modules/$.species", "npm:core-js@0.9.16/modules/$.wks", "npm:core-js@0.9.16/modules/$.uid", "npm:core-js@0.9.16/modules/$.task", "npm:core-js@0.9.16/modules/$.mix", "npm:core-js@0.9.16/modules/$.iter-detect", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var $ = require("npm:core-js@0.9.13/modules/$"),
-        ctx = require("npm:core-js@0.9.13/modules/$.ctx"),
-        cof = require("npm:core-js@0.9.13/modules/$.cof"),
-        $def = require("npm:core-js@0.9.13/modules/$.def"),
-        assert = require("npm:core-js@0.9.13/modules/$.assert"),
-        forOf = require("npm:core-js@0.9.13/modules/$.for-of"),
-        setProto = require("npm:core-js@0.9.13/modules/$.set-proto").set,
-        species = require("npm:core-js@0.9.13/modules/$.species"),
-        SPECIES = require("npm:core-js@0.9.13/modules/$.wks")('species'),
-        RECORD = require("npm:core-js@0.9.13/modules/$.uid").safe('record'),
+    var $ = require("npm:core-js@0.9.16/modules/$"),
+        ctx = require("npm:core-js@0.9.16/modules/$.ctx"),
+        cof = require("npm:core-js@0.9.16/modules/$.cof"),
+        $def = require("npm:core-js@0.9.16/modules/$.def"),
+        assert = require("npm:core-js@0.9.16/modules/$.assert"),
+        forOf = require("npm:core-js@0.9.16/modules/$.for-of"),
+        setProto = require("npm:core-js@0.9.16/modules/$.set-proto").set,
+        same = require("npm:core-js@0.9.16/modules/$.same"),
+        species = require("npm:core-js@0.9.16/modules/$.species"),
+        SPECIES = require("npm:core-js@0.9.16/modules/$.wks")('species'),
+        RECORD = require("npm:core-js@0.9.16/modules/$.uid").safe('record'),
         PROMISE = 'Promise',
         global = $.g,
         process = global.process,
-        asap = process && process.nextTick || require("npm:core-js@0.9.13/modules/$.task").set,
+        asap = process && process.nextTick || require("npm:core-js@0.9.16/modules/$.task").set,
         P = global[PROMISE],
         isFunction = $.isFunction,
         isObject = $.isObject,
         assertFunction = assert.fn,
-        assertObject = assert.obj;
+        assertObject = assert.obj,
+        Wrapper;
+    function testResolve(sub) {
+      var test = new P(function() {});
+      if (sub)
+        test.constructor = Object;
+      return P.resolve(test) === test;
+    }
     var useNative = function() {
-      var test,
-          works = false;
+      var works = false;
       function P2(x) {
         var self = new P(x);
         setProto(self, P2.prototype);
         return self;
       }
       try {
-        works = isFunction(P) && isFunction(P.resolve) && P.resolve(test = new P(function() {})) == test;
+        works = isFunction(P) && isFunction(P.resolve) && testResolve();
         setProto(P2, P);
         P2.prototype = $.create(P.prototype, {constructor: {value: P2}});
         if (!(P2.resolve(5).then(function() {}) instanceof P2)) {
           works = false;
+        }
+        if (works && $.DESC) {
+          var thenableThenGotten = false;
+          P.resolve($.setDesc({}, 'then', {get: function() {
+              thenableThenGotten = true;
+            }}));
+          works = thenableThenGotten;
         }
       } catch (e) {
         works = false;
       }
       return works;
     }();
+    function isPromise(it) {
+      return isObject(it) && (useNative ? cof.classof(it) == 'Promise' : RECORD in it);
+    }
+    function sameConstructor(a, b) {
+      if (!$.FW && a === P && b === Wrapper)
+        return true;
+      return same(a, b);
+    }
     function getConstructor(C) {
       var S = assertObject(C)[SPECIES];
       return S != undefined ? S : C;
@@ -29868,29 +31271,34 @@ System.register("npm:core-js@0.9.13/modules/es6.promise", ["npm:core-js@0.9.13/m
     }
     function $resolve(value) {
       var record = this,
-          then,
-          wrapper;
+          then;
       if (record.d)
         return ;
       record.d = true;
       record = record.r || record;
       try {
         if (then = isThenable(value)) {
-          wrapper = {
-            r: record,
-            d: false
-          };
-          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+          asap(function() {
+            var wrapper = {
+              r: record,
+              d: false
+            };
+            try {
+              then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+            } catch (e) {
+              $reject.call(wrapper, e);
+            }
+          });
         } else {
           record.v = value;
           record.s = 1;
           notify(record);
         }
-      } catch (err) {
-        $reject.call(wrapper || {
+      } catch (e) {
+        $reject.call({
           r: record,
           d: false
-        }, err);
+        }, e);
       }
     }
     if (!useNative) {
@@ -29912,7 +31320,7 @@ System.register("npm:core-js@0.9.13/modules/es6.promise", ["npm:core-js@0.9.13/m
           $reject.call(record, err);
         }
       };
-      require("npm:core-js@0.9.13/modules/$.mix")(P.prototype, {
+      require("npm:core-js@0.9.16/modules/$.mix")(P.prototype, {
         then: function then(onFulfilled, onRejected) {
           var S = assertObject(assertObject(this).constructor)[SPECIES];
           var react = {
@@ -29927,7 +31335,8 @@ System.register("npm:core-js@0.9.13/modules/es6.promise", ["npm:core-js@0.9.13/m
           record.c.push(react);
           if (record.a)
             record.a.push(react);
-          record.s && notify(record);
+          if (record.s)
+            notify(record);
           return promise;
         },
         'catch': function(onRejected) {
@@ -29938,20 +31347,18 @@ System.register("npm:core-js@0.9.13/modules/es6.promise", ["npm:core-js@0.9.13/m
     $def($def.G + $def.W + $def.F * !useNative, {Promise: P});
     cof.set(P, PROMISE);
     species(P);
-    species($.core[PROMISE]);
-    $def($def.S + $def.F * !useNative, PROMISE, {
-      reject: function reject(r) {
+    species(Wrapper = $.core[PROMISE]);
+    $def($def.S + $def.F * !useNative, PROMISE, {reject: function reject(r) {
         return new (getConstructor(this))(function(res, rej) {
           rej(r);
         });
-      },
-      resolve: function resolve(x) {
-        return isObject(x) && RECORD in x && $.getProto(x) === this.prototype ? x : new (getConstructor(this))(function(res) {
+      }});
+    $def($def.S + $def.F * (!useNative || testResolve(true)), PROMISE, {resolve: function resolve(x) {
+        return isPromise(x) && sameConstructor(x.constructor, this) ? x : new this(function(res) {
           res(x);
         });
-      }
-    });
-    $def($def.S + $def.F * !(useNative && require("npm:core-js@0.9.13/modules/$.iter-detect")(function(iter) {
+      }});
+    $def($def.S + $def.F * !(useNative && require("npm:core-js@0.9.16/modules/$.iter-detect")(function(iter) {
       P.all(iter)['catch'](function() {});
     })), PROMISE, {
       all: function all(iterable) {
@@ -29986,7 +31393,7 @@ System.register("npm:core-js@0.9.13/modules/es6.promise", ["npm:core-js@0.9.13/m
   return module.exports;
 });
 
-System.register("github:aurelia/dependency-injection@0.7.1", ["github:aurelia/dependency-injection@0.7.1/index"], function($__export) {
+System.register("github:aurelia/dependency-injection@0.8.1", ["github:aurelia/dependency-injection@0.8.1/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -29996,7 +31403,7 @@ System.register("github:aurelia/dependency-injection@0.7.1", ["github:aurelia/de
   };
 });
 
-System.register("github:aurelia/binding@0.6.1", ["github:aurelia/binding@0.6.1/index"], function($__export) {
+System.register("github:aurelia/binding@0.7.3", ["github:aurelia/binding@0.7.3/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -30006,7 +31413,7 @@ System.register("github:aurelia/binding@0.6.1", ["github:aurelia/binding@0.6.1/i
   };
 });
 
-System.register("github:aurelia/router@0.8.0", ["github:aurelia/router@0.8.0/index"], function($__export) {
+System.register("github:aurelia/router@0.9.0", ["github:aurelia/router@0.9.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -30016,7 +31423,7 @@ System.register("github:aurelia/router@0.8.0", ["github:aurelia/router@0.8.0/ind
   };
 });
 
-System.register("github:aurelia/validation@0.2.4/index", ["github:aurelia/validation@0.2.4/validation/validation-config", "github:aurelia/validation@0.2.4/validation/validation", "github:aurelia/validation@0.2.4/validation/utilities", "github:aurelia/validation@0.2.4/validation/validation-locale", "github:aurelia/validation@0.2.4/validation/validation-result", "github:aurelia/validation@0.2.4/validation/validation-rules", "github:aurelia/validation@0.2.4/validation/validate-custom-attribute", "github:aurelia/validation@0.2.4/validation/validate-custom-attribute-view-strategy", "github:aurelia/validation@0.2.4/validation/decorators"], function(_export) {
+System.register("github:aurelia/validation@0.2.5/index", ["github:aurelia/validation@0.2.5/validation/validation-config", "github:aurelia/validation@0.2.5/validation/validation", "github:aurelia/validation@0.2.5/validation/utilities", "github:aurelia/validation@0.2.5/validation/validation-locale", "github:aurelia/validation@0.2.5/validation/validation-result", "github:aurelia/validation@0.2.5/validation/validation-rules", "github:aurelia/validation@0.2.5/validation/validate-custom-attribute", "github:aurelia/validation@0.2.5/validation/validate-custom-attribute-view-strategy", "github:aurelia/validation@0.2.5/validation/decorators"], function(_export) {
   var ValidationConfig,
       Validation;
   _export('configure', configure);
@@ -30025,7 +31432,7 @@ System.register("github:aurelia/validation@0.2.4/index", ["github:aurelia/valida
     if (configCallback !== undefined && typeof configCallback === 'function') {
       configCallback(Validation.defaults);
     }
-    aurelia.container.registerInstance(ValidationConfig, Validation.defaults);
+    aurelia.withSingleton(ValidationConfig, Validation.defaults);
     return Validation.defaults.locale();
   }
   return {
@@ -30051,6 +31458,7 @@ System.register("github:aurelia/validation@0.2.4/index", ["github:aurelia/valida
       _export('ValidateCustomAttribute', _validationValidateCustomAttribute.ValidateCustomAttribute);
     }, function(_validationValidateCustomAttributeViewStrategy) {
       _export('ValidateCustomAttributeViewStrategy', _validationValidateCustomAttributeViewStrategy.ValidateCustomAttributeViewStrategy);
+      _export('ValidateCustomAttributeViewStrategyBase', _validationValidateCustomAttributeViewStrategy.ValidateCustomAttributeViewStrategyBase);
     }, function(_validationDecorators) {
       _export('ensure', _validationDecorators.ensure);
     }],
@@ -30060,64 +31468,65 @@ System.register("github:aurelia/validation@0.2.4/index", ["github:aurelia/valida
   };
 });
 
-System.register("npm:core-js@0.9.13/shim", ["npm:core-js@0.9.13/modules/es5", "npm:core-js@0.9.13/modules/es6.symbol", "npm:core-js@0.9.13/modules/es6.object.assign", "npm:core-js@0.9.13/modules/es6.object.is", "npm:core-js@0.9.13/modules/es6.object.set-prototype-of", "npm:core-js@0.9.13/modules/es6.object.to-string", "npm:core-js@0.9.13/modules/es6.object.statics-accept-primitives", "npm:core-js@0.9.13/modules/es6.function.name", "npm:core-js@0.9.13/modules/es6.function.has-instance", "npm:core-js@0.9.13/modules/es6.number.constructor", "npm:core-js@0.9.13/modules/es6.number.statics", "npm:core-js@0.9.13/modules/es6.math", "npm:core-js@0.9.13/modules/es6.string.from-code-point", "npm:core-js@0.9.13/modules/es6.string.raw", "npm:core-js@0.9.13/modules/es6.string.iterator", "npm:core-js@0.9.13/modules/es6.string.code-point-at", "npm:core-js@0.9.13/modules/es6.string.ends-with", "npm:core-js@0.9.13/modules/es6.string.includes", "npm:core-js@0.9.13/modules/es6.string.repeat", "npm:core-js@0.9.13/modules/es6.string.starts-with", "npm:core-js@0.9.13/modules/es6.array.from", "npm:core-js@0.9.13/modules/es6.array.of", "npm:core-js@0.9.13/modules/es6.array.iterator", "npm:core-js@0.9.13/modules/es6.array.species", "npm:core-js@0.9.13/modules/es6.array.copy-within", "npm:core-js@0.9.13/modules/es6.array.fill", "npm:core-js@0.9.13/modules/es6.array.find", "npm:core-js@0.9.13/modules/es6.array.find-index", "npm:core-js@0.9.13/modules/es6.regexp", "npm:core-js@0.9.13/modules/es6.promise", "npm:core-js@0.9.13/modules/es6.map", "npm:core-js@0.9.13/modules/es6.set", "npm:core-js@0.9.13/modules/es6.weak-map", "npm:core-js@0.9.13/modules/es6.weak-set", "npm:core-js@0.9.13/modules/es6.reflect", "npm:core-js@0.9.13/modules/es7.array.includes", "npm:core-js@0.9.13/modules/es7.string.at", "npm:core-js@0.9.13/modules/es7.string.lpad", "npm:core-js@0.9.13/modules/es7.string.rpad", "npm:core-js@0.9.13/modules/es7.regexp.escape", "npm:core-js@0.9.13/modules/es7.object.get-own-property-descriptors", "npm:core-js@0.9.13/modules/es7.object.to-array", "npm:core-js@0.9.13/modules/es7.map.to-json", "npm:core-js@0.9.13/modules/es7.set.to-json", "npm:core-js@0.9.13/modules/js.array.statics", "npm:core-js@0.9.13/modules/web.timers", "npm:core-js@0.9.13/modules/web.immediate", "npm:core-js@0.9.13/modules/web.dom.iterable", "npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/shim", ["npm:core-js@0.9.16/modules/es5", "npm:core-js@0.9.16/modules/es6.symbol", "npm:core-js@0.9.16/modules/es6.object.assign", "npm:core-js@0.9.16/modules/es6.object.is", "npm:core-js@0.9.16/modules/es6.object.set-prototype-of", "npm:core-js@0.9.16/modules/es6.object.to-string", "npm:core-js@0.9.16/modules/es6.object.statics-accept-primitives", "npm:core-js@0.9.16/modules/es6.function.name", "npm:core-js@0.9.16/modules/es6.function.has-instance", "npm:core-js@0.9.16/modules/es6.number.constructor", "npm:core-js@0.9.16/modules/es6.number.statics", "npm:core-js@0.9.16/modules/es6.math", "npm:core-js@0.9.16/modules/es6.string.from-code-point", "npm:core-js@0.9.16/modules/es6.string.raw", "npm:core-js@0.9.16/modules/es6.string.iterator", "npm:core-js@0.9.16/modules/es6.string.code-point-at", "npm:core-js@0.9.16/modules/es6.string.ends-with", "npm:core-js@0.9.16/modules/es6.string.includes", "npm:core-js@0.9.16/modules/es6.string.repeat", "npm:core-js@0.9.16/modules/es6.string.starts-with", "npm:core-js@0.9.16/modules/es6.array.from", "npm:core-js@0.9.16/modules/es6.array.of", "npm:core-js@0.9.16/modules/es6.array.iterator", "npm:core-js@0.9.16/modules/es6.array.species", "npm:core-js@0.9.16/modules/es6.array.copy-within", "npm:core-js@0.9.16/modules/es6.array.fill", "npm:core-js@0.9.16/modules/es6.array.find", "npm:core-js@0.9.16/modules/es6.array.find-index", "npm:core-js@0.9.16/modules/es6.regexp", "npm:core-js@0.9.16/modules/es6.promise", "npm:core-js@0.9.16/modules/es6.map", "npm:core-js@0.9.16/modules/es6.set", "npm:core-js@0.9.16/modules/es6.weak-map", "npm:core-js@0.9.16/modules/es6.weak-set", "npm:core-js@0.9.16/modules/es6.reflect", "npm:core-js@0.9.16/modules/es7.array.includes", "npm:core-js@0.9.16/modules/es7.string.at", "npm:core-js@0.9.16/modules/es7.string.lpad", "npm:core-js@0.9.16/modules/es7.string.rpad", "npm:core-js@0.9.16/modules/es7.regexp.escape", "npm:core-js@0.9.16/modules/es7.object.get-own-property-descriptors", "npm:core-js@0.9.16/modules/es7.object.to-array", "npm:core-js@0.9.16/modules/es7.map.to-json", "npm:core-js@0.9.16/modules/es7.set.to-json", "npm:core-js@0.9.16/modules/js.array.statics", "npm:core-js@0.9.16/modules/web.timers", "npm:core-js@0.9.16/modules/web.immediate", "npm:core-js@0.9.16/modules/web.dom.iterable", "npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.13/modules/es5");
-  require("npm:core-js@0.9.13/modules/es6.symbol");
-  require("npm:core-js@0.9.13/modules/es6.object.assign");
-  require("npm:core-js@0.9.13/modules/es6.object.is");
-  require("npm:core-js@0.9.13/modules/es6.object.set-prototype-of");
-  require("npm:core-js@0.9.13/modules/es6.object.to-string");
-  require("npm:core-js@0.9.13/modules/es6.object.statics-accept-primitives");
-  require("npm:core-js@0.9.13/modules/es6.function.name");
-  require("npm:core-js@0.9.13/modules/es6.function.has-instance");
-  require("npm:core-js@0.9.13/modules/es6.number.constructor");
-  require("npm:core-js@0.9.13/modules/es6.number.statics");
-  require("npm:core-js@0.9.13/modules/es6.math");
-  require("npm:core-js@0.9.13/modules/es6.string.from-code-point");
-  require("npm:core-js@0.9.13/modules/es6.string.raw");
-  require("npm:core-js@0.9.13/modules/es6.string.iterator");
-  require("npm:core-js@0.9.13/modules/es6.string.code-point-at");
-  require("npm:core-js@0.9.13/modules/es6.string.ends-with");
-  require("npm:core-js@0.9.13/modules/es6.string.includes");
-  require("npm:core-js@0.9.13/modules/es6.string.repeat");
-  require("npm:core-js@0.9.13/modules/es6.string.starts-with");
-  require("npm:core-js@0.9.13/modules/es6.array.from");
-  require("npm:core-js@0.9.13/modules/es6.array.of");
-  require("npm:core-js@0.9.13/modules/es6.array.iterator");
-  require("npm:core-js@0.9.13/modules/es6.array.species");
-  require("npm:core-js@0.9.13/modules/es6.array.copy-within");
-  require("npm:core-js@0.9.13/modules/es6.array.fill");
-  require("npm:core-js@0.9.13/modules/es6.array.find");
-  require("npm:core-js@0.9.13/modules/es6.array.find-index");
-  require("npm:core-js@0.9.13/modules/es6.regexp");
-  require("npm:core-js@0.9.13/modules/es6.promise");
-  require("npm:core-js@0.9.13/modules/es6.map");
-  require("npm:core-js@0.9.13/modules/es6.set");
-  require("npm:core-js@0.9.13/modules/es6.weak-map");
-  require("npm:core-js@0.9.13/modules/es6.weak-set");
-  require("npm:core-js@0.9.13/modules/es6.reflect");
-  require("npm:core-js@0.9.13/modules/es7.array.includes");
-  require("npm:core-js@0.9.13/modules/es7.string.at");
-  require("npm:core-js@0.9.13/modules/es7.string.lpad");
-  require("npm:core-js@0.9.13/modules/es7.string.rpad");
-  require("npm:core-js@0.9.13/modules/es7.regexp.escape");
-  require("npm:core-js@0.9.13/modules/es7.object.get-own-property-descriptors");
-  require("npm:core-js@0.9.13/modules/es7.object.to-array");
-  require("npm:core-js@0.9.13/modules/es7.map.to-json");
-  require("npm:core-js@0.9.13/modules/es7.set.to-json");
-  require("npm:core-js@0.9.13/modules/js.array.statics");
-  require("npm:core-js@0.9.13/modules/web.timers");
-  require("npm:core-js@0.9.13/modules/web.immediate");
-  require("npm:core-js@0.9.13/modules/web.dom.iterable");
-  module.exports = require("npm:core-js@0.9.13/modules/$").core;
+  require("npm:core-js@0.9.16/modules/es5");
+  require("npm:core-js@0.9.16/modules/es6.symbol");
+  require("npm:core-js@0.9.16/modules/es6.object.assign");
+  require("npm:core-js@0.9.16/modules/es6.object.is");
+  require("npm:core-js@0.9.16/modules/es6.object.set-prototype-of");
+  require("npm:core-js@0.9.16/modules/es6.object.to-string");
+  require("npm:core-js@0.9.16/modules/es6.object.statics-accept-primitives");
+  require("npm:core-js@0.9.16/modules/es6.function.name");
+  require("npm:core-js@0.9.16/modules/es6.function.has-instance");
+  require("npm:core-js@0.9.16/modules/es6.number.constructor");
+  require("npm:core-js@0.9.16/modules/es6.number.statics");
+  require("npm:core-js@0.9.16/modules/es6.math");
+  require("npm:core-js@0.9.16/modules/es6.string.from-code-point");
+  require("npm:core-js@0.9.16/modules/es6.string.raw");
+  require("npm:core-js@0.9.16/modules/es6.string.iterator");
+  require("npm:core-js@0.9.16/modules/es6.string.code-point-at");
+  require("npm:core-js@0.9.16/modules/es6.string.ends-with");
+  require("npm:core-js@0.9.16/modules/es6.string.includes");
+  require("npm:core-js@0.9.16/modules/es6.string.repeat");
+  require("npm:core-js@0.9.16/modules/es6.string.starts-with");
+  require("npm:core-js@0.9.16/modules/es6.array.from");
+  require("npm:core-js@0.9.16/modules/es6.array.of");
+  require("npm:core-js@0.9.16/modules/es6.array.iterator");
+  require("npm:core-js@0.9.16/modules/es6.array.species");
+  require("npm:core-js@0.9.16/modules/es6.array.copy-within");
+  require("npm:core-js@0.9.16/modules/es6.array.fill");
+  require("npm:core-js@0.9.16/modules/es6.array.find");
+  require("npm:core-js@0.9.16/modules/es6.array.find-index");
+  require("npm:core-js@0.9.16/modules/es6.regexp");
+  require("npm:core-js@0.9.16/modules/es6.promise");
+  require("npm:core-js@0.9.16/modules/es6.map");
+  require("npm:core-js@0.9.16/modules/es6.set");
+  require("npm:core-js@0.9.16/modules/es6.weak-map");
+  require("npm:core-js@0.9.16/modules/es6.weak-set");
+  require("npm:core-js@0.9.16/modules/es6.reflect");
+  require("npm:core-js@0.9.16/modules/es7.array.includes");
+  require("npm:core-js@0.9.16/modules/es7.string.at");
+  require("npm:core-js@0.9.16/modules/es7.string.lpad");
+  require("npm:core-js@0.9.16/modules/es7.string.rpad");
+  require("npm:core-js@0.9.16/modules/es7.regexp.escape");
+  require("npm:core-js@0.9.16/modules/es7.object.get-own-property-descriptors");
+  require("npm:core-js@0.9.16/modules/es7.object.to-array");
+  require("npm:core-js@0.9.16/modules/es7.map.to-json");
+  require("npm:core-js@0.9.16/modules/es7.set.to-json");
+  require("npm:core-js@0.9.16/modules/js.array.statics");
+  require("npm:core-js@0.9.16/modules/web.timers");
+  require("npm:core-js@0.9.16/modules/web.immediate");
+  require("npm:core-js@0.9.16/modules/web.dom.iterable");
+  module.exports = require("npm:core-js@0.9.16/modules/$").core;
   global.define = __define;
   return module.exports;
 });
 
-System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurelia/metadata@0.5.0", "github:aurelia/binding@0.6.1", "github:aurelia/task-queue@0.4.0", "github:aurelia/templating@0.11.2/view-strategy", "github:aurelia/templating@0.11.2/view-engine", "github:aurelia/templating@0.11.2/content-selector", "github:aurelia/templating@0.11.2/util", "github:aurelia/templating@0.11.2/bindable-property", "github:aurelia/templating@0.11.2/behavior-instance"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/html-behavior", ["github:aurelia/metadata@0.6.0", "github:aurelia/binding@0.7.3", "github:aurelia/task-queue@0.5.0", "github:aurelia/templating@0.12.1/view-strategy", "github:aurelia/templating@0.12.1/view-engine", "github:aurelia/templating@0.12.1/content-selector", "github:aurelia/templating@0.12.1/util", "github:aurelia/templating@0.12.1/bindable-property", "github:aurelia/templating@0.12.1/behavior-instance"], function(_export) {
+  'use strict';
   var Origin,
       ObserverLocator,
       TaskQueue,
@@ -30127,11 +31536,15 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
       hyphenate,
       BindableProperty,
       BehaviorInstance,
-      _classCallCheck,
       defaultInstruction,
       contentSelectorFactoryOptions,
       hasShadowDOM,
       HtmlBehaviorResource;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   return {
     setters: [function(_aureliaMetadata) {
       Origin = _aureliaMetadata.Origin;
@@ -30153,12 +31566,6 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
       BehaviorInstance = _behaviorInstance.BehaviorInstance;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       defaultInstruction = {suppressBind: false};
       contentSelectorFactoryOptions = {suppressBind: true};
       hasShadowDOM = !!HTMLElement.prototype.createShadowRoot;
@@ -30167,12 +31574,14 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
           _classCallCheck(this, HtmlBehaviorResource);
           this.elementName = null;
           this.attributeName = null;
+          this.attributeDefaultBindingMode = undefined;
           this.liftsContent = false;
           this.targetShadowDOM = false;
           this.skipContentProcessing = false;
           this.usesShadowDOM = false;
           this.childExpression = null;
           this.hasDynamicOptions = false;
+          this.containerless = false;
           this.properties = [];
           this.attributes = {};
         }
@@ -30192,6 +31601,7 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
           var proto = target.prototype,
               properties = this.properties,
               attributeName = this.attributeName,
+              attributeDefaultBindingMode = this.attributeDefaultBindingMode,
               i,
               ii,
               current;
@@ -30204,7 +31614,8 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
           this.handlesUnbind = 'unbind' in proto;
           this.handlesAttached = 'attached' in proto;
           this.handlesDetached = 'detached' in proto;
-          this.apiName = (this.elementName || this.attributeName).replace(/-([a-z])/g, function(m, w) {
+          this.htmlName = this.elementName || this.attributeName;
+          this.apiName = this.htmlName.replace(/-([a-z])/g, function(m, w) {
             return w.toUpperCase();
           });
           if (attributeName !== null) {
@@ -30212,7 +31623,8 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
               new BindableProperty({
                 name: 'value',
                 changeHandler: 'valueChanged' in proto ? 'valueChanged' : null,
-                attribute: attributeName
+                attribute: attributeName,
+                defaultBindingMode: attributeDefaultBindingMode
               }).registerWith(target, this);
             }
             current = properties[0];
@@ -30226,7 +31638,8 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
               current = new BindableProperty({
                 name: 'value',
                 changeHandler: 'valueChanged' in proto ? 'valueChanged' : null,
-                attribute: attributeName
+                attribute: attributeName,
+                defaultBindingMode: attributeDefaultBindingMode
               });
               current.hasOptions = true;
               current.registerWith(target, this);
@@ -30270,7 +31683,8 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
           if (this.liftsContent) {
             if (!instruction.viewFactory) {
               var template = document.createElement('template'),
-                  fragment = document.createDocumentFragment();
+                  fragment = document.createDocumentFragment(),
+                  part = node.getAttribute('part');
               node.removeAttribute(instruction.originalAttrName);
               if (node.parentNode) {
                 node.parentNode.replaceChild(template, node);
@@ -30281,25 +31695,51 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
               }
               fragment.appendChild(node);
               instruction.viewFactory = compiler.compile(fragment, resources);
+              if (part) {
+                instruction.viewFactory.part = part;
+                node.removeAttribute('part');
+              }
               node = template;
             }
-          } else if (this.elementName !== null && !this.usesShadowDOM && !this.skipContentProcessing && node.hasChildNodes()) {
-            var fragment = document.createDocumentFragment(),
-                currentChild = node.firstChild,
-                nextSibling;
-            while (currentChild) {
-              nextSibling = currentChild.nextSibling;
-              fragment.appendChild(currentChild);
-              currentChild = nextSibling;
+          } else if (this.elementName !== null) {
+            var partReplacements = {};
+            if (!this.skipContentProcessing && node.hasChildNodes()) {
+              if (!this.usesShadowDOM) {
+                var fragment = document.createDocumentFragment(),
+                    currentChild = node.firstChild,
+                    nextSibling;
+                while (currentChild) {
+                  nextSibling = currentChild.nextSibling;
+                  if (currentChild.tagName === 'TEMPLATE' && (toReplace = currentChild.getAttribute('replace-part'))) {
+                    partReplacements[toReplace] = compiler.compile(currentChild, resources);
+                  } else {
+                    fragment.appendChild(currentChild);
+                  }
+                  currentChild = nextSibling;
+                }
+                instruction.contentFactory = compiler.compile(fragment, resources);
+              } else {
+                var currentChild = node.firstChild,
+                    nextSibling,
+                    toReplace;
+                while (currentChild) {
+                  nextSibling = currentChild.nextSibling;
+                  if (currentChild.tagName === 'TEMPLATE' && (toReplace = currentChild.getAttribute('replace-part'))) {
+                    partReplacements[toReplace] = compiler.compile(currentChild, resources);
+                  }
+                  currentChild = nextSibling;
+                }
+              }
             }
-            instruction.contentFactory = compiler.compile(fragment, resources);
           }
+          instruction.partReplacements = partReplacements;
           instruction.suppressBind = true;
           return node;
         };
-        HtmlBehaviorResource.prototype.create = function create(container, _x, _x2, bindings) {
+        HtmlBehaviorResource.prototype.create = function create(container) {
           var instruction = arguments[1] === undefined ? defaultInstruction : arguments[1];
           var element = arguments[2] === undefined ? null : arguments[2];
+          var bindings = arguments[3] === undefined ? null : arguments[3];
           var executionContext = instruction.executionContext || container.get(this.target),
               behaviorInstance = new BehaviorInstance(this, executionContext, instruction),
               viewFactory,
@@ -30309,7 +31749,7 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
           } else if (this.elementName !== null) {
             viewFactory = instruction.viewFactory || this.viewFactory;
             if (viewFactory) {
-              behaviorInstance.view = viewFactory.create(container, behaviorInstance.executionContext, instruction);
+              behaviorInstance.view = viewFactory.create(container, executionContext, instruction);
             }
             if (element) {
               element.primaryBehavior = behaviorInstance;
@@ -30328,19 +31768,35 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
                     behaviorInstance.contentView = contentView;
                   }
                 }
-                if (this.childExpression) {
-                  behaviorInstance.view.addBinding(this.childExpression.createBinding(host, behaviorInstance.executionContext));
+                if (instruction.anchorIsContainer) {
+                  if (this.childExpression) {
+                    behaviorInstance.view.addBinding(this.childExpression.createBinding(host, executionContext));
+                  }
+                  behaviorInstance.view.appendNodesTo(host);
+                } else {
+                  behaviorInstance.view.insertNodesBefore(host);
                 }
-                behaviorInstance.view.appendNodesTo(host);
+              } else if (this.childExpression) {
+                bindings.push(this.childExpression.createBinding(element, executionContext));
               }
             } else if (behaviorInstance.view) {
               behaviorInstance.view.owner = behaviorInstance;
+              if (this.childExpression) {
+                behaviorInstance.view.addBinding(this.childExpression.createBinding(instruction.host, executionContext));
+              }
+            } else if (this.childExpression) {
+              bindings.push(this.childExpression.createBinding(instruction.host, executionContext));
             }
           } else if (this.childExpression) {
-            bindings.push(this.childExpression.createBinding(element, behaviorInstance.executionContext));
+            bindings.push(this.childExpression.createBinding(element, executionContext));
           }
-          if (element && !(this.apiName in element)) {
-            element[this.apiName] = behaviorInstance.executionContext;
+          if (element) {
+            if (!(this.apiName in element)) {
+              element[this.apiName] = executionContext;
+            }
+            if (!(this.htmlName in element)) {
+              element[this.htmlName] = behaviorInstance;
+            }
           }
           return behaviorInstance;
         };
@@ -30368,7 +31824,8 @@ System.register("github:aurelia/templating@0.11.2/html-behavior", ["github:aurel
   };
 });
 
-System.register("github:aurelia/templating-router@0.12.0/index", ["github:aurelia/router@0.8.0", "github:aurelia/templating-router@0.12.0/route-loader", "github:aurelia/templating-router@0.12.0/router-view", "github:aurelia/templating-router@0.12.0/route-href"], function(_export) {
+System.register("github:aurelia/templating-router@0.13.0/index", ["github:aurelia/router@0.9.0", "github:aurelia/templating-router@0.13.0/route-loader", "github:aurelia/templating-router@0.13.0/router-view", "github:aurelia/templating-router@0.13.0/route-href"], function(_export) {
+  'use strict';
   var Router,
       AppRouter,
       RouteLoader,
@@ -30391,7 +31848,6 @@ System.register("github:aurelia/templating-router@0.12.0/index", ["github:aureli
       RouteHref = _routeHref.RouteHref;
     }],
     execute: function() {
-      'use strict';
       _export('TemplatingRouteLoader', TemplatingRouteLoader);
       _export('RouterView', RouterView);
       _export('RouteHref', RouteHref);
@@ -30400,7 +31856,7 @@ System.register("github:aurelia/templating-router@0.12.0/index", ["github:aureli
   };
 });
 
-System.register("github:aurelia/validation@0.2.4", ["github:aurelia/validation@0.2.4/index"], function($__export) {
+System.register("github:aurelia/validation@0.2.5", ["github:aurelia/validation@0.2.5/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -30410,30 +31866,31 @@ System.register("github:aurelia/validation@0.2.4", ["github:aurelia/validation@0
   };
 });
 
-System.register("npm:core-js@0.9.13/index", ["npm:core-js@0.9.13/shim", "npm:core-js@0.9.13/modules/core.dict", "npm:core-js@0.9.13/modules/core.iter-helpers", "npm:core-js@0.9.13/modules/core.$for", "npm:core-js@0.9.13/modules/core.delay", "npm:core-js@0.9.13/modules/core.function.part", "npm:core-js@0.9.13/modules/core.object", "npm:core-js@0.9.13/modules/core.array.turn", "npm:core-js@0.9.13/modules/core.number.iterator", "npm:core-js@0.9.13/modules/core.number.math", "npm:core-js@0.9.13/modules/core.string.escape-html", "npm:core-js@0.9.13/modules/core.date", "npm:core-js@0.9.13/modules/core.global", "npm:core-js@0.9.13/modules/core.log", "npm:core-js@0.9.13/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16/index", ["npm:core-js@0.9.16/shim", "npm:core-js@0.9.16/modules/core.dict", "npm:core-js@0.9.16/modules/core.iter-helpers", "npm:core-js@0.9.16/modules/core.$for", "npm:core-js@0.9.16/modules/core.delay", "npm:core-js@0.9.16/modules/core.function.part", "npm:core-js@0.9.16/modules/core.object", "npm:core-js@0.9.16/modules/core.array.turn", "npm:core-js@0.9.16/modules/core.number.iterator", "npm:core-js@0.9.16/modules/core.number.math", "npm:core-js@0.9.16/modules/core.string.escape-html", "npm:core-js@0.9.16/modules/core.date", "npm:core-js@0.9.16/modules/core.global", "npm:core-js@0.9.16/modules/core.log", "npm:core-js@0.9.16/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.13/shim");
-  require("npm:core-js@0.9.13/modules/core.dict");
-  require("npm:core-js@0.9.13/modules/core.iter-helpers");
-  require("npm:core-js@0.9.13/modules/core.$for");
-  require("npm:core-js@0.9.13/modules/core.delay");
-  require("npm:core-js@0.9.13/modules/core.function.part");
-  require("npm:core-js@0.9.13/modules/core.object");
-  require("npm:core-js@0.9.13/modules/core.array.turn");
-  require("npm:core-js@0.9.13/modules/core.number.iterator");
-  require("npm:core-js@0.9.13/modules/core.number.math");
-  require("npm:core-js@0.9.13/modules/core.string.escape-html");
-  require("npm:core-js@0.9.13/modules/core.date");
-  require("npm:core-js@0.9.13/modules/core.global");
-  require("npm:core-js@0.9.13/modules/core.log");
-  module.exports = require("npm:core-js@0.9.13/modules/$").core;
+  require("npm:core-js@0.9.16/shim");
+  require("npm:core-js@0.9.16/modules/core.dict");
+  require("npm:core-js@0.9.16/modules/core.iter-helpers");
+  require("npm:core-js@0.9.16/modules/core.$for");
+  require("npm:core-js@0.9.16/modules/core.delay");
+  require("npm:core-js@0.9.16/modules/core.function.part");
+  require("npm:core-js@0.9.16/modules/core.object");
+  require("npm:core-js@0.9.16/modules/core.array.turn");
+  require("npm:core-js@0.9.16/modules/core.number.iterator");
+  require("npm:core-js@0.9.16/modules/core.number.math");
+  require("npm:core-js@0.9.16/modules/core.string.escape-html");
+  require("npm:core-js@0.9.16/modules/core.date");
+  require("npm:core-js@0.9.16/modules/core.global");
+  require("npm:core-js@0.9.16/modules/core.log");
+  module.exports = require("npm:core-js@0.9.16/modules/$").core;
   global.define = __define;
   return module.exports;
 });
 
-System.register("github:aurelia/templating@0.11.2/index", ["github:aurelia/templating@0.11.2/html-behavior", "github:aurelia/templating@0.11.2/bindable-property", "github:aurelia/templating@0.11.2/resource-registry", "github:aurelia/templating@0.11.2/children", "github:aurelia/templating@0.11.2/element-config", "github:aurelia/templating@0.11.2/view-strategy", "github:aurelia/templating@0.11.2/view-compiler", "github:aurelia/templating@0.11.2/view-engine", "github:aurelia/templating@0.11.2/view-factory", "github:aurelia/templating@0.11.2/view-slot", "github:aurelia/templating@0.11.2/binding-language", "github:aurelia/templating@0.11.2/composition-engine", "github:aurelia/templating@0.11.2/animator", "github:aurelia/templating@0.11.2/decorators"], function(_export) {
+System.register("github:aurelia/templating@0.12.1/index", ["github:aurelia/templating@0.12.1/html-behavior", "github:aurelia/templating@0.12.1/bindable-property", "github:aurelia/templating@0.12.1/resource-registry", "github:aurelia/templating@0.12.1/children", "github:aurelia/templating@0.12.1/element-config", "github:aurelia/templating@0.12.1/view-strategy", "github:aurelia/templating@0.12.1/view-compiler", "github:aurelia/templating@0.12.1/view-engine", "github:aurelia/templating@0.12.1/view-factory", "github:aurelia/templating@0.12.1/view-slot", "github:aurelia/templating@0.12.1/view", "github:aurelia/templating@0.12.1/binding-language", "github:aurelia/templating@0.12.1/composition-engine", "github:aurelia/templating@0.12.1/animator", "github:aurelia/templating@0.12.1/decorators"], function(_export) {
+  'use strict';
   return {
     setters: [function(_htmlBehavior) {
       _export('HtmlBehaviorResource', _htmlBehavior.HtmlBehaviorResource);
@@ -30460,6 +31917,8 @@ System.register("github:aurelia/templating@0.11.2/index", ["github:aurelia/templ
       _export('BoundViewFactory', _viewFactory.BoundViewFactory);
     }, function(_viewSlot) {
       _export('ViewSlot', _viewSlot.ViewSlot);
+    }, function(_view) {
+      _export('View', _view.View);
     }, function(_bindingLanguage) {
       _export('BindingLanguage', _bindingLanguage.BindingLanguage);
     }, function(_compositionEngine) {
@@ -30471,13 +31930,11 @@ System.register("github:aurelia/templating@0.11.2/index", ["github:aurelia/templ
         _export(_key, _decorators[_key]);
       }
     }],
-    execute: function() {
-      'use strict';
-    }
+    execute: function() {}
   };
 });
 
-System.register("github:aurelia/templating-router@0.12.0", ["github:aurelia/templating-router@0.12.0/index"], function($__export) {
+System.register("github:aurelia/templating-router@0.13.0", ["github:aurelia/templating-router@0.13.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -30487,16 +31944,16 @@ System.register("github:aurelia/templating-router@0.12.0", ["github:aurelia/temp
   };
 });
 
-System.register("npm:core-js@0.9.13", ["npm:core-js@0.9.13/index"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.16", ["npm:core-js@0.9.16/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("npm:core-js@0.9.13/index");
+  module.exports = require("npm:core-js@0.9.16/index");
   global.define = __define;
   return module.exports;
 });
 
-System.register("github:aurelia/templating@0.11.2", ["github:aurelia/templating@0.11.2/index"], function($__export) {
+System.register("github:aurelia/templating@0.12.1", ["github:aurelia/templating@0.12.1/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -30506,7 +31963,8 @@ System.register("github:aurelia/templating@0.11.2", ["github:aurelia/templating@
   };
 });
 
-System.register("github:aurelia/framework@0.11.0/aurelia", ["npm:core-js@0.9.13", "github:aurelia/logging@0.4.0", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/loader@0.6.0", "github:aurelia/path@0.6.1", "github:aurelia/framework@0.11.0/plugins", "github:aurelia/templating@0.11.2"], function(_export) {
+System.register("github:aurelia/framework@0.12.0/aurelia", ["npm:core-js@0.9.16", "github:aurelia/logging@0.5.0", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/loader@0.7.0", "github:aurelia/path@0.7.0", "github:aurelia/framework@0.12.0/plugins", "github:aurelia/templating@0.12.1"], function(_export) {
+  'use strict';
   var core,
       LogManager,
       Container,
@@ -30520,11 +31978,15 @@ System.register("github:aurelia/framework@0.11.0/aurelia", ["npm:core-js@0.9.13"
       ResourceRegistry,
       CompositionEngine,
       Animator,
-      _classCallCheck,
       logger,
       slice,
       CustomEvent,
       Aurelia;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError('Cannot call a class as a function');
+    }
+  }
   function preventActionlessFormSubmit() {
     document.body.addEventListener('submit', function(evt) {
       var target = evt.target;
@@ -30568,12 +32030,6 @@ System.register("github:aurelia/framework@0.11.0/aurelia", ["npm:core-js@0.9.13"
       Animator = _aureliaTemplating.Animator;
     }],
     execute: function() {
-      'use strict';
-      _classCallCheck = function(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-          throw new TypeError('Cannot call a class as a function');
-        }
-      };
       logger = LogManager.getLogger('aurelia');
       slice = Array.prototype.slice;
       if (!window.CustomEvent || typeof window.CustomEvent !== 'function') {
@@ -30673,12 +32129,12 @@ System.register("github:aurelia/framework@0.11.0/aurelia", ["npm:core-js@0.9.13"
             this.host = applicationHost;
           }
           this.host.aurelia = this;
-          this.container.registerInstance(Element, this.host);
           compositionEngine = this.container.get(CompositionEngine);
           instruction.viewModel = root;
           instruction.container = instruction.childContainer = this.container;
           instruction.viewSlot = new ViewSlot(this.host, true);
           instruction.viewSlot.transformChildNodesIntoView();
+          instruction.host = this.host;
           return compositionEngine.compose(instruction).then(function(root) {
             _this2.root = root;
             instruction.viewSlot.attached();
@@ -30699,7 +32155,8 @@ System.register("github:aurelia/framework@0.11.0/aurelia", ["npm:core-js@0.9.13"
   };
 });
 
-System.register("github:aurelia/framework@0.11.0/index", ["github:aurelia/logging@0.4.0", "github:aurelia/framework@0.11.0/aurelia", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/binding@0.6.1", "github:aurelia/metadata@0.5.0", "github:aurelia/templating@0.11.2", "github:aurelia/loader@0.6.0", "github:aurelia/task-queue@0.4.0"], function(_export) {
+System.register("github:aurelia/framework@0.12.0/index", ["github:aurelia/logging@0.5.0", "github:aurelia/framework@0.12.0/aurelia", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/binding@0.7.3", "github:aurelia/metadata@0.6.0", "github:aurelia/templating@0.12.1", "github:aurelia/loader@0.7.0", "github:aurelia/task-queue@0.5.0", "github:aurelia/path@0.7.0"], function(_export) {
+  'use strict';
   var TheLogManager,
       LogManager;
   return {
@@ -30731,16 +32188,19 @@ System.register("github:aurelia/framework@0.11.0/index", ["github:aurelia/loggin
       for (var _key6 in _aureliaTaskQueue) {
         _export(_key6, _aureliaTaskQueue[_key6]);
       }
+    }, function(_aureliaPath) {
+      for (var _key7 in _aureliaPath) {
+        _export(_key7, _aureliaPath[_key7]);
+      }
     }],
     execute: function() {
-      'use strict';
       LogManager = TheLogManager;
       _export('LogManager', LogManager);
     }
   };
 });
 
-System.register("github:aurelia/framework@0.11.0", ["github:aurelia/framework@0.11.0/index"], function($__export) {
+System.register("github:aurelia/framework@0.12.0", ["github:aurelia/framework@0.12.0/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -30750,7 +32210,8 @@ System.register("github:aurelia/framework@0.11.0", ["github:aurelia/framework@0.
   };
 });
 
-System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13", "github:aurelia/framework@0.11.0", "github:aurelia/logging-console@0.4.0"], function(_export) {
+System.register("github:aurelia/bootstrapper@0.13.1/index", ["npm:core-js@0.9.16", "github:aurelia/framework@0.12.0", "github:aurelia/logging-console@0.5.0"], function(_export) {
+  'use strict';
   var core,
       Aurelia,
       LogManager,
@@ -30801,11 +32262,19 @@ System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13
   }
   function ensureLoader() {
     if (!window.AureliaLoader) {
-      return System.normalize('aurelia-bootstrapper').then(function(bootstrapperName) {
-        return System.normalize('aurelia-loader-default', bootstrapperName).then(function(loaderName) {
-          return System['import'](loaderName);
+      if (window.System) {
+        return System.normalize('aurelia-bootstrapper').then(function(bootstrapperName) {
+          return System.normalize('aurelia-loader-default', bootstrapperName).then(function(loaderName) {
+            return System['import'](loaderName);
+          });
         });
-      });
+      } else if (window.require) {
+        return new Promise(function(resolve, reject) {
+          require(['aurelia-loader-default'], resolve, reject);
+        });
+      } else {
+        throw new Error('No window.AureliaLoader is defined and there is neither a System API (ES6) or a Require API (AMD) available to load your app.');
+      }
     }
     return Promise.resolve();
   }
@@ -30856,14 +32325,17 @@ System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13
           return this;
         };
       }));
+      toLoad.push(System.normalize('aurelia-templating-router', bName).then(function(templatingRouter) {
+        aurelia.use.router = function() {
+          aurelia.use.plugin(templatingRouter);
+          return this;
+        };
+      }));
       toLoad.push(System.normalize('aurelia-history-browser', bName).then(function(historyBrowser) {
-        return System.normalize('aurelia-templating-router', bName).then(function(templatingRouter) {
-          aurelia.use.router = function() {
-            aurelia.use.plugin(historyBrowser);
-            aurelia.use.plugin(templatingRouter);
-            return this;
-          };
-        });
+        aurelia.use.history = function() {
+          aurelia.use.plugin(historyBrowser);
+          return this;
+        };
       }));
       toLoad.push(System.normalize('aurelia-templating-resources', bName).then(function(name) {
         System.map['aurelia-templating-resources'] = name;
@@ -30880,7 +32352,7 @@ System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13
         };
       }));
       aurelia.use.standardConfiguration = function() {
-        aurelia.use.defaultBindingLanguage().defaultResources().router().eventAggregator();
+        aurelia.use.defaultBindingLanguage().defaultResources().history().router().eventAggregator();
         return this;
       };
       aurelia.use.developmentLogging = function() {
@@ -30909,10 +32381,6 @@ System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13
         return configureAurelia(aurelia).then(function() {
           return m.configure(aurelia);
         });
-      })['catch'](function(e) {
-        setTimeout(function() {
-          throw e;
-        }, 0);
       });
     } else {
       aurelia = new Aurelia();
@@ -30925,10 +32393,6 @@ System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13
         return aurelia.start().then(function(a) {
           return a.setRoot();
         });
-      })['catch'](function(e) {
-        setTimeout(function() {
-          throw e;
-        }, 0);
       });
     }
   }
@@ -30961,7 +32425,6 @@ System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13
       ConsoleAppender = _aureliaLoggingConsole.ConsoleAppender;
     }],
     execute: function() {
-      'use strict';
       logger = LogManager.getLogger('bootstrapper');
       readyQueue = [];
       isReady = false;
@@ -30971,7 +32434,7 @@ System.register("github:aurelia/bootstrapper@0.12.0/index", ["npm:core-js@0.9.13
   };
 });
 
-System.register("github:aurelia/bootstrapper@0.12.0", ["github:aurelia/bootstrapper@0.12.0/index"], function($__export) {
+System.register("github:aurelia/bootstrapper@0.13.1", ["github:aurelia/bootstrapper@0.13.1/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -30981,7 +32444,7 @@ System.register("github:aurelia/bootstrapper@0.12.0", ["github:aurelia/bootstrap
   };
 });
 
-System.register("bundle", ["github:aurelia/bootstrapper@0.12.0", "github:aurelia/dependency-injection@0.7.1", "github:aurelia/templating-binding@0.11.0", "github:aurelia/templating-router@0.12.0", "github:aurelia/templating-resources@0.11.0", "github:aurelia/event-aggregator@0.4.0", "github:aurelia/router@0.8.0", "github:aurelia/loader-default@0.7.0", "github:aurelia/history-browser@0.4.0", "github:aurelia/validation@0.2.4", "github:components/jquery@2.1.4", "github:twbs/bootstrap@3.3.4", "github:systemjs/plugin-css@0.1.9", "npm:numeral@1.5.3", "github:lipsitzm/aurelia-bs-modal@master", "nav-bar", "converters/currency-format", "converters/percent-format", "app", "city", "city-list", "day", "drug-list", "footer-bar", "game", "player", "drugViews/buyDrug", "drugViews/buySellChooser", "drugViews/buySellIssue", "drugViews/sellDrug", "engines/gameEngine", "modalBodies/payDebt", "modalBodies/surpriseEvents", "models/cityInfo", "models/dayOption", "models/difficultyLevel", "models/drug", "models/playerInfo", "models/purchasedDrug", "models/surprise", "services/cityService", "services/dayService", "services/difficultyService", "services/drugService", "services/playerService", "services/surpriseService"], function(_export) {
+System.register("bundle", ["github:aurelia/bootstrapper@0.13.1", "github:aurelia/dependency-injection@0.8.1", "github:aurelia/templating-binding@0.12.0", "github:aurelia/templating-router@0.13.0", "github:aurelia/templating-resources@0.12.1", "github:aurelia/event-aggregator@0.4.0", "github:aurelia/router@0.9.0", "github:aurelia/loader-default@0.8.0", "github:aurelia/history-browser@0.5.0", "github:aurelia/validation@0.2.5", "github:components/jquery@2.1.4", "github:twbs/bootstrap@3.3.4", "github:systemjs/plugin-css@0.1.9", "npm:numeral@1.5.3", "github:lipsitzm/aurelia-bs-modal@master", "nav-bar", "converters/currency-format", "converters/percent-format", "app", "city", "city-list", "day", "drug-list", "footer-bar", "game", "player", "drugViews/buyDrug", "drugViews/buySellChooser", "drugViews/buySellIssue", "drugViews/sellDrug", "engines/gameEngine", "modalBodies/payDebt", "modalBodies/surpriseEvents", "models/cityInfo", "models/dayOption", "models/difficultyLevel", "models/drug", "models/playerInfo", "models/purchasedDrug", "models/surprise", "services/cityService", "services/dayService", "services/difficultyService", "services/drugService", "services/playerService", "services/surpriseService"], function(_export) {
   'use strict';
   return {
     setters: [function(_aureliaBootstrapper) {}, function(_aureliaDependencyInjection) {}, function(_aureliaTemplatingBinding) {}, function(_aureliaTemplatingRouter) {}, function(_aureliaTemplatingResources) {}, function(_aureliaEventAggregator) {}, function(_aureliaRouter) {}, function(_aureliaLoaderDefault) {}, function(_aureliaHistoryBrowser) {}, function(_aureliaValidation) {}, function(_jquery) {}, function(_bootstrap) {}, function(_css) {}, function(_numeral) {}, function(_lipsitzmAureliaBsModal) {}, function(_navBar) {}, function(_convertersCurrencyFormat) {}, function(_convertersPercentFormat) {}, function(_app) {}, function(_city) {}, function(_cityList) {}, function(_day) {}, function(_drugList) {}, function(_footerBar) {}, function(_game) {}, function(_player) {}, function(_drugViewsBuyDrug) {}, function(_drugViewsBuySellChooser) {}, function(_drugViewsBuySellIssue) {}, function(_drugViewsSellDrug) {}, function(_enginesGameEngine) {}, function(_modalBodiesPayDebt) {}, function(_modalBodiesSurpriseEvents) {}, function(_modelsCityInfo) {}, function(_modelsDayOption) {}, function(_modelsDifficultyLevel) {}, function(_modelsDrug) {}, function(_modelsPlayerInfo) {}, function(_modelsPurchasedDrug) {}, function(_modelsSurprise) {}, function(_servicesCityService) {}, function(_servicesDayService) {}, function(_servicesDifficultyService) {}, function(_servicesDrugService) {}, function(_servicesPlayerService) {}, function(_servicesSurpriseService) {}],
