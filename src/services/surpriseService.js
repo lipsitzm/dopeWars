@@ -5,7 +5,8 @@ let surprises = [
   new Surprise(.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugCheaper'),
   new Surprise(.15, 'DrugService', 'SurpriseMakeRandomAvailableDrugMoreExpensive'),
   new Surprise(.25, 'PlayerService', 'SurpriseFindDrugsOnSubway'),
-  new Surprise(.05, 'PlayerService', 'SurpriseGetMugged')
+  new Surprise(.05, 'PlayerService', 'SurpriseGetMugged'),
+  new Surprise(.05, 'PlayerService', 'SurpriseFindMoney')
 ];
 
 export class SurpriseService {

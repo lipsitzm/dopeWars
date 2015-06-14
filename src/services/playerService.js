@@ -2,6 +2,7 @@ import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {PlayerInfo} from '../models/playerInfo';
 import {DrugService} from '../services/drugService';
+import numeral from 'numeral';
 
 let player = new PlayerInfo();
 let drugList = null;
@@ -55,6 +56,16 @@ export class PlayerService {
 
         player.Money = Math.floor(player.Money / 2);
         resolve('You got jumped in the middle the middle of the night! They stole half of all your drugs and money!');
+      }
+    );
+  }
+
+  SurpriseFindMoney() {
+    return new Promise( // Faking out a promise in case down the road this becomes an actual server call
+      function (resolve, reject) {
+        let moneyToAdd = Math.floor(player.Money / 2);
+        player.Money = player.Money + moneyToAdd;
+        resolve('You found a briefcase on the subway with ' + numeral(moneyToAdd).format('($0,0)') + ' in it!');
       }
     );
   }
