@@ -84,6 +84,13 @@ section {
 .cheapest-drug-cost {
   color: #347C17;
 }
+.most-expensive-drug-cost .fa.fa-arrow-up, .cheapest-drug-cost .fa.fa-arrow-up, .most-expensive-drug-cost .fa.fa-arrow-down, .cheapest-drug-cost .fa.fa-arrow-down {
+  font-size: 1.3em;
+}
+.middle-expensive-drug-cost .fa.fa-arrow-up, .middle-cheapest-drug-cost .fa.fa-arrow-up, .middle-expensive-drug-cost .fa.fa-arrow-down, .middle-cheapest-drug-cost .fa.fa-arrow-down {
+  font-size: .8em;
+}
+
 
 .footer-holder {
   font-style: italic;

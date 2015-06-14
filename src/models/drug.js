@@ -6,13 +6,32 @@ let drugPriceColorClasses = [
   'most-expensive-drug-cost'
 ];
 
+let drugPriceChangeDirectionClasses = {
+  'down': 'fa fa-arrow-down',
+  'up': 'fa fa-arrow-up',
+  'even': ''
+};
+
+let setThreshold = function(newPrice, obj) {
+  // With the drugService Surprises allowing outlier prices, we need to colorize those as well
+  if(newPrice >= obj.MaxPrice) {
+    obj.ThresholdLevel = 4;
+  } else if (newPrice <= obj.MinPrice) {
+    obj.ThresholdLevel = 0;
+  } else {
+    // Otherwise we can just figure out the band that this price would fall in and color it that way
+    obj.ThresholdLevel = Math.floor((obj.Price - obj.MinPrice) / (obj.MaxPrice - obj.MinPrice) * 100 / 20);
+  }
+};
+
 export class Drug{
   MaxPrice = 1;
   MinPrice = 1;
-  price = 1;
+  price = null;
   Available = true;
   Name = '';
   ThresholdLevel = 2;
+  directionChange = 'even';
 
   constructor(nameIn, minPriceIn, maxPriceIn){
     this.Name = nameIn;
@@ -20,16 +39,8 @@ export class Drug{
     this.MinPrice = minPriceIn;
   }
 
-  SetThreshold(newPrice) {
-    // With the drugService Surprises allowing outlier prices, we need to colorize those as well
-    if(newPrice >= this.MaxPrice) {
-      this.ThresholdLevel = 4;
-    } else if (newPrice <= this.MinPrice) {
-      this.ThresholdLevel = 0;
-    } else {
-      // Otherwise we can just figure out the band that this price would fall in and color it that way
-      this.ThresholdLevel = Math.floor((this.Price - this.MinPrice) / (this.MaxPrice - this.MinPrice) * 100 / 20);
-    }
+  get PriceChangeDirectionClass() {
+    return drugPriceChangeDirectionClasses[this.directionChange];
   }
 
   get ThresholdColorClass() {
@@ -41,7 +52,11 @@ export class Drug{
   }
 
   set Price(newVal) {
+    if(this.price !== null) { // Don't change the directionChange from even if we're setting the price for the first time
+      this.directionChange = newVal > this.price ? 'up' : (newVal < this.price ? 'down' : 'even');
+    }
+
     this.price = newVal;
-    this.SetThreshold(newVal);
+    setThreshold(newVal, this);
   }
 }
