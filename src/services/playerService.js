@@ -63,9 +63,23 @@ export class PlayerService {
   SurpriseFindMoney() {
     return new Promise( // Faking out a promise in case down the road this becomes an actual server call
       function (resolve, reject) {
-        let moneyToAdd = Math.floor(player.Money / 2);
+        let moneyToAdd = Math.floor(Math.random() * ((player.Money / 2) - 1) + 1);
         player.Money = player.Money + moneyToAdd;
         resolve('You found a briefcase on the subway with ' + numeral(moneyToAdd).format('($0,0)') + ' in it!');
+      }
+    );
+  }
+
+  SurpriseBiggerBackpack() {
+    return new Promise( // Faking out a promise in case down the road this becomes an actual server call
+      function (resolve, reject) {
+        let spaceToAdd = Math.floor(Math.random() * ((player.BackpackSize / 5) - 1) + 1);
+        if(spaceToAdd <= 1) {
+          spaceToAdd = 2; // Don't want to deal with singular vs plural messages
+        }
+        player.BackpackSize = player.BackpackSize + spaceToAdd;
+        player.BackpackSpace = player.BackpackSpace + spaceToAdd;
+        resolve('You were on your way to your next customer and found a new backpack with space for ' + spaceToAdd + ' more drugs in it!');
       }
     );
   }
