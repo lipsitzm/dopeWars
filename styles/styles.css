@@ -84,11 +84,20 @@ section {
 .cheapest-drug-cost {
   color: #347C17;
 }
-.most-expensive-drug-cost .fa.fa-arrow-up, .cheapest-drug-cost .fa.fa-arrow-up, .most-expensive-drug-cost .fa.fa-arrow-down, .cheapest-drug-cost .fa.fa-arrow-down {
-  font-size: 1.3em;
+.noBands.fa.fa-arrow-up, .noBands.fa.fa-arrow-down {
+  font-size: 0;
 }
-.middle-expensive-drug-cost .fa.fa-arrow-up, .middle-cheapest-drug-cost .fa.fa-arrow-up, .middle-expensive-drug-cost .fa.fa-arrow-down, .middle-cheapest-drug-cost .fa.fa-arrow-down {
-  font-size: .8em;
+.oneBand.fa.fa-arrow-up, .oneBand.fa.fa-arrow-down {
+  font-size: .7em;
+}
+.twoBands.fa.fa-arrow-up, .twoBands.fa.fa-arrow-down {
+  font-size: .9em;
+}
+.threeBands.fa.fa-arrow-up, .threeBands.fa.fa-arrow-down {
+  font-size: 1.1em;
+}
+.fourBands.fa.fa-arrow-up, .fourBands.fa.fa-arrow-down {
+  font-size: 1.3em;
 }
 
 

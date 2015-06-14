@@ -12,7 +12,16 @@ let drugPriceChangeDirectionClasses = {
   'even': ''
 };
 
+let drugThresholdChangeClasses = [
+  'noBands',
+  'oneBand',
+  'twoBands',
+  'threeBands',
+  'fourBands'
+];
+
 let setThreshold = function(newPrice, obj) {
+  let curThreshold = obj.ThresholdLevel;
   // With the drugService Surprises allowing outlier prices, we need to colorize those as well
   if(newPrice >= obj.MaxPrice) {
     obj.ThresholdLevel = 4;
@@ -22,6 +31,8 @@ let setThreshold = function(newPrice, obj) {
     // Otherwise we can just figure out the band that this price would fall in and color it that way
     obj.ThresholdLevel = Math.floor((obj.Price - obj.MinPrice) / (obj.MaxPrice - obj.MinPrice) * 100 / 20);
   }
+
+  obj.thresholdLevelBandsChanged = obj.ThresholdLevel - curThreshold;
 };
 
 export class Drug{
@@ -32,6 +43,7 @@ export class Drug{
   Name = '';
   ThresholdLevel = 2;
   directionChange = 'even';
+  thresholdLevelBandsChanged = 0;
 
   constructor(nameIn, minPriceIn, maxPriceIn){
     this.Name = nameIn;
@@ -45,6 +57,10 @@ export class Drug{
 
   get ThresholdColorClass() {
     return drugPriceColorClasses[this.ThresholdLevel];
+  }
+
+  get ThresholdChangeClass() {
+    return drugThresholdChangeClasses[this.thresholdLevelBandsChanged];
   }
 
   get Price() {
