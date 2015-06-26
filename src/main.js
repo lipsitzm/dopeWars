@@ -1,5 +1,3 @@
-import './bundle';
-
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()

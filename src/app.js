@@ -39,6 +39,7 @@ export class App {
     config.map([
       // No default route because the mapUnknownRoutes is handling that now
       {
+        name: 'game',
         route: ':totalDays/:difficultyLevel',
         moduleId: './game',
         title: 'Dope Wars'
