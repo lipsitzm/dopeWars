@@ -19,7 +19,7 @@ export class NavBar {
 
   dayOptionChange(newDayOption) {
     // Is there a way to get this into the HTML? Can't do it right now due to it's dependency on a bound param that isn't value immediately
-    location.href = this.router.generate("Dope Wars", {
+    location.href = this.router.generate("game", {
       totalDays: newDayOption.TotalDays,
       difficultyLevel: this.GameEngine.CurrentDifficultyLevel.Name
     });
@@ -27,7 +27,7 @@ export class NavBar {
 
   difficultyLevelChange(newDiffLevel) {
     // Is there a way to get this into the HTML? Can't do it right now due to it's dependency on a bound param that isn't value immediately
-    location.href = this.router.generate("Dope Wars", {
+    location.href = this.router.generate("game", {
       totalDays: this.GameEngine.CurrentDayOption.TotalDays,
       difficultyLevel: newDiffLevel.Name
     });
