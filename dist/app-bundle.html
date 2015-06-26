@@ -1,0 +1,235 @@
+<template id="app.html!view">
+  <div class="page-host">
+    <router-view></router-view>
+  </div>
+</template>
+<template id="city-list.html!view">
+  <div class="row">
+    <require from="./city"></require>
+    <city class="col-xs-12 col-sm-6" city_info.bind="GameEngine.CurrentCity" drug_list.bind="GameEngine.Drugs" drugs_available.bind="GameEngine.DrugsAvailable"></city>
+    <div class="col-xs-12 col-sm-6">
+      <!-- Can this get moved into it's own view / model? I can't get the change binding to work right now -->
+      <h1>Travel to</h1>
+      <button repeat.for="city of GameEngine.Cities" class="btn btn-default btn-block ${city.Name == $parent.GameEngine.CurrentCity.Name ? 'active' : ''}" click.delegate="$parent.MoveCity($index)">${city.Name}</button>
+    </div>
+  </div>
+</template>
+<template id="city.html!view">
+  <h1>${city_info.Name}</h1>
+  <require from="./drug-list"></require>
+  <div show.bind="drugs_available === true">
+    <drug-list></drug-list>
+  </div>
+  <div show.bind="drugs_available === false">
+    <h3>Those damn hippies bought all the drugs today.</h3>
+  </div>
+</template>
+<template id="day.html!view">
+  <h3 class="col-sm-4 col-xs-12">Day ${current_day} of ${max_days}</h3>
+  <h3 class="col-sm-8 col-xs-12" show.bind="is_last_day">This is your last day to make that money!</h3>
+</template>
+<template id="drug-list.html!view">
+  <require from="./converters/currency-format"></require>
+  <div repeat.for="drugVM of drugViewModels" show.bind="drugVM.Drug.Available" class="btn btn-default btn-block" click.delegate="$parent.ShowDrugDialog(drugVM.Drug)">
+    <strong class="${drugVM.Drug.ThresholdColorClass}">${drugVM.Drug.Name} - <span>${drugVM.Drug.Price | currencyFormat}</span>&nbsp;<span class="${drugVM.Drug.PriceChangeDirectionClass} ${drugVM.Drug.ThresholdChangeClass}"></span></strong>
+    <div class="pull-right" show.bind="drugVM.BackpackCount > 0">${drugVM.BackpackCount} (${drugVM.HighestBuyPrice | currencyFormat})</div>
+  </div>
+  <modal showing.bind="showing">
+    <modal-header title.bind="modalTitle" close.call="cancel()"></modal-header>
+    <modal-body content_view.bind="modalView" content_model.bind="modalModel"></modal-body>
+  </modal>
+</template>
+<template id="drugViews/buyDrug.html!view">
+  <div validate.bind="validation">
+    <require from="converters/currency-format"></require>
+    <div class="form-group">
+      <label>${drug.Name} To Buy</label>
+      <div class="row">
+        <div class="col-xs-8">
+          <input class="form-control" value.bind="buyAmount" type="number">
+        </div>
+        <!-- Can't do the below in the JS because I don't know how to bind to a inner property change event... How's that done? -->
+        <div class="col-xs-4">
+          <p>${(drug.Price * buyAmount) | currencyFormat}</p>
+        </div>
+      </div>
+    </div>
+    <button click.delegate="buyDrugs()" class="btn btn-primary" disabled.bind="validation.isValidating">Buy ${buyAmount} ${drug.Name}</button>
+    <button click.delegate="cancel()" class="btn btn-default">Cancel</button>
+  </div>
+</template>
+<template id="drugViews/buySellChooser.html!view">
+  <div>
+    <div class="form-group">
+      <label>You've got ${drugCount} ${drug.Name} in your backpack. Do you want to buy more or sell that?</label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block" click.delegate="goToBuy()">Buy</button>
+      <button class="btn btn-success btn-block" click.delegate="goToSell()">Sell</button>
+      <button class="btn btn-default btn-block" click.delegate="cancel()">Cancel</button>
+    </div>
+  </div>
+</template>
+<template id="drugViews/buySellIssue.html!view">
+  <div>
+    <div class="form-group">
+      <label show.bind="reason == 1">You can't fit more ${drug.Name} in your backpack. Or it'll be hanging out and the 5-0 will see it.</label>
+      <label show.bind="reason == 2">You don't have the loot to buy more ${drug.Name} and no ${drug.Name} to sell.</label>
+    </div>
+    <div class="form-group">
+      <button click.delegate="cancel()" class="btn btn-default">Cancel</button>
+    </div>
+  </div>
+</template>
+<template id="drugViews/sellDrug.html!view">
+  <div validate.bind="validation">
+    <require from="converters/currency-format"></require>
+    <div class="form-group">
+      <label>${drug.Name} To Sell</label>
+      <div class="row">
+        <div class="col-xs-8">
+          <input class="form-control" value.bind="sellAmount" type="number">
+        </div>
+        <!-- Can't do the below in the JS because I don't know how to bind to a inner property change event... How's that done? -->
+        <div class="col-xs-4">
+          <p>${(drug.Price * sellAmount) | currencyFormat}</p>
+        </div>
+      </div>
+    </div>
+    <button click.delegate="sellDrugs()" class="btn btn-success" disabled.bind="validation.isValidating">Sell ${sellAmount} ${drug.Name}</button>
+    <button click.delegate="cancel()" class="btn btn-default">Cancel</button>
+  </div>
+</template>
+<template id="footer-bar.html!view">
+  <footer>
+    <div class="row footer-holder">
+      <small>
+        <div class="col-xs-offset-1 col-xs-11 col-sm-5" id="craftedFooter">
+          <div>Crafted with love by Michael Lipsitz</div>
+          <a href="http://www.michaellipsitz.com" target="_blank">www.michaellipsitz.com</a>
+        </div>
+      </small>
+    </div>
+  </footer>
+</template>
+<template id="game.html!view">
+  <!--Including this here so that it gets pulled in after bootstrap-->
+  <link rel="stylesheet" type="text/css" href="styles/styles.css">
+  <require from="./nav-bar"></require>
+  <nav-bar></nav-bar>
+  <require from="./player"></require>
+  <section show.bind="GameEngine.GameOver === false">
+    <div class="row">
+      <require from="./day"></require>
+      <day max_days.bind="GameEngine.CurrentDayOption.TotalDays" current_day.bind="GameEngine.CurrentDay" is_last_day.bind="GameEngine.IsLastDay"></day>
+    </div>
+    <div class="row">
+      <player player_info.bind="GameEngine.Player"></player>
+    </div>
+    <div class="row">
+      <require from="./city-list"></require>
+      <city-list class="col-xs-12"></city-list>
+    </div>
+    <modal showing.bind="surpriseTriggered">
+      <modal-header title.bind="surpriseTitle" close.call="cancel()"></modal-header>
+      <modal-body content_view.bind="surpriseModalView" content_model.bind="surpriseModalModel"></modal-body>
+    </modal>
+  </section>
+  <section show.bind="GameEngine.GameOver">
+    <div class="splash mrg-btm-10-pct">
+      <div class="message">Game Over</div>
+      <require from="./converters/currency-format"></require>
+      <div class="message">You made ${GameEngine.Player.Profit | currencyFormat}</div>
+    </div>
+  </section>
+  <require from="./footer-bar"></require>
+  <footer-bar></footer-bar>
+</template>
+<template id="modalBodies/payDebt.html!view">
+  <div validate.bind="validation">
+    <require from="converters/currency-format"></require>
+    <require from="converters/percent-format"></require>
+    <div class="form">
+      <div class="form-group">
+        <p class="lead">The loan shark gave you ${ Player.LoanOutstanding | currencyFormat } with a vig of ${ Player.InterestRate | percentFormat }. You have ${ Player.Money | currencyFormat } in cash.</p>
+        <label>Amount to Pay Back</label>
+            <input class="form-control" value.bind="paymentAmount" type="number">
+      </div>
+      <div class="form-group">
+        <button click.delegate="payDebt()" disabled.bind="validation.isValidating" class="btn btn-primary">Pay ${ paymentAmount | currencyFormat } Back</button>
+        <button class="btn btn-default" click.delegate="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</template>
+<template id="modalBodies/surpriseEvents.html!view">
+  <div>
+    <div class="form-group">
+      <label repeat.for="result of results">${result}</label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" click.delegate="continue()">Continue</button>
+    </div>
+  </div>
+</template>
+<template id="nav-bar.html!view">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dw-navbar-collapse">
+          <span class="sr-only">Toggle Navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <i class="fa fa-home"></i>
+          <span>${router.title}</span>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="dw-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Game Length <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li repeat.for="dayOption of GameEngine.DayOptions" class="${$parent.GameEngine.CurrentDayOption.TotalDays === dayOption.TotalDays ? 'active' : ''}">
+                <a href="#" click.delegate="$parent.dayOptionChange(dayOption)">${dayOption.Name}</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Difficulty Level <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li repeat.for="diffLevel of GameEngine.DifficultyLevels" class="${$parent.GameEngine.CurrentDifficultyLevel.Name === diffLevel.Name ? 'active' : ''}">
+                <a href="#" click.delegate="$parent.difficultyLevelChange(diffLevel)">${diffLevel.Name}</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" click.delegate="restartGame()">Restart Game</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="loader" if.bind="router.isNavigating">
+            <i class="fa fa-spinner fa-pulse fa-2x"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>
+<template id="player.html!view">
+  <require from="./converters/currency-format"></require>
+  <h3 class="col-xs-6 col-sm-3">Money: ${player_info.Money | currencyFormat}</h3>
+  <div class="col-xs-6 col-sm-3">
+    <h3>Debt: ${player_info.LoanOutstanding | currencyFormat}
+    <small class="btn btn-default col-xs-offset-1" click.delegate="showDebtDialog()" show.bind="player_info.LoanOutstanding > 0">Pay Debt</small>
+    </h3>
+    <modal showing.bind="showing">
+      <modal-header title.bind="modalTitle" close.call="cancel()"></modal-header>
+      <modal-body content_model.bind="that" content_view.bind="modalView"></modal-body>
+    </modal>
+  </div>
+  <h3 class="col-xs-6 col-sm-3">Backpack Space: ${player_info.BackpackSpace}</h3>
+  <h3 class="col-xs-6 col-sm-3">Backpack Size: ${player_info.BackpackSize}</h3>
+</template>

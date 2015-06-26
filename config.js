@@ -308,12 +308,12 @@ System.config({
       "nav-bar",
       "main",
       "game",
+      "ga",
       "footer-bar",
       "drug-list",
       "day",
       "city",
       "city-list",
-      "bundle",
       "app"
     ]
   },

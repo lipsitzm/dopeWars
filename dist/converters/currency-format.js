@@ -20,7 +20,7 @@ System.register(['numeral'], function (_export) {
         _createClass(CurrencyFormatValueConverter, [{
           key: 'toView',
           value: function toView(value) {
-            return numeral(value).format('($0,0)');
+            return numeral(value).format('$-0,0');
           }
         }]);
 
@@ -31,4 +31,4 @@ System.register(['numeral'], function (_export) {
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnZlcnRlcnMvY3VycmVuY3ktZm9ybWF0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztlQUdhLDRCQUE0Qjs7Ozs7Ozs7Ozs7QUFBNUIsa0NBQTRCO2lCQUE1Qiw0QkFBNEI7Z0NBQTVCLDRCQUE0Qjs7O3FCQUE1Qiw0QkFBNEI7O2lCQUNqQyxnQkFBQyxLQUFLLEVBQUU7QUFDWixtQkFBTyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1dBQ3hDOzs7ZUFIVSw0QkFBNEI7Ozs4Q0FBNUIsNEJBQTRCIiwiZmlsZSI6ImNvbnZlcnRlcnMvY3VycmVuY3ktZm9ybWF0LmpzIiwic291cmNlUm9vdCI6Ii9zcmMvIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnZlcnRlcnMvY3VycmVuY3ktZm9ybWF0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztlQUdhLDRCQUE0Qjs7Ozs7Ozs7Ozs7QUFBNUIsa0NBQTRCO2lCQUE1Qiw0QkFBNEI7Z0NBQTVCLDRCQUE0Qjs7O3FCQUE1Qiw0QkFBNEI7O2lCQUNqQyxnQkFBQyxLQUFLLEVBQUU7QUFDWixtQkFBTyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1dBQ3ZDOzs7ZUFIVSw0QkFBNEI7Ozs4Q0FBNUIsNEJBQTRCIiwiZmlsZSI6ImNvbnZlcnRlcnMvY3VycmVuY3ktZm9ybWF0LmpzIiwic291cmNlUm9vdCI6Ii9zcmMvIn0=
